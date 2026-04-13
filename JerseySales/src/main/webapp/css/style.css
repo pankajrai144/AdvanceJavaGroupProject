@@ -21,9 +21,6 @@ img { width: 100%; display: block; object-fit: cover; }
     --mid: #666666;
 }
 
-/* ===========================
-   HEADER
-   =========================== */
 header {
     background: var(--black);
     color: var(--white);
@@ -148,9 +145,6 @@ header {
 
 .header-icons a:hover { color: var(--white); background: rgba(255,255,255,0.08); }
 
-/* ===========================
-   HERO
-   =========================== */
 .hero {
     position: relative;
     height: 500px;
@@ -223,9 +217,6 @@ header {
 
 .dot.active { background: var(--white); }
 
-/* ===========================
-   PRODUCTS
-   =========================== */
 .products {
     padding: 56px 32px;
     max-width: 1200px;
@@ -422,9 +413,6 @@ footer {
     color: #555;
 }
 
-/* ===========================
-   RESPONSIVE
-   =========================== */
 @media (max-width: 900px) {
     .product-grid { grid-template-columns: repeat(2, 1fr); }
     .hero-text h1 { font-size: 2rem; }
