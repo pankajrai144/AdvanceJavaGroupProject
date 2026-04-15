@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" isELIgnored="false"%>
-
 <style>
-
-/* NAVBAR */
 .navbar {
   display: flex;
   align-items: center;
@@ -13,22 +10,16 @@
   gap: 20px;
   background: #fff;
 }
-
-/* LOGO */
 .logo {
   font-size: 22px;
   font-weight: 600;
   white-space: nowrap;
 }
-
-/* CENTER */
 .nav-center {
   flex: 1;
   display: flex;
   justify-content: center;
 }
-
-/* SEARCH */
 .search-box {
   display: flex;
   align-items: center;
@@ -56,8 +47,6 @@
   height: 34px;
   cursor: pointer;
 }
-
-/* RIGHT */
 .nav-right {
   display: flex;
   align-items: center;
@@ -69,8 +58,6 @@
   color: #333;
   font-size: 14px;
 }
-
-/* DROPDOWN */
 .dropdown {
   position: relative;
 }
@@ -95,22 +82,18 @@
   display: block;
   padding: 12px 16px;
   color: #333;
-  border-bottom: 1px solid #eee;   /* ✅ adds separation */
+  border-bottom: 1px solid #eee;   
 }
 
 .dropdown-menu a:last-child {
-  border-bottom: none;   /* remove last line */
+  border-bottom: none;   
 }
-
-/* BUTTON */
 .login-btn {
   background: black;
   color: white !important;
   padding: 8px 18px;
   border-radius: 20px;
 }
-
-/* ICON BOX */
 .wishlist,
 .cart {
   background: black;
@@ -122,8 +105,6 @@
   gap: 6px;
   cursor: pointer;
 }
-
-/* FIX ICON COLOR */
 .wishlist i,
 .cart i {
   color: white !important;
@@ -131,11 +112,9 @@
 }
 
 </style>
-
-<!-- NAVBAR -->
 <div class="navbar">
 
-  <div class="logo">⚽ FIFA 2026</div>
+  <div class="logo"></div>
 
   <div class="nav-center">
     <div class="search-box">
@@ -160,8 +139,6 @@
     <a href="about.jsp">About Us</a>
 
     <a href="login.jsp" class="login-btn">Sign In</a>
-
-    <!-- ✅ FIXED ICONS (Font Awesome v6) -->
     <div class="wishlist">
       <i class="fa-regular fa-heart"></i>
       <span id="wish-count">0</span>
