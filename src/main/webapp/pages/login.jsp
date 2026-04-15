@@ -5,19 +5,13 @@
 <html>
 <head>
 <title>Login</title>
-
-<!-- CSS -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/login.css">
-
-<!-- FONT AWESOME -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
 <body>
 
 <div class="auth-wrapper">
-
-  <!-- LEFT -->
   <div class="auth-left">
     <div class="overlay">
       <h1>⚽ FIFA World Cup 2026</h1>

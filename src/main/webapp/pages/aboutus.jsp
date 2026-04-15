@@ -16,7 +16,7 @@
 <jsp:include page="/components/header.jsp"/>
 <div class="page-content">
 <section class="hero">
-  <h1>About PrimeJerseys</h1>
+  <h1>About JerseyPasal</h1>
   <p>More than jerseys — we deliver passion, identity, and pride.</p>
 </section>
 <section class="about">
@@ -49,43 +49,53 @@
   <div class="team-grid">
     <div class="team-card">
       <img src="https://randomuser.me/api/portraits/men/1.jpg">
-      <h4>Eijkeyal Pankaj</h4>
-      <p class="role">Founder & Developer</p>
+      <h4>Eijkeyal Pakhrin</h4>
+      <p class="role">Backend Engineer</p>
       <p class="desc">
-        Problem-solving focused developer with strong analytical thinking 
-        and creative approach to challenges.
+        Through my journey in technology, I have built strong confidence in solving problems creatively and effectively.
+         I approach challenges by breaking them into manageable parts and finding practical, innovative solutions. 
+         This growth has strengthened both my skills and mindset, making me more resilient, continuously learning, and committed to creating value and helping others.
       </p>
     </div>
     <div class="team-card">
       <img src="https://randomuser.me/api/portraits/men/2.jpg">
       <h4>Pankaj Rai</h4>
-      <p class="role">Backend Engineer</p>
+      <p class="role">Team Leeadr & Backend Engineer</p>
       <p class="desc">
-        Builds secure and scalable backend systems ensuring smooth performance.
+        A motivated and detail-oriented individual with a strong commitment to academic and professional growth. 
+        Possesses excellent organizational, communication, and problem-solving skills, with the ability to adapt to new challenges and environments.
+         Demonstrates a high level of responsibility, integrity, and dedication in all tasks undertaken. 
+         Eager to learn and continuously improve, with a proactive approach to achieving goals. Capable of working both independently and collaboratively to deliver effective and efficient results.
       </p>
     </div>
     <div class="team-card">
       <img src="https://randomuser.me/api/portraits/men/3.jpg">
       <h4>Bishrut Adhikari</h4>
-      <p class="role">UI/UX Designer</p>
+      <p class="role">Backend Engineer</p>
       <p class="desc">
         Designs modern and user-friendly interfaces for better experience.
       </p>
     </div>
     <div class="team-card">
       <img src="https://randomuser.me/api/portraits/women/4.jpg">
-      <h4>Kriti Shah</h4>
-      <p class="role">Marketing Manager</p>
+      <h4>Kritee Khadka</h4>
+      <p class="role">Frontend Developer</p>
       <p class="desc">
-        Drives brand growth through smart marketing strategies.
+        I am Kritee Khadka, a Bachelor in Computing student with an interest in frontend development and database management. 
+        I have practical experience in HTML, CSS, and MySQL, allowing me to build responsive, user-friendly web interfaces and manage structured data efficiently. 
+        I focus on creating functional and visually appealing applications, and I am currently developing a jersey selling system as part of my coursework, 
+        which applies my skills in frontend design and database management to simulate an e-commerce platform.
       </p>
     </div>
     <div class="team-card">
       <img src="https://randomuser.me/api/portraits/women/5.jpg">
       <h4>Manisha Shah</h4>
-      <p class="role">Customer Support</p>
+      <p class="role">Frontend Developer</p>
       <p class="desc">
-        Ensures smooth and friendly customer experience.
+       I am Manisha Shah, a passionate computing student currently pursuing my bachelor’s degree.
+       I have a strong interest in web development and enjoy learning technologies like HTML, Python, and Java.
+        In this group project, I contributed to building a jersey-selling website while improving my teamwork, problem-solving, and practical development skills. 
+        I am motivated to keep learning and growing in the field of technology.
       </p>
     </div>
   </div>

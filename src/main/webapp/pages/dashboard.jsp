@@ -8,19 +8,14 @@
 <meta charset="UTF-8">
 <title>User Dashboard</title>
 
-<!-- CSS -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/dashboard.css">
 
-<!-- FONT AWESOME -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
 </head>
 
 <body>
 
 <div class="dashboard-container">
-
-  <!-- SIDEBAR -->
   <div class="sidebar">
 
     <h2>
@@ -35,8 +30,10 @@
         </a>
       </li>
 
-      <li class="active">
-        <i class="fa-solid fa-house"></i> Dashboard
+      <li>
+        <a href="#" class="menu-link active">
+          <i class="fa-solid fa-house"></i> Dashboard
+        </a>
       </li>
 
       <li>
@@ -77,25 +74,20 @@
 
     </ul>
   </div>
-
-  <!-- MAIN CONTENT -->
   <div class="main-content">
-
-    <!-- TOP BAR -->
     <div class="top-bar">
 
       <div class="search-box">
         <input type="text" placeholder="Search...">
         <i class="fa fa-search"></i>
       </div>
+
       <div class="user-info">
         <span>Pankaj Rai</span>
         <div class="avatar">P</div>
       </div>
 
     </div>
-
-    <!-- STATS -->
     <div class="stats">
 
       <div class="stat-card">
@@ -123,8 +115,6 @@
       </div>
 
     </div>
-
-    <!-- CARDS -->
     <div class="card-grid">
 
       <div class="card">
@@ -151,13 +141,9 @@
         <p>2 saved items</p>
         <button>View Wishlist</button>
       </div>
-
     </div>
-
-    <!-- LOWER SECTION -->
     <div class="bottom-section">
 
-      <!-- RECENT ORDERS -->
       <div class="table-card">
         <h3>Recent Orders</h3>
 
@@ -183,21 +169,14 @@
               <td><span class="badge pending">Pending</span></td>
             </tr>
           </tbody>
-
         </table>
       </div>
 
-      <!-- NOTIFICATIONS -->
       <div class="table-card">
         <h3>Notifications</h3>
 
-        <div class="notification">
-          🎉 New offer available
-        </div>
-
-        <div class="notification">
-          📦 Order #102 is being processed
-        </div>
+        <div class="notification">New offer available</div>
+        <div class="notification">Order is being processed</div>
 
       </div>
 

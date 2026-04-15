@@ -101,7 +101,7 @@
   <div class="footer-bottom">
     <p><strong>KTHREE INC.</strong></p>
     <p>Orlando, FL</p>
-    <p>© 2026 PrimeJerseys</p>
+    <p>© 2026 Jersey Pasal</p>
   </div>
 
 </footer>
