@@ -1,0 +1,212 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+:root {
+    --red:    #c0392b;
+    --red-dark: #a93226;
+    --black:  #111111;
+    --white:  #ffffff;
+    --grey:   #f0f0f0;
+    --mid:    #666666;
+    --header-h: 68px;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+.site-header {
+    background: var(--black);
+    color: var(--white);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 2px solid var(--red);
+}
+
+.header-inner {
+    display: flex;
+    align-items: center;
+    height: var(--header-h);
+    padding: 0 32px 0 40px;
+    gap: 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+.logo-wrap {
+    margin-left: 8px;
+    flex-shrink: 0;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1.4rem;
+    font-weight: 900;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--white);
+}
+
+.logo-icon {
+    font-size: 1.6rem;
+    line-height: 1;
+}
+
+.logo-text {
+    color: var(--white);
+}
+
+.logo-text span {
+    color: var(--red);
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    flex: 1;
+    justify-content: center;
+}
+.nav-item,
+.nav-link-drop {
+    padding: 8px 16px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: #cccccc;
+    border-radius: 4px;
+    transition: color 0.2s, background 0.2s;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    white-space: nowrap;
+}
+
+.nav-item:hover,
+.nav-link-drop:hover {
+    color: var(--white);
+    background: rgba(255, 255, 255, 0.08);
+}
+.arrow {
+    font-size: 0.6rem;
+    margin-top: 1px;
+    color: #aaa;
+}
+.dropdown {
+    position: relative;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 0;
+    background: var(--white);
+    color: var(--black);
+    min-width: 280px;
+    border-radius: 6px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    flex-direction: row;
+    gap: 20px;
+    border-top: 3px solid var(--red);
+    z-index: 999;
+}
+.dropdown:hover .dropdown-menu {
+    display: flex;
+}
+
+.dropdown-col {
+    flex: 1;
+}
+.col-title {
+    font-size: 0.68rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--mid);
+    margin-bottom: 10px;
+    padding-bottom: 7px;
+    border-bottom: 1px solid #e5e5e5;
+}
+.dropdown-menu a {
+    display: block;
+    padding: 7px 0;
+    font-size: 0.86rem;
+    font-weight: 500;
+    color: #333;
+    transition: color 0.15s, padding-left 0.15s;
+}
+
+.dropdown-menu a:hover {
+    color: var(--red);
+    padding-left: 4px;
+}
+
+/* Header action buttons (top-right) */
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: auto;
+    flex-shrink: 0;
+}
+
+.btn-signin {
+    padding: 8px 18px;
+    font-size: 0.84rem;
+    font-weight: 700;
+    color: var(--white);
+    background: transparent;
+    border: 1.5px solid rgba(255, 255, 255, 0.35);
+    border-radius: 5px;
+    cursor: pointer;
+    letter-spacing: 0.3px;
+    transition: border-color 0.2s, background 0.2s, color 0.2s;
+    white-space: nowrap;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+}
+
+.btn-signin:hover {
+    border-color: var(--white);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.btn-get-started {
+    padding: 8px 18px;
+    font-size: 0.84rem;
+    font-weight: 700;
+    color: var(--white);
+    background: var(--red);
+    border: 1.5px solid var(--red);
+    border-radius: 5px;
+    cursor: pointer;
+    letter-spacing: 0.3px;
+    transition: background 0.2s, border-color 0.2s;
+    white-space: nowrap;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+}
+
+.btn-get-started:hover {
+    background: var(--red-dark);
+    border-color: var(--red-dark);
+}
+
+@media (max-width: 900px) {
+    .nav-item, .nav-link-drop { padding: 8px 10px; font-size: 0.82rem; }
+    .btn-signin, .btn-get-started { padding: 7px 13px; font-size: 0.78rem; }
+}
+
+@media (max-width: 640px) {
+    .nav-links { display: none; }
+    .header-inner { padding: 0 16px; }
+    .btn-signin { display: none; }
+}
