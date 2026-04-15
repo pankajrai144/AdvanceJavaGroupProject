@@ -1,97 +1,255 @@
-/* Reset default styles */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif;
-}
-
-/* Body styling */
+/* RESET */
 body {
-    height: 100vh;
-    background: linear-gradient(135deg, #4facfe, #00f2fe);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: #f7f8fc;
 }
 
-/* Login box */
-.login-box {
-    background: #fff;
-    padding: 30px 40px;
-    width: 350px;
-    border-radius: 10px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+/* LAYOUT */
+.auth-wrapper {
+  display: flex;
+  height: 100vh;
+}
+
+/* LEFT SIDE */
+.auth-left {
+  flex: 1;
+  background: url('https://images.unsplash.com/photo-1546519638-68e109498ffc') no-repeat center/cover;
+  position: relative;
+}
+
+.auth-left::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(0,0,0,0.85), rgba(0,0,0,0.55));
+}
+
+/* TEXT OVER IMAGE */
+.overlay {
+  position: relative;
+  z-index: 2;
+  color: white;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 60px;
+}
+
+.overlay h1 {
+  font-size: 44px;
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+
+.overlay p {
+  font-size: 18px;
+  opacity: 0.85;
+}
+
+/* RIGHT SIDE */
+.auth-right {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* LOGIN BOX */
+.auth-box {
+  width: 380px;
+  padding: 40px;
+  background: #ffffff;
+  border-radius: 18px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.08);
+}
+
+/* TITLE */
+.auth-box h2 {
+  margin-bottom: 8px;
+  font-weight: 600;
+  font-size: 24px;
+}
+
+/* REGISTER TEXT */
+.top-text {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 25px;
+}
+/*
+.top-text a {
+  color: #4a32e0;
+  font-weight: 600;
+  text-decoration: none;
+  margin-left: 5px;
+}
+
+.top-text a:hover {
+  text-decoration: underline;
+}
+*/
+.top-text a {
+  color: #6b5bd3;   /* softer, warmer */
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.top-text a:hover {
+  color: #4a32e0;   /* slightly stronger on hover */
+  text-decoration: underline;
+}
+/* INPUT */
+.input-group {
+  margin-bottom: 18px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 14px;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  outline: none;
+  font-size: 14px;
+  background: #fafafa;
+  transition: all 0.25s ease;
+}
+
+.input-group input:focus {
+  border-color: #6a5cff;
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(106, 92, 255, 0.1);
+}
+
+/* PASSWORD */
+.password-group {
+  position: relative;
+}
+
+.password-group span {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 12px;
+  cursor: pointer;
+  color: #777;
+  font-weight: 500;
+}
+
+/* FORGOT */
+.extra-links {
+  text-align: right;
+  margin-top: -8px;
+  margin-bottom: 18px;
+}
+
+.extra-links a {
+  font-size: 13px;
+  color: #6a5cff;
+  text-decoration: none;
+}
+
+.extra-links a:hover {
+  text-decoration: underline;
+}
+
+/* LOGIN BUTTON */
+.login-btn {
+  width: 100%;
+  padding: 14px;
+ /* background: linear-gradient(90deg, #6a5cff, #4a32e0);*/
+  background: linear-gradient(90deg, #7b5cff, #5a3ec8);
+  color: white;
+  border: none;
+  border-radius: 40px;
+  cursor: pointer;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 20px rgba(74, 50, 224, 0.25);
+}
+
+.login-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(74, 50, 224, 0.35);
+}
+
+.login-btn:active {
+  transform: scale(0.97);
+}
+
+/* DIVIDER */
+.divider {
+  margin: 28px 0;
+  font-size: 13px;
+  color: #aaa;
+  text-align: center;
+  position: relative;
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  height: 1px;
+  width: 40%;
+  background: #e0e0e0;
+  position: absolute;
+  top: 50%;
+}
+
+.divider::before { left: 0; }
+.divider::after { right: 0; }
+
+/* GOOGLE BUTTON */
+.google-btn {
+  width: 100%;
+  padding: 13px;
+  border-radius: 40px;
+  border: 1px solid #e0e0e0;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 14px;
+  transition: all 0.25s ease;
+}
+
+.google-btn img {
+  width: 20px;
+}
+
+.google-btn:hover {
+  background: #f9f9f9;
+  border-color: #ccc;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .auth-wrapper {
+    flex-direction: column;
+  }
+
+  .auth-left {
+    height: 220px;
+  }
+
+  .overlay {
+    padding: 20px;
     text-align: center;
-}
+  }
 
-/* Heading */
-.login-box h2 {
-    margin-bottom: 20px;
-    color: #333;
-}
+  .overlay h1 {
+    font-size: 28px;
+  }
 
-/* Row spacing */
-.row {
-    margin-bottom: 15px;
-}
-
-/* Labels */
-label {
-    display: block;
-    text-align: left;
-    margin-bottom: 5px;
-    font-weight: bold;
-    color: #555;
-}
-
-/* Input fields */
-input[type="text"],
-input[type="password"] {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    outline: none;
-    transition: 0.3s;
-}
-
-/* Input focus effect */
-input:focus {
-    border-color: #4facfe;
-    box-shadow: 0 0 5px rgba(79, 172, 254, 0.5);
-}
-
-/* Login button */
-.login-button {
-    width: 100%;
-    padding: 10px;
-    background: #4facfe;
-    border: none;
-    color: white;
-    font-size: 16px;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-/* Hover effect */
-.login-button:hover {
-    background: #00c6ff;
-}
-
-/* Forgot password link */
-.forgot-button {
-    display: block;
-    text-decoration: none;
-    color: #4facfe;
-    font-size: 14px;
-    margin-top: 10px;
-    transition: 0.3s;
-}
-
-/* Hover effect */
-.forgot-button:hover {
-    text-decoration: underline;
-    color: #0077cc;
+  .auth-box {
+    width: 90%;
+    margin: 20px auto;
+    padding: 25px;
+  }
 }

@@ -1,6 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" isELIgnored="false"%>
 
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Home - PrimeJerseys</title>
+
+<!-- ✅ FONT AWESOME (IMPORTANT) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<!-- ✅ INDEX CSS -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/index.css">
+
+</head>
+
+<body>
+
+<!-- ✅ HEADER (NAVBAR SAME EVERYWHERE) -->
 <jsp:include page="/components/header.jsp"/>
 
 <!-- HERO -->
@@ -44,4 +61,8 @@
   </div>
 </div>
 
+<!-- ✅ FOOTER -->
 <jsp:include page="/components/footer.jsp"/>
+
+</body>
+</html>

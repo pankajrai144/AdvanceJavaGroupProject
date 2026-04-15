@@ -1,0 +1,181 @@
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+.page-content {
+  margin-top: 0;
+}
+
+.about-page .hero {
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  text-align: center;
+  color: white;
+
+  
+  background: linear-gradient(
+      rgba(0,0,0,0.75),
+      rgba(0,0,0,0.75)
+    ),
+    url('https://images.unsplash.com/photo-1517927033932-b3d18e61fb3a?auto=format&fit=crop&w=1400&q=80');
+
+  background-size: cover;
+  background-position: center;
+}
+.about-page .hero h1 {
+  font-size: 48px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.about-page .hero p {
+  font-size: 18px;
+  color: #ccc;
+}
+
+/* SMALL LINE */
+.about-page .hero::after {
+  content: "";
+  width: 60px;
+  height: 3px;
+  background: white;
+  margin-top: 20px;
+  border-radius: 2px;
+}
+
+.about-page .about,
+.about-page .stats,
+.about-page .team {
+  margin-top: 70px;
+}
+.about-page .about {
+  padding: 0 10%;
+  text-align: center;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  color: #444;
+  line-height: 1.7;
+}
+
+.about-page .about h2 {
+  font-size: 30px;
+  margin-bottom: 20px;
+}
+
+.about-page .about p {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+.about-page .stats {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  padding: 20px;
+  flex-wrap: wrap;
+}
+
+.about-page .stat-box {
+  background: #fff;
+  padding: 20px 30px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  min-width: 120px;
+  text-align: center;
+}
+
+.about-page .stat-box h3 {
+  font-size: 28px;
+  color: black;
+}
+
+.about-page .stat-box p {
+  font-size: 14px;
+  color: #666;
+}
+.about-page .team {
+  padding: 0 10%;
+  text-align: center;
+}
+
+.about-page .team h2 {
+  font-size: 30px;
+  margin-bottom: 30px;
+}
+
+.about-page .team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+  gap: 25px;
+}
+.about-page .team-card {
+  background: white;
+  padding: 20px;
+  border-radius: 14px;
+  border: 1px solid #eee;
+  transition: 0.3s;
+  overflow: hidden;
+}
+
+.about-page .team-card img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.about-page .team-card h4 {
+  margin-top: 12px;
+  font-size: 16px;
+}
+
+.about-page .role {
+  font-size: 13px;
+  color: #777;
+}
+.about-page .team-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+}
+
+.about-page .desc {
+  font-size: 13px;
+  color: #555;
+  margin-top: 10px;
+  max-height: 0;
+  overflow: hidden;
+  transition: 0.4s ease;
+}
+
+.about-page .team-card:hover .desc {
+  max-height: 100px;
+}
+@media (max-width: 768px) {
+
+  .about-page .hero {
+    height: 60vh;
+  }
+
+  .about-page .hero h1 {
+    font-size: 32px;
+  }
+
+  .about-page .hero p {
+    font-size: 14px;
+  }
+
+  .about-page .stats {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+}
