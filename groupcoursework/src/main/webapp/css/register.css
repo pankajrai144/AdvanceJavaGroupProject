@@ -1,1 +1,242 @@
-@charset "UTF-8";
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  height: 100vh;
+  background: #111;
+  color: #fff;
+}
+
+.auth-container {
+  display: flex;
+  height: 100vh;
+}
+
+.left-panel {
+  flex: 1;
+  background: url("../images/messi.jpg") ;
+  background-size: cover;
+  position: relative;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 60px;
+}
+
+.overlay h1 {
+  font-size: 40px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #fff;
+}
+
+.overlay p {
+  font-size: 15px;
+  opacity: 0.85;
+}
+
+.right-panel {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #111; 
+}
+
+
+.form-box {
+  width: 420px; 
+  background: #1a1a1a; 
+  padding: 40px; 
+  border-radius: 18px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+.form-box h2 {
+  margin-bottom: 25px;
+  font-size: 24px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.form-box input {
+  width: 100%;
+  padding: 14px;
+  margin-bottom: 18px; 
+  border-radius: 12px;
+  border: 1px solid #333;
+  outline: none;
+  transition: 0.3s;
+  font-size: 14px;
+  background: #111;
+  color: #fff;
+}
+
+.form-box input:focus {
+  border-color: #8b0d1f;
+  box-shadow: 0 0 0 2px rgba(139,13,31,0.25);
+}
+
+
+.gender {
+  display: flex;
+  align-items: center;
+  gap: 35px;
+  margin: 12px 0 20px;
+  color: #ddd;
+}
+
+.gender label {
+  display: flex;
+  align-items: center;   
+  gap: 10px;
+  font-size: 14px;
+  line-height: 1;       
+  cursor: pointer;
+}
+
+.gender input {
+  accent-color: #8b0d1f;
+  width: 16px;
+  height: 16px;
+  margin: 0;             
+}
+
+.terms {
+  display: flex;
+  align-items: center;
+  margin-bottom: 22px;
+  color: #ccc;
+}
+
+.terms label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  line-height: 1; 
+  cursor: pointer;
+}
+
+.terms input {
+  accent-color: #8b0d1f;
+  width: 16px;
+  height: 16px;
+  margin: 0;
+}
+
+.terms a {
+  color: #8b0d1f;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.btn {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 30px;
+  background: linear-gradient(90deg, #8b0d1f, #6a0917);
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 10px;
+  margin-bottom: 18px;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  box-shadow: 0 10px 20px rgba(139, 13, 31, 0.35);
+}
+
+.divider {
+  text-align: center;
+  margin: 25px 0;
+  font-size: 12px;
+  color: #888;
+  position: relative;
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  position: absolute;
+  width: 40%;
+  height: 1px;
+  background: #333;
+  top: 50%;
+}
+
+.google-btn {
+  width: 100%;
+  padding: 13px;
+  border-radius: 40px;
+  border: 1px solid #333;
+  background: #111;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 14px;
+  transition: all 0.25s ease;
+}
+
+.google-icon {
+  width: 14px;
+  height: 14px;
+  object-fit: contain;
+}
+
+.google-btn:hover {
+  background: #1a1a1a;
+  box-shadow: 0 5px 12px rgba(0,0,0,0.5);
+}
+
+.login-text {
+  margin-top: 15px;
+  font-size: 13px;
+  text-align: center;
+  color: #aaa;
+}
+
+.login-text a {
+  color: #8b0d1f;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+@media (max-width: 900px) {
+
+  .auth-container {
+    flex-direction: column;
+  }
+
+  .left-panel {
+    height: 200px;
+  }
+
+  .overlay {
+    padding: 20px;
+    text-align: center;
+  }
+
+  .form-box {
+    width: 90%;
+  }
+}
