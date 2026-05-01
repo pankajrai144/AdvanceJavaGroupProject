@@ -7,7 +7,6 @@ public class LoginService {
 
     public boolean loginUser(String email, String password) throws Exception {
 
-        // Hash the entered password because registered password is stored as hash
         String hashedPassword = PasswordUtil.getHashPassword(password);
 
         // Check user from database
