@@ -26,26 +26,37 @@
 
       <h2>Create Account</h2>
 
-      <input type="text" name="fullname" placeholder="Full Name" required>
+      <%
+        String error = (String) request.getAttribute("error");
+        if (error != null) {
+      %>
+        <div class="error-message">
+          <%= error %>
+        </div>
+      <%
+        }
+      %>
 
-      <input type="email" name="email" placeholder="Email Address" required>
+      <input type="text" name="fullname" placeholder="Full Name">
 
-      <input type="tel" name="phone" placeholder="Phone Number" pattern="[0-9]{10}" required>
+      <input type="text" name="email" placeholder="Email Address">
 
-      <input type="date" name="dob" required>
+      <input type="text" name="phone" placeholder="Phone Number">
 
-      <input type="password" name="password" placeholder="Password" required>
+      <input type="text" name="dob" placeholder="Date of Birth">
 
-      <input type="text" name="address" placeholder="Address" required>
+      <input type="password" name="password" placeholder="Password">
+
+      <input type="text" name="address" placeholder="Address">
 
       <div class="gender">
-        <label><input type="radio" name="gender" value="Male" required> Male</label>
+        <label><input type="radio" name="gender" value="Male"> Male</label>
         <label><input type="radio" name="gender" value="Female"> Female</label>
       </div>
 
       <div class="terms">
         <label>
-          <input type="checkbox" required>
+          <input type="checkbox" name="terms" value="agree">
           I agree to <a href="#">Terms & Conditions</a>
         </label>
       </div>
