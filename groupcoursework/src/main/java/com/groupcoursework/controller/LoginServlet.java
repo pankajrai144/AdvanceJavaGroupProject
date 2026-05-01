@@ -5,7 +5,11 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+
 import java.io.IOException;
+
+import com.groupcoursework.service.LoginService;
+import com.groupcoursework.utils.SessionUtil;
 
 /**
  * Servlet implementation class LoginServlet
@@ -37,7 +41,28 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		
+		try {
+			String email = request.getParameter("email");
+			String password = request.getParameter("password");
+			
+			LoginService service = new LoginService();
+			boolean isValidUser = service.loginUser(email, password);
+			
+			if (isValidUser) {
+				SessionUtil.setAttribute(request, "userEmail", email,3600);
+				
+				response.sendRedirect(request.getContextPath() + "/userdashboard");
+			} else {
+				request.setAttribute("error", "Invalid email or password");
+				request.getRequestDispatcher("/WEB-INF/pages/login.jsp").forward(request, response);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			request.setAttribute("error", "Login failed. Please try again.");
+			request.getRequestDispatcher("/WEB-INF/pages/login.jsp").forward(request, response);
+		}
 	}
 
 }

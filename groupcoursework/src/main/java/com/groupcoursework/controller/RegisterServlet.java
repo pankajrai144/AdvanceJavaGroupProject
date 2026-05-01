@@ -7,37 +7,39 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-/**
- * Servlet implementation class RegisterServlet
- */
+import com.groupcoursework.service.RegisterService;
+
 @WebServlet(asyncSupported = true, urlPatterns = { "/register" })
 public class RegisterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+
     public RegisterServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		request.getRequestDispatcher("/WEB-INF/pages/register.jsp").forward(request, response);
-
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
 
+		try {
+			String fullname = request.getParameter("fullname");
+			String email = request.getParameter("email");
+			String phone = request.getParameter("phone");
+			String dob = request.getParameter("dob");
+			String password = request.getParameter("password");
+			String address = request.getParameter("address");
+			String gender = request.getParameter("gender");
+
+			RegisterService service = new RegisterService();
+			service.registerUser(fullname, email, phone, dob, password, address, gender);
+
+			response.sendRedirect(request.getContextPath() + "/login");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			response.getWriter().println("Registration Failed: " + e.getMessage());
+		}
+	}
 }
