@@ -6,24 +6,21 @@
 }
 
 body {
-  min-height: 100vh;
-  height: auto;
+  height: 100vh;
   background: #111;
   color: #fff;
-  overflow-y: auto;
 }
 
 .auth-container {
   display: flex;
-  min-height: 100vh;
-  height: auto;
+  height: 100vh;
 }
 
+/* LEFT PANEL */
 .left-panel {
   flex: 1;
   background: url("../images/messi.jpg");
   background-size: cover;
-  background-position: center;
   position: relative;
 }
 
@@ -31,7 +28,6 @@ body {
   position: absolute;
   inset: 0;
   background: rgba(0, 0, 0, 0.75);
-  color: white;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -42,7 +38,6 @@ body {
   font-size: 40px;
   font-weight: 600;
   margin-bottom: 10px;
-  color: #fff;
 }
 
 .overlay p {
@@ -50,45 +45,80 @@ body {
   opacity: 0.85;
 }
 
+/* RIGHT PANEL */
 .right-panel {
   flex: 1;
   display: flex;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
   background: #111;
-  padding: 70px 20px 40px;
-  overflow-y: auto;
 }
 
 .form-box {
   width: 420px;
-  height: auto;
   background: #1a1a1a;
   padding: 40px;
   border-radius: 18px;
   box-shadow: 0 20px 40px rgba(0,0,0,0.6);
   border: 1px solid rgba(255,255,255,0.05);
 }
-
-.form-box h2 {
-  margin-top: 0;
-  margin-bottom: 20px;
-  font-size: 24px;
-  font-weight: 600;
+.upload-btn {
+  margin-top: 10px;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 30px;
+  background: #8b0d1f;
   color: #fff;
+  font-size: 13px;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
-.error-message {
-  width: 100%;
-  background: rgba(139, 13, 31, 0.18);
-  border: 1px solid rgba(139, 13, 31, 0.5);
-  color: #ffb3b3;
-  font-size: 13px;
+.upload-btn:hover {
+  background: #6a0917;
+}
+/* PROFILE */
+.profile-upload {
   text-align: center;
-  padding: 10px 12px;
-  border-radius: 10px;
-  margin-bottom: 16px;
-  line-height: 1.4;
+  margin-bottom: 25px;
+}
+
+.profile-upload input {
+  display: none;
+}
+
+.profile-preview {
+  width: 95px;
+  height: 95px;
+  border-radius: 50%;
+  background: #111;
+  border: 2px dashed #444;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 10px;
+  cursor: pointer;
+  overflow: hidden;
+  position: relative;
+}
+
+.profile-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: none;
+  position: absolute;
+}
+
+.profile-preview i {
+  font-size: 30px;
+  color: #888;
+}
+
+/* INPUTS */
+.form-box h2 {
+  margin-bottom: 25px;
+  font-size: 24px;
 }
 
 .form-box input {
@@ -98,10 +128,9 @@ body {
   border-radius: 12px;
   border: 1px solid #333;
   outline: none;
-  transition: 0.3s;
-  font-size: 14px;
   background: #111;
   color: #fff;
+  font-size: 14px;
 }
 
 .form-box input:focus {
@@ -109,12 +138,36 @@ body {
   box-shadow: 0 0 0 2px rgba(139,13,31,0.25);
 }
 
-.gender {
+/* DATE FIELD FIXED */
+.date-wrapper {
+  position: relative;
+  margin-bottom: 18px;
+}
+
+.date-input {
+  padding-right: 45px;
+}
+
+/* PERFECT CENTER ICON */
+.date-wrapper i {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 16px;
+  color: #aaa;
+  cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 35px;
-  margin: 12px 0 20px;
-  color: #ddd;
+  justify-content: center;
+  height: 100%;
+}
+
+/* GENDER FIX */
+.gender {
+  display: flex;
+  gap: 40px;
+  margin: 18px 0 20px;
 }
 
 .gender label {
@@ -122,22 +175,19 @@ body {
   align-items: center;
   gap: 10px;
   font-size: 14px;
-  line-height: 1;
   cursor: pointer;
 }
 
-.gender input {
+.gender input[type="radio"] {
   accent-color: #8b0d1f;
   width: 16px;
   height: 16px;
   margin: 0;
 }
 
+/* TERMS FIX */
 .terms {
-  display: flex;
-  align-items: center;
   margin-bottom: 22px;
-  color: #ccc;
 }
 
 .terms label {
@@ -145,23 +195,23 @@ body {
   align-items: center;
   gap: 10px;
   font-size: 13px;
-  line-height: 1;
   cursor: pointer;
 }
 
-.terms input {
+.terms input[type="checkbox"] {
   accent-color: #8b0d1f;
-  width: 16px;
-  height: 16px;
+  width: 15px;
+  height: 15px;
   margin: 0;
 }
 
+/* FIXED TEXT COLOR */
 .terms a {
-  color: #8b0d1f;
-  text-decoration: none;
-  font-weight: 500;
+  color: #fff;
+  text-decoration: underline;
 }
 
+/* BUTTON */
 .btn {
   width: 100%;
   padding: 14px;
@@ -169,72 +219,53 @@ body {
   border-radius: 30px;
   background: linear-gradient(90deg, #8b0d1f, #6a0917);
   color: white;
-  font-size: 14px;
   font-weight: 600;
   cursor: pointer;
-  margin-top: 10px;
   margin-bottom: 18px;
-  transition: 0.3s;
 }
 
 .btn:hover {
-  box-shadow: 0 10px 20px rgba(139, 13, 31, 0.35);
+  box-shadow: 0 10px 20px rgba(139,13,31,0.35);
 }
 
+/* DIVIDER */
 .divider {
-  text-align: center;
+  display: flex;
+  align-items: center;
+  gap: 10px;
   margin: 25px 0;
+  color: #777;
   font-size: 12px;
-  color: #888;
-  position: relative;
 }
 
 .divider::before,
 .divider::after {
   content: "";
-  position: absolute;
-  width: 40%;
+  flex: 1;
   height: 1px;
   background: #333;
-  top: 50%;
 }
 
-.divider::before {
-  left: 0;
-}
-
-.divider::after {
-  right: 0;
-}
-
+/* GOOGLE */
 .google-btn {
   width: 100%;
-  padding: 13px;
-  border-radius: 40px;
+  padding: 12px;
+  border-radius: 30px;
   border: 1px solid #333;
-  background: #111;
+  background: #181818;
   color: #fff;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   gap: 10px;
   cursor: pointer;
-  font-weight: 500;
-  font-size: 14px;
-  transition: all 0.25s ease;
 }
 
 .google-icon {
-  width: 14px;
-  height: 14px;
-  object-fit: contain;
+  width: 18px;
 }
 
-.google-btn:hover {
-  background: #1a1a1a;
-  box-shadow: 0 5px 12px rgba(0,0,0,0.5);
-}
-
+/* LOGIN */
 .login-text {
   margin-top: 15px;
   font-size: 13px;
@@ -245,27 +276,21 @@ body {
 .login-text a {
   color: #8b0d1f;
   text-decoration: none;
-  font-weight: 500;
 }
 
+/* RESPONSIVE */
 @media (max-width: 900px) {
-
   .auth-container {
     flex-direction: column;
   }
 
   .left-panel {
     height: 200px;
-    flex: none;
   }
 
   .overlay {
     padding: 20px;
     text-align: center;
-  }
-
-  .right-panel {
-    padding: 40px 20px;
   }
 
   .form-box {
