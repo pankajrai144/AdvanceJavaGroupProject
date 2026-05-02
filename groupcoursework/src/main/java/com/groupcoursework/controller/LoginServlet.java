@@ -47,12 +47,18 @@ public class LoginServlet extends HttpServlet {
 			String password = request.getParameter("password");
 			
 			LoginService service = new LoginService();
-			boolean isValidUser = service.loginUser(email, password);
+			String role = service.loginUser(email, password);
 			
-			if (isValidUser) {
-				SessionUtil.setAttribute(request, "userEmail", email,3600);
+			if (role != null) {
+				SessionUtil.setAttribute(request, "userEmail", email, 3600);
+				SessionUtil.setAttribute(request, "userRole", role, 3600);
 				
-				response.sendRedirect(request.getContextPath() + "/userdashboard");
+				if (role.equalsIgnoreCase("admin")) {
+					response.sendRedirect(request.getContextPath() + "/admindashboard");
+				} else {
+					response.sendRedirect(request.getContextPath() + "/userdashboard");
+				}
+				
 			} else {
 				request.setAttribute("error", "Invalid email or password");
 				request.getRequestDispatcher("/WEB-INF/pages/login.jsp").forward(request, response);

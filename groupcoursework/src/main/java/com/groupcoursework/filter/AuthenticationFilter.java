@@ -18,7 +18,7 @@ import jakarta.servlet.http.HttpServletResponse;
 /**
  * Servlet Filter implementation class AuthenticationFilter
  */
-@WebFilter(urlPatterns = { "/userdashboard", "/logout" })
+@WebFilter(urlPatterns = { "/userdashboard", "/admindashboard", "/logout" })
 public class AuthenticationFilter extends HttpFilter implements Filter {
 
 	private static final long serialVersionUID = 1L;
@@ -38,13 +38,43 @@ public class AuthenticationFilter extends HttpFilter implements Filter {
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
 		HttpServletResponse httpResponse = (HttpServletResponse) response;
 
-		boolean isLoggedIn = SessionUtil.getAttribute(httpRequest, "userEmail") != null;
+		// Prevent browser from showing old dashboard page after logout
+		httpResponse.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+		httpResponse.setHeader("Pragma", "no-cache");
+		httpResponse.setDateHeader("Expires", 0);
 
-		if (isLoggedIn) {
-			chain.doFilter(request, response);
-		} else {
+		Object userEmail = SessionUtil.getAttribute(httpRequest, "userEmail");
+		Object userRole = SessionUtil.getAttribute(httpRequest, "userRole");
+
+		boolean isLoggedIn = userEmail != null;
+
+		if (!isLoggedIn) {
 			httpResponse.sendRedirect(httpRequest.getContextPath() + "/login");
+			return;
 		}
+
+		String path = httpRequest.getServletPath();
+
+		if (path.equals("/admindashboard")) {
+			if ("admin".equalsIgnoreCase(String.valueOf(userRole))) {
+				chain.doFilter(request, response);
+			} else {
+				httpResponse.sendRedirect(httpRequest.getContextPath() + "/userdashboard");
+			}
+			return;
+		}
+
+		if (path.equals("/userdashboard")) {
+			if ("member".equalsIgnoreCase(String.valueOf(userRole))) {
+				chain.doFilter(request, response);
+			} else {
+				httpResponse.sendRedirect(httpRequest.getContextPath() + "/admindashboard");
+			}
+			return;
+		}
+
+		// This allows /logout to continue to LogoutServlet
+		chain.doFilter(request, response);
 	}
 
 	public void init(FilterConfig fConfig) throws ServletException {

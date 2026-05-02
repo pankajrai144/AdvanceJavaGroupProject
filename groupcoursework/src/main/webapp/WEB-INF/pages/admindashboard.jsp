@@ -33,10 +33,11 @@
       <li><i class="fa fa-cog"></i> Settings</li>
     </ul>
 
-    <div class="logout">
+    <a href="${pageContext.request.contextPath}/logout" class="logout">
       <i class="fa fa-sign-out-alt"></i> Logout
-    </div>
+    </a>
   </aside>
+
   <main class="main">
     <div class="topbar">
       <h1>Dashboard Overview</h1>
@@ -45,12 +46,14 @@
         <i class="fa fa-bell"></i>
       </div>
     </div>
+
     <div class="stats">
       <div class="card"><h4>Total Revenue</h4><p>$12,400</p></div>
       <div class="card"><h4>Orders</h4><p>320</p></div>
       <div class="card"><h4>Customers</h4><p>150</p></div>
       <div class="card"><h4>Products</h4><p>85</p></div>
     </div>
+
     <div class="grid">
 
       <div class="box">
@@ -84,6 +87,7 @@
       </div>
 
     </div>
+
     <div class="section">
       <h2>Product Management</h2>
 
@@ -99,6 +103,7 @@
         <button type="submit">Add Product</button>
       </form>
     </div>
+
     <div class="section">
       <h2>Order Management</h2>
 
@@ -118,6 +123,7 @@
         </tr>
       </table>
     </div>
+
     <div class="section">
       <h2>User Management</h2>
 
@@ -133,6 +139,7 @@
         </tr>
       </table>
     </div>
+
     <div class="section">
       <h2>Category Management</h2>
 
@@ -143,6 +150,7 @@
       <p>National Jerseys</p>
       <p>Retro Jerseys</p>
     </div>
+
     <div class="section">
       <h2>Analytics</h2>
 

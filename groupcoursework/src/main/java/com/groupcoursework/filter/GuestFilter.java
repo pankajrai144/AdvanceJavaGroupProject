@@ -38,10 +38,17 @@ public class GuestFilter extends HttpFilter implements Filter {
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
 		HttpServletResponse httpResponse = (HttpServletResponse) response;
 
-		boolean isLoggedIn = SessionUtil.getAttribute(httpRequest, "userEmail") != null;
+		Object userEmail = SessionUtil.getAttribute(httpRequest, "userEmail");
+		Object userRole = SessionUtil.getAttribute(httpRequest, "userRole");
+
+		boolean isLoggedIn = userEmail != null;
 
 		if (isLoggedIn) {
-			httpResponse.sendRedirect(httpRequest.getContextPath() + "/userdashboard");
+			if ("admin".equalsIgnoreCase(String.valueOf(userRole))) {
+				httpResponse.sendRedirect(httpRequest.getContextPath() + "/admindashboard");
+			} else {
+				httpResponse.sendRedirect(httpRequest.getContextPath() + "/userdashboard");
+			}
 		} else {
 			chain.doFilter(request, response);
 		}

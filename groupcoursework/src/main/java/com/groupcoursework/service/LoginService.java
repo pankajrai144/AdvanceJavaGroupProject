@@ -5,13 +5,13 @@ import com.groupcoursework.utils.PasswordUtil;
 
 public class LoginService {
 
-    public boolean loginUser(String email, String password) throws Exception {
+    public String loginUser(String email, String password) throws Exception {
 
         String hashedPassword = PasswordUtil.getHashPassword(password);
 
-        // Check user from database
+        // Get user role from database
         UserDAO dao = new UserDAO();
-        return dao.checkLogin(email, hashedPassword);
+        return dao.getUserRole(email, hashedPassword);
     }
 
 }
