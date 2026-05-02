@@ -11,14 +11,15 @@ import com.groupcoursework.utils.DBconfig;
 public class UserDAO {
 
     public void insertUser(String fullname, String email, String phone, String dob,
-                           String password, String address, String gender) throws Exception {
+                           String password, String address, String gender,
+                           String profileImageName) throws Exception {
 
         Connection con = DBconfig.getConnection();
 
         LocalDate localDate = LocalDate.parse(dob);
         Date sqlDate = Date.valueOf(localDate);
 
-        String sql = "INSERT INTO users (fullname, email, phone, dob, password, address, gender) VALUES (?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO users (fullname, email, phone, dob, password, address, gender, profile_image) VALUES (?,?,?,?,?,?,?,?)";
 
         PreparedStatement pst = con.prepareStatement(sql);
 
@@ -29,6 +30,7 @@ public class UserDAO {
         pst.setString(5, password);
         pst.setString(6, address);
         pst.setString(7, gender);
+        pst.setString(8, profileImageName);
 
         pst.executeUpdate();
 

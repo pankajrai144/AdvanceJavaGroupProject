@@ -16,11 +16,16 @@
   <aside class="sidebar">
     <div class="logo">Admin Dashboard</div>
 
-   <div class="admin-profile">
-  <img src="" alt="profile" />
-  <h4>Admin</h4>
-  <p>Eijkeyal</p>
-</div>
+    <div class="admin-profile">
+      <div class="admin-profile-img-box">
+        <img src="${pageContext.request.contextPath}/getimage?email=${sessionScope.userEmail}" 
+             alt="Admin Profile"
+             class="admin-profile-img">
+      </div>
+
+      <h4>Admin</h4>
+      <p>${sessionScope.userEmail}</p>
+    </div>
 
     <ul>
       <li class="active"><i class="fa fa-chart-line"></i> Dashboard</li>

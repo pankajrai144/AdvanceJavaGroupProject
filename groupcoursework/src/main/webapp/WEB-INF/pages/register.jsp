@@ -9,7 +9,6 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/register.css">
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 </head>
 
 <body>
@@ -23,13 +22,13 @@
 
   <div class="right-panel">
 
-    <form action="${pageContext.request.contextPath}/register" method="post" class="form-box">
+    <form action="${pageContext.request.contextPath}/register" method="post" enctype="multipart/form-data" class="form-box">
 
       <h2>Create Account</h2>
 
       <%
         String error = (String) request.getAttribute("error");
-        if (error != null) {
+        if (error != null && "POST".equalsIgnoreCase(request.getMethod())) {
       %>
         <div class="error-message">
           <%= error %>
@@ -37,17 +36,15 @@
       <%
         }
       %>
-      <div class="profile-upload">
 
-        <div class="profile-preview">
-          <img id="previewImg" src="" alt="Preview" style="display:none;">
-          <i id="defaultIcon" class="fa-solid fa-user"></i>
+      <div class="profile-upload">
+        <div class="profile-preview-box">
+          <img id="profilePreview" src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="Profile Preview">
         </div>
-        <input type="file" id="profilePic" name="profilePic" accept="image/*" required hidden>
-        <button type="button" class="upload-btn"
-          onclick="document.getElementById('profilePic').click()">
-          Upload Profile Picture
-        </button>
+
+        <input type="file" id="profilePic" name="profilePic" accept="image/*" onchange="previewProfileImage(event)">
+
+        <label for="profilePic" class="upload-pic-btn">Upload Pic</label>
       </div>
 
       <input type="text" name="fullname" placeholder="Full Name">
@@ -56,9 +53,7 @@
 
       <input type="text" name="phone" placeholder="Phone Number">
 
-      <div class="date-wrapper">
-        <input type="text" id="dob" name="dob" class="date-input" placeholder="dd/mm/yyyy" required>
-      </div>
+      <input type="date" name="dob" id="dob" class="date-input" onclick="openDatePicker(this)" onfocus="openDatePicker(this)">
 
       <input type="password" name="password" placeholder="Password">
 
@@ -81,7 +76,7 @@
       <div class="divider">OR</div>
 
       <button type="button" class="google-btn">
-        <img src="https://www.svgrepo.com/show/475656/google-color.svg" class="google-icon">
+        <img src="https://developers.google.com/identity/images/g-logo.png" class="google-icon">
         Continue with Google
       </button>
 
@@ -93,35 +88,31 @@
     </form>
   </div>
 </div>
-<script>
-  const fileInput = document.getElementById("profilePic");
-  const previewImg = document.getElementById("previewImg");
-  const defaultIcon = document.getElementById("defaultIcon");
 
-  fileInput.addEventListener("change", function () {
-    const file = this.files[0];
+<script>
+  function previewProfileImage(event) {
+    const file = event.target.files[0];
+    const preview = document.getElementById("profilePreview");
 
     if (file) {
-      const reader = new FileReader();
-
-      reader.onload = function (e) {
-        previewImg.src = e.target.result;
-        previewImg.style.display = "block";
-        defaultIcon.style.display = "none";
-      };
-
-      reader.readAsDataURL(file);
+      preview.src = URL.createObjectURL(file);
     }
-  });
-</script>
-<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  }
 
-<script>
-  flatpickr("#dob", {
-    dateFormat: "d/m/Y",
-    maxDate: "today",
-    yearSelectorType: "dropdown"
-  });
+  function openDatePicker(input) {
+    if (input.showPicker) {
+      input.showPicker();
+    }
+  }
+
+  const dobInput = document.getElementById("dob");
+  const today = new Date();
+
+  today.setDate(today.getDate() - 1);
+
+  const maxDate = today.toISOString().split("T")[0];
+  dobInput.setAttribute("max", maxDate);
 </script>
+
 </body>
 </html>

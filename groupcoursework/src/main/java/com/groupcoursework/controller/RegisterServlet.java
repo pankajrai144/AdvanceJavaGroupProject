@@ -1,19 +1,28 @@
 package com.groupcoursework.controller;
 
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.Part;
+
+import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 import com.groupcoursework.service.RegisterService;
+import com.groupcoursework.utils.FileUploadUtil;
 
 @WebServlet(asyncSupported = true, urlPatterns = { "/register" })
+@MultipartConfig
 public class RegisterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+
+	private static final String UPLOAD_DIR =
+			System.getProperty("user.home") + File.separator + "jersey_pasal_uploads";
 
     public RegisterServlet() {
         super();
@@ -35,7 +44,9 @@ public class RegisterServlet extends HttpServlet {
 			String gender = request.getParameter("gender");
 			String terms = request.getParameter("terms");
 
-			String error = validateRegisterForm(fullname, email, phone, dob, password, address, gender, terms);
+			Part profilePic = request.getPart("profilePic");
+
+			String error = validateRegisterForm(fullname, email, phone, dob, password, address, gender, terms, profilePic);
 
 			if (error != null) {
 				request.setAttribute("error", error);
@@ -43,8 +54,14 @@ public class RegisterServlet extends HttpServlet {
 				return;
 			}
 
+			String extension = FileUploadUtil.getFileExtension(profilePic.getSubmittedFileName());
+			String cleanEmail = FileUploadUtil.cleanEmailForFileName(email);
+			String profileImageName = cleanEmail + extension;
+
+			FileUploadUtil.saveFile(profilePic, UPLOAD_DIR, profileImageName);
+
 			RegisterService service = new RegisterService();
-			service.registerUser(fullname, email, phone, dob, password, address, gender);
+			service.registerUser(fullname, email, phone, dob, password, address, gender, profileImageName);
 
 			response.sendRedirect(request.getContextPath() + "/login");
 
@@ -56,7 +73,7 @@ public class RegisterServlet extends HttpServlet {
 	}
 
 	private String validateRegisterForm(String fullname, String email, String phone, String dob,
-			String password, String address, String gender, String terms) {
+			String password, String address, String gender, String terms, Part profilePic) {
 
 		if (fullname == null || fullname.trim().isEmpty()) {
 			return "Full name is required.";
@@ -111,6 +128,21 @@ public class RegisterServlet extends HttpServlet {
 
 		if (terms == null || !terms.equals("agree")) {
 			return "You must agree to the Terms & Conditions.";
+		}
+
+		if (profilePic == null || profilePic.getSubmittedFileName() == null 
+				|| profilePic.getSubmittedFileName().trim().isEmpty()) {
+			return "Please upload a profile picture.";
+		}
+
+		String contentType = profilePic.getContentType();
+
+		if (contentType == null || !contentType.startsWith("image/")) {
+			return "Please upload only an image file.";
+		}
+
+		if (profilePic.getSize() == 0) {
+			return "Uploaded image file is empty.";
 		}
 
 		return null;

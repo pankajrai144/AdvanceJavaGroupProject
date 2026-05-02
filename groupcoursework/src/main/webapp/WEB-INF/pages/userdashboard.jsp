@@ -19,13 +19,13 @@
   <div class="sidebar">
 
     <h2>
-      <a href="index.jsp" class="logo-link">JerseyPasal</a>
+      <a href="${pageContext.request.contextPath}/index.jsp" class="logo-link">JerseyPasal</a>
     </h2>
 
     <ul class="sidebar-menu">
 
       <li>
-        <a href="index.jsp" class="menu-link">
+        <a href="${pageContext.request.contextPath}/index.jsp" class="menu-link">
           <i class="fa-solid fa-globe"></i> Home
         </a>
       </li>
@@ -37,43 +37,44 @@
       </li>
 
       <li>
-        <a href="orders.jsp" class="menu-link">
+        <a href="${pageContext.request.contextPath}/orders.jsp" class="menu-link">
           <i class="fa-solid fa-box"></i> Orders
         </a>
       </li>
 
       <li>
-        <a href="cart.jsp" class="menu-link">
+        <a href="${pageContext.request.contextPath}/cart.jsp" class="menu-link">
           <i class="fa-solid fa-cart-shopping"></i> Cart
         </a>
       </li>
 
       <li>
-        <a href="wishlist.jsp" class="menu-link">
+        <a href="${pageContext.request.contextPath}/wishlist.jsp" class="menu-link">
           <i class="fa-regular fa-heart"></i> Wishlist
         </a>
       </li>
 
       <li>
-        <a href="profile.jsp" class="menu-link">
+        <a href="${pageContext.request.contextPath}/profile.jsp" class="menu-link">
           <i class="fa-solid fa-user"></i> Profile
         </a>
       </li>
 
       <li>
-        <a href="settings.jsp" class="menu-link">
+        <a href="${pageContext.request.contextPath}/settings.jsp" class="menu-link">
           <i class="fa-solid fa-gear"></i> Settings
         </a>
       </li>
 
       <li>
-        <a href="logout" class="menu-link">
+        <a href="${pageContext.request.contextPath}/logout" class="menu-link">
           <i class="fa-solid fa-right-from-bracket"></i> Logout
         </a>
       </li>
 
     </ul>
   </div>
+
   <div class="main-content">
     <div class="top-bar">
 
@@ -83,11 +84,17 @@
       </div>
 
       <div class="user-info">
-        <span>Pankaj Rai</span>
-        <div class="avatar">P</div>
+        <span>${sessionScope.userEmail}</span>
+
+        <div class="avatar-img-box">
+          <img src="${pageContext.request.contextPath}/getimage?email=${sessionScope.userEmail}" 
+               alt="Profile Picture"
+               class="avatar-img">
+        </div>
       </div>
 
     </div>
+
     <div class="stats">
 
       <div class="stat-card">
@@ -115,12 +122,12 @@
       </div>
 
     </div>
+
     <div class="card-grid">
 
       <div class="card">
         <h3><i class="fa-solid fa-user"></i> Account Info</h3>
-        <p><strong>Name:</strong> Pankaj Rai</p>
-        <p><strong>Email:</strong> pankajraiokladhunga@gmail.com</p>
+        <p><strong>Email:</strong> ${sessionScope.userEmail}</p>
         <button>Edit Profile</button>
       </div>
 
@@ -142,6 +149,7 @@
         <button>View Wishlist</button>
       </div>
     </div>
+
     <div class="bottom-section">
 
       <div class="table-card">
