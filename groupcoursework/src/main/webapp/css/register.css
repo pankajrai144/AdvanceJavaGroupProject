@@ -15,8 +15,6 @@ body {
   display: flex;
   height: 100vh;
 }
-
-/* LEFT PANEL */
 .left-panel {
   flex: 1;
   background: url("../images/messi.jpg");
@@ -44,8 +42,6 @@ body {
   font-size: 15px;
   opacity: 0.85;
 }
-
-/* RIGHT PANEL */
 .right-panel {
   flex: 1;
   display: flex;
@@ -77,7 +73,6 @@ body {
 .upload-btn:hover {
   background: #6a0917;
 }
-/* PROFILE */
 .profile-upload {
   text-align: center;
   margin-bottom: 25px;
@@ -114,8 +109,6 @@ body {
   font-size: 30px;
   color: #888;
 }
-
-/* INPUTS */
 .form-box h2 {
   margin-bottom: 25px;
   font-size: 24px;
@@ -137,8 +130,6 @@ body {
   border-color: #8b0d1f;
   box-shadow: 0 0 0 2px rgba(139,13,31,0.25);
 }
-
-/* DATE FIELD FIXED */
 .date-wrapper {
   position: relative;
   margin-bottom: 18px;
@@ -147,8 +138,6 @@ body {
 .date-input {
   padding-right: 45px;
 }
-
-/* PERFECT CENTER ICON */
 .date-wrapper i {
   position: absolute;
   right: 15px;
@@ -162,8 +151,6 @@ body {
   justify-content: center;
   height: 100%;
 }
-
-/* GENDER FIX */
 .gender {
   display: flex;
   gap: 40px;
@@ -184,8 +171,6 @@ body {
   height: 16px;
   margin: 0;
 }
-
-/* TERMS FIX */
 .terms {
   margin-bottom: 22px;
 }
@@ -204,14 +189,10 @@ body {
   height: 15px;
   margin: 0;
 }
-
-/* FIXED TEXT COLOR */
 .terms a {
   color: #fff;
   text-decoration: underline;
 }
-
-/* BUTTON */
 .btn {
   width: 100%;
   padding: 14px;
@@ -227,8 +208,6 @@ body {
 .btn:hover {
   box-shadow: 0 10px 20px rgba(139,13,31,0.35);
 }
-
-/* DIVIDER */
 .divider {
   display: flex;
   align-items: center;
@@ -245,8 +224,6 @@ body {
   height: 1px;
   background: #333;
 }
-
-/* GOOGLE */
 .google-btn {
   width: 100%;
   padding: 12px;
@@ -264,8 +241,6 @@ body {
 .google-icon {
   width: 18px;
 }
-
-/* LOGIN */
 .login-text {
   margin-top: 15px;
   font-size: 13px;
@@ -276,9 +251,12 @@ body {
 .login-text a {
   color: #8b0d1f;
   text-decoration: none;
+  
 }
-
-/* RESPONSIVE */
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px #111 inset !important;
+  -webkit-text-fill-color: #fff !important;
+}
 @media (max-width: 900px) {
   .auth-container {
     flex-direction: column;
