@@ -39,8 +39,15 @@ body {
   border: 1px solid var(--border);
 }
 
-h2 { color: var(--text); }
-.subtitle { color: var(--subtext); margin-bottom: 20px; font-size: 13px; }
+h2 { 
+  color: var(--text); 
+}
+
+.subtitle { 
+  color: var(--subtext); 
+  margin-bottom: 20px; 
+  font-size: 13px; 
+}
 
 .profile-preview {
   width: 100px;
@@ -70,6 +77,7 @@ h2 { color: var(--text); }
 }
 
 .upload-btn {
+  display: inline-block;
   margin-bottom: 20px;
   padding: 10px 20px;
   border-radius: 30px;
@@ -117,11 +125,16 @@ h2 { color: var(--text); }
 }
 
 .back-link {
-  display: block;
-  margin-top: 15px;
-  color: #aaa;
+  color: var(--subtext) !important;
   text-decoration: none;
   font-size: 13px;
+  display: block;
+  text-align: center;
+  margin-top: 18px;
+}
+
+.back-link:visited {
+  color: var(--subtext) !important;
 }
 </style>
 </head>
@@ -134,17 +147,18 @@ h2 { color: var(--text); }
   <p class="subtitle">Manage your Jersey Pasal account</p>
 
   <form action="${pageContext.request.contextPath}/profile" method="post" enctype="multipart/form-data">
-    <div class="profile-preview" onclick="document.getElementById('profilePic').click()">
+
+    <div class="profile-preview">
       <img id="previewImg">
       <i id="defaultIcon" class="fa-solid fa-user"></i>
     </div>
 
     <input type="file" id="profilePic" name="profilePic" accept="image/*" hidden>
 
-    <button type="button" class="upload-btn"
-      onclick="document.getElementById('profilePic').click()">
+    <label for="profilePic" class="upload-btn">
       Upload Profile Picture
-    </button>
+    </label>
+
     <div class="input-group">
       <label>First Name</label>
       <input type="text" name="firstName" value="${user.firstName}">
@@ -174,29 +188,11 @@ h2 { color: var(--text); }
 
   </form>
 
-  <a href="dashboard.jsp" class="back-link">← Back to Dashboard</a>
+  <a href="${pageContext.request.contextPath}/userdashboard" class="back-link">
+    <i class="fa-solid fa-arrow-left-long"></i> Back to Dashboard
+  </a>
 
 </div>
-<script>
-const fileInput = document.getElementById("profilePic");
-const previewImg = document.getElementById("previewImg");
-const defaultIcon = document.getElementById("defaultIcon");
 
-fileInput.addEventListener("change", function () {
-  const file = this.files[0];
-
-  if (file) {
-    const reader = new FileReader();
-
-    reader.onload = function (e) {
-      previewImg.src = e.target.result;
-      previewImg.style.display = "block";
-      defaultIcon.style.display = "none";
-    };
-
-    reader.readAsDataURL(file);
-  }
-});
-</script>
 </body>
 </html>

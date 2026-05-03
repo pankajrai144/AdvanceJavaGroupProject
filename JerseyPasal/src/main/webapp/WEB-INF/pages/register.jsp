@@ -42,7 +42,7 @@
           <img id="profilePreview" src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="Profile Preview">
         </div>
 
-        <input type="file" id="profilePic" name="profilePic" accept="image/*" onchange="previewProfileImage(event)">
+        <input type="file" id="profilePic" name="profilePic" accept="image/*">
 
         <label for="profilePic" class="upload-pic-btn">Upload Pic</label>
       </div>
@@ -53,7 +53,7 @@
 
       <input type="text" name="phone" placeholder="Phone Number">
 
-      <input type="date" name="dob" id="dob" class="date-input" onclick="openDatePicker(this)" onfocus="openDatePicker(this)">
+      <input type="date" name="dob" id="dob" class="date-input">
 
       <input type="password" name="password" placeholder="Password">
 
@@ -88,31 +88,6 @@
     </form>
   </div>
 </div>
-
-<script>
-  function previewProfileImage(event) {
-    const file = event.target.files[0];
-    const preview = document.getElementById("profilePreview");
-
-    if (file) {
-      preview.src = URL.createObjectURL(file);
-    }
-  }
-
-  function openDatePicker(input) {
-    if (input.showPicker) {
-      input.showPicker();
-    }
-  }
-
-  const dobInput = document.getElementById("dob");
-  const today = new Date();
-
-  today.setDate(today.getDate() - 1);
-
-  const maxDate = today.toISOString().split("T")[0];
-  dobInput.setAttribute("max", maxDate);
-</script>
 
 </body>
 </html>

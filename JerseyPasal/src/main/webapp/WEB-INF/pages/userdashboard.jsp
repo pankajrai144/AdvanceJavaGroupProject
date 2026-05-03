@@ -72,12 +72,10 @@
         </a>
       </li>
 
-      <!-- Soft Delete Account Button -->
       <li>
-        <form action="${pageContext.request.contextPath}/deleteaccount" 
-              method="post"
-              class="delete-account-form"
-              onsubmit="return confirm('Are you sure you want to delete your account? Your account will be deactivated and you will not be able to login again.');">
+        <form action="${pageContext.request.contextPath}/confirmdelete" 
+              method="get"
+              class="delete-account-form">
 
           <button type="submit" class="menu-link delete-account-btn">
             <i class="fa-solid fa-user-slash"></i> Delete Account
@@ -142,7 +140,9 @@
       <div class="card">
         <h3><i class="fa-solid fa-user"></i> Account Info</h3>
         <p><strong>Email:</strong> ${sessionScope.loggedInUser.email}</p>
+        <a href="${pageContext.request.contextPath}/editprofile" class="back-link">
         <button>Edit Profile</button>
+        </a>
       </div>
 
       <div class="card">

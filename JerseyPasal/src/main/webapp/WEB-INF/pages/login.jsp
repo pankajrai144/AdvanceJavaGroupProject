@@ -10,18 +10,6 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-<script>
-function togglePassword() {
-    var password = document.getElementById("password");
-
-    if (password.type === "password") {
-        password.type = "text";
-    } else {
-        password.type = "password";
-    }
-}
-</script>
-
 </head>
 
 <body>
@@ -58,8 +46,7 @@ function togglePassword() {
       </div>
 
       <div class="input-group password-group">
-        <input type="password" name="password" placeholder="Enter Password" id="password" required>
-        <span onclick="togglePassword()">SHOW</span>
+        <input type="password" name="password" placeholder="Enter Password" id="password">
       </div>
 
       <div class="extra-links">
