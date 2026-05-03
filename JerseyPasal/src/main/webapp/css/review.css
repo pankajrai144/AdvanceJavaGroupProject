@@ -1,1 +1,89 @@
-@charset "UTF-8";
+.reviewbox {
+    max-width: 640px;
+    margin: 0 auto;
+    background: #1a1a1a;
+    border: 1px solid #222;
+    border-radius: 8px;
+    padding: 40px 36px;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 24px;
+}
+
+.label {
+    font-size: 0.68rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.input {
+    background: #111;
+    border: 1px solid #333;
+    border-radius: 4px;
+    color: var(--white);
+    font-family: inherit;
+    font-size: 0.88rem;
+    padding: 12px 14px;
+    width: 100%;
+    outline: none;
+}
+
+.textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.stars {
+    display: flex;
+    flex-direction: row-reverse;
+    gap: 6px;
+    width: fit-content;
+}
+
+.stars input {
+    display: none;
+}
+
+.stars label {
+    font-size: 2rem;
+    color: #333;
+    cursor: pointer;
+}
+
+.stars label:hover,
+.stars label:hover ~ label,
+.stars input:checked ~ label {
+    color: var(--red);
+}
+
+.radiogroup {
+    display: flex;
+    gap: 24px;
+}
+
+.radiolabel {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.75);
+    cursor: pointer;
+}
+
+.radiolabel input {
+    accent-color: var(--red);
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+}
+
+@media (max-width: 600px) {
+    .reviewbox { padding: 28px 20px; }
+    .stars label { font-size: 1.6rem; }
+}
