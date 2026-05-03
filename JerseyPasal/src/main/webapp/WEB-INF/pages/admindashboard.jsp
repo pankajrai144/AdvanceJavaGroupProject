@@ -118,6 +118,7 @@
         <input type="number" placeholder="Price">
         <input type="number" placeholder="Stock Quantity">
         <input type="text" placeholder="Category">
+        <input type="text" placeholder="Descriptions">
         <input type="file">
         <button type="submit">Add Product</button>
       </form>
