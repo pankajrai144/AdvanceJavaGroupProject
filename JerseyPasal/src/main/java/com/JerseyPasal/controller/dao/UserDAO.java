@@ -320,4 +320,36 @@ public class UserDAO {
 
         return rows > 0;
     }
+
+    public boolean updateUserProfile(int userId, String fullname, String dob, String email,
+                                     String phone, String address, String gender,
+                                     String profileImageName) throws Exception {
+
+        Connection con = DBconfig.getConnection();
+
+        LocalDate localDate = LocalDate.parse(dob);
+        Date sqlDate = Date.valueOf(localDate);
+
+        String sql = "UPDATE users "
+                   + "SET fullname = ?, dob = ?, email = ?, phone = ?, address = ?, gender = ?, profile_image = ? "
+                   + "WHERE user_id = ?";
+
+        PreparedStatement pst = con.prepareStatement(sql);
+
+        pst.setString(1, fullname);
+        pst.setDate(2, sqlDate);
+        pst.setString(3, email);
+        pst.setString(4, phone);
+        pst.setString(5, address);
+        pst.setString(6, gender);
+        pst.setString(7, profileImageName);
+        pst.setInt(8, userId);
+
+        int rows = pst.executeUpdate();
+
+        pst.close();
+        con.close();
+
+        return rows > 0;
+    }
 }
