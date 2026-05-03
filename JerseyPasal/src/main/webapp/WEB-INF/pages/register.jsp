@@ -47,26 +47,31 @@
         <label for="profilePic" class="upload-pic-btn">Upload Pic</label>
       </div>
 
-      <input type="text" name="fullname" placeholder="Full Name">
+      <input type="text" name="fullname" placeholder="Full Name" value="${param.fullname}">
 
-      <input type="text" name="email" placeholder="Email Address">
+      <input type="text" name="email" placeholder="Email Address" value="${param.email}">
 
-      <input type="text" name="phone" placeholder="Phone Number">
+      <input type="text" name="phone" placeholder="Phone Number" value="${param.phone}">
 
-      <input type="date" name="dob" id="dob" class="date-input">
+      <input type="date" name="dob" id="dob" class="date-input" value="${param.dob}">
 
       <input type="password" name="password" placeholder="Password">
 
-      <input type="text" name="address" placeholder="Address">
+      <input type="text" name="address" placeholder="Address" value="${param.address}">
 
       <div class="gender">
-        <label><input type="radio" name="gender" value="Male"> Male</label>
-        <label><input type="radio" name="gender" value="Female"> Female</label>
+        <label>
+          <input type="radio" name="gender" value="Male" ${param.gender == 'Male' ? 'checked' : ''}> Male
+        </label>
+
+        <label>
+          <input type="radio" name="gender" value="Female" ${param.gender == 'Female' ? 'checked' : ''}> Female
+        </label>
       </div>
 
       <div class="terms">
         <label>
-          <input type="checkbox" name="terms" value="agree">
+          <input type="checkbox" name="terms" value="agree" ${param.terms == 'agree' ? 'checked' : ''}>
           I agree to <a href="#">Terms & Conditions</a>
         </label>
       </div>
