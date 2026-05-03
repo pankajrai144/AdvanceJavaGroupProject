@@ -1,7 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" isELIgnored="false"%>
 
-<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%
+    String adminMessage = "";
+    String userRows = "";
+
+    if (request.getAttribute("adminMessage") != null) {
+        adminMessage = request.getAttribute("adminMessage").toString();
+    }
+
+    if (request.getAttribute("userRows") != null) {
+        userRows = request.getAttribute("userRows").toString();
+    }
+%>
 
 <!DOCTYPE html>
 <html>
@@ -135,17 +146,10 @@
       </table>
     </div>
 
-    <!-- USER MANAGEMENT SECTION -->
     <div class="section">
       <h2>User Management</h2>
 
-      <c:if test="${param.denied == 'true'}">
-        <p class="success-message">User account has been denied successfully.</p>
-      </c:if>
-
-      <c:if test="${param.error == 'true'}">
-        <p class="error-message">Something went wrong. Please try again.</p>
-      </c:if>
+      <%= adminMessage %>
 
       <table>
         <tr>
@@ -155,53 +159,8 @@
           <th>Action</th>
         </tr>
 
-        <c:forEach var="user" items="${users}">
-          <tr>
-            <td>${user.fullname}</td>
-            <td>${user.email}</td>
-
-            <td>
-              <c:choose>
-                <c:when test="${user.approval_status == 'denied'}">
-                  <span class="badge denied">Denied</span>
-                </c:when>
-
-                <c:when test="${user.approval_status == 'deleted'}">
-                  <span class="badge denied">Deleted</span>
-                </c:when>
-
-                <c:otherwise>
-                  <span class="badge success">Approved</span>
-                </c:otherwise>
-              </c:choose>
-            </td>
-
-            <td>
-              <c:choose>
-                <c:when test="${user.approval_status == 'denied'}">
-                  <button disabled>Denied</button>
-                </c:when>
-
-                <c:when test="${user.approval_status == 'deleted'}">
-                  <button disabled>Deleted</button>
-                </c:when>
-
-                <c:otherwise>
-                  <form action="${pageContext.request.contextPath}/denyuser" method="post"
-                        onsubmit="return confirm('Are you sure you want to deny this user?');">
-                    <input type="hidden" name="userid" value="${user.userid}">
-                    <button type="submit" class="deny-btn">Deny</button>
-                  </form>
-                </c:otherwise>
-              </c:choose>
-            </td>
-          </tr>
-        </c:forEach>
+        <%= userRows %>
       </table>
-
-      <c:if test="${empty users}">
-        <p>No users found.</p>
-      </c:if>
     </div>
 
     <div class="section">
