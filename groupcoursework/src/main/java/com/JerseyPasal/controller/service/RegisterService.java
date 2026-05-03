@@ -9,9 +9,18 @@ public class RegisterService {
                              String password, String address, String gender,
                              String profileImageName) throws Exception {
 
-        password = PasswordUtil.getHashPassword(password);
+        String hashedPassword = PasswordUtil.getHashPassword(password.trim());
 
         UserDAO dao = new UserDAO();
-        dao.insertUser(fullname, email, phone, dob, password, address, gender, profileImageName);
+        dao.insertUser(
+                fullname.trim(),
+                email.trim().toLowerCase(),
+                phone.trim(),
+                dob.trim(),
+                hashedPassword,
+                address.trim(),
+                gender.trim(),
+                profileImageName
+        );
     }
 }

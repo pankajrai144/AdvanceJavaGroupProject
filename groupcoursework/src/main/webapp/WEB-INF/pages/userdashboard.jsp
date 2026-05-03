@@ -72,6 +72,20 @@
         </a>
       </li>
 
+      <!-- Soft Delete Account Button -->
+      <li>
+        <form action="${pageContext.request.contextPath}/deleteaccount" 
+              method="post"
+              class="delete-account-form"
+              onsubmit="return confirm('Are you sure you want to delete your account? Your account will be deactivated and you will not be able to login again.');">
+
+          <button type="submit" class="menu-link delete-account-btn">
+            <i class="fa-solid fa-user-slash"></i> Delete Account
+          </button>
+
+        </form>
+      </li>
+
     </ul>
   </div>
 
@@ -84,10 +98,10 @@
       </div>
 
       <div class="user-info">
-        <span>${sessionScope.userEmail}</span>
+        <span>${sessionScope.loggedInUser.email}</span>
 
         <div class="avatar-img-box">
-          <img src="${pageContext.request.contextPath}/getimage?email=${sessionScope.userEmail}" 
+          <img src="${pageContext.request.contextPath}/getimage?email=${sessionScope.loggedInUser.email}" 
                alt="Profile Picture"
                class="avatar-img">
         </div>
@@ -127,7 +141,7 @@
 
       <div class="card">
         <h3><i class="fa-solid fa-user"></i> Account Info</h3>
-        <p><strong>Email:</strong> ${sessionScope.userEmail}</p>
+        <p><strong>Email:</strong> ${sessionScope.loggedInUser.email}</p>
         <button>Edit Profile</button>
       </div>
 

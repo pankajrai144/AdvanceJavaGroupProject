@@ -42,8 +42,8 @@ body {
   margin-bottom: 8px;
 }
 
-.menu-link,
-.sidebar-menu li {
+/* Sidebar links */
+.menu-link {
   display: flex;
   align-items: center;
   gap: 12px;
@@ -54,16 +54,46 @@ body {
   color: #cbd5e1;
   transition: 0.3s;
   text-decoration: none;
+  width: 100%;
 }
 
-.menu-link:hover,
-.sidebar-menu li:hover {
+.menu-link:hover {
   background: #1e293b;
   color: white;
 }
 
 .sidebar-menu .active {
   background: linear-gradient(90deg, #6a5cff, #4a32e0);
+  color: white;
+}
+
+/* Delete Account form inside sidebar */
+.delete-account-form {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+/* Delete Account button styled like sidebar menu */
+.delete-account-btn {
+  background: transparent;
+  border: none;
+  outline: none;
+  text-align: left;
+  width: 100%;
+  font: inherit;
+}
+
+.delete-account-btn:hover {
+  background: #7f1d1d;
+  color: white;
+}
+
+.delete-account-btn i {
+  color: #f87171;
+}
+
+.delete-account-btn:hover i {
   color: white;
 }
 
@@ -300,6 +330,7 @@ table td {
   border-radius: 10px;
 }
 
+/* Responsive design */
 @media (max-width: 768px) {
 
   .dashboard-container {
@@ -308,16 +339,32 @@ table td {
 
   .sidebar {
     width: 100%;
-    flex-direction: row;
-    overflow-x: auto;
+    flex-direction: column;
+    padding: 18px;
   }
 
   .sidebar-menu {
     display: flex;
+    overflow-x: auto;
+    gap: 8px;
+  }
+
+  .sidebar-menu li {
+    min-width: max-content;
+  }
+
+  .menu-link {
+    white-space: nowrap;
   }
 
   .main-content {
     padding: 15px;
+  }
+
+  .top-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
   }
 
   .bottom-section {

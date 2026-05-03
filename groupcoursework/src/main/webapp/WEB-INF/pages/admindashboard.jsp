@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" isELIgnored="false"%>
+
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,13 +21,13 @@
 
     <div class="admin-profile">
       <div class="admin-profile-img-box">
-        <img src="${pageContext.request.contextPath}/getimage?email=${sessionScope.userEmail}" 
+        <img src="${pageContext.request.contextPath}/getimage?email=${sessionScope.loggedInUser.email}" 
              alt="Admin Profile"
              class="admin-profile-img">
       </div>
 
       <h4>Admin</h4>
-      <p>${sessionScope.userEmail}</p>
+      <p>${sessionScope.loggedInUser.email}</p>
     </div>
 
     <ul>
@@ -114,7 +117,10 @@
 
       <table>
         <tr>
-          <th>ID</th><th>Customer</th><th>Status</th><th>Action</th>
+          <th>ID</th>
+          <th>Customer</th>
+          <th>Status</th>
+          <th>Action</th>
         </tr>
         <tr>
           <td>#101</td>
@@ -129,20 +135,73 @@
       </table>
     </div>
 
+    <!-- USER MANAGEMENT SECTION -->
     <div class="section">
       <h2>User Management</h2>
 
+      <c:if test="${param.denied == 'true'}">
+        <p class="success-message">User account has been denied successfully.</p>
+      </c:if>
+
+      <c:if test="${param.error == 'true'}">
+        <p class="error-message">Something went wrong. Please try again.</p>
+      </c:if>
+
       <table>
-        <tr><th>Name</th><th>Email</th><th>Status</th><th>Action</th></tr>
         <tr>
-          <td>John</td>
-          <td>john@email.com</td>
-          <td>Active</td>
-          <td>
-            <button>View</button>
-          </td>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Status</th>
+          <th>Action</th>
         </tr>
+
+        <c:forEach var="user" items="${users}">
+          <tr>
+            <td>${user.fullname}</td>
+            <td>${user.email}</td>
+
+            <td>
+              <c:choose>
+                <c:when test="${user.approval_status == 'denied'}">
+                  <span class="badge denied">Denied</span>
+                </c:when>
+
+                <c:when test="${user.approval_status == 'deleted'}">
+                  <span class="badge denied">Deleted</span>
+                </c:when>
+
+                <c:otherwise>
+                  <span class="badge success">Approved</span>
+                </c:otherwise>
+              </c:choose>
+            </td>
+
+            <td>
+              <c:choose>
+                <c:when test="${user.approval_status == 'denied'}">
+                  <button disabled>Denied</button>
+                </c:when>
+
+                <c:when test="${user.approval_status == 'deleted'}">
+                  <button disabled>Deleted</button>
+                </c:when>
+
+                <c:otherwise>
+                  <form action="${pageContext.request.contextPath}/denyuser" method="post"
+                        onsubmit="return confirm('Are you sure you want to deny this user?');">
+                    <input type="hidden" name="userid" value="${user.userid}">
+                    <button type="submit" class="deny-btn">Deny</button>
+                  </form>
+                </c:otherwise>
+              </c:choose>
+            </td>
+          </tr>
+        </c:forEach>
       </table>
+
+      <c:if test="${empty users}">
+        <p>No users found.</p>
+      </c:if>
     </div>
 
     <div class="section">
@@ -160,8 +219,8 @@
       <h2>Analytics</h2>
 
       <p>Sales Trend</p>
-      <p> Top Categories</p>
-      <p> Most Viewed Products</p>
+      <p>Top Categories</p>
+      <p>Most Viewed Products</p>
     </div>
 
   </main>

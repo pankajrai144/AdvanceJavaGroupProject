@@ -6,10 +6,8 @@
 <head>
 <title>Login</title>
 
-<!-- CSS -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/login.css">
 
-<!-- FONT AWESOME -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <script>
@@ -30,7 +28,6 @@ function togglePassword() {
 
 <div class="auth-wrapper">
 
-  <!-- LEFT -->
   <div class="auth-left">
     <div class="overlay">
       <h1>Welcome to Jersey Pasal</h1>

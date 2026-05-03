@@ -19,132 +19,145 @@ import com.JerseyPasal.controller.utils.FileUploadUtil;
 @WebServlet(asyncSupported = true, urlPatterns = { "/register" })
 @MultipartConfig
 public class RegisterServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	private static final String UPLOAD_DIR =
-			System.getProperty("user.home") + File.separator + "jersey_pasal_uploads";
+    private static final String UPLOAD_DIR =
+            System.getProperty("user.home") + File.separator + "jersey_pasal_uploads";
 
     public RegisterServlet() {
         super();
     }
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/pages/register.jsp").forward(request, response);
-	}
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.getRequestDispatcher("/WEB-INF/pages/register.jsp").forward(request, response);
+    }
 
-		try {
-			String fullname = request.getParameter("fullname");
-			String email = request.getParameter("email");
-			String phone = request.getParameter("phone");
-			String dob = request.getParameter("dob");
-			String password = request.getParameter("password");
-			String address = request.getParameter("address");
-			String gender = request.getParameter("gender");
-			String terms = request.getParameter("terms");
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
 
-			Part profilePic = request.getPart("profilePic");
+        try {
+            String fullname = request.getParameter("fullname");
+            String email = request.getParameter("email");
+            String phone = request.getParameter("phone");
+            String dob = request.getParameter("dob");
+            String password = request.getParameter("password");
+            String address = request.getParameter("address");
+            String gender = request.getParameter("gender");
+            String terms = request.getParameter("terms");
 
-			String error = validateRegisterForm(fullname, email, phone, dob, password, address, gender, terms, profilePic);
+            Part profilePic = request.getPart("profilePic");
 
-			if (error != null) {
-				request.setAttribute("error", error);
-				request.getRequestDispatcher("/WEB-INF/pages/register.jsp").forward(request, response);
-				return;
-			}
+            String error = validateRegisterForm(fullname, email, phone, dob, password, address, gender, terms, profilePic);
 
-			String extension = FileUploadUtil.getFileExtension(profilePic.getSubmittedFileName());
-			String cleanEmail = FileUploadUtil.cleanEmailForFileName(email);
-			String profileImageName = cleanEmail + extension;
+            if (error != null) {
+                request.setAttribute("error", error);
+                request.getRequestDispatcher("/WEB-INF/pages/register.jsp").forward(request, response);
+                return;
+            }
 
-			FileUploadUtil.saveFile(profilePic, UPLOAD_DIR, profileImageName);
+            fullname = fullname.trim();
+            email = email.trim().toLowerCase();
+            phone = phone.trim();
+            dob = dob.trim();
+            password = password.trim();
+            address = address.trim();
+            gender = gender.trim();
 
-			RegisterService service = new RegisterService();
-			service.registerUser(fullname, email, phone, dob, password, address, gender, profileImageName);
+            String extension = FileUploadUtil.getFileExtension(profilePic.getSubmittedFileName());
+            String cleanEmail = FileUploadUtil.cleanEmailForFileName(email);
+            String profileImageName = cleanEmail + extension;
 
-			response.sendRedirect(request.getContextPath() + "/login");
+            FileUploadUtil.saveFile(profilePic, UPLOAD_DIR, profileImageName);
 
-		} catch (Exception e) {
-			e.printStackTrace();
-			request.setAttribute("error", "Registration failed. Please try again.");
-			request.getRequestDispatcher("/WEB-INF/pages/register.jsp").forward(request, response);
-		}
-	}
+            RegisterService service = new RegisterService();
 
-	private String validateRegisterForm(String fullname, String email, String phone, String dob,
-			String password, String address, String gender, String terms, Part profilePic) {
+            
+            service.registerUser(fullname, email, phone, dob, password, address, gender, profileImageName);
 
-		if (fullname == null || fullname.trim().isEmpty()) {
-			return "Full name is required.";
-		}
+            response.sendRedirect(request.getContextPath() + "/login?registered=true");
 
-		if (email == null || email.trim().isEmpty()) {
-			return "Email address is required.";
-		}
+        } catch (Exception e) {
+            e.printStackTrace();
+            request.setAttribute("error", "Registration failed. Please try again.");
+            request.getRequestDispatcher("/WEB-INF/pages/register.jsp").forward(request, response);
+        }
+    }
 
-		if (!email.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")) {
-			return "Please enter a valid email address.";
-		}
+    private String validateRegisterForm(String fullname, String email, String phone, String dob,
+            String password, String address, String gender, String terms, Part profilePic) {
 
-		if (phone == null || phone.trim().isEmpty()) {
-			return "Phone number is required.";
-		}
+        if (fullname == null || fullname.trim().isEmpty()) {
+            return "Full name is required.";
+        }
 
-		if (!phone.matches("[0-9]{10}")) {
-			return "Phone number must contain exactly 10 digits.";
-		}
+        if (email == null || email.trim().isEmpty()) {
+            return "Email address is required.";
+        }
 
-		if (dob == null || dob.trim().isEmpty()) {
-			return "Date of birth is required.";
-		}
+        if (!email.trim().matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")) {
+            return "Please enter a valid email address.";
+        }
 
-		try {
-			LocalDate birthDate = LocalDate.parse(dob);
+        if (phone == null || phone.trim().isEmpty()) {
+            return "Phone number is required.";
+        }
 
-			if (birthDate.isEqual(LocalDate.now()) || birthDate.isAfter(LocalDate.now())) {
-				return "Date of birth cannot be today or in the future.";
-			}
+        if (!phone.trim().matches("[0-9]{10}")) {
+            return "Phone number must contain exactly 10 digits.";
+        }
 
-		} catch (DateTimeParseException e) {
-			return "Date of birth must be in YYYY-MM-DD format.";
-		}
+        if (dob == null || dob.trim().isEmpty()) {
+            return "Date of birth is required.";
+        }
 
-		if (password == null || password.trim().isEmpty()) {
-			return "Password is required.";
-		}
+        try {
+            LocalDate birthDate = LocalDate.parse(dob.trim());
 
-		if (password.length() < 6) {
-			return "Password must be at least 6 characters long.";
-		}
+            if (birthDate.isEqual(LocalDate.now()) || birthDate.isAfter(LocalDate.now())) {
+                return "Date of birth cannot be today or in the future.";
+            }
 
-		if (address == null || address.trim().isEmpty()) {
-			return "Address is required.";
-		}
+        } catch (DateTimeParseException e) {
+            return "Date of birth must be in YYYY-MM-DD format.";
+        }
 
-		if (gender == null || gender.trim().isEmpty()) {
-			return "Please select your gender.";
-		}
+        if (password == null || password.trim().isEmpty()) {
+            return "Password is required.";
+        }
 
-		if (terms == null || !terms.equals("agree")) {
-			return "You must agree to the Terms & Conditions.";
-		}
+        if (password.trim().length() < 6) {
+            return "Password must be at least 6 characters long.";
+        }
 
-		if (profilePic == null || profilePic.getSubmittedFileName() == null 
-				|| profilePic.getSubmittedFileName().trim().isEmpty()) {
-			return "Please upload a profile picture.";
-		}
+        if (address == null || address.trim().isEmpty()) {
+            return "Address is required.";
+        }
 
-		String contentType = profilePic.getContentType();
+        if (gender == null || gender.trim().isEmpty()) {
+            return "Please select your gender.";
+        }
 
-		if (contentType == null || !contentType.startsWith("image/")) {
-			return "Please upload only an image file.";
-		}
+        if (terms == null || !terms.equals("agree")) {
+            return "You must agree to the Terms & Conditions.";
+        }
 
-		if (profilePic.getSize() == 0) {
-			return "Uploaded image file is empty.";
-		}
+        if (profilePic == null || profilePic.getSubmittedFileName() == null
+                || profilePic.getSubmittedFileName().trim().isEmpty()) {
+            return "Please upload a profile picture.";
+        }
 
-		return null;
-	}
+        String contentType = profilePic.getContentType();
+
+        if (contentType == null || !contentType.startsWith("image/")) {
+            return "Please upload only an image file.";
+        }
+
+        if (profilePic.getSize() == 0) {
+            return "Uploaded image file is empty.";
+        }
+
+        return null;
+    }
 }

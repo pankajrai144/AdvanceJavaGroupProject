@@ -2,6 +2,7 @@ package com.JerseyPasal.controller.filter;
 
 import java.io.IOException;
 
+import com.JerseyPasal.controller.model.UserModel;
 import com.JerseyPasal.controller.utils.SessionUtil;
 
 import jakarta.servlet.Filter;
@@ -14,6 +15,7 @@ import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 /**
  * Servlet Filter implementation class GuestFilter
@@ -21,41 +23,52 @@ import jakarta.servlet.http.HttpServletResponse;
 @WebFilter(urlPatterns = { "/login", "/register" })
 public class GuestFilter extends HttpFilter implements Filter {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	public GuestFilter() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+    public GuestFilter() {
+        super();
+    }
 
-	public void destroy() {
-		// TODO Auto-generated method stub
-	}
+    public void destroy() {
+    }
 
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
-			throws IOException, ServletException {
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+            throws IOException, ServletException {
 
-		HttpServletRequest httpRequest = (HttpServletRequest) request;
-		HttpServletResponse httpResponse = (HttpServletResponse) response;
+        HttpServletRequest httpRequest = (HttpServletRequest) request;
+        HttpServletResponse httpResponse = (HttpServletResponse) response;
 
-		Object userEmail = SessionUtil.getAttribute(httpRequest, "userEmail");
-		Object userRole = SessionUtil.getAttribute(httpRequest, "userRole");
+        Object loggedInUserObj = SessionUtil.getAttribute(httpRequest, "loggedInUser");
 
-		boolean isLoggedIn = userEmail != null;
+       
+        if (loggedInUserObj != null) {
 
-		if (isLoggedIn) {
-			if ("admin".equalsIgnoreCase(String.valueOf(userRole))) {
-				httpResponse.sendRedirect(httpRequest.getContextPath() + "/admindashboard");
-			} else {
-				httpResponse.sendRedirect(httpRequest.getContextPath() + "/userdashboard");
-			}
-		} else {
-			chain.doFilter(request, response);
-		}
-	}
+            UserModel loggedInUser = (UserModel) loggedInUserObj;
+            String role = loggedInUser.getRole();
 
-	public void init(FilterConfig fConfig) throws ServletException {
-		// TODO Auto-generated method stub
-	}
+            if ("admin".equalsIgnoreCase(role)) {
+                httpResponse.sendRedirect(httpRequest.getContextPath() + "/admindashboard");
+                return;
+            }
 
+            if ("user".equalsIgnoreCase(role)) {
+                httpResponse.sendRedirect(httpRequest.getContextPath() + "/userdashboard");
+                return;
+            }
+
+            
+            HttpSession session = httpRequest.getSession(false);
+            if (session != null) {
+                session.invalidate();
+            }
+
+            httpResponse.sendRedirect(httpRequest.getContextPath() + "/login");
+            return;
+        }
+
+        chain.doFilter(request, response);
+    }
+
+    public void init(FilterConfig fConfig) throws ServletException {
+    }
 }

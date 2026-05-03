@@ -2,6 +2,7 @@ package com.JerseyPasal.controller.filter;
 
 import java.io.IOException;
 
+import com.JerseyPasal.controller.model.UserModel;
 import com.JerseyPasal.controller.utils.SessionUtil;
 
 import jakarta.servlet.Filter;
@@ -38,25 +39,26 @@ public class AuthenticationFilter extends HttpFilter implements Filter {
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
 		HttpServletResponse httpResponse = (HttpServletResponse) response;
 
-		// Prevent browser from showing old dashboard page after logout
 		httpResponse.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
 		httpResponse.setHeader("Pragma", "no-cache");
 		httpResponse.setDateHeader("Expires", 0);
 
-		Object userEmail = SessionUtil.getAttribute(httpRequest, "userEmail");
-		Object userRole = SessionUtil.getAttribute(httpRequest, "userRole");
+		Object loggedInUserObj = SessionUtil.getAttribute(httpRequest, "loggedInUser");
 
-		boolean isLoggedIn = userEmail != null;
+		boolean isLoggedIn = loggedInUserObj != null;
 
 		if (!isLoggedIn) {
 			httpResponse.sendRedirect(httpRequest.getContextPath() + "/login");
 			return;
 		}
 
+		UserModel loggedInUser = (UserModel) loggedInUserObj;
+		String userRole = loggedInUser.getRole();
+
 		String path = httpRequest.getServletPath();
 
 		if (path.equals("/admindashboard")) {
-			if ("admin".equalsIgnoreCase(String.valueOf(userRole))) {
+			if ("admin".equalsIgnoreCase(userRole)) {
 				chain.doFilter(request, response);
 			} else {
 				httpResponse.sendRedirect(httpRequest.getContextPath() + "/userdashboard");
@@ -65,7 +67,7 @@ public class AuthenticationFilter extends HttpFilter implements Filter {
 		}
 
 		if (path.equals("/userdashboard")) {
-			if ("member".equalsIgnoreCase(String.valueOf(userRole))) {
+			if ("user".equalsIgnoreCase(userRole)) {
 				chain.doFilter(request, response);
 			} else {
 				httpResponse.sendRedirect(httpRequest.getContextPath() + "/admindashboard");
@@ -73,7 +75,6 @@ public class AuthenticationFilter extends HttpFilter implements Filter {
 			return;
 		}
 
-		// This allows /logout to continue to LogoutServlet
 		chain.doFilter(request, response);
 	}
 
