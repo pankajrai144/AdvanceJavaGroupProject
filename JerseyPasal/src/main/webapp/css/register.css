@@ -91,7 +91,10 @@ body {
   line-height: 1.4;
 }
 
-/* Profile picture upload section */
+.error-message:empty {
+  display: none;
+}
+
 .profile-upload {
   margin-bottom: 16px;
   color: #ddd;
@@ -134,12 +137,10 @@ body {
   display: block;
 }
 
-/* Hide original Choose File input */
 .profile-upload input[type="file"] {
   display: none;
 }
 
-/* Custom Upload Pic button */
 .upload-pic-btn {
   display: inline-block;
   background: #8b0d1f;
@@ -174,21 +175,18 @@ body {
   box-shadow: 0 0 0 2px rgba(139,13,31,0.25);
 }
 
-/* Date of Birth calendar input */
 .date-input {
   color: #fff;
   background: #111;
   cursor: pointer;
 }
 
-/* Makes the calendar icon visible on dark background in Chrome/Edge */
 .date-input::-webkit-calendar-picker-indicator {
   filter: invert(1);
   cursor: pointer;
   opacity: 1;
 }
 
-/* Keeps date placeholder/text readable */
 .date-input::-webkit-datetime-edit {
   color: #fff;
 }

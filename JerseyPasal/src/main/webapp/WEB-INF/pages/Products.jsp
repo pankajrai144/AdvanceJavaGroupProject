@@ -99,6 +99,7 @@
                             </div>
                         </div>
 
+                        <p class="pd-stock">Stock Available: ${product.stockQuantity}</p>
 
                         <div class="pd17">
                             <c:choose>

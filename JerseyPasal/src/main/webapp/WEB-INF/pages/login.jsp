@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" isELIgnored="false"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 
 <!DOCTYPE html>
 <html>
@@ -7,7 +8,6 @@
 <title>Login</title>
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/login.css">
-
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 </head>
@@ -24,36 +24,20 @@
   </div>
 
   <div class="auth-right">
-    <form class="auth-box" action="login" method="post">
+    <form class="auth-box" action="${pageContext.request.contextPath}/login" method="post">
       <h2>Sign in to your account</h2>
 
       <p class="top-text">
         Don't have an account?
-        <a href="register">Create a new account now</a>
+        <a href="${pageContext.request.contextPath}/register">Create a new account now</a>
       </p>
 
-      <% 
-        String error = (String) request.getAttribute("error");
-        String rememberedEmail = (String) request.getAttribute("rememberedEmail");
-        String rememberChecked = (String) request.getAttribute("rememberChecked");
-
-        if (rememberedEmail == null) {
-            rememberedEmail = "";
-        }
-
-        if (rememberChecked == null) {
-            rememberChecked = "";
-        }
-
-        if (error != null) {
-      %>
-        <p style="color:red; text-align:center;"><%= error %></p>
-      <% 
-        }
-      %>
+      <c:if test="${not empty error}">
+        <p style="color:red; text-align:center;">${error}</p>
+      </c:if>
 
       <div class="input-group">
-        <input type="email" name="email" placeholder="Email Address" value="<%= rememberedEmail %>" required>
+        <input type="email" name="email" placeholder="Email Address" value="${rememberedEmail}">
       </div>
 
       <div class="input-group password-group">
@@ -62,7 +46,7 @@
 
       <div class="remember-box">
         <label>
-          <input type="checkbox" name="remember" value="yes" <%= rememberChecked %>>
+          <input type="checkbox" name="remember" value="yes" <c:if test="${rememberChecked == 'checked'}">checked</c:if>>
           Remember my email
         </label>
       </div>

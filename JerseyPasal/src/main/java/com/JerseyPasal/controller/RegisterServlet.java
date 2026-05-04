@@ -52,6 +52,7 @@ public class RegisterServlet extends HttpServlet {
             String error = validateRegisterForm(fullname, email, phone, dob, password, address, gender, terms, profilePic);
 
             if (error != null) {
+                setRegisterFormAttributes(request, fullname, email, phone, dob, address, gender, terms);
                 request.setAttribute("error", error);
                 request.getRequestDispatcher("/WEB-INF/pages/register.jsp").forward(request, response);
                 return;
@@ -73,7 +74,6 @@ public class RegisterServlet extends HttpServlet {
 
             RegisterService service = new RegisterService();
 
-            
             service.registerUser(fullname, email, phone, dob, password, address, gender, profileImageName);
 
             response.sendRedirect(request.getContextPath() + "/login?registered=true");
@@ -83,6 +83,44 @@ public class RegisterServlet extends HttpServlet {
             request.setAttribute("error", "Registration failed. Please try again.");
             request.getRequestDispatcher("/WEB-INF/pages/register.jsp").forward(request, response);
         }
+    }
+
+    private void setRegisterFormAttributes(HttpServletRequest request, String fullname, String email,
+            String phone, String dob, String address, String gender, String terms) {
+
+        request.setAttribute("fullname", cleanValue(fullname));
+        request.setAttribute("email", cleanValue(email));
+        request.setAttribute("phone", cleanValue(phone));
+        request.setAttribute("dob", cleanValue(dob));
+        request.setAttribute("address", cleanValue(address));
+
+        String maleChecked = "";
+        String femaleChecked = "";
+        String termsChecked = "";
+
+        if ("Male".equals(gender)) {
+            maleChecked = "checked";
+        }
+
+        if ("Female".equals(gender)) {
+            femaleChecked = "checked";
+        }
+
+        if ("agree".equals(terms)) {
+            termsChecked = "checked";
+        }
+
+        request.setAttribute("maleChecked", maleChecked);
+        request.setAttribute("femaleChecked", femaleChecked);
+        request.setAttribute("termsChecked", termsChecked);
+    }
+
+    private String cleanValue(String value) {
+        if (value == null) {
+            return "";
+        }
+
+        return value.trim();
     }
 
     private String validateRegisterForm(String fullname, String email, String phone, String dob,
@@ -156,6 +194,10 @@ public class RegisterServlet extends HttpServlet {
 
         if (profilePic.getSize() == 0) {
             return "Uploaded image file is empty.";
+        }
+
+        if (profilePic.getSize() > 2 * 1024 * 1024) {
+            return "Profile picture must be less than 2MB.";
         }
 
         return null;
