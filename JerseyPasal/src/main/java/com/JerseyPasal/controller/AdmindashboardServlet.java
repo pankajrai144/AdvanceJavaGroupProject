@@ -67,6 +67,10 @@ public class AdmindashboardServlet extends HttpServlet {
                 adminMessage = "<p class='success-message'>User account has been approved successfully.</p>";
             } else if ("true".equals(request.getParameter("productAdded"))) {
                 adminMessage = "<p class='success-message'>Product has been added successfully.</p>";
+            } else if ("true".equals(request.getParameter("productUpdated"))) {
+                adminMessage = "<p class='success-message'>Product has been updated successfully.</p>";
+            } else if ("true".equals(request.getParameter("productDeleted"))) {
+                adminMessage = "<p class='success-message'>Product has been deleted successfully.</p>";
             } else if ("empty".equals(request.getParameter("productError"))) {
                 adminMessage = "<p class='error-message'>Please fill all required product fields.</p>";
             } else if ("jerseyName".equals(request.getParameter("productError"))) {
@@ -101,6 +105,10 @@ public class AdmindashboardServlet extends HttpServlet {
                 adminMessage = "<p class='error-message'>Please upload only JPG, JPEG, PNG or WEBP image files.</p>";
             } else if ("imagesize".equals(request.getParameter("productError"))) {
                 adminMessage = "<p class='error-message'>Product image size must be less than 2MB.</p>";
+            } else if ("delete".equals(request.getParameter("productError"))) {
+                adminMessage = "<p class='error-message'>Product could not be deleted. Please try again.</p>";
+            } else if ("update".equals(request.getParameter("productError"))) {
+                adminMessage = "<p class='error-message'>Product could not be updated. Please try again.</p>";
             } else if ("true".equals(request.getParameter("productError"))) {
                 adminMessage = "<p class='error-message'>Product could not be added. Please try again.</p>";
             } else if ("true".equals(request.getParameter("error"))) {
@@ -192,6 +200,16 @@ public class AdmindashboardServlet extends HttpServlet {
                         imageHtml = "<span class='no-image-text'>No image</span>";
                     }
 
+                    String actionHtml =
+                            "<div class='product-action-box'>" +
+                            "<a href='" + request.getContextPath() + "/editproduct?productId=" + product.getProductId() + "' class='edit-product-btn'>Edit</a>" +
+                            "<form action='" + request.getContextPath() + "/deleteproduct' method='post' " +
+                            "onsubmit=\"return confirm('Are you sure you want to delete this product?');\">" +
+                            "<input type='hidden' name='productId' value='" + product.getProductId() + "'>" +
+                            "<button type='submit' class='delete-product-btn'>Delete</button>" +
+                            "</form>" +
+                            "</div>";
+
                     productRows.append("<tr>");
                     productRows.append("<td>").append(imageHtml).append("</td>");
                     productRows.append("<td>").append(product.getJerseyName()).append("</td>");
@@ -201,12 +219,13 @@ public class AdmindashboardServlet extends HttpServlet {
                     productRows.append("<td>$").append(product.getPrice()).append("</td>");
                     productRows.append("<td>").append(product.getStockQuantity()).append("</td>");
                     productRows.append("<td>").append(product.getCategory()).append("</td>");
+                    productRows.append("<td>").append(actionHtml).append("</td>");
                     productRows.append("</tr>");
                 }
 
             } else {
                 productRows.append("<tr>");
-                productRows.append("<td colspan='8'>No products found.</td>");
+                productRows.append("<td colspan='9'>No products found.</td>");
                 productRows.append("</tr>");
             }
 
@@ -221,7 +240,7 @@ public class AdmindashboardServlet extends HttpServlet {
 
             request.setAttribute("adminMessage", "<p class='error-message'>Unable to load dashboard data.</p>");
             request.setAttribute("userRows", "<tr><td colspan='4'>No users found.</td></tr>");
-            request.setAttribute("productRows", "<tr><td colspan='8'>No products found.</td></tr>");
+            request.setAttribute("productRows", "<tr><td colspan='9'>No products found.</td></tr>");
             request.getRequestDispatcher("/WEB-INF/pages/admindashboard.jsp").forward(request, response);
         }
     }

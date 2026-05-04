@@ -131,6 +131,7 @@
           <th>Price</th>
           <th>Stock</th>
           <th>Category</th>
+          <th>Action</th>
         </tr>
 
         <c:out value="${productRows}" escapeXml="false" />

@@ -37,16 +37,10 @@ public class GetImageServlet extends HttpServlet {
 			return;
 		}
 
-		/*
-		 * PRODUCT IMAGE
-		 * Example:
-		 * /getimage?productImage=product_123456.jpg
-		 */
 		if (productImage != null && !productImage.trim().isEmpty()) {
 
 			productImage = productImage.trim();
 
-			// Security check: block path traversal
 			if (productImage.contains("..") || productImage.contains("/") || productImage.contains("\\")) {
 				response.sendError(HttpServletResponse.SC_BAD_REQUEST);
 				return;
@@ -61,11 +55,6 @@ public class GetImageServlet extends HttpServlet {
 
 		} else {
 
-			/*
-			 * PROFILE IMAGE
-			 * Example:
-			 * /getimage?email=user@gmail.com
-			 */
 			if (email == null || email.trim().isEmpty()) {
 				response.sendError(HttpServletResponse.SC_BAD_REQUEST);
 				return;

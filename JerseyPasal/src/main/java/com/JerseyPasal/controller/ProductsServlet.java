@@ -1,11 +1,16 @@
 package com.JerseyPasal.controller;
 
+import com.JerseyPasal.controller.dao.ProductDAO;
+import com.JerseyPasal.controller.model.ProductModel;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Servlet implementation class ProductsServlet
@@ -27,8 +32,19 @@ public class ProductsServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-        request.getRequestDispatcher("/WEB-INF/pages/Products.jsp").forward(request, response);
-
+		
+		try {
+			ProductDAO dao = new ProductDAO();
+			ArrayList<ProductModel> products = dao.getAllProducts();
+			
+			request.setAttribute("products", products);
+			request.getRequestDispatcher("/WEB-INF/pages/Products.jsp").forward(request, response);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			request.setAttribute("products", new ArrayList<ProductModel>());
+			request.getRequestDispatcher("/WEB-INF/pages/Products.jsp").forward(request, response);
+		}
 	}
 
 	/**

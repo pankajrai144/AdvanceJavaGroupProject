@@ -25,7 +25,7 @@
     <ul class="sidebar-menu">
 
       <li>
-        <a href="${pageContext.request.contextPath}/index.jsp" class="menu-link">
+        <a href="${pageContext.request.contextPath}/index" class="menu-link">
           <i class="fa-solid fa-globe"></i> Home
         </a>
       </li>
