@@ -26,13 +26,9 @@ public class GetImageServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		String email = request.getParameter("email");
+		String productImage = request.getParameter("productImage");
 
-		if (email == null || email.trim().isEmpty()) {
-			response.sendError(HttpServletResponse.SC_BAD_REQUEST);
-			return;
-		}
-
-		String cleanEmail = FileUploadUtil.cleanEmailForFileName(email);
+		File imageFile = null;
 
 		File folder = new File(UPLOAD_DIR);
 
@@ -41,19 +37,57 @@ public class GetImageServlet extends HttpServlet {
 			return;
 		}
 
-		File[] matches = folder.listFiles((dir, fileName) -> fileName.startsWith(cleanEmail + "."));
+		/*
+		 * PRODUCT IMAGE
+		 * Example:
+		 * /getimage?productImage=product_123456.jpg
+		 */
+		if (productImage != null && !productImage.trim().isEmpty()) {
 
-		if (matches == null || matches.length == 0) {
-			response.sendError(HttpServletResponse.SC_NOT_FOUND);
-			return;
+			productImage = productImage.trim();
+
+			// Security check: block path traversal
+			if (productImage.contains("..") || productImage.contains("/") || productImage.contains("\\")) {
+				response.sendError(HttpServletResponse.SC_BAD_REQUEST);
+				return;
+			}
+
+			imageFile = new File(UPLOAD_DIR, productImage);
+
+			if (!imageFile.exists() || !imageFile.isFile()) {
+				response.sendError(HttpServletResponse.SC_NOT_FOUND);
+				return;
+			}
+
+		} else {
+
+			/*
+			 * PROFILE IMAGE
+			 * Example:
+			 * /getimage?email=user@gmail.com
+			 */
+			if (email == null || email.trim().isEmpty()) {
+				response.sendError(HttpServletResponse.SC_BAD_REQUEST);
+				return;
+			}
+
+			String cleanEmail = FileUploadUtil.cleanEmailForFileName(email);
+
+			File[] matches = folder.listFiles((dir, fileName) -> fileName.startsWith(cleanEmail + "."));
+
+			if (matches == null || matches.length == 0) {
+				response.sendError(HttpServletResponse.SC_NOT_FOUND);
+				return;
+			}
+
+			imageFile = matches[0];
 		}
-
-		File imageFile = matches[0];
 
 		String contentType = Files.probeContentType(imageFile.toPath());
 
-		if (contentType == null) {
-			contentType = "image/jpeg";
+		if (contentType == null || !contentType.startsWith("image/")) {
+			response.sendError(HttpServletResponse.SC_UNSUPPORTED_MEDIA_TYPE);
+			return;
 		}
 
 		response.setContentType(contentType);

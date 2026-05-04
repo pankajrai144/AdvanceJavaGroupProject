@@ -1,18 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" isELIgnored="false"%>
-
-<%
-    String adminMessage = "";
-    String userRows = "";
-
-    if (request.getAttribute("adminMessage") != null) {
-        adminMessage = request.getAttribute("adminMessage").toString();
-    }
-
-    if (request.getAttribute("userRows") != null) {
-        userRows = request.getAttribute("userRows").toString();
-    }
-%>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 
 <!DOCTYPE html>
 <html>
@@ -110,18 +98,43 @@
     <div class="section">
       <h2>Product Management</h2>
 
-      <form class="form-grid">
-        <input type="text" placeholder="Jersey Name">
-        <input type="text" placeholder="Team Name">
-        <input type="text" placeholder="Size (S, M, L, XL)">
-        <input type="text" placeholder="Season (2025/26)">
-        <input type="number" placeholder="Price">
-        <input type="number" placeholder="Stock Quantity">
-        <input type="text" placeholder="Category">
-        <input type="text" placeholder="Descriptions">
-        <input type="file">
+      <c:out value="${adminMessage}" escapeXml="false" />
+
+      <form class="form-grid" action="${pageContext.request.contextPath}/adminproduct" method="post" enctype="multipart/form-data">
+        <input type="text" name="jerseyName" placeholder="Jersey Name">
+        <input type="text" name="teamName" placeholder="Team Name">
+        <input type="text" name="size" placeholder="Size (S, M, L, XL)">
+        <input type="text" name="season" placeholder="Season (2025/26)">
+        <input type="number" step="0.01" name="price" placeholder="Price">
+        <input type="number" name="stockQuantity" placeholder="Stock Quantity">
+
+        <select name="category">
+          <option value="">Select Category</option>
+          <option value="Club">Club</option>
+          <option value="Nation">Nation</option>
+        </select>
+
+        <input type="text" name="description" placeholder="Descriptions">
+        <input type="file" name="productImage">
         <button type="submit">Add Product</button>
       </form>
+
+      <h3 class="table-title">Product List</h3>
+
+      <table>
+        <tr>
+          <th>Image</th>
+          <th>Jersey</th>
+          <th>Team</th>
+          <th>Size</th>
+          <th>Season</th>
+          <th>Price</th>
+          <th>Stock</th>
+          <th>Category</th>
+        </tr>
+
+        <c:out value="${productRows}" escapeXml="false" />
+      </table>
     </div>
 
     <div class="section">
@@ -150,8 +163,6 @@
     <div class="section">
       <h2>User Management</h2>
 
-      <%= adminMessage %>
-
       <table>
         <tr>
           <th>Name</th>
@@ -160,7 +171,7 @@
           <th>Action</th>
         </tr>
 
-        <%= userRows %>
+        <c:out value="${userRows}" escapeXml="false" />
       </table>
     </div>
 
@@ -172,7 +183,6 @@
 
       <p>Club Jerseys</p>
       <p>National Jerseys</p>
-      <p>Retro Jerseys</p>
     </div>
 
     <div class="section">

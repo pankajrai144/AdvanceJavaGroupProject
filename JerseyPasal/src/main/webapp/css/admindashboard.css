@@ -307,10 +307,82 @@ button:disabled:hover {
   gap: 10px;
 }
 
-.form-grid input {
+.form-grid input,
+.form-grid select {
   padding: 10px;
   border-radius: 8px;
   border: 1px solid #ddd;
+  outline: none;
+  background: #ffffff;
+  color: #2d3436;
+  font-size: 14px;
+}
+
+.form-grid input:focus,
+.form-grid select:focus {
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.12);
+}
+
+.form-grid input[type="file"] {
+  background: #f8f9ff;
+  cursor: pointer;
+}
+
+.form-grid button {
+  grid-column: span 2;
+}
+
+.table-title {
+  margin-top: 25px;
+  margin-bottom: 12px;
+  font-size: 18px;
+  color: #2d3436;
+}
+
+.section table {
+  margin-top: 10px;
+  background: #ffffff;
+}
+
+.section table th {
+  background: #f8f9ff;
+  color: #555;
+  font-weight: 600;
+  vertical-align: middle;
+}
+
+.section table td {
+  color: #333;
+  vertical-align: middle;
+}
+
+.section table tr:hover {
+  background: #fafbff;
+}
+
+.product-img {
+  width: 55px;
+  height: 55px;
+  object-fit: cover;
+  border-radius: 8px;
+  display: block;
+  margin: 0 auto;
+  border: 1px solid #e6e9f0;
+  background: #f4f6fb;
+}
+
+.no-image-text {
+  font-size: 12px;
+  color: #888;
+  display: block;
+  text-align: center;
+}
+
+.section table th:first-child,
+.section table td:first-child {
+  width: 80px;
+  text-align: center;
 }
 
 button {
@@ -338,5 +410,9 @@ button:hover {
 
   .form-grid {
     grid-template-columns: 1fr;
+  }
+
+  .form-grid button {
+    grid-column: span 1;
   }
 }
