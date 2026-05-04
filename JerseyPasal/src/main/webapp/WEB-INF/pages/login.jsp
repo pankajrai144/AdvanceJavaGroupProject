@@ -34,6 +34,17 @@
 
       <% 
         String error = (String) request.getAttribute("error");
+        String rememberedEmail = (String) request.getAttribute("rememberedEmail");
+        String rememberChecked = (String) request.getAttribute("rememberChecked");
+
+        if (rememberedEmail == null) {
+            rememberedEmail = "";
+        }
+
+        if (rememberChecked == null) {
+            rememberChecked = "";
+        }
+
         if (error != null) {
       %>
         <p style="color:red; text-align:center;"><%= error %></p>
@@ -42,11 +53,18 @@
       %>
 
       <div class="input-group">
-        <input type="email" name="email" placeholder="Email Address" required>
+        <input type="email" name="email" placeholder="Email Address" value="<%= rememberedEmail %>" required>
       </div>
 
       <div class="input-group password-group">
         <input type="password" name="password" placeholder="Enter Password" id="password">
+      </div>
+
+      <div class="remember-box">
+        <label>
+          <input type="checkbox" name="remember" value="yes" <%= rememberChecked %>>
+          Remember my email
+        </label>
       </div>
 
       <div class="extra-links">

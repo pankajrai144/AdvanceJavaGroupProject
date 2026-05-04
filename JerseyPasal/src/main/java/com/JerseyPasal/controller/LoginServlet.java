@@ -2,6 +2,7 @@ package com.JerseyPasal.controller;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -27,6 +28,18 @@ public class LoginServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        Cookie[] cookies = request.getCookies();
+
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if ("rememberEmail".equals(cookie.getName())) {
+                    request.setAttribute("rememberedEmail", cookie.getValue());
+                    request.setAttribute("rememberChecked", "checked");
+                    break;
+                }
+            }
+        }
+
         request.getRequestDispatcher("/WEB-INF/pages/login.jsp").forward(request, response);
     }
 
@@ -37,11 +50,18 @@ public class LoginServlet extends HttpServlet {
         try {
             String email = request.getParameter("email");
             String password = request.getParameter("password");
+            String remember = request.getParameter("remember");
 
             if (email == null || email.trim().isEmpty() ||
                 password == null || password.trim().isEmpty()) {
 
                 request.setAttribute("error", "Email and password are required.");
+                request.setAttribute("rememberedEmail", email);
+
+                if ("yes".equals(remember)) {
+                    request.setAttribute("rememberChecked", "checked");
+                }
+
                 request.getRequestDispatcher("/WEB-INF/pages/login.jsp").forward(request, response);
                 return;
             }
@@ -53,6 +73,19 @@ public class LoginServlet extends HttpServlet {
             UserModel loggedInUser = service.loginUser(email, password);
 
             if (loggedInUser != null) {
+
+                if ("yes".equals(remember)) {
+                    Cookie emailCookie = new Cookie("rememberEmail", email);
+                    emailCookie.setMaxAge(7 * 24 * 60 * 60);
+                    emailCookie.setPath(request.getContextPath());
+                    emailCookie.setHttpOnly(true);
+                    response.addCookie(emailCookie);
+                } else {
+                    Cookie emailCookie = new Cookie("rememberEmail", "");
+                    emailCookie.setMaxAge(0);
+                    emailCookie.setPath(request.getContextPath());
+                    response.addCookie(emailCookie);
+                }
 
                 SessionUtil.setAttribute(request, "loggedInUser", loggedInUser, 3600);
 
@@ -78,6 +111,12 @@ public class LoginServlet extends HttpServlet {
                 } else {
 
                     request.setAttribute("error", "Invalid email or password");
+                }
+
+                request.setAttribute("rememberedEmail", email);
+
+                if ("yes".equals(remember)) {
+                    request.setAttribute("rememberChecked", "checked");
                 }
 
                 request.getRequestDispatcher("/WEB-INF/pages/login.jsp").forward(request, response);
