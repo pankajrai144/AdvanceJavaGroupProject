@@ -19,7 +19,7 @@
   <div class="auth-left">
     <div class="overlay">
       <h1>Welcome to Jersey Pasal</h1>
-      <p>Register to begin an amazing journey!</p>
+      <p>Login to begin an amazing journey!</p>
     </div>
   </div>
 
