@@ -22,7 +22,6 @@ public class UserDAO {
         LocalDate localDate = LocalDate.parse(dob);
         Date sqlDate = Date.valueOf(localDate);
 
-       
         String sql = "INSERT INTO users "
                    + "(fullname, email, phone, dob, password, address, gender, profile_image, role, approval_status) "
                    + "VALUES (?,?,?,?,?,?,?,?,?,?)";
@@ -50,7 +49,6 @@ public class UserDAO {
 
         Connection con = DBconfig.getConnection();
 
-       
         String sql = "SELECT * FROM users "
                    + "WHERE email = ? AND password = ? "
                    + "AND (approval_status IS NULL OR approval_status NOT IN ('denied', 'deleted'))";
@@ -75,7 +73,6 @@ public class UserDAO {
 
         Connection con = DBconfig.getConnection();
 
-        
         String sql = "SELECT role FROM users "
                    + "WHERE email = ? AND password = ? "
                    + "AND (approval_status IS NULL OR approval_status NOT IN ('denied', 'deleted'))";
@@ -92,14 +89,12 @@ public class UserDAO {
         if (rs.next()) {
             role = rs.getString("role");
 
-           
             if (role == null || role.trim().isEmpty()) {
                 role = "user";
             } else {
                 role = role.trim();
             }
 
-           
             if ("member".equalsIgnoreCase(role)) {
                 role = "user";
             }
@@ -112,7 +107,6 @@ public class UserDAO {
         return role;
     }
 
-    
     public UserModel getUserByEmailAndPassword(String email, String password) throws Exception {
 
         Connection con = DBconfig.getConnection();
@@ -155,7 +149,6 @@ public class UserDAO {
                 role = role.trim();
             }
 
-           
             if ("member".equalsIgnoreCase(role)) {
                 role = "user";
             }
@@ -283,9 +276,28 @@ public class UserDAO {
 
         Connection con = DBconfig.getConnection();
 
-        
         String sql = "UPDATE users "
                    + "SET approval_status = 'denied' "
+                   + "WHERE user_id = ? AND (role IS NULL OR role <> 'admin')";
+
+        PreparedStatement pst = con.prepareStatement(sql);
+
+        pst.setInt(1, userId);
+
+        int rows = pst.executeUpdate();
+
+        pst.close();
+        con.close();
+
+        return rows > 0;
+    }
+
+    public boolean approveUser(int userId) throws Exception {
+
+        Connection con = DBconfig.getConnection();
+
+        String sql = "UPDATE users "
+                   + "SET approval_status = 'approved' "
                    + "WHERE user_id = ? AND (role IS NULL OR role <> 'admin')";
 
         PreparedStatement pst = con.prepareStatement(sql);
@@ -304,7 +316,6 @@ public class UserDAO {
 
         Connection con = DBconfig.getConnection();
 
-        
         String sql = "UPDATE users "
                    + "SET approval_status = 'deleted' "
                    + "WHERE email = ? AND (role IS NULL OR role <> 'admin')";

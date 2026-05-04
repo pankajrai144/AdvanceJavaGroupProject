@@ -60,6 +60,8 @@ public class AdmindashboardServlet extends HttpServlet {
 
             if ("true".equals(request.getParameter("denied"))) {
                 adminMessage = "<p class='success-message'>User account has been denied successfully.</p>";
+            } else if ("true".equals(request.getParameter("approved"))) {
+                adminMessage = "<p class='success-message'>User account has been approved successfully.</p>";
             } else if ("true".equals(request.getParameter("error"))) {
                 adminMessage = "<p class='error-message'>Something went wrong. Please try again.</p>";
             }
@@ -96,7 +98,14 @@ public class AdmindashboardServlet extends HttpServlet {
 
                     if ("denied".equalsIgnoreCase(status)) {
                         statusHtml = "<span class='badge denied'>Denied</span>";
-                        actionHtml = "<button disabled>Denied</button>";
+
+                        actionHtml =
+                                "<form action='" + request.getContextPath() + "/approveuser' method='post' " +
+                                "onsubmit=\"return confirm('Are you sure you want to approve this user?');\">" +
+                                "<input type='hidden' name='userid' value='" + userid + "'>" +
+                                "<button type='submit' class='approve-btn'>Approve</button>" +
+                                "</form>";
+
                     } else if ("deleted".equalsIgnoreCase(status)) {
                         statusHtml = "<span class='badge denied'>Deleted</span>";
                         actionHtml = "<button disabled>Deleted</button>";

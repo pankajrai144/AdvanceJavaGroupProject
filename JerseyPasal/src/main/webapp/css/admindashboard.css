@@ -234,6 +234,61 @@ table tr {
   color: #f39c12;
 }
 
+.denied {
+  background: #ffecec;
+  color: #ff4d4f;
+}
+
+.success-message {
+  background: #e6ffed;
+  color: #1f8f4d;
+  padding: 12px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+
+.error-message {
+  background: #ffecec;
+  color: #ff4d4f;
+  padding: 12px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+
+.deny-btn {
+  background: #ff4d4f;
+  color: white;
+  padding: 8px 14px;
+  border-radius: 8px;
+}
+
+.deny-btn:hover {
+  background: #d9363e;
+}
+
+.approve-btn {
+  background: #1f8f4d;
+  color: white;
+  padding: 8px 14px;
+  border-radius: 8px;
+}
+
+.approve-btn:hover {
+  background: #176b3a;
+}
+
+button:disabled {
+  background: #b0b0b0;
+  color: #ffffff;
+  cursor: not-allowed;
+}
+
+button:disabled:hover {
+  background: #b0b0b0;
+}
+
 .section {
   background: #ffffff;
   padding: 20px;
