@@ -16,6 +16,7 @@ import jakarta.servlet.http.Part;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Servlet implementation class EditProductServlet
@@ -109,20 +110,30 @@ public class EditProductServlet extends HttpServlet {
 			String productIdValue = request.getParameter("productId");
 			String jerseyName = request.getParameter("jerseyName");
 			String teamName = request.getParameter("teamName");
-			String size = request.getParameter("size");
+			String[] selectedSizes = request.getParameterValues("size");
 			String season = request.getParameter("season");
 			String priceValue = request.getParameter("price");
 			String stockValue = request.getParameter("stockQuantity");
 			String category = request.getParameter("category");
 			String description = request.getParameter("description");
 			String existingImage = request.getParameter("existingImage");
+			String existingImage2 = request.getParameter("existingImage2");
+			String existingImage3 = request.getParameter("existingImage3");
+			String existingImage4 = request.getParameter("existingImage4");
 			
-			Part productImage = request.getPart("productImage");
+			ArrayList<Part> productImages = new ArrayList<>();
+			
+			for (Part part : request.getParts()) {
+				if ("productImages".equals(part.getName()) && part.getSize() > 0) {
+					productImages.add(part);
+				}
+			}
 			
 			if (isEmpty(productIdValue) ||
 				isEmpty(jerseyName) ||
 				isEmpty(teamName) ||
-				isEmpty(size) ||
+				selectedSizes == null ||
+				selectedSizes.length == 0 ||
 				isEmpty(season) ||
 				isEmpty(priceValue) ||
 				isEmpty(stockValue) ||
@@ -136,7 +147,6 @@ public class EditProductServlet extends HttpServlet {
 			
 			jerseyName = jerseyName.trim();
 			teamName = teamName.trim();
-			size = size.trim();
 			season = season.trim();
 			priceValue = priceValue.trim();
 			stockValue = stockValue.trim();
@@ -152,6 +162,24 @@ public class EditProductServlet extends HttpServlet {
 				existingImage = "";
 			} else {
 				existingImage = existingImage.trim();
+			}
+
+			if (existingImage2 == null) {
+				existingImage2 = "";
+			} else {
+				existingImage2 = existingImage2.trim();
+			}
+
+			if (existingImage3 == null) {
+				existingImage3 = "";
+			} else {
+				existingImage3 = existingImage3.trim();
+			}
+
+			if (existingImage4 == null) {
+				existingImage4 = "";
+			} else {
+				existingImage4 = existingImage4.trim();
 			}
 			
 			if (jerseyName.length() < 2 || jerseyName.length() > 100) {
@@ -174,17 +202,35 @@ public class EditProductServlet extends HttpServlet {
 				return;
 			}
 			
-			if (!size.equalsIgnoreCase("S") &&
-				!size.equalsIgnoreCase("M") &&
-				!size.equalsIgnoreCase("L") &&
-				!size.equalsIgnoreCase("XL") &&
-				!size.equalsIgnoreCase("XXL")) {
+			StringBuilder sizeBuilder = new StringBuilder();
+			
+			for (String selectedSize : selectedSizes) {
+				if (selectedSize == null) {
+					response.sendRedirect(request.getContextPath() + "/admindashboard?productError=size");
+					return;
+				}
 				
-				response.sendRedirect(request.getContextPath() + "/admindashboard?productError=size");
-				return;
+				selectedSize = selectedSize.trim().toUpperCase();
+				
+				if (!selectedSize.equals("XS") &&
+					!selectedSize.equals("S") &&
+					!selectedSize.equals("M") &&
+					!selectedSize.equals("L") &&
+					!selectedSize.equals("XL") &&
+					!selectedSize.equals("XXL")) {
+					
+					response.sendRedirect(request.getContextPath() + "/admindashboard?productError=size");
+					return;
+				}
+				
+				if (sizeBuilder.length() > 0) {
+					sizeBuilder.append(",");
+				}
+				
+				sizeBuilder.append(selectedSize);
 			}
 			
-			size = size.toUpperCase();
+			String size = sizeBuilder.toString();
 			
 			if (!season.matches("^[0-9]{4}/[0-9]{2}$")) {
 				response.sendRedirect(request.getContextPath() + "/admindashboard?productError=season");
@@ -233,46 +279,58 @@ public class EditProductServlet extends HttpServlet {
 			}
 			
 			String productImageName = existingImage;
+			String productImageName2 = existingImage2;
+			String productImageName3 = existingImage3;
+			String productImageName4 = existingImage4;
 			
-			if (productImage != null && productImage.getSize() > 0) {
+			if (!productImages.isEmpty()) {
 				
-				if (productImage.getSize() > MAX_IMAGE_SIZE) {
-					response.sendRedirect(request.getContextPath() + "/admindashboard?productError=imagesize");
+				if (productImages.size() != 4) {
+					response.sendRedirect(request.getContextPath() + "/admindashboard?productError=imagecount");
 					return;
 				}
 				
-				if (!FileUploadUtil.isImage(productImage)) {
-					response.sendRedirect(request.getContextPath() + "/admindashboard?productError=image");
-					return;
-				}
+				Part productImage = productImages.get(0);
+				Part productImage2 = productImages.get(1);
+				Part productImage3 = productImages.get(2);
+				Part productImage4 = productImages.get(3);
 				
-				String originalFileName = productImage.getSubmittedFileName();
-				
-				if (originalFileName == null || originalFileName.trim().isEmpty()) {
-					response.sendRedirect(request.getContextPath() + "/admindashboard?productError=image");
-					return;
-				}
-				
-				String extension = FileUploadUtil.getFileExtension(originalFileName);
-				
-				if (extension == null || extension.trim().isEmpty()) {
-					response.sendRedirect(request.getContextPath() + "/admindashboard?productError=image");
-					return;
-				}
-				
-				extension = extension.toLowerCase();
-				
-				if (!extension.equals(".jpg") &&
-					!extension.equals(".jpeg") &&
-					!extension.equals(".png") &&
-					!extension.equals(".webp")) {
+				if (!isValidImage(productImage) ||
+					!isValidImage(productImage2) ||
+					!isValidImage(productImage3) ||
+					!isValidImage(productImage4)) {
 					
 					response.sendRedirect(request.getContextPath() + "/admindashboard?productError=image");
 					return;
 				}
 				
-				productImageName = "product_" + System.currentTimeMillis() + extension;
+				if (productImage.getSize() > MAX_IMAGE_SIZE ||
+					productImage2.getSize() > MAX_IMAGE_SIZE ||
+					productImage3.getSize() > MAX_IMAGE_SIZE ||
+					productImage4.getSize() > MAX_IMAGE_SIZE) {
+					
+					response.sendRedirect(request.getContextPath() + "/admindashboard?productError=imagesize");
+					return;
+				}
+				
+				productImageName = createProductImageName(productImage, "main");
+				productImageName2 = createProductImageName(productImage2, "second");
+				productImageName3 = createProductImageName(productImage3, "third");
+				productImageName4 = createProductImageName(productImage4, "fourth");
+				
+				if (productImageName == null ||
+					productImageName2 == null ||
+					productImageName3 == null ||
+					productImageName4 == null) {
+					
+					response.sendRedirect(request.getContextPath() + "/admindashboard?productError=image");
+					return;
+				}
+				
 				FileUploadUtil.saveFile(productImage, UPLOAD_DIR, productImageName);
+				FileUploadUtil.saveFile(productImage2, UPLOAD_DIR, productImageName2);
+				FileUploadUtil.saveFile(productImage3, UPLOAD_DIR, productImageName3);
+				FileUploadUtil.saveFile(productImage4, UPLOAD_DIR, productImageName4);
 			}
 			
 			ProductModel product = new ProductModel();
@@ -287,6 +345,9 @@ public class EditProductServlet extends HttpServlet {
 			product.setCategory(category);
 			product.setDescription(description);
 			product.setProductImage(productImageName);
+			product.setProductImage2(productImageName2);
+			product.setProductImage3(productImageName3);
+			product.setProductImage4(productImageName4);
 			
 			ProductDAO dao = new ProductDAO();
 			boolean updated = dao.updateProduct(product);
@@ -305,6 +366,48 @@ public class EditProductServlet extends HttpServlet {
 	
 	private boolean isEmpty(String value) {
 		return value == null || value.trim().isEmpty();
+	}
+
+	private boolean isValidImage(Part imagePart) {
+		if (imagePart == null || imagePart.getSize() <= 0) {
+			return false;
+		}
+		
+		if (!FileUploadUtil.isImage(imagePart)) {
+			return false;
+		}
+		
+		String originalFileName = imagePart.getSubmittedFileName();
+		
+		if (originalFileName == null || originalFileName.trim().isEmpty()) {
+			return false;
+		}
+		
+		String extension = FileUploadUtil.getFileExtension(originalFileName);
+		
+		if (extension == null || extension.trim().isEmpty()) {
+			return false;
+		}
+		
+		extension = extension.toLowerCase();
+		
+		return extension.equals(".jpg") ||
+			   extension.equals(".jpeg") ||
+			   extension.equals(".png") ||
+			   extension.equals(".webp");
+	}
+	
+	private String createProductImageName(Part imagePart, String imageType) {
+		String originalFileName = imagePart.getSubmittedFileName();
+		String extension = FileUploadUtil.getFileExtension(originalFileName);
+		
+		if (extension == null || extension.trim().isEmpty()) {
+			return null;
+		}
+		
+		extension = extension.toLowerCase();
+		
+		return "product_" + imageType + "_" + System.currentTimeMillis() + extension;
 	}
 
 }

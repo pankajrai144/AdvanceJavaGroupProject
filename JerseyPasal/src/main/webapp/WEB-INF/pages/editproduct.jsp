@@ -1,6 +1,35 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="fn" uri="jakarta.tags.functions" %>
+
+<c:set var="xsChecked" value="" />
+<c:set var="sChecked" value="" />
+<c:set var="mChecked" value="" />
+<c:set var="lChecked" value="" />
+<c:set var="xlChecked" value="" />
+<c:set var="xxlChecked" value="" />
+
+<c:forEach var="sizeValue" items="${fn:split(product.size, ',')}">
+  <c:if test="${fn:trim(sizeValue) == 'XS'}">
+    <c:set var="xsChecked" value="checked" />
+  </c:if>
+  <c:if test="${fn:trim(sizeValue) == 'S'}">
+    <c:set var="sChecked" value="checked" />
+  </c:if>
+  <c:if test="${fn:trim(sizeValue) == 'M'}">
+    <c:set var="mChecked" value="checked" />
+  </c:if>
+  <c:if test="${fn:trim(sizeValue) == 'L'}">
+    <c:set var="lChecked" value="checked" />
+  </c:if>
+  <c:if test="${fn:trim(sizeValue) == 'XL'}">
+    <c:set var="xlChecked" value="checked" />
+  </c:if>
+  <c:if test="${fn:trim(sizeValue) == 'XXL'}">
+    <c:set var="xxlChecked" value="checked" />
+  </c:if>
+</c:forEach>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -42,7 +71,7 @@ body {
 .upload-card {
   background: var(--card);
   width: 100%;
-  max-width: 620px;
+  max-width: 720px;
   margin: 0 auto;
   padding: 32px;
   border-radius: 18px;
@@ -73,10 +102,18 @@ body {
   margin-bottom: 22px;
 }
 
+.image-preview-grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 15px;
+}
+
 .profile-preview {
-  width: 105px;
-  height: 105px;
-  border-radius: 50%;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 12px;
   background: #111;
   border: 2px dashed #444;
   display: flex;
@@ -92,7 +129,7 @@ body {
 }
 
 .profile-preview i {
-  font-size: 32px;
+  font-size: 28px;
   color: #888;
 }
 
@@ -119,19 +156,26 @@ body {
 }
 
 .upload-btn {
-  display: inline-block;
-  background: var(--primary);
-  color: #fff;
-  padding: 11px 22px;
-  border-radius: 30px;
-  font-size: 14px;
-  font-weight: bold;
+  width: 100%;
+  min-height: 58px;
+  border: 2px dashed var(--primary);
+  border-radius: 14px;
+  background: #111;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
   cursor: pointer;
+  font-size: 15px;
+  font-weight: bold;
   transition: 0.3s ease;
 }
 
 .upload-btn:hover {
-  background: var(--primary-dark);
+  background: #241015;
+  border-color: #ff4d6d;
+  color: #ffccd5;
 }
 
 .input-group {
@@ -170,6 +214,44 @@ body {
   box-shadow: 0 0 0 2px rgba(139, 13, 31, 0.25);
 }
 
+.size-checkbox-group {
+  background: var(--input-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.size-checkbox-group label {
+  cursor: pointer;
+  margin: 0;
+}
+
+.size-checkbox-group input {
+  display: none;
+}
+
+.size-checkbox-group span {
+  display: inline-block;
+  min-width: 48px;
+  text-align: center;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: #1a1a1a;
+  border: 1px solid var(--border);
+  color: var(--subtext);
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.size-checkbox-group input:checked + span {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #ffffff;
+}
+
 .btn-submit {
   width: 100%;
   background: var(--primary);
@@ -200,7 +282,7 @@ body {
   color: #fff !important;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 600px) {
   body {
     padding: 20px 12px;
   }
@@ -213,9 +295,8 @@ body {
     font-size: 25px;
   }
 
-  .profile-preview {
-    width: 90px;
-    height: 90px;
+  .image-preview-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 </style>
@@ -234,26 +315,67 @@ body {
 
     <input type="hidden" name="productId" value="${product.productId}">
     <input type="hidden" name="existingImage" value="${product.productImage}">
+    <input type="hidden" name="existingImage2" value="${product.productImage2}">
+    <input type="hidden" name="existingImage3" value="${product.productImage3}">
+    <input type="hidden" name="existingImage4" value="${product.productImage4}">
 
     <div class="profile-section">
-      <div class="profile-preview">
-        <c:choose>
-          <c:when test="${not empty product.productImage}">
-            <img src="${pageContext.request.contextPath}/getimage?productImage=${product.productImage}" alt="Product Image">
-          </c:when>
-          <c:otherwise>
-            <i class="fa-solid fa-image"></i>
-          </c:otherwise>
-        </c:choose>
+      <div class="image-preview-grid">
+
+        <div class="profile-preview">
+          <c:choose>
+            <c:when test="${not empty product.productImage}">
+              <img src="${pageContext.request.contextPath}/getimage?productImage=${product.productImage}" alt="Product Image">
+            </c:when>
+            <c:otherwise>
+              <i class="fa-solid fa-image"></i>
+            </c:otherwise>
+          </c:choose>
+        </div>
+
+        <div class="profile-preview">
+          <c:choose>
+            <c:when test="${not empty product.productImage2}">
+              <img src="${pageContext.request.contextPath}/getimage?productImage=${product.productImage2}" alt="Product Image">
+            </c:when>
+            <c:otherwise>
+              <i class="fa-solid fa-image"></i>
+            </c:otherwise>
+          </c:choose>
+        </div>
+
+        <div class="profile-preview">
+          <c:choose>
+            <c:when test="${not empty product.productImage3}">
+              <img src="${pageContext.request.contextPath}/getimage?productImage=${product.productImage3}" alt="Product Image">
+            </c:when>
+            <c:otherwise>
+              <i class="fa-solid fa-image"></i>
+            </c:otherwise>
+          </c:choose>
+        </div>
+
+        <div class="profile-preview">
+          <c:choose>
+            <c:when test="${not empty product.productImage4}">
+              <img src="${pageContext.request.contextPath}/getimage?productImage=${product.productImage4}" alt="Product Image">
+            </c:when>
+            <c:otherwise>
+              <i class="fa-solid fa-image"></i>
+            </c:otherwise>
+          </c:choose>
+        </div>
+
       </div>
 
       <h3 class="product-name">${product.jerseyName}</h3>
       <p class="product-team">${product.teamName}</p>
 
       <div class="file-box">
-        <input type="file" id="productImage" name="productImage">
-        <label for="productImage" class="upload-btn">
-          <i class="fa-solid fa-camera"></i> Upload New Image
+        <input type="file" id="productImages" name="productImages" accept="image/*" multiple>
+        <label for="productImages" class="upload-btn">
+          <i class="fa-solid fa-cloud-arrow-up"></i>
+          <span>Upload 4 New Product Images</span>
         </label>
       </div>
     </div>
@@ -269,8 +391,39 @@ body {
     </div>
 
     <div class="input-group">
-      <label>Size</label>
-      <input type="text" name="size" value="${product.size}">
+      <label>Available Sizes</label>
+
+      <div class="size-checkbox-group">
+        <label>
+          <input type="checkbox" name="size" value="XS" ${xsChecked}>
+          <span>XS</span>
+        </label>
+
+        <label>
+          <input type="checkbox" name="size" value="S" ${sChecked}>
+          <span>S</span>
+        </label>
+
+        <label>
+          <input type="checkbox" name="size" value="M" ${mChecked}>
+          <span>M</span>
+        </label>
+
+        <label>
+          <input type="checkbox" name="size" value="L" ${lChecked}>
+          <span>L</span>
+        </label>
+
+        <label>
+          <input type="checkbox" name="size" value="XL" ${xlChecked}>
+          <span>XL</span>
+        </label>
+
+        <label>
+          <input type="checkbox" name="size" value="XXL" ${xxlChecked}>
+          <span>XXL</span>
+        </label>
+      </div>
     </div>
 
     <div class="input-group">
