@@ -1,11 +1,11 @@
-.nation-top-section {
+.ns1 {
     background: var(--black);
     padding: 90px 40px 72px;
     text-align: center;
     border-bottom: 1px solid #1e1e1e;
 }
 
-.nation-top-section h1 {
+.ns1 h1 {
     font-size: 4.5rem;
     font-weight: 900;
     text-transform: uppercase;
@@ -15,11 +15,11 @@
     margin-bottom: 20px;
 }
 
-.nation-top-section h1 span {
+.ns1 h1 span {
     color: var(--red);
 }
 
-.small-red-title {
+.nt1 {
     font-size: 0.68rem;
     font-weight: 800;
     letter-spacing: 3.5px;
@@ -28,7 +28,7 @@
     margin-bottom: 16px;
 }
 
-.top-section-text {
+.nt2 {
     font-size: 0.92rem;
     color: var(--mid);
     max-width: 480px;
@@ -36,7 +36,7 @@
     line-height: 1.7;
 }
 
-.jersey-info-section {
+.ns3 {
     background: var(--black);
     padding: 80px 40px 64px;
     text-align: center;
@@ -44,7 +44,7 @@
     max-width: 100%;
 }
 
-.jersey-info-section h2 {
+.ns3 h2 {
     font-size: 2.2rem;
     font-weight: 900;
     text-transform: uppercase;
@@ -53,7 +53,7 @@
     letter-spacing: -0.5px;
 }
 
-.jersey-info-section p {
+.ns3 p {
     font-size: 0.88rem;
     color: var(--mid);
     line-height: 1.8;
@@ -61,18 +61,18 @@
     margin: 0 auto;
 }
 
-.nation-products-section {
+.ns4 {
     background: var(--black);
     padding: 60px 40px;
     border-bottom: 1px solid #1e1e1e;
 }
 
-.nation-products-container {
+.nw2 {
     max-width: 1200px;
     margin: 0 auto;
 }
 
-.nation-products-title {
+.nt3 {
     font-size: 0.65rem;
     font-weight: 800;
     letter-spacing: 3px;
@@ -81,21 +81,21 @@
     margin-bottom: 28px;
 }
 
-.nation-products-list {
+.ng1 {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
     align-items: stretch;
 }
 
-.product-link {
+.nc-link {
     text-decoration: none;
     color: inherit;
     display: block;
     height: 100%;
 }
 
-.product-box {
+.nc1 {
     background: #161616;
     border: 1px solid #222;
     border-radius: 6px;
@@ -107,13 +107,13 @@
     height: 100%;
 }
 
-.product-box:hover {
+.nc1:hover {
     transform: translateY(-6px);
     border-color: var(--red);
     box-shadow: 0 14px 30px rgba(0, 0, 0, 0.45);
 }
 
-.product-image-area {
+.ni2 {
     position: relative;
     aspect-ratio: 3 / 4;
     background: #111;
@@ -121,19 +121,19 @@
     flex-shrink: 0;
 }
 
-.product-image-area img {
+.ni2 img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     transition: transform 0.35s ease, opacity 0.35s ease;
 }
 
-.product-box:hover .product-image-area img {
+.nc1:hover .ni2 img {
     transform: scale(1.04);
     opacity: 0.55;
 }
 
-.view-product-text {
+.view-details-box {
     position: absolute;
     inset: 0;
     background: rgba(0, 0, 0, 0.45);
@@ -144,11 +144,11 @@
     transition: opacity 0.25s ease;
 }
 
-.product-box:hover .view-product-text {
+.nc1:hover .view-details-box {
     opacity: 1;
 }
 
-.view-product-text span {
+.view-details-box span {
     background: var(--red);
     color: var(--white);
     padding: 13px 28px;
@@ -159,14 +159,14 @@
     letter-spacing: 1.5px;
 }
 
-.product-details {
+.ni3 {
     padding: 18px 20px 22px;
     display: flex;
     flex-direction: column;
     flex: 1;
 }
 
-.team-name {
+.nt4 {
     font-size: 0.62rem;
     font-weight: 800;
     letter-spacing: 2.5px;
@@ -175,7 +175,7 @@
     margin-bottom: 5px;
 }
 
-.jersey-name {
+.nt5 {
     font-size: 0.95rem;
     font-weight: 900;
     text-transform: uppercase;
@@ -183,7 +183,7 @@
     margin-bottom: 10px;
 }
 
-.jersey-description {
+.nt6 {
     font-size: 0.78rem;
     color: var(--mid);
     line-height: 1.6;
@@ -192,31 +192,31 @@
     min-height: 75px;
 }
 
-.jersey-price {
+.nt7 {
     font-size: 1.1rem;
     font-weight: 900;
     color: var(--white);
     margin-bottom: 0;
 }
 
-.authentic-jersey-section {
+.ns5 {
     background: var(--black);
     border-top: 1px solid #1e1e1e;
 }
 
-.authentic-jersey-container {
+.nw3 {
     display: flex;
     min-height: 520px;
 }
 
-.authentic-left-box {
+.nl1 {
     flex: 1;
     position: relative;
     display: flex;
     align-items: center;
 }
 
-.authentic-background-image {
+.ni4 {
     position: absolute;
     inset: 0;
     width: 100%;
@@ -225,20 +225,20 @@
     filter: brightness(0.2);
 }
 
-.authentic-text-box {
+.nc2 {
     position: relative;
     z-index: 1;
     padding: 60px 52px;
 }
 
-.authentic-text-box > i {
+.nc2 > i {
     font-size: 2rem;
     color: var(--red);
     display: block;
     margin-bottom: 18px;
 }
 
-.authentic-text-box h2 {
+.nc2 h2 {
     font-size: 2rem;
     font-weight: 900;
     text-transform: uppercase;
@@ -247,7 +247,7 @@
     margin-bottom: 24px;
 }
 
-.authentic-text-box ul {
+.nc2 ul {
     list-style: none;
     display: flex;
     flex-direction: column;
@@ -255,7 +255,7 @@
     margin-bottom: 32px;
 }
 
-.authentic-text-box ul li {
+.nc2 ul li {
     font-size: 0.84rem;
     color: rgba(255,255,255,0.75);
     display: flex;
@@ -263,12 +263,12 @@
     gap: 10px;
 }
 
-.authentic-text-box ul li i {
+.nc2 ul li i {
     color: var(--red);
     font-size: 0.82rem;
 }
 
-.shop-all-button {
+.nb5 {
     display: inline-block;
     padding: 13px 34px;
     background: var(--white);
@@ -282,25 +282,25 @@
     transition: background 0.2s, color 0.2s;
 }
 
-.shop-all-button:hover {
+.nb5:hover {
     background: var(--black);
     color: var(--white);
 }
 
-.video-section-box {
+.nr1 {
     flex: 1;
     position: relative;
     overflow: hidden;
 }
 
-.video-section-box video {
+.nr1 video {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
 }
 
-.video-text-box {
+.nc3 {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -309,7 +309,7 @@
     padding: 24px 28px;
 }
 
-.video-text-box span {
+.nc3 span {
     display: block;
     font-size: 0.6rem;
     font-weight: 900;
@@ -319,83 +319,83 @@
     margin-bottom: 5px;
 }
 
-.video-text-box p {
+.nc3 p {
     font-size: 0.82rem;
     color: rgba(255,255,255,0.65);
 }
 
 @media (max-width: 1024px) {
-    .nation-top-section h1 {
+    .ns1 h1 {
         font-size: 3.5rem;
     }
 }
 
 @media (max-width: 800px) {
-    .nation-top-section {
+    .ns1 {
         padding: 64px 24px 52px;
     }
 
-    .nation-top-section h1 {
+    .ns1 h1 {
         font-size: 2.8rem;
         letter-spacing: -1px;
     }
 
-    .jersey-info-section {
+    .ns3 {
         padding: 56px 24px 48px;
     }
 
-    .jersey-info-section h2 {
+    .ns3 h2 {
         font-size: 1.8rem;
     }
 
-    .nation-products-section {
+    .ns4 {
         padding: 48px 24px;
     }
 
-    .nation-products-list {
+    .ng1 {
         grid-template-columns: 1fr;
         gap: 16px;
     }
 
-    .authentic-jersey-container {
+    .nw3 {
         flex-direction: column;
     }
 
-    .authentic-left-box {
+    .nl1 {
         min-height: 400px;
     }
 
-    .video-section-box {
+    .nr1 {
         min-height: 280px;
     }
 
-    .authentic-text-box {
+    .nc2 {
         padding: 40px 28px;
     }
 
-    .authentic-text-box h2 {
+    .nc2 h2 {
         font-size: 1.6rem;
     }
 }
 
 @media (max-width: 480px) {
-    .nation-top-section h1 {
+    .ns1 h1 {
         font-size: 2.2rem;
     }
 
-    .nation-products-section {
+    .ns4 {
         padding: 36px 16px;
     }
 
-    .product-details {
+    .ni3 {
         padding: 16px 16px 18px;
     }
 
-    .authentic-text-box {
+    .nc2 {
         padding: 28px 20px;
     }
 
-    .authentic-text-box h2 {
+    .nc2 h2 {
         font-size: 1.3rem;
     }
 }
