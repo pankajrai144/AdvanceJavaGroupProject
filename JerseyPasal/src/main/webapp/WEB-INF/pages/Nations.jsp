@@ -30,13 +30,12 @@
 
 <section class="ns4" id="portugal">
     <div class="nw2">
-        <p class="nt3">Portugal</p>
+        <p class="nt3"></p>
         <div class="ng1">
 
             <div class="nc1">
                 <div class="ni2">
                     <img src="${pageContext.request.contextPath}/images/ronaldo2.jpg" alt="Portugal Home 2026" />
-                    <span class="nb1">Home</span>
                 </div>
                 <div class="ni3">
                     <p class="nt4">Portugal</p>
@@ -50,7 +49,6 @@
             <div class="nc1">
                 <div class="ni2">
                     <img src="${pageContext.request.contextPath}/images/bruno.jpg" alt="Portugal Away 2026" />
-                    <span class="nb3">Away</span>
                 </div>
                 <div class="ni3">
                     <p class="nt4">Portugal</p>
@@ -64,7 +62,6 @@
             <div class="nc1">
                 <div class="ni2">
                     <img src="${pageContext.request.contextPath}/images/bruno1.jpg" alt="Portugal Third 2026" />
-                    <span class="nb4">Third</span>
                 </div>
                 <div class="ni3">
                     <p class="nt4">Portugal</p>
@@ -81,13 +78,12 @@
 
 <section class="ns4 na1" id="argentina">
     <div class="nw2">
-        <p class="nt3">Argentina</p>
+        <p class="nt3"></p>
         <div class="ng1">
 
             <div class="nc1">
                 <div class="ni2">
                     <img src="${pageContext.request.contextPath}/images/messi2.jpg" alt="Argentina Home 2026" />
-                    <span class="nb1">Home</span>
                 </div>
                 <div class="ni3">
                     <p class="nt4">Argentina</p>
@@ -101,7 +97,6 @@
             <div class="nc1">
                 <div class="ni2">
                     <img src="${pageContext.request.contextPath}/images/nico-paz.jpg" alt="Argentina Away 2026" />
-                    <span class="nb3">Away</span>
                 </div>
                 <div class="ni3">
                     <p class="nt4">Argentina</p>
@@ -115,7 +110,6 @@
             <div class="nc1">
                 <div class="ni2">
                     <img src="${pageContext.request.contextPath}/images/dybala.jpg" alt="Argentina Third 2026" />
-                    <span class="nb4">Third</span>
                 </div>
                 <div class="ni3">
                     <p class="nt4">Argentina</p>
@@ -132,13 +126,12 @@
 
 <section class="ns4" id="brazil">
     <div class="nw2">
-        <p class="nt3">Brazil</p>
+        <p class="nt3"></p>
         <div class="ng1">
 
             <div class="nc1">
                 <div class="ni2">
                     <img src="${pageContext.request.contextPath}/images/neymar.jpg" alt="Brazil Home 2026" />
-                    <span class="nb1">Home</span>
                 </div>
                 <div class="ni3">
                     <p class="nt4">Brazil</p>
@@ -152,7 +145,6 @@
             <div class="nc1">
                 <div class="ni2">
                     <img src="${pageContext.request.contextPath}/images/cunha.jpg" alt="Brazil Away 2026" />
-                    <span class="nb3">Away</span>
                 </div>
                 <div class="ni3">
                     <p class="nt4">Brazil</p>
@@ -166,7 +158,6 @@
             <div class="nc1">
                 <div class="ni2">
                     <img src="${pageContext.request.contextPath}/images/rodrygo.jpg" alt="Brazil Third 2026" />
-                    <span class="nb4">Third</span>
                 </div>
                 <div class="ni3">
                     <p class="nt4">Brazil</p>
