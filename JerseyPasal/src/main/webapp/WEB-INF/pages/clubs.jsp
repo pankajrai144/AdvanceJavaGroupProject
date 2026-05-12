@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" isELIgnored="false"%>
+
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,193 +31,101 @@
     <p>Every strip is crafted to official match specification — the same breathable, performance-grade fabric worn on the pitch by the world's best. Includes the official season badge and club crest.</p>
 </section>
 
-<section class="cs4" id="manchester-united">
+<section class="cs4">
     <div class="cw2">
+
+        <c:if test="${not empty error}">
+            <p class="ct6">${error}</p>
+        </c:if>
+
         <div class="cg1">
 
-            <a href="#" class="cc-link">
-                <div class="cc1">
-                    <div class="ci2">
-                        <img src="${pageContext.request.contextPath}/images/manutd-home.jpg" alt="Manchester United Home 2024/25" />
-                        <div class="view-details-box">
-                            <span>View Details</span>
-                        </div>
-                    </div>
-                    <div class="ci3">
-                        <p class="ct4">Manchester United</p>
-                        <p class="ct5">Home Kit 2024/25</p>
-                        <p class="ct6">The iconic Theatre of Dreams red. AeroReady technology with a tailored fit and embroidered devil crest on the chest.</p>
-                        <p class="ct7">£84.99</p>
-                    </div>
-                </div>
-            </a>
+            <c:choose>
+                <c:when test="${not empty clubProducts}">
 
-            <a href="#" class="cc-link">
-                <div class="cc1">
-                    <div class="ci2">
-                        <img src="${pageContext.request.contextPath}/images/manutd-away.jpg" alt="Manchester United Away 2024/25" />
-                        <div class="view-details-box">
-                            <span>View Details</span>
-                        </div>
-                    </div>
-                    <div class="ci3">
-                        <p class="ct4">Manchester United</p>
-                        <p class="ct5">Away Kit 2024/25</p>
-                        <p class="ct6">Clean white with black and red trim. Lightweight mesh panels and a slim-fit silhouette inspired by United's 1990s away strips.</p>
-                        <p class="ct7">£84.99</p>
-                    </div>
-                </div>
-            </a>
+                    <c:forEach var="product" items="${clubProducts}">
 
-            <a href="#" class="cc-link">
-                <div class="cc1">
-                    <div class="ci2">
-                        <img src="${pageContext.request.contextPath}/images/manutd-third.jpg" alt="Manchester United Third 2024/25" />
-                        <div class="view-details-box">
-                            <span>View Details</span>
+                        <a href="${pageContext.request.contextPath}/product?productId=${product.productId}" class="cc-link">
+                            <div class="cc1">
+                                <div class="ci2">
+                                    <c:choose>
+                                        <c:when test="${not empty product.productImage}">
+                                            <img src="${pageContext.request.contextPath}/getimage?productImage=${product.productImage}" alt="${product.jerseyName}" />
+                                        </c:when>
+                                        <c:otherwise>
+                                            <div class="pd-no-image">
+                                                <i class="fa-solid fa-image"></i>
+                                            </div>
+                                        </c:otherwise>
+                                    </c:choose>
+
+                                    <div class="view-details-box">
+                                        <span>View Details</span>
+                                    </div>
+                                </div>
+
+                                <div class="ci3">
+                                    <p class="ct4">${product.teamName}</p>
+                                    <p class="ct5">${product.jerseyName}</p>
+                                    <p class="ct6">${product.description}</p>
+                                    <p class="ct7">£${product.price}</p>
+                                </div>
+                            </div>
+                        </a>
+
+                    </c:forEach>
+
+                </c:when>
+
+                <c:otherwise>
+                    <div class="cc1">
+                        <div class="ci3">
+                            <p class="ct4">No Club Jerseys Available</p>
+                            <p class="ct6">Club products added by admin will appear here.</p>
                         </div>
                     </div>
-                    <div class="ci3">
-                        <p class="ct4">Manchester United</p>
-                        <p class="ct5">Third Kit 2024/25</p>
-                        <p class="ct6">Bold blue with a tonal graphic weave. Limited collector's edition with gold embroidery and 100% recycled polyester construction.</p>
-                        <p class="ct7">£84.99</p>
-                    </div>
-                </div>
-            </a>
+                </c:otherwise>
+            </c:choose>
 
         </div>
-    </div>
-</section>
 
-<section class="cs4 ca1" id="ac-milan">
-    <div class="cw2">
-        <div class="cg1">
+        <c:if test="${totalPages > 1}">
+            <div class="cp-section">
 
-            <a href="#" class="cc-link">
-                <div class="cc1">
-                    <div class="ci2">
-                        <img src="${pageContext.request.contextPath}/images/acmilan-home.jpg" alt="AC Milan Home 2024/25" />
-                        <div class="view-details-box">
-                            <span>View Details</span>
-                        </div>
-                    </div>
-                    <div class="ci3">
-                        <p class="ct4">AC Milan</p>
-                        <p class="ct5">Home Kit 2024/25</p>
-                        <p class="ct6">The legendary red and black stripes of the Rossoneri. Puma EvoKnit fabric with moisture-wicking and the iconic Milan devil badge.</p>
-                        <p class="ct7">£79.99</p>
-                    </div>
+                <c:choose>
+                    <c:when test="${currentPage > 1}">
+                        <a href="${pageContext.request.contextPath}/clubs?page=${currentPage - 1}" class="cp1">Previous</a>
+                    </c:when>
+                    <c:otherwise>
+                        <span class="cp1 ca2">Previous</span>
+                    </c:otherwise>
+                </c:choose>
+
+                <div class="cpg1">
+                    <c:forEach begin="1" end="${totalPages}" var="pageNumber">
+                        <c:choose>
+                            <c:when test="${pageNumber == currentPage}">
+                                <span class="cp2 ca3">${pageNumber}</span>
+                            </c:when>
+                            <c:otherwise>
+                                <a href="${pageContext.request.contextPath}/clubs?page=${pageNumber}" class="cp2">${pageNumber}</a>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:forEach>
                 </div>
-            </a>
 
-            <a href="#" class="cc-link">
-                <div class="cc1">
-                    <div class="ci2">
-                        <img src="${pageContext.request.contextPath}/images/acmilan-away.jpg" alt="AC Milan Away 2024/25" />
-                        <div class="view-details-box">
-                            <span>View Details</span>
-                        </div>
-                    </div>
-                    <div class="ci3">
-                        <p class="ct4">AC Milan</p>
-                        <p class="ct5">Away Kit 2024/25</p>
-                        <p class="ct6">All-white with subtle red pinstripes. Quick-dry mesh lining and a modern tapered cut, inspired by Milan's European glory nights.</p>
-                        <p class="ct7">£79.99</p>
-                    </div>
-                </div>
-            </a>
+                <c:choose>
+                    <c:when test="${currentPage < totalPages}">
+                        <a href="${pageContext.request.contextPath}/clubs?page=${currentPage + 1}" class="cp1">Next</a>
+                    </c:when>
+                    <c:otherwise>
+                        <span class="cp1 ca2">Next</span>
+                    </c:otherwise>
+                </c:choose>
 
-            <a href="#" class="cc-link">
-                <div class="cc1">
-                    <div class="ci2">
-                        <img src="${pageContext.request.contextPath}/images/acmilan-third.jpg" alt="AC Milan Third 2024/25" />
-                        <div class="view-details-box">
-                            <span>View Details</span>
-                        </div>
-                    </div>
-                    <div class="ci3">
-                        <p class="ct4">AC Milan</p>
-                        <p class="ct5">Third Kit 2024/25</p>
-                        <p class="ct6">Deep black with a gradient red fade and gold trim detail. A bold tribute to San Siro and Milan's seven European Cup victories.</p>
-                        <p class="ct7">£79.99</p>
-                    </div>
-                </div>
-            </a>
+            </div>
+        </c:if>
 
-        </div>
-    </div>
-</section>
-
-<section class="cs4" id="real-madrid">
-    <div class="cw2">
-        <div class="cg1">
-
-            <a href="#" class="cc-link">
-                <div class="cc1">
-                    <div class="ci2">
-                        <img src="${pageContext.request.contextPath}/images/realmadrid-home.jpg" alt="Real Madrid Home 2024/25" />
-                        <div class="view-details-box">
-                            <span>View Details</span>
-                        </div>
-                    </div>
-                    <div class="ci3">
-                        <p class="ct4">Real Madrid</p>
-                        <p class="ct5">Home Kit 2024/25</p>
-                        <p class="ct6">Classic all-white with gold trim. AeroReady technology with a tailored fit and embroidered club crest on the chest.</p>
-                        <p class="ct7">£84.99</p>
-                    </div>
-                </div>
-            </a>
-
-            <a href="#" class="cc-link">
-                <div class="cc1">
-                    <div class="ci2">
-                        <img src="${pageContext.request.contextPath}/images/realmadrid-away.jpg" alt="Real Madrid Away 2024/25" />
-                        <div class="view-details-box">
-                            <span>View Details</span>
-                        </div>
-                    </div>
-                    <div class="ci3">
-                        <p class="ct4">Real Madrid</p>
-                        <p class="ct5">Away Kit 2024/25</p>
-                        <p class="ct6">Deep purple with white detailing. Lightweight mesh panels and a modern slim-fit silhouette for Champions League intensity.</p>
-                        <p class="ct7">£84.99</p>
-                    </div>
-                </div>
-            </a>
-
-            <a href="#" class="cc-link">
-                <div class="cc1">
-                    <div class="ci2">
-                        <img src="${pageContext.request.contextPath}/images/realmadrid-third.jpg" alt="Real Madrid Third 2024/25" />
-                        <div class="view-details-box">
-                            <span>View Details</span>
-                        </div>
-                    </div>
-                    <div class="ci3">
-                        <p class="ct4">Real Madrid</p>
-                        <p class="ct5">Third Kit 2024/25</p>
-                        <p class="ct6">Bold black with a subtle tonal pattern. Limited-run collector's edition with gold embroidery and recycled construction.</p>
-                        <p class="ct7">£84.99</p>
-                    </div>
-                </div>
-            </a>
-
-        </div>
-    </div>
-</section>
-
-<section class="cs6">
-    <div class="cw4">
-        <a href="#manchester-united" class="cp1 ca2">&#8592; Prev</a>
-        <div class="cpg1">
-            <a href="#manchester-united" class="cp2 ca3">1</a>
-            <a href="#ac-milan" class="cp2">2</a>
-            <a href="#real-madrid" class="cp2">3</a>
-            <a href="#barcelona" class="cp2">4</a>
-        </div>
-        <a href="#ac-milan" class="cp1">Next &#8594;</a>
     </div>
 </section>
 
@@ -233,7 +144,7 @@
                     <li><i class="fa-solid fa-circle-check"></i> Season badge embroidered on chest</li>
                     <li><i class="fa-solid fa-circle-check"></i> Sourced direct from manufacturer</li>
                 </ul>
-                <a href="#" class="cb5">Shop All Club Kits</a>
+                <a href="${pageContext.request.contextPath}/product" class="cb5">Shop All Club Kits</a>
             </div>
         </div>
 
