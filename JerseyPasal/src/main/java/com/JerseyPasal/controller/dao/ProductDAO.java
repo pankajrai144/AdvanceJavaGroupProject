@@ -76,6 +76,47 @@ public class ProductDAO {
         return products;
     }
 
+    public ArrayList<ProductModel> getProductsByCategory(String category) throws Exception {
+
+        ArrayList<ProductModel> products = new ArrayList<>();
+
+        Connection con = DBconfig.getConnection();
+
+        String sql = "SELECT product_id, jersey_name, team_name, size, season, price, stock_quantity, category, description, product_image "
+                   + "FROM products "
+                   + "WHERE category = ? "
+                   + "ORDER BY product_id DESC";
+
+        PreparedStatement pst = con.prepareStatement(sql);
+
+        pst.setString(1, category);
+
+        ResultSet rs = pst.executeQuery();
+
+        while (rs.next()) {
+            ProductModel product = new ProductModel();
+
+            product.setProductId(rs.getInt("product_id"));
+            product.setJerseyName(rs.getString("jersey_name"));
+            product.setTeamName(rs.getString("team_name"));
+            product.setSize(rs.getString("size"));
+            product.setSeason(rs.getString("season"));
+            product.setPrice(rs.getDouble("price"));
+            product.setStockQuantity(rs.getInt("stock_quantity"));
+            product.setCategory(rs.getString("category"));
+            product.setDescription(rs.getString("description"));
+            product.setProductImage(rs.getString("product_image"));
+
+            products.add(product);
+        }
+
+        rs.close();
+        pst.close();
+        con.close();
+
+        return products;
+    }
+
     public ProductModel getProductById(int productId) throws Exception {
 
         ProductModel product = null;

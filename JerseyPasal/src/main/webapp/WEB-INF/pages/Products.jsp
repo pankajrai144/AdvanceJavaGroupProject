@@ -42,21 +42,30 @@
                         </div>
 
                         <div class="pd5">
-                            <img src="${pageContext.request.contextPath}/images/portugal2.jpg" 
-                                 alt="View 1" 
-                                 class="pd6" />
+                            <c:choose>
+                                <c:when test="${not empty product.productImage}">
+                                    <img src="${pageContext.request.contextPath}/getimage?productImage=${product.productImage}" 
+                                         alt="${product.jerseyName}" 
+                                         class="pd6" />
 
-                            <img src="${pageContext.request.contextPath}/images/ronaldo3.jpg" 
-                                 alt="View 2" 
-                                 class="pd6" />
+                                    <img src="${pageContext.request.contextPath}/getimage?productImage=${product.productImage}" 
+                                         alt="${product.jerseyName}" 
+                                         class="pd6" />
 
-                            <img src="${pageContext.request.contextPath}/images/portugal4.jpg" 
-                                 alt="View 3" 
-                                 class="pd6" />
+                                    <img src="${pageContext.request.contextPath}/getimage?productImage=${product.productImage}" 
+                                         alt="${product.jerseyName}" 
+                                         class="pd6" />
 
-                            <img src="${pageContext.request.contextPath}/images/portugal3.jpg" 
-                                 alt="View 4" 
-                                 class="pd6" />
+                                    <img src="${pageContext.request.contextPath}/getimage?productImage=${product.productImage}" 
+                                         alt="${product.jerseyName}" 
+                                         class="pd6" />
+                                </c:when>
+                                <c:otherwise>
+                                    <div class="pd-no-image">
+                                        <i class="fa-solid fa-image"></i>
+                                    </div>
+                                </c:otherwise>
+                            </c:choose>
                         </div>
                     </div>
 

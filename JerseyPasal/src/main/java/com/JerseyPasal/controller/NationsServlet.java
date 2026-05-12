@@ -1,11 +1,16 @@
 package com.JerseyPasal.controller;
 
+import com.JerseyPasal.controller.dao.ProductDAO;
+import com.JerseyPasal.controller.model.ProductModel;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Servlet implementation class NationsServlet
@@ -27,6 +32,18 @@ public class NationsServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+
+        try {
+            ProductDAO dao = new ProductDAO();
+            ArrayList<ProductModel> nationProducts = dao.getProductsByCategory("Nation");
+
+            request.setAttribute("nationProducts", nationProducts);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            request.setAttribute("error", "Unable to load nation products.");
+        }
+
         request.getRequestDispatcher("/WEB-INF/pages/Nations.jsp").forward(request, response);
 
 	}

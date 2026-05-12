@@ -35,9 +35,26 @@ public class ProductsServlet extends HttpServlet {
 		
 		try {
 			ProductDAO dao = new ProductDAO();
-			ArrayList<ProductModel> products = dao.getAllProducts();
+			String productIdValue = request.getParameter("productId");
 			
-			request.setAttribute("products", products);
+			if (productIdValue != null && !productIdValue.trim().isEmpty()) {
+				int productId = Integer.parseInt(productIdValue);
+				ProductModel selectedProduct = dao.getProductById(productId);
+				
+				ArrayList<ProductModel> products = new ArrayList<>();
+				
+				if (selectedProduct != null) {
+					products.add(selectedProduct);
+				}
+				
+				request.setAttribute("products", products);
+				request.setAttribute("selectedProduct", selectedProduct);
+				
+			} else {
+				ArrayList<ProductModel> products = dao.getAllProducts();
+				request.setAttribute("products", products);
+			}
+			
 			request.getRequestDispatcher("/WEB-INF/pages/Products.jsp").forward(request, response);
 			
 		} catch (Exception e) {

@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" isELIgnored="false"%>
+
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,159 +31,67 @@
     <p>Every strip is crafted to the official match specification — the same breathable, performance-grade fabric worn on the pitch by the world's best. Every shirt ships with the official FIFA World Cup tournament badge.</p>
 </section>
 
-<section class="ns4" id="portugal">
+<section class="ns4">
     <div class="nw2">
-        <p class="nt3"></p>
+        <p class="nt3">Nation Jerseys</p>
+
+        <c:if test="${not empty error}">
+            <p class="nt6">${error}</p>
+        </c:if>
+
         <div class="ng1">
 
-            <div class="nc1">
-                <div class="ni2">
-                    <img src="${pageContext.request.contextPath}/images/ronaldo2.jpg" alt="Portugal Home 2026" />
-                </div>
-                <div class="ni3">
-                    <p class="nt4">Portugal</p>
-                    <p class="nt5">Home Kit 2026</p>
-                    <p class="nt6">Classic deep red with clima-dry weave, mesh panels, and a tailored fit built for match intensity.</p>
-                    <p class="nt7">£74.99</p>
-                    <a href="${pageContext.request.contextPath}/product" class="nb2">Add to Bag</a>
-                </div>
-            </div>
+            <c:choose>
+                <c:when test="${not empty nationProducts}">
 
-            <div class="nc1">
-                <div class="ni2">
-                    <img src="${pageContext.request.contextPath}/images/bruno.jpg" alt="Portugal Away 2026" />
-                </div>
-                <div class="ni3">
-                    <p class="nt4">Portugal</p>
-                    <p class="nt5">Away Kit 2026</p>
-                    <p class="nt6">Clean white with green trim. Lightweight recycled yarn with moisture-wicking for hot-weather fixtures.</p>
-                    <p class="nt7">£74.99</p>
-                    <a href="#" class="nb2">Add to Bag</a>
-                </div>
-            </div>
+                    <c:forEach var="product" items="${nationProducts}">
 
-            <div class="nc1">
-                <div class="ni2">
-                    <img src="${pageContext.request.contextPath}/images/bruno1.jpg" alt="Portugal Third 2026" />
-                </div>
-                <div class="ni3">
-                    <p class="nt4">Portugal</p>
-                    <p class="nt5">Third Kit 2026</p>
-                    <p class="nt6">Limited black with gold accents inspired by Portugal's Age of Discovery. Collector's grade, limited stock.</p>
-                    <p class="nt7">£74.99</p>
-                    <a href="#" class="nb2">Add to Bag</a>
-                </div>
-            </div>
+                        <div class="nc1">
+                            <div class="ni2">
+                                <c:choose>
+                                    <c:when test="${not empty product.productImage}">
+                                        <img src="${pageContext.request.contextPath}/getimage?productImage=${product.productImage}" alt="${product.jerseyName}" />
+                                    </c:when>
+                                    <c:otherwise>
+                                        <div class="pd-no-image">
+                                            <i class="fa-solid fa-image"></i>
+                                        </div>
+                                    </c:otherwise>
+                                </c:choose>
+                            </div>
 
-        </div>
-    </div>
-</section>
+                            <div class="ni3">
+                                <p class="nt4">${product.teamName}</p>
+                                <p class="nt5">${product.jerseyName}</p>
+                                <p class="nt6">${product.description}</p>
+                                <p class="nt7">£${product.price}</p>
 
-<section class="ns4 na1" id="argentina">
-    <div class="nw2">
-        <p class="nt3"></p>
-        <div class="ng1">
+                                <c:choose>
+                                    <c:when test="${product.stockQuantity > 0}">
+                                        <a href="${pageContext.request.contextPath}/product?productId=${product.productId}" class="nb2">Add to Bag</a>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <span class="nb2">Out of Stock</span>
+                                    </c:otherwise>
+                                </c:choose>
+                            </div>
+                        </div>
 
-            <div class="nc1">
-                <div class="ni2">
-                    <img src="${pageContext.request.contextPath}/images/messi2.jpg" alt="Argentina Home 2026" />
-                </div>
-                <div class="ni3">
-                    <p class="nt4">Argentina</p>
-                    <p class="nt5">Home Kit 2026</p>
-                    <p class="nt6">The iconic sky-blue and white stripes. AeroReady fabric with a relaxed game fit and embroidered AFA badge.</p>
-                    <p class="nt7">£79.99</p>
-                    <a href="#" class="nb2">Add to Bag</a>
-                </div>
-            </div>
+                    </c:forEach>
 
-            <div class="nc1">
-                <div class="ni2">
-                    <img src="${pageContext.request.contextPath}/images/nico-paz.jpg" alt="Argentina Away 2026" />
-                </div>
-                <div class="ni3">
-                    <p class="nt4">Argentina</p>
-                    <p class="nt5">Away Kit 2026</p>
-                    <p class="nt6">Deep navy with tonal chest pattern. Quick-dry mesh lining and a slim-fit silhouette for a clean look.</p>
-                    <p class="nt7">£79.99</p>
-                    <a href="#" class="nb2">Add to Bag</a>
-                </div>
-            </div>
+                </c:when>
 
-            <div class="nc1">
-                <div class="ni2">
-                    <img src="${pageContext.request.contextPath}/images/dybala.jpg" alt="Argentina Third 2026" />
-                </div>
-                <div class="ni3">
-                    <p class="nt4">Argentina</p>
-                    <p class="nt5">Third Kit 2026</p>
-                    <p class="nt6">Bold purple with an Aztec-inspired print honouring the host nations. Woven collar tape and recycled construction.</p>
-                    <p class="nt7">£79.99</p>
-                    <a href="#" class="nb2">Add to Bag</a>
-                </div>
-            </div>
+                <c:otherwise>
+                    <div class="nc1">
+                        <div class="ni3">
+                            <p class="nt4">No Nation Jerseys Available</p>
+                            <p class="nt6">Nation products added by admin will appear here.</p>
+                        </div>
+                    </div>
+                </c:otherwise>
+            </c:choose>
 
         </div>
-    </div>
-</section>
-
-<section class="ns4" id="brazil">
-    <div class="nw2">
-        <p class="nt3"></p>
-        <div class="ng1">
-
-            <div class="nc1">
-                <div class="ni2">
-                    <img src="${pageContext.request.contextPath}/images/neymar.jpg" alt="Brazil Home 2026" />
-                </div>
-                <div class="ni3">
-                    <p class="nt4">Brazil</p>
-                    <p class="nt5">Home Kit 2026</p>
-                    <p class="nt6">The legendary canary yellow. Dri-Fit ADV tech, Brasil chest graphic, and breathable side panels for tropical conditions.</p>
-                    <p class="nt7">£69.99</p>
-                    <a href="#" class="nb2">Add to Bag</a>
-                </div>
-            </div>
-
-            <div class="nc1">
-                <div class="ni2">
-                    <img src="${pageContext.request.contextPath}/images/cunha.jpg" alt="Brazil Away 2026" />
-                </div>
-                <div class="ni3">
-                    <p class="nt4">Brazil</p>
-                    <p class="nt5">Away Kit 2026</p>
-                    <p class="nt6">Cobalt blue with the full-colour CBF crest. Inspired by Brazil's 1970s away strips with a modern tapered fit.</p>
-                    <p class="nt7">£69.99</p>
-                    <a href="#" class="nb2">Add to Bag</a>
-                </div>
-            </div>
-
-            <div class="nc1">
-                <div class="ni2">
-                    <img src="${pageContext.request.contextPath}/images/rodrygo.jpg" alt="Brazil Third 2026" />
-                </div>
-                <div class="ni3">
-                    <p class="nt4">Brazil</p>
-                    <p class="nt5">Third Kit 2026</p>
-                    <p class="nt6">All-green with an Amazon rainforest graphic woven into the fabric. Made from 100% recycled polyester throughout.</p>
-                    <p class="nt7">£69.99</p>
-                    <a href="#" class="nb2">Add to Bag</a>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</section>
-
-<section class="ns6">
-    <div class="nw4">
-        <a href="#portugal" class="np1 na2">&#8592; Prev</a>
-        <div class="npg1">
-            <a href="#portugal" class="np2 na3">1</a>
-            <a href="#argentina" class="np2">2</a>
-            <a href="#brazil" class="np2">3</a>
-        </div>
-        <a href="#argentina" class="np1">Next &#8594;</a>
     </div>
 </section>
 
@@ -199,7 +110,7 @@
                     <li><i class="fa-solid fa-circle-check"></i> Tournament badge embroidered on chest</li>
                     <li><i class="fa-solid fa-circle-check"></i> Sourced direct from manufacturer</li>
                 </ul>
-                <a href="#" class="nb5">Shop All World Cup Kits</a>
+                <a href="${pageContext.request.contextPath}/product" class="nb5">Shop All World Cup Kits</a>
             </div>
         </div>
 
