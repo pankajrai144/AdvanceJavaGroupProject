@@ -280,8 +280,8 @@ body {
     </div>
 
     <div class="input-group">
-      <label>Date of Birth</label>
-      <input type="date" name="dob" value="${sessionScope.loggedInUser.dob}">
+      <label>Registration Date</label>
+      <input type="date" name="registrationDate" value="${sessionScope.loggedInUser.registrationDate}" readonly>
     </div>
 
     <div class="input-group">

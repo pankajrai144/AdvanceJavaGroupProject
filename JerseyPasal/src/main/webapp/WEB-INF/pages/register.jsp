@@ -45,7 +45,8 @@
 
       <input type="text" name="phone" placeholder="Phone Number" value="${phone}">
 
-      <input type="date" name="dob" id="dob" class="date-input" value="${dob}">
+      <label class="date-label">Registration Date</label>
+      <input type="date" name="registrationDate" id="registrationDate" class="date-input" value="${registrationDate}">
 
       <input type="password" name="password" placeholder="Password">
 

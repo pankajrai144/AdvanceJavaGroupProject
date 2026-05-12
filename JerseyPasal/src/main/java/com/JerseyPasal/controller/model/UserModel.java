@@ -6,7 +6,7 @@ public class UserModel {
     private String fullname;
     private String email;
     private String phone;
-    private String dob;
+    private String registrationDate;
     private String address;
     private String gender;
     private String profileImage;
@@ -48,12 +48,12 @@ public class UserModel {
         this.phone = phone;
     }
 
-    public String getDob() {
-        return dob;
+    public String getRegistrationDate() {
+        return registrationDate;
     }
 
-    public void setDob(String dob) {
-        this.dob = dob;
+    public void setRegistrationDate(String registrationDate) {
+        this.registrationDate = registrationDate;
     }
 
     public String getAddress() {

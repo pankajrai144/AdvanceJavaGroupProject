@@ -13,17 +13,17 @@ import com.JerseyPasal.controller.utils.DBconfig;
 
 public class UserDAO {
 
-    public void insertUser(String fullname, String email, String phone, String dob,
+    public void insertUser(String fullname, String email, String phone, String registrationDate,
                            String password, String address, String gender,
                            String profileImageName) throws Exception {
 
         Connection con = DBconfig.getConnection();
 
-        LocalDate localDate = LocalDate.parse(dob);
+        LocalDate localDate = LocalDate.parse(registrationDate);
         Date sqlDate = Date.valueOf(localDate);
 
         String sql = "INSERT INTO users "
-                   + "(fullname, email, phone, dob, password, address, gender, profile_image, role, approval_status) "
+                   + "(fullname, email, phone, registration_date, password, address, gender, profile_image, role, approval_status) "
                    + "VALUES (?,?,?,?,?,?,?,?,?,?)";
 
         PreparedStatement pst = con.prepareStatement(sql);
@@ -43,6 +43,27 @@ public class UserDAO {
 
         pst.close();
         con.close();
+    }
+
+    public boolean emailExists(String email) throws Exception {
+
+        Connection con = DBconfig.getConnection();
+
+        String sql = "SELECT email FROM users WHERE email = ?";
+
+        PreparedStatement pst = con.prepareStatement(sql);
+
+        pst.setString(1, email);
+
+        ResultSet rs = pst.executeQuery();
+
+        boolean exists = rs.next();
+
+        rs.close();
+        pst.close();
+        con.close();
+
+        return exists;
     }
 
     public boolean checkLogin(String email, String password) throws Exception {
@@ -111,7 +132,7 @@ public class UserDAO {
 
         Connection con = DBconfig.getConnection();
 
-        String sql = "SELECT user_id, fullname, email, phone, dob, address, gender, profile_image, role, approval_status "
+        String sql = "SELECT user_id, fullname, email, phone, registration_date, address, gender, profile_image, role, approval_status "
                    + "FROM users "
                    + "WHERE email = ? AND password = ? "
                    + "AND approval_status = 'approved'";
@@ -133,8 +154,8 @@ public class UserDAO {
             user.setEmail(rs.getString("email"));
             user.setPhone(rs.getString("phone"));
 
-            if (rs.getDate("dob") != null) {
-                user.setDob(rs.getDate("dob").toString());
+            if (rs.getDate("registration_date") != null) {
+                user.setRegistrationDate(rs.getDate("registration_date").toString());
             }
 
             user.setAddress(rs.getString("address"));
@@ -332,17 +353,17 @@ public class UserDAO {
         return rows > 0;
     }
 
-    public boolean updateUserProfile(int userId, String fullname, String dob, String email,
+    public boolean updateUserProfile(int userId, String fullname, String registrationDate, String email,
                                      String phone, String address, String gender,
                                      String profileImageName) throws Exception {
 
         Connection con = DBconfig.getConnection();
 
-        LocalDate localDate = LocalDate.parse(dob);
+        LocalDate localDate = LocalDate.parse(registrationDate);
         Date sqlDate = Date.valueOf(localDate);
 
         String sql = "UPDATE users "
-                   + "SET fullname = ?, dob = ?, email = ?, phone = ?, address = ?, gender = ?, profile_image = ? "
+                   + "SET fullname = ?, registration_date = ?, email = ?, phone = ?, address = ?, gender = ?, profile_image = ? "
                    + "WHERE user_id = ?";
 
         PreparedStatement pst = con.prepareStatement(sql);

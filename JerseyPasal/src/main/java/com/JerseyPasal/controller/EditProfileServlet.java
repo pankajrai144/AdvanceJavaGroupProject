@@ -15,7 +15,6 @@ import jakarta.servlet.http.Part;
 
 import java.io.File;
 import java.io.IOException;
-import java.time.LocalDate;
 
 /**
  * Servlet implementation class EditProfileServlet
@@ -70,20 +69,20 @@ public class EditProfileServlet extends HttpServlet {
 		UserModel loggedInUser = (UserModel) session.getAttribute("loggedInUser");
 
 		String fullname = request.getParameter("fullname");
-		String dob = request.getParameter("dob");
 		String email = request.getParameter("email");
 		String phone = request.getParameter("phone");
 		String address = request.getParameter("address");
 		String gender = request.getParameter("gender");
 
 		fullname = fullname == null ? "" : fullname.trim();
-		dob = dob == null ? "" : dob.trim();
 		email = email == null ? "" : email.trim().toLowerCase();
 		phone = phone == null ? "" : phone.trim();
 		address = address == null ? "" : address.trim();
 		gender = gender == null ? "" : gender.trim();
 
-		if (fullname.isEmpty() || dob.isEmpty() || email.isEmpty() || phone.isEmpty() || address.isEmpty() || gender.isEmpty()) {
+		String registrationDate = loggedInUser.getRegistrationDate();
+
+		if (fullname.isEmpty() || registrationDate == null || registrationDate.trim().isEmpty() || email.isEmpty() || phone.isEmpty() || address.isEmpty() || gender.isEmpty()) {
 			session.setAttribute("error", "All fields are required.");
 			response.sendRedirect(request.getContextPath() + "/editprofile");
 			return;
@@ -103,24 +102,6 @@ public class EditProfileServlet extends HttpServlet {
 
 		if (!phone.matches("^[0-9]{10}$")) {
 			session.setAttribute("error", "Phone number must be 10 digits.");
-			response.sendRedirect(request.getContextPath() + "/editprofile");
-			return;
-		}
-
-		LocalDate dobDate;
-
-		try {
-			dobDate = LocalDate.parse(dob);
-		} catch (Exception e) {
-			session.setAttribute("error", "Please enter a valid date of birth.");
-			response.sendRedirect(request.getContextPath() + "/editprofile");
-			return;
-		}
-
-		LocalDate today = LocalDate.now();
-
-		if (dobDate.isEqual(today) || dobDate.isAfter(today)) {
-			session.setAttribute("error", "Date of birth cannot be today or in the future.");
 			response.sendRedirect(request.getContextPath() + "/editprofile");
 			return;
 		}
@@ -160,7 +141,7 @@ public class EditProfileServlet extends HttpServlet {
 			boolean updated = userDAO.updateUserProfile(
 					loggedInUser.getUserid(),
 					fullname,
-					dob,
+					registrationDate,
 					email,
 					phone,
 					address,
@@ -170,7 +151,7 @@ public class EditProfileServlet extends HttpServlet {
 
 			if (updated) {
 				loggedInUser.setFullname(fullname);
-				loggedInUser.setDob(dob);
+				loggedInUser.setRegistrationDate(registrationDate);
 				loggedInUser.setEmail(email);
 				loggedInUser.setPhone(phone);
 				loggedInUser.setAddress(address);

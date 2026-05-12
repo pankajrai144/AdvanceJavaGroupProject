@@ -5,7 +5,7 @@ import com.JerseyPasal.controller.utils.PasswordUtil;
 
 public class RegisterService {
 
-    public void registerUser(String fullname, String email, String phone, String dob,
+    public void registerUser(String fullname, String email, String phone, String registrationDate,
                              String password, String address, String gender,
                              String profileImageName) throws Exception {
 
@@ -16,7 +16,7 @@ public class RegisterService {
                 fullname.trim(),
                 email.trim().toLowerCase(),
                 phone.trim(),
-                dob.trim(),
+                registrationDate.trim(),
                 hashedPassword,
                 address.trim(),
                 gender.trim(),
