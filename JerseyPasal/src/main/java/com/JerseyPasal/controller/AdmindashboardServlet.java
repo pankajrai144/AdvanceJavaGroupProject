@@ -82,7 +82,7 @@ public class AdmindashboardServlet extends HttpServlet {
             } else if ("teamNameFormat".equals(request.getParameter("productError"))) {
                 adminMessage = "<p class='error-message'>Team name can only contain letters, numbers, spaces, hyphen and full stop.</p>";
             } else if ("size".equals(request.getParameter("productError"))) {
-                adminMessage = "<p class='error-message'>Size must be S, M, L, XL, or XXL.</p>";
+                adminMessage = "<p class='error-message'>Please select at least one valid size: XS, S, M, L, XL, or XXL.</p>";
             } else if ("season".equals(request.getParameter("productError"))) {
                 adminMessage = "<p class='error-message'>Season format must be like 2025/26.</p>";
             } else if ("category".equals(request.getParameter("productError"))) {

@@ -70,7 +70,7 @@ public class AdminProductServlet extends HttpServlet {
 		try {
 			String jerseyName = request.getParameter("jerseyName");
 			String teamName = request.getParameter("teamName");
-			String size = request.getParameter("size");
+			String[] selectedSizes = request.getParameterValues("size");
 			String season = request.getParameter("season");
 			String priceValue = request.getParameter("price");
 			String stockValue = request.getParameter("stockQuantity");
@@ -88,7 +88,8 @@ public class AdminProductServlet extends HttpServlet {
 			// BACKEND EMPTY VALIDATION
 			if (isEmpty(jerseyName) ||
 				isEmpty(teamName) ||
-				isEmpty(size) ||
+				selectedSizes == null ||
+				selectedSizes.length == 0 ||
 				isEmpty(season) ||
 				isEmpty(priceValue) ||
 				isEmpty(stockValue) ||
@@ -100,7 +101,6 @@ public class AdminProductServlet extends HttpServlet {
 			
 			jerseyName = jerseyName.trim();
 			teamName = teamName.trim();
-			size = size.trim();
 			season = season.trim();
 			priceValue = priceValue.trim();
 			stockValue = stockValue.trim();
@@ -135,17 +135,35 @@ public class AdminProductServlet extends HttpServlet {
 			}
 			
 			// BACKEND SIZE VALIDATION
-			if (!size.equalsIgnoreCase("S") &&
-				!size.equalsIgnoreCase("M") &&
-				!size.equalsIgnoreCase("L") &&
-				!size.equalsIgnoreCase("XL") &&
-				!size.equalsIgnoreCase("XXL")) {
+			StringBuilder sizeBuilder = new StringBuilder();
+			
+			for (String selectedSize : selectedSizes) {
+				if (selectedSize == null) {
+					response.sendRedirect(request.getContextPath() + "/admindashboard?productError=size");
+					return;
+				}
 				
-				response.sendRedirect(request.getContextPath() + "/admindashboard?productError=size");
-				return;
+				selectedSize = selectedSize.trim().toUpperCase();
+				
+				if (!selectedSize.equals("XS") &&
+					!selectedSize.equals("S") &&
+					!selectedSize.equals("M") &&
+					!selectedSize.equals("L") &&
+					!selectedSize.equals("XL") &&
+					!selectedSize.equals("XXL")) {
+					
+					response.sendRedirect(request.getContextPath() + "/admindashboard?productError=size");
+					return;
+				}
+				
+				if (sizeBuilder.length() > 0) {
+					sizeBuilder.append(",");
+				}
+				
+				sizeBuilder.append(selectedSize);
 			}
 			
-			size = size.toUpperCase();
+			String size = sizeBuilder.toString();
 			
 			// BACKEND SEASON VALIDATION
 			if (!season.matches("^[0-9]{4}/[0-9]{2}$")) {

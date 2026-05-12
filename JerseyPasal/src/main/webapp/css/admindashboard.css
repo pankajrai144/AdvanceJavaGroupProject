@@ -472,6 +472,55 @@ button:hover {
   background: #6a0917;
 }
 
+.product-size-group {
+  grid-column: 1 / -1;
+  background: #222222;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 6px;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.product-size-title {
+  width: 100%;
+  font-size: 12px;
+  font-weight: 800;
+  color: rgba(255, 255, 255, 0.45);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 4px;
+}
+
+.product-size-group label {
+  cursor: pointer;
+}
+
+.product-size-group input {
+  display: none;
+}
+
+.product-size-group span {
+  display: inline-block;
+  min-width: 46px;
+  text-align: center;
+  padding: 9px 12px;
+  border-radius: 6px;
+  background: #1a1a1a;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.product-size-group input:checked + span {
+  background: #8b0d1f;
+  border-color: #8b0d1f;
+  color: #ffffff;
+}
+
 .product-image-upload {
   width: 100%;
   grid-column: 1 / -1;

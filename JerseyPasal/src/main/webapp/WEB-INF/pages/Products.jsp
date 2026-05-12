@@ -44,31 +44,35 @@
 
                         <div class="pd5">
                             <c:if test="${not empty product.productImage}">
-                                <img src="${pageContext.request.contextPath}/getimage?productImage=${product.productImage}" 
-                                     alt="${product.jerseyName}" 
-                                     class="pd6"
-                                     onclick="document.getElementById('mainProductImage${status.index}').src=this.src" />
+                                <a href="${pageContext.request.contextPath}/product?productId=${product.productId}&selectedImage=${product.productImage}">
+                                    <img src="${pageContext.request.contextPath}/getimage?productImage=${product.productImage}" 
+                                         alt="${product.jerseyName}" 
+                                         class="pd6" />
+                                </a>
                             </c:if>
 
                             <c:if test="${not empty product.productImage2}">
-                                <img src="${pageContext.request.contextPath}/getimage?productImage=${product.productImage2}" 
-                                     alt="${product.jerseyName}" 
-                                     class="pd6"
-                                     onclick="document.getElementById('mainProductImage${status.index}').src=this.src" />
+                                <a href="${pageContext.request.contextPath}/product?productId=${product.productId}&selectedImage=${product.productImage2}">
+                                    <img src="${pageContext.request.contextPath}/getimage?productImage=${product.productImage2}" 
+                                         alt="${product.jerseyName}" 
+                                         class="pd6" />
+                                </a>
                             </c:if>
 
                             <c:if test="${not empty product.productImage3}">
-                                <img src="${pageContext.request.contextPath}/getimage?productImage=${product.productImage3}" 
-                                     alt="${product.jerseyName}" 
-                                     class="pd6"
-                                     onclick="document.getElementById('mainProductImage${status.index}').src=this.src" />
+                                <a href="${pageContext.request.contextPath}/product?productId=${product.productId}&selectedImage=${product.productImage3}">
+                                    <img src="${pageContext.request.contextPath}/getimage?productImage=${product.productImage3}" 
+                                         alt="${product.jerseyName}" 
+                                         class="pd6" />
+                                </a>
                             </c:if>
 
                             <c:if test="${not empty product.productImage4}">
-                                <img src="${pageContext.request.contextPath}/getimage?productImage=${product.productImage4}" 
-                                     alt="${product.jerseyName}" 
-                                     class="pd6"
-                                     onclick="document.getElementById('mainProductImage${status.index}').src=this.src" />
+                                <a href="${pageContext.request.contextPath}/product?productId=${product.productId}&selectedImage=${product.productImage4}">
+                                    <img src="${pageContext.request.contextPath}/getimage?productImage=${product.productImage4}" 
+                                         alt="${product.jerseyName}" 
+                                         class="pd6" />
+                                </a>
                             </c:if>
                         </div>
                     </div>
@@ -86,30 +90,19 @@
 
                         <div class="pd13">
                             <p class="pd14">Select Size</p>
+
                             <div class="pd15">
-                                <input type="radio" name="size${status.index}" id="xs${status.index}" />
-                                <label for="xs${status.index}" class="pd16">XS</label>
-
-                                <input type="radio" name="size${status.index}" id="s${status.index}" 
-                                    <c:if test="${product.size == 'S'}">checked</c:if> />
-                                <label for="s${status.index}" class="pd16">S</label>
-
-                                <input type="radio" name="size${status.index}" id="m${status.index}" 
-                                    <c:if test="${product.size == 'M'}">checked</c:if> />
-                                <label for="m${status.index}" class="pd16">M</label>
-
-                                <input type="radio" name="size${status.index}" id="l${status.index}" 
-                                    <c:if test="${product.size == 'L'}">checked</c:if> />
-                                <label for="l${status.index}" class="pd16">L</label>
-
-                                <input type="radio" name="size${status.index}" id="xl${status.index}" 
-                                    <c:if test="${product.size == 'XL'}">checked</c:if> />
-                                <label for="xl${status.index}" class="pd16">XL</label>
-
-                                <input type="radio" name="size${status.index}" id="xxl${status.index}" 
-                                    <c:if test="${product.size == 'XXL'}">checked</c:if> />
-                                <label for="xxl${status.index}" class="pd16">XXL</label>
+                                <a href="${pageContext.request.contextPath}/product?productId=${product.productId}&selectedSize=XS" class="pd16">XS</a>
+                                <a href="${pageContext.request.contextPath}/product?productId=${product.productId}&selectedSize=S" class="pd16">S</a>
+                                <a href="${pageContext.request.contextPath}/product?productId=${product.productId}&selectedSize=M" class="pd16">M</a>
+                                <a href="${pageContext.request.contextPath}/product?productId=${product.productId}&selectedSize=L" class="pd16">L</a>
+                                <a href="${pageContext.request.contextPath}/product?productId=${product.productId}&selectedSize=XL" class="pd16">XL</a>
+                                <a href="${pageContext.request.contextPath}/product?productId=${product.productId}&selectedSize=XXL" class="pd16">XXL</a>
                             </div>
+
+                            <c:if test="${not empty sizeMessage}">
+                                <p class="size-message ${sizeMessageType}">${sizeMessage}</p>
+                            </c:if>
                         </div>
 
                         <p class="pd-stock">Stock Available: ${product.stockQuantity}</p>
@@ -228,7 +221,7 @@
                                     <td class="pd39">${product.category}</td>
                                 </tr>
                                 <tr>
-                                    <td class="pd38">Size</td>
+                                    <td class="pd38">Available Sizes</td>
                                     <td class="pd39">${product.size}</td>
                                 </tr>
                                 <tr>

@@ -103,7 +103,41 @@
       <form class="form-grid" action="${pageContext.request.contextPath}/adminproduct" method="post" enctype="multipart/form-data">
         <input type="text" name="jerseyName" placeholder="Jersey Name">
         <input type="text" name="teamName" placeholder="Team Name">
-        <input type="text" name="size" placeholder="Size (S, M, L, XL)">
+
+        <div class="product-size-group">
+          <span class="product-size-title">Available Sizes</span>
+
+          <label>
+            <input type="checkbox" name="size" value="XS">
+            <span>XS</span>
+          </label>
+
+          <label>
+            <input type="checkbox" name="size" value="S">
+            <span>S</span>
+          </label>
+
+          <label>
+            <input type="checkbox" name="size" value="M">
+            <span>M</span>
+          </label>
+
+          <label>
+            <input type="checkbox" name="size" value="L">
+            <span>L</span>
+          </label>
+
+          <label>
+            <input type="checkbox" name="size" value="XL">
+            <span>XL</span>
+          </label>
+
+          <label>
+            <input type="checkbox" name="size" value="XXL">
+            <span>XXL</span>
+          </label>
+        </div>
+
         <input type="text" name="season" placeholder="Season (2025/26)">
         <input type="number" step="0.01" name="price" placeholder="Price">
         <input type="number" name="stockQuantity" placeholder="Stock Quantity">

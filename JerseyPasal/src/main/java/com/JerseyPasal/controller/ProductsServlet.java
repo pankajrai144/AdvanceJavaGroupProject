@@ -36,6 +36,8 @@ public class ProductsServlet extends HttpServlet {
 		try {
 			ProductDAO dao = new ProductDAO();
 			String productIdValue = request.getParameter("productId");
+			String selectedSize = request.getParameter("selectedSize");
+			String selectedImage = request.getParameter("selectedImage");
 			
 			if (productIdValue != null && !productIdValue.trim().isEmpty()) {
 				int productId = Integer.parseInt(productIdValue);
@@ -45,6 +47,27 @@ public class ProductsServlet extends HttpServlet {
 				
 				if (selectedProduct != null) {
 					products.add(selectedProduct);
+
+					if (selectedSize != null && !selectedSize.trim().isEmpty()) {
+						selectedSize = selectedSize.trim().toUpperCase();
+
+						if (isSizeAvailable(selectedProduct.getSize(), selectedSize)) {
+							request.setAttribute("sizeMessage", "Size " + selectedSize + " is available.");
+							request.setAttribute("sizeMessageType", "size-success");
+							request.setAttribute("selectedSize", selectedSize);
+						} else {
+							request.setAttribute("sizeMessage", "Stock not available for this size.");
+							request.setAttribute("sizeMessageType", "size-error");
+						}
+					}
+
+					if (selectedImage != null && !selectedImage.trim().isEmpty()) {
+						selectedImage = selectedImage.trim();
+
+						if (isProductImageAvailable(selectedProduct, selectedImage)) {
+							request.setAttribute("selectedImage", selectedImage);
+						}
+					}
 				}
 				
 				request.setAttribute("products", products);
@@ -70,6 +93,34 @@ public class ProductsServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
+	}
+
+	private boolean isSizeAvailable(String availableSizes, String selectedSize) {
+		if (availableSizes == null || availableSizes.trim().isEmpty() ||
+			selectedSize == null || selectedSize.trim().isEmpty()) {
+			return false;
+		}
+
+		String[] sizeList = availableSizes.split(",");
+
+		for (String size : sizeList) {
+			if (size.trim().equalsIgnoreCase(selectedSize.trim())) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	private boolean isProductImageAvailable(ProductModel product, String selectedImage) {
+		if (product == null || selectedImage == null || selectedImage.trim().isEmpty()) {
+			return false;
+		}
+
+		return selectedImage.equals(product.getProductImage()) ||
+			   selectedImage.equals(product.getProductImage2()) ||
+			   selectedImage.equals(product.getProductImage3()) ||
+			   selectedImage.equals(product.getProductImage4());
 	}
 
 }
