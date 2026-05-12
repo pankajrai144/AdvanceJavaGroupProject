@@ -472,6 +472,43 @@ button:hover {
   background: #6a0917;
 }
 
+.product-image-upload {
+  width: 100%;
+  grid-column: 1 / -1;
+}
+
+.product-image-upload input[type="file"] {
+  display: none;
+}
+
+.product-upload-label {
+  width: 100%;
+  min-height: 58px;
+  border: 2px dashed #8b0d1f;
+  border-radius: 14px;
+  background: #161616;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 600;
+  transition: 0.3s ease;
+}
+
+.product-upload-label i {
+  font-size: 22px;
+  color: #ff4d6d;
+}
+
+.product-upload-label:hover {
+  background: #241015;
+  border-color: #ff4d6d;
+  color: #ffccd5;
+}
+
 @media (max-width: 900px) {
   .stats {
     grid-template-columns: 1fr 1fr;

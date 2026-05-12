@@ -115,7 +115,15 @@
         </select>
 
         <input type="text" name="description" placeholder="Descriptions">
-        <input type="file" name="productImage">
+
+        <div class="product-image-upload">
+          <input type="file" id="productImages" name="productImages" accept="image/*" multiple>
+          <label for="productImages" class="product-upload-label">
+            <i class="fa-solid fa-cloud-arrow-up"></i>
+            <span>Choose 4 Product Images</span>
+          </label>
+        </div>
+
         <button type="submit">Add Product</button>
       </form>
 

@@ -101,6 +101,8 @@ public class AdmindashboardServlet extends HttpServlet {
                 adminMessage = "<p class='error-message'>Please enter valid numbers for price and stock.</p>";
             } else if ("noimage".equals(request.getParameter("productError"))) {
                 adminMessage = "<p class='error-message'>Please upload a product image.</p>";
+            } else if ("imagecount".equals(request.getParameter("productError"))) {
+                adminMessage = "<p class='error-message'>Please select exactly 4 product images.</p>";
             } else if ("image".equals(request.getParameter("productError"))) {
                 adminMessage = "<p class='error-message'>Please upload only JPG, JPEG, PNG or WEBP image files.</p>";
             } else if ("imagesize".equals(request.getParameter("productError"))) {

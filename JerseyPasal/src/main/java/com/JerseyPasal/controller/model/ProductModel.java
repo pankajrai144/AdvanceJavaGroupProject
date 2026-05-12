@@ -12,6 +12,9 @@ public class ProductModel {
     private String category;
     private String description;
     private String productImage;
+    private String productImage2;
+    private String productImage3;
+    private String productImage4;
 
     public ProductModel() {
     }
@@ -94,5 +97,29 @@ public class ProductModel {
 
     public void setProductImage(String productImage) {
         this.productImage = productImage;
+    }
+
+    public String getProductImage2() {
+        return productImage2;
+    }
+
+    public void setProductImage2(String productImage2) {
+        this.productImage2 = productImage2;
+    }
+
+    public String getProductImage3() {
+        return productImage3;
+    }
+
+    public void setProductImage3(String productImage3) {
+        this.productImage3 = productImage3;
+    }
+
+    public String getProductImage4() {
+        return productImage4;
+    }
+
+    public void setProductImage4(String productImage4) {
+        this.productImage4 = productImage4;
     }
 }

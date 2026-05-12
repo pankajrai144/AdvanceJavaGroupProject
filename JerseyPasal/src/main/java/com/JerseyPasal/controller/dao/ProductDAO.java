@@ -15,8 +15,8 @@ public class ProductDAO {
         Connection con = DBconfig.getConnection();
 
         String sql = "INSERT INTO products "
-                   + "(jersey_name, team_name, size, season, price, stock_quantity, category, description, product_image) "
-                   + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                   + "(jersey_name, team_name, size, season, price, stock_quantity, category, description, product_image, product_image_2, product_image_3, product_image_4) "
+                   + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         PreparedStatement pst = con.prepareStatement(sql);
 
@@ -29,6 +29,9 @@ public class ProductDAO {
         pst.setString(7, product.getCategory());
         pst.setString(8, product.getDescription());
         pst.setString(9, product.getProductImage());
+        pst.setString(10, product.getProductImage2());
+        pst.setString(11, product.getProductImage3());
+        pst.setString(12, product.getProductImage4());
 
         int rows = pst.executeUpdate();
 
@@ -44,7 +47,7 @@ public class ProductDAO {
 
         Connection con = DBconfig.getConnection();
 
-        String sql = "SELECT product_id, jersey_name, team_name, size, season, price, stock_quantity, category, description, product_image "
+        String sql = "SELECT product_id, jersey_name, team_name, size, season, price, stock_quantity, category, description, product_image, product_image_2, product_image_3, product_image_4 "
                    + "FROM products "
                    + "ORDER BY product_id DESC";
 
@@ -65,6 +68,9 @@ public class ProductDAO {
             product.setCategory(rs.getString("category"));
             product.setDescription(rs.getString("description"));
             product.setProductImage(rs.getString("product_image"));
+            product.setProductImage2(rs.getString("product_image_2"));
+            product.setProductImage3(rs.getString("product_image_3"));
+            product.setProductImage4(rs.getString("product_image_4"));
 
             products.add(product);
         }
@@ -82,7 +88,7 @@ public class ProductDAO {
 
         Connection con = DBconfig.getConnection();
 
-        String sql = "SELECT product_id, jersey_name, team_name, size, season, price, stock_quantity, category, description, product_image "
+        String sql = "SELECT product_id, jersey_name, team_name, size, season, price, stock_quantity, category, description, product_image, product_image_2, product_image_3, product_image_4 "
                    + "FROM products "
                    + "WHERE category = ? "
                    + "ORDER BY product_id DESC";
@@ -106,6 +112,9 @@ public class ProductDAO {
             product.setCategory(rs.getString("category"));
             product.setDescription(rs.getString("description"));
             product.setProductImage(rs.getString("product_image"));
+            product.setProductImage2(rs.getString("product_image_2"));
+            product.setProductImage3(rs.getString("product_image_3"));
+            product.setProductImage4(rs.getString("product_image_4"));
 
             products.add(product);
         }
@@ -123,7 +132,7 @@ public class ProductDAO {
 
         Connection con = DBconfig.getConnection();
 
-        String sql = "SELECT product_id, jersey_name, team_name, size, season, price, stock_quantity, category, description, product_image "
+        String sql = "SELECT product_id, jersey_name, team_name, size, season, price, stock_quantity, category, description, product_image, product_image_2, product_image_3, product_image_4 "
                    + "FROM products "
                    + "WHERE product_id = ?";
 
@@ -146,6 +155,9 @@ public class ProductDAO {
             product.setCategory(rs.getString("category"));
             product.setDescription(rs.getString("description"));
             product.setProductImage(rs.getString("product_image"));
+            product.setProductImage2(rs.getString("product_image_2"));
+            product.setProductImage3(rs.getString("product_image_3"));
+            product.setProductImage4(rs.getString("product_image_4"));
         }
 
         rs.close();
@@ -160,7 +172,7 @@ public class ProductDAO {
         Connection con = DBconfig.getConnection();
 
         String sql = "UPDATE products "
-                   + "SET jersey_name = ?, team_name = ?, size = ?, season = ?, price = ?, stock_quantity = ?, category = ?, description = ?, product_image = ? "
+                   + "SET jersey_name = ?, team_name = ?, size = ?, season = ?, price = ?, stock_quantity = ?, category = ?, description = ?, product_image = ?, product_image_2 = ?, product_image_3 = ?, product_image_4 = ? "
                    + "WHERE product_id = ?";
 
         PreparedStatement pst = con.prepareStatement(sql);
@@ -174,7 +186,10 @@ public class ProductDAO {
         pst.setString(7, product.getCategory());
         pst.setString(8, product.getDescription());
         pst.setString(9, product.getProductImage());
-        pst.setInt(10, product.getProductId());
+        pst.setString(10, product.getProductImage2());
+        pst.setString(11, product.getProductImage3());
+        pst.setString(12, product.getProductImage4());
+        pst.setInt(13, product.getProductId());
 
         int rows = pst.executeUpdate();
 

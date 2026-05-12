@@ -16,6 +16,7 @@ import jakarta.servlet.http.Part;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Servlet implementation class AdminProductServlet
@@ -76,7 +77,13 @@ public class AdminProductServlet extends HttpServlet {
 			String category = request.getParameter("category");
 			String description = request.getParameter("description");
 			
-			Part productImage = request.getPart("productImage");
+			ArrayList<Part> productImages = new ArrayList<>();
+			
+			for (Part part : request.getParts()) {
+				if ("productImages".equals(part.getName()) && part.getSize() > 0) {
+					productImages.add(part);
+				}
+			}
 			
 			// BACKEND EMPTY VALIDATION
 			if (isEmpty(jerseyName) ||
@@ -192,49 +199,52 @@ public class AdminProductServlet extends HttpServlet {
 			}
 			
 			// BACKEND IMAGE VALIDATION
-			if (productImage == null || productImage.getSize() <= 0) {
-				response.sendRedirect(request.getContextPath() + "/admindashboard?productError=noimage");
+			if (productImages.size() != 4) {
+				response.sendRedirect(request.getContextPath() + "/admindashboard?productError=imagecount");
 				return;
 			}
 			
-			if (productImage.getSize() > MAX_IMAGE_SIZE) {
-				response.sendRedirect(request.getContextPath() + "/admindashboard?productError=imagesize");
-				return;
-			}
+			Part productImage = productImages.get(0);
+			Part productImage2 = productImages.get(1);
+			Part productImage3 = productImages.get(2);
+			Part productImage4 = productImages.get(3);
 			
-			if (!FileUploadUtil.isImage(productImage)) {
-				response.sendRedirect(request.getContextPath() + "/admindashboard?productError=image");
-				return;
-			}
-			
-			String originalFileName = productImage.getSubmittedFileName();
-			
-			if (originalFileName == null || originalFileName.trim().isEmpty()) {
-				response.sendRedirect(request.getContextPath() + "/admindashboard?productError=noimage");
-				return;
-			}
-			
-			String extension = FileUploadUtil.getFileExtension(originalFileName);
-			
-			if (extension == null || extension.trim().isEmpty()) {
-				response.sendRedirect(request.getContextPath() + "/admindashboard?productError=image");
-				return;
-			}
-			
-			extension = extension.toLowerCase();
-			
-			if (!extension.equals(".jpg") &&
-				!extension.equals(".jpeg") &&
-				!extension.equals(".png") &&
-				!extension.equals(".webp")) {
+			if (!isValidImage(productImage) ||
+				!isValidImage(productImage2) ||
+				!isValidImage(productImage3) ||
+				!isValidImage(productImage4)) {
 				
 				response.sendRedirect(request.getContextPath() + "/admindashboard?productError=image");
 				return;
 			}
 			
-			String productImageName = "product_" + System.currentTimeMillis() + extension;
+			if (productImage.getSize() > MAX_IMAGE_SIZE ||
+				productImage2.getSize() > MAX_IMAGE_SIZE ||
+				productImage3.getSize() > MAX_IMAGE_SIZE ||
+				productImage4.getSize() > MAX_IMAGE_SIZE) {
+				
+				response.sendRedirect(request.getContextPath() + "/admindashboard?productError=imagesize");
+				return;
+			}
+			
+			String productImageName = createProductImageName(productImage, "main");
+			String productImageName2 = createProductImageName(productImage2, "second");
+			String productImageName3 = createProductImageName(productImage3, "third");
+			String productImageName4 = createProductImageName(productImage4, "fourth");
+			
+			if (productImageName == null ||
+				productImageName2 == null ||
+				productImageName3 == null ||
+				productImageName4 == null) {
+				
+				response.sendRedirect(request.getContextPath() + "/admindashboard?productError=image");
+				return;
+			}
 			
 			FileUploadUtil.saveFile(productImage, UPLOAD_DIR, productImageName);
+			FileUploadUtil.saveFile(productImage2, UPLOAD_DIR, productImageName2);
+			FileUploadUtil.saveFile(productImage3, UPLOAD_DIR, productImageName3);
+			FileUploadUtil.saveFile(productImage4, UPLOAD_DIR, productImageName4);
 			
 			ProductModel product = new ProductModel();
 			
@@ -247,6 +257,9 @@ public class AdminProductServlet extends HttpServlet {
 			product.setCategory(category);
 			product.setDescription(description);
 			product.setProductImage(productImageName);
+			product.setProductImage2(productImageName2);
+			product.setProductImage3(productImageName3);
+			product.setProductImage4(productImageName4);
 			
 			ProductDAO dao = new ProductDAO();
 			boolean added = dao.addProduct(product);
@@ -265,6 +278,48 @@ public class AdminProductServlet extends HttpServlet {
 	
 	private boolean isEmpty(String value) {
 		return value == null || value.trim().isEmpty();
+	}
+	
+	private boolean isValidImage(Part imagePart) {
+		if (imagePart == null || imagePart.getSize() <= 0) {
+			return false;
+		}
+		
+		if (!FileUploadUtil.isImage(imagePart)) {
+			return false;
+		}
+		
+		String originalFileName = imagePart.getSubmittedFileName();
+		
+		if (originalFileName == null || originalFileName.trim().isEmpty()) {
+			return false;
+		}
+		
+		String extension = FileUploadUtil.getFileExtension(originalFileName);
+		
+		if (extension == null || extension.trim().isEmpty()) {
+			return false;
+		}
+		
+		extension = extension.toLowerCase();
+		
+		return extension.equals(".jpg") ||
+			   extension.equals(".jpeg") ||
+			   extension.equals(".png") ||
+			   extension.equals(".webp");
+	}
+	
+	private String createProductImageName(Part imagePart, String imageType) {
+		String originalFileName = imagePart.getSubmittedFileName();
+		String extension = FileUploadUtil.getFileExtension(originalFileName);
+		
+		if (extension == null || extension.trim().isEmpty()) {
+			return null;
+		}
+		
+		extension = extension.toLowerCase();
+		
+		return "product_" + imageType + "_" + System.currentTimeMillis() + extension;
 	}
 
 }

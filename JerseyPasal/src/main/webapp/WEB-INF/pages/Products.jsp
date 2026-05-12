@@ -30,7 +30,8 @@
                         <div class="pd4">
                             <c:choose>
                                 <c:when test="${not empty product.productImage}">
-                                    <img src="${pageContext.request.contextPath}/getimage?productImage=${product.productImage}" 
+                                    <img id="mainProductImage${status.index}"
+                                         src="${pageContext.request.contextPath}/getimage?productImage=${product.productImage}" 
                                          alt="${product.jerseyName}" />
                                 </c:when>
                                 <c:otherwise>
@@ -42,30 +43,33 @@
                         </div>
 
                         <div class="pd5">
-                            <c:choose>
-                                <c:when test="${not empty product.productImage}">
-                                    <img src="${pageContext.request.contextPath}/getimage?productImage=${product.productImage}" 
-                                         alt="${product.jerseyName}" 
-                                         class="pd6" />
+                            <c:if test="${not empty product.productImage}">
+                                <img src="${pageContext.request.contextPath}/getimage?productImage=${product.productImage}" 
+                                     alt="${product.jerseyName}" 
+                                     class="pd6"
+                                     onclick="document.getElementById('mainProductImage${status.index}').src=this.src" />
+                            </c:if>
 
-                                    <img src="${pageContext.request.contextPath}/getimage?productImage=${product.productImage}" 
-                                         alt="${product.jerseyName}" 
-                                         class="pd6" />
+                            <c:if test="${not empty product.productImage2}">
+                                <img src="${pageContext.request.contextPath}/getimage?productImage=${product.productImage2}" 
+                                     alt="${product.jerseyName}" 
+                                     class="pd6"
+                                     onclick="document.getElementById('mainProductImage${status.index}').src=this.src" />
+                            </c:if>
 
-                                    <img src="${pageContext.request.contextPath}/getimage?productImage=${product.productImage}" 
-                                         alt="${product.jerseyName}" 
-                                         class="pd6" />
+                            <c:if test="${not empty product.productImage3}">
+                                <img src="${pageContext.request.contextPath}/getimage?productImage=${product.productImage3}" 
+                                     alt="${product.jerseyName}" 
+                                     class="pd6"
+                                     onclick="document.getElementById('mainProductImage${status.index}').src=this.src" />
+                            </c:if>
 
-                                    <img src="${pageContext.request.contextPath}/getimage?productImage=${product.productImage}" 
-                                         alt="${product.jerseyName}" 
-                                         class="pd6" />
-                                </c:when>
-                                <c:otherwise>
-                                    <div class="pd-no-image">
-                                        <i class="fa-solid fa-image"></i>
-                                    </div>
-                                </c:otherwise>
-                            </c:choose>
+                            <c:if test="${not empty product.productImage4}">
+                                <img src="${pageContext.request.contextPath}/getimage?productImage=${product.productImage4}" 
+                                     alt="${product.jerseyName}" 
+                                     class="pd6"
+                                     onclick="document.getElementById('mainProductImage${status.index}').src=this.src" />
+                            </c:if>
                         </div>
                     </div>
 
