@@ -14,43 +14,12 @@
 </head>
 <body>
 
-<%@ include file="/components/header.jsp" %>
+<jsp:include page="/components/header.jsp"/>
 
 <section class="ns1">
     <p class="nt1">2026 FIFA World Cup</p>
     <h1>Find Your <span>Nation</span></h1>
     <p class="nt2">Official jerseys from every competing nation. Pick your flag, own your kit.</p>
-</section>
-
-<section class="ns2">
-    <div class="nw1">
-
-        <a href="${pageContext.request.contextPath}/product" class="ni1">
-            <img src="${pageContext.request.contextPath}/images/portugal1.jpg" alt="Portugal" />
-            <span>Portugal</span>
-        </a>
-
-        <a href="#" class="ni1">
-            <img src="${pageContext.request.contextPath}/images/argentina2.jpg" alt="Argentina" />
-            <span>Argentina</span>
-        </a>
-
-        <a href="#" class="ni1">
-            <img src="${pageContext.request.contextPath}/images/brazil2.jpg" alt="Brazil" />
-            <span>Brazil</span>
-        </a>
-
-        <a href="#" class="ni1">
-            <img src="${pageContext.request.contextPath}/images/france1.png" alt="France" />
-            <span>France</span>
-        </a>
-
-        <a href="#" class="ni1">
-            <img src="${pageContext.request.contextPath}/images/england.jpg" alt="England" />
-            <span>England</span>
-        </a>
-
-    </div>
 </section>
 
 <section class="ns3">
@@ -59,7 +28,7 @@
     <p>Every strip is crafted to the official match specification — the same breathable, performance-grade fabric worn on the pitch by the world's best. Every shirt ships with the official FIFA World Cup tournament badge.</p>
 </section>
 
-<section class="ns4">
+<section class="ns4" id="portugal">
     <div class="nw2">
         <p class="nt3">Portugal</p>
         <div class="ng1">
@@ -110,7 +79,7 @@
     </div>
 </section>
 
-<section class="ns4 na1">
+<section class="ns4 na1" id="argentina">
     <div class="nw2">
         <p class="nt3">Argentina</p>
         <div class="ng1">
@@ -161,7 +130,7 @@
     </div>
 </section>
 
-<section class="ns4">
+<section class="ns4" id="brazil">
     <div class="nw2">
         <p class="nt3">Brazil</p>
         <div class="ng1">
@@ -209,6 +178,18 @@
             </div>
 
         </div>
+    </div>
+</section>
+
+<section class="ns6">
+    <div class="nw4">
+        <a href="#portugal" class="np1 na2">&#8592; Prev</a>
+        <div class="npg1">
+            <a href="#portugal" class="np2 na3">1</a>
+            <a href="#argentina" class="np2">2</a>
+            <a href="#brazil" class="np2">3</a>
+        </div>
+        <a href="#argentina" class="np1">Next &#8594;</a>
     </div>
 </section>
 
