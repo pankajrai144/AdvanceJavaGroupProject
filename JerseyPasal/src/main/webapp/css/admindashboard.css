@@ -558,6 +558,60 @@ button:hover {
   color: #ffccd5;
 }
 
+.product-action-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: nowrap;
+}
+
+.edit-product-btn,
+.delete-product-btn {
+  min-width: 72px;
+  height: 36px;
+  padding: 0 14px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.edit-product-btn {
+  background: rgba(30, 150, 70, 0.15);
+  color: #2ecc71;
+  border: 1px solid rgba(30, 150, 70, 0.3);
+}
+
+.edit-product-btn:hover {
+  background: rgba(30, 150, 70, 0.28);
+}
+
+.delete-product-btn {
+  background: rgba(231, 76, 60, 0.15);
+  color: #e74c3c;
+  border: 1px solid rgba(231, 76, 60, 0.3);
+}
+
+.delete-product-btn:hover {
+  background: rgba(231, 76, 60, 0.28);
+}
+
+.product-action-box form {
+  margin: 0;
+}
+
+.product-action-box button {
+  margin: 0;
+}
+
 @media (max-width: 900px) {
   .stats {
     grid-template-columns: 1fr 1fr;
@@ -573,5 +627,9 @@ button:hover {
 
   .form-grid button {
     grid-column: span 1;
+  }
+
+  .product-action-box {
+    justify-content: flex-start;
   }
 }
