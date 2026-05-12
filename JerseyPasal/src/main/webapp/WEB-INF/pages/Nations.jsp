@@ -89,6 +89,44 @@
             </c:choose>
 
         </div>
+
+        <c:if test="${totalPages > 1}">
+            <div class="np-section">
+
+                <c:choose>
+                    <c:when test="${currentPage > 1}">
+                        <a href="${pageContext.request.contextPath}/nation?page=${currentPage - 1}" class="np-link">Previous</a>
+                    </c:when>
+                    <c:otherwise>
+                        <span class="np-link np-disabled">Previous</span>
+                    </c:otherwise>
+                </c:choose>
+
+                <div class="np-number-box">
+                    <c:forEach begin="1" end="${totalPages}" var="pageNumber">
+                        <c:choose>
+                            <c:when test="${pageNumber == currentPage}">
+                                <span class="np-number np-active">${pageNumber}</span>
+                            </c:when>
+                            <c:otherwise>
+                                <a href="${pageContext.request.contextPath}/nation?page=${pageNumber}" class="np-number">${pageNumber}</a>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:forEach>
+                </div>
+
+                <c:choose>
+                    <c:when test="${currentPage < totalPages}">
+                        <a href="${pageContext.request.contextPath}/nation?page=${currentPage + 1}" class="np-link">Next</a>
+                    </c:when>
+                    <c:otherwise>
+                        <span class="np-link np-disabled">Next</span>
+                    </c:otherwise>
+                </c:choose>
+
+            </div>
+        </c:if>
+
     </div>
 </section>
 

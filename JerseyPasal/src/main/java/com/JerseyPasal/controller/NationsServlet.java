@@ -35,13 +35,55 @@ public class NationsServlet extends HttpServlet {
 
         try {
             ProductDAO dao = new ProductDAO();
-            ArrayList<ProductModel> nationProducts = dao.getProductsByCategory("Nation");
+            ArrayList<ProductModel> allNationProducts = dao.getProductsByCategory("Nation");
+
+            int productsPerPage = 9;
+            int currentPage = 1;
+
+            String pageValue = request.getParameter("page");
+
+            if (pageValue != null && !pageValue.trim().isEmpty()) {
+                try {
+                    currentPage = Integer.parseInt(pageValue);
+                } catch (NumberFormatException e) {
+                    currentPage = 1;
+                }
+            }
+
+            int totalProducts = allNationProducts.size();
+            int totalPages = (int) Math.ceil((double) totalProducts / productsPerPage);
+
+            if (totalPages == 0) {
+                totalPages = 1;
+            }
+
+            if (currentPage < 1) {
+                currentPage = 1;
+            }
+
+            if (currentPage > totalPages) {
+                currentPage = totalPages;
+            }
+
+            int startIndex = (currentPage - 1) * productsPerPage;
+            int endIndex = Math.min(startIndex + productsPerPage, totalProducts);
+
+            ArrayList<ProductModel> nationProducts = new ArrayList<>();
+
+            if (totalProducts > 0) {
+                nationProducts = new ArrayList<>(allNationProducts.subList(startIndex, endIndex));
+            }
 
             request.setAttribute("nationProducts", nationProducts);
+            request.setAttribute("currentPage", currentPage);
+            request.setAttribute("totalPages", totalPages);
 
         } catch (Exception e) {
             e.printStackTrace();
             request.setAttribute("error", "Unable to load nation products.");
+            request.setAttribute("nationProducts", new ArrayList<ProductModel>());
+            request.setAttribute("currentPage", 1);
+            request.setAttribute("totalPages", 1);
         }
 
         request.getRequestDispatcher("/WEB-INF/pages/Nations.jsp").forward(request, response);
