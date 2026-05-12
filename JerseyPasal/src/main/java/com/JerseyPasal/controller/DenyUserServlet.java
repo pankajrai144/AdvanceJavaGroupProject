@@ -43,7 +43,7 @@ public class DenyUserServlet extends HttpServlet {
 
         UserModel loggedInUser = (UserModel) session.getAttribute("loggedInUser");
 
-        if (!loggedInUser.getRole().equalsIgnoreCase("admin")) {
+        if (loggedInUser.getRole() == null || !loggedInUser.getRole().equalsIgnoreCase("admin")) {
             response.sendRedirect(request.getContextPath() + "/login");
             return;
         }

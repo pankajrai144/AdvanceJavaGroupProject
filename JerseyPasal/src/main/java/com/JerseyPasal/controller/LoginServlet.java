@@ -99,10 +99,9 @@ public class LoginServlet extends HttpServlet {
 
             } else {
 
-               
                 if (service.isUserDenied(email, password)) {
 
-                    request.setAttribute("error", "Your account has been denied by admin. Please contact support.");
+                    request.setAttribute("error", "Your account is not approved yet. Please wait for admin approval.");
 
                 } else if (service.isUserDeleted(email, password)) {
 

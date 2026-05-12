@@ -37,7 +37,7 @@ public class UserDAO {
         pst.setString(7, gender);
         pst.setString(8, profileImageName);
         pst.setString(9, "user");
-        pst.setString(10, "approved");
+        pst.setString(10, "denied");
 
         pst.executeUpdate();
 
@@ -51,7 +51,7 @@ public class UserDAO {
 
         String sql = "SELECT * FROM users "
                    + "WHERE email = ? AND password = ? "
-                   + "AND (approval_status IS NULL OR approval_status NOT IN ('denied', 'deleted'))";
+                   + "AND approval_status = 'approved'";
 
         PreparedStatement pst = con.prepareStatement(sql);
 
@@ -75,7 +75,7 @@ public class UserDAO {
 
         String sql = "SELECT role FROM users "
                    + "WHERE email = ? AND password = ? "
-                   + "AND (approval_status IS NULL OR approval_status NOT IN ('denied', 'deleted'))";
+                   + "AND approval_status = 'approved'";
 
         PreparedStatement pst = con.prepareStatement(sql);
 
@@ -114,7 +114,7 @@ public class UserDAO {
         String sql = "SELECT user_id, fullname, email, phone, dob, address, gender, profile_image, role, approval_status "
                    + "FROM users "
                    + "WHERE email = ? AND password = ? "
-                   + "AND (approval_status IS NULL OR approval_status NOT IN ('denied', 'deleted'))";
+                   + "AND approval_status = 'approved'";
 
         PreparedStatement pst = con.prepareStatement(sql);
 
@@ -158,7 +158,7 @@ public class UserDAO {
             String approvalStatus = rs.getString("approval_status");
 
             if (approvalStatus == null || approvalStatus.trim().isEmpty()) {
-                approvalStatus = "approved";
+                approvalStatus = "denied";
             } else {
                 approvalStatus = approvalStatus.trim();
             }
@@ -254,7 +254,7 @@ public class UserDAO {
             String approvalStatus = rs.getString("approval_status");
 
             if (approvalStatus == null || approvalStatus.trim().isEmpty()) {
-                approvalStatus = "approved";
+                approvalStatus = "denied";
             }
 
             user.put("userid", String.valueOf(rs.getInt("user_id")));
