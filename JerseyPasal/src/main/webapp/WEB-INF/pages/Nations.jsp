@@ -19,73 +19,70 @@
 
 <jsp:include page="/components/header.jsp"/>
 
-<section class="ns1">
-    <p class="nt1">2026 FIFA World Cup</p>
+<section class="nation-top-section">
+    <p class="small-red-title">2026 FIFA World Cup</p>
     <h1>Find Your <span>Nation</span></h1>
-    <p class="nt2">Official jerseys from every competing nation. Pick your flag, own your kit.</p>
+    <p class="top-section-text">Official jerseys from every competing nation. Pick your flag, own your kit.</p>
 </section>
 
-<section class="ns3">
-    <p class="nt1">Official Kits</p>
+<section class="jersey-info-section">
+    <p class="small-red-title">Official Kits</p>
     <h2>Newest 2026 FIFA Jerseys</h2>
     <p>Every strip is crafted to the official match specification — the same breathable, performance-grade fabric worn on the pitch by the world's best. Every shirt ships with the official FIFA World Cup tournament badge.</p>
 </section>
 
-<section class="ns4">
-    <div class="nw2">
-        <p class="nt3">Nation Jerseys</p>
+<section class="nation-products-section">
+    <div class="nation-products-container">
+        <p class="nation-products-title">Nation Jerseys</p>
 
         <c:if test="${not empty error}">
-            <p class="nt6">${error}</p>
+            <p class="jersey-description">${error}</p>
         </c:if>
 
-        <div class="ng1">
+        <div class="nation-products-list">
 
             <c:choose>
                 <c:when test="${not empty nationProducts}">
 
                     <c:forEach var="product" items="${nationProducts}">
 
-                        <div class="nc1">
-                            <div class="ni2">
-                                <c:choose>
-                                    <c:when test="${not empty product.productImage}">
-                                        <img src="${pageContext.request.contextPath}/getimage?productImage=${product.productImage}" alt="${product.jerseyName}" />
-                                    </c:when>
-                                    <c:otherwise>
-                                        <div class="pd-no-image">
-                                            <i class="fa-solid fa-image"></i>
-                                        </div>
-                                    </c:otherwise>
-                                </c:choose>
-                            </div>
+                        <a href="${pageContext.request.contextPath}/product?productId=${product.productId}" class="product-link">
+                            <div class="product-box">
+                                <div class="product-image-area">
+                                    <c:choose>
+                                        <c:when test="${not empty product.productImage}">
+                                            <img src="${pageContext.request.contextPath}/getimage?productImage=${product.productImage}" alt="${product.jerseyName}" />
+                                        </c:when>
+                                        <c:otherwise>
+                                            <div class="pd-no-image">
+                                                <i class="fa-solid fa-image"></i>
+                                            </div>
+                                        </c:otherwise>
+                                    </c:choose>
 
-                            <div class="ni3">
-                                <p class="nt4">${product.teamName}</p>
-                                <p class="nt5">${product.jerseyName}</p>
-                                <p class="nt6">${product.description}</p>
-                                <p class="nt7">£${product.price}</p>
+                                    <div class="view-product-text">
+                                        <span>View Details</span>
+                                    </div>
+                                </div>
 
-                                <c:choose>
-                                    <c:when test="${product.stockQuantity > 0}">
-                                        <a href="${pageContext.request.contextPath}/product?productId=${product.productId}" class="nb2">Add to Bag</a>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <span class="nb2">Out of Stock</span>
-                                    </c:otherwise>
-                                </c:choose>
+                                <div class="product-details">
+                                    <p class="team-name">${product.teamName}</p>
+                                    <p class="jersey-name">${product.jerseyName}</p>
+                                    <p class="jersey-description">${product.description}</p>
+                                    <p class="jersey-price">£${product.price}</p>
+                                </div>
                             </div>
-                        </div>
+                        </a>
 
                     </c:forEach>
 
                 </c:when>
 
                 <c:otherwise>
-                    <div class="nc1">
-                        <div class="ni3">
-                            <p class="nt4">No Nation Jerseys Available</p>
-                            <p class="nt6">Nation products added by admin will appear here.</p>
+                    <div class="product-box">
+                        <div class="product-details">
+                            <p class="team-name">No Nation Jerseys Available</p>
+                            <p class="jersey-description">Nation products added by admin will appear here.</p>
                         </div>
                     </div>
                 </c:otherwise>
@@ -95,12 +92,12 @@
     </div>
 </section>
 
-<section class="ns5">
-    <div class="nw3">
+<section class="authentic-jersey-section">
+    <div class="authentic-jersey-container">
 
-        <div class="nl1">
-            <img src="${pageContext.request.contextPath}/images/worldcup-authentic.jpg" alt="Authentic World Cup Jersey" class="ni4" />
-            <div class="nc2">
+        <div class="authentic-left-box">
+            <img src="${pageContext.request.contextPath}/images/worldcup-authentic.jpg" alt="Authentic World Cup Jersey" class="authentic-background-image" />
+            <div class="authentic-text-box">
                 <i class="fa-solid fa-shield-halved"></i>
                 <h2>100% Authentic<br>World Cup Jerseys</h2>
                 <ul>
@@ -110,13 +107,13 @@
                     <li><i class="fa-solid fa-circle-check"></i> Tournament badge embroidered on chest</li>
                     <li><i class="fa-solid fa-circle-check"></i> Sourced direct from manufacturer</li>
                 </ul>
-                <a href="${pageContext.request.contextPath}/product" class="nb5">Shop All World Cup Kits</a>
+                <a href="${pageContext.request.contextPath}/product" class="shop-all-button">Shop All World Cup Kits</a>
             </div>
         </div>
 
-        <div class="nr1">
+        <div class="video-section-box">
             <video src="${pageContext.request.contextPath}/videos/jersey-story.mp4" autoplay muted loop poster="${pageContext.request.contextPath}/images/video-poster.jpg"></video>
-            <div class="nc3">
+            <div class="video-text-box">
                 <span>Behind the Kit</span>
                 <p>How the 2026 World Cup jerseys were made</p>
             </div>
