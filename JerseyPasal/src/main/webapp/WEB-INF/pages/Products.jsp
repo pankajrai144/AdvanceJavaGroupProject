@@ -29,6 +29,11 @@
                     <div class="pd3">
                         <div class="pd4">
                             <c:choose>
+                                <c:when test="${not empty selectedImage}">
+                                    <img id="mainProductImage${status.index}"
+                                         src="${pageContext.request.contextPath}/getimage?productImage=${selectedImage}" 
+                                         alt="${product.jerseyName}" />
+                                </c:when>
                                 <c:when test="${not empty product.productImage}">
                                     <img id="mainProductImage${status.index}"
                                          src="${pageContext.request.contextPath}/getimage?productImage=${product.productImage}" 
@@ -92,12 +97,12 @@
                             <p class="pd14">Select Size</p>
 
                             <div class="pd15">
-                                <a href="${pageContext.request.contextPath}/product?productId=${product.productId}&selectedSize=XS" class="pd16">XS</a>
-                                <a href="${pageContext.request.contextPath}/product?productId=${product.productId}&selectedSize=S" class="pd16">S</a>
-                                <a href="${pageContext.request.contextPath}/product?productId=${product.productId}&selectedSize=M" class="pd16">M</a>
-                                <a href="${pageContext.request.contextPath}/product?productId=${product.productId}&selectedSize=L" class="pd16">L</a>
-                                <a href="${pageContext.request.contextPath}/product?productId=${product.productId}&selectedSize=XL" class="pd16">XL</a>
-                                <a href="${pageContext.request.contextPath}/product?productId=${product.productId}&selectedSize=XXL" class="pd16">XXL</a>
+                                <a href="${pageContext.request.contextPath}/product?productId=${product.productId}&selectedSize=XS" class="pd16 <c:if test='${selectedSize == "XS"}'>size-selected</c:if>">XS</a>
+                                <a href="${pageContext.request.contextPath}/product?productId=${product.productId}&selectedSize=S" class="pd16 <c:if test='${selectedSize == "S"}'>size-selected</c:if>">S</a>
+                                <a href="${pageContext.request.contextPath}/product?productId=${product.productId}&selectedSize=M" class="pd16 <c:if test='${selectedSize == "M"}'>size-selected</c:if>">M</a>
+                                <a href="${pageContext.request.contextPath}/product?productId=${product.productId}&selectedSize=L" class="pd16 <c:if test='${selectedSize == "L"}'>size-selected</c:if>">L</a>
+                                <a href="${pageContext.request.contextPath}/product?productId=${product.productId}&selectedSize=XL" class="pd16 <c:if test='${selectedSize == "XL"}'>size-selected</c:if>">XL</a>
+                                <a href="${pageContext.request.contextPath}/product?productId=${product.productId}&selectedSize=XXL" class="pd16 <c:if test='${selectedSize == "XXL"}'>size-selected</c:if>">XXL</a>
                             </div>
 
                             <c:if test="${not empty sizeMessage}">
@@ -105,19 +110,23 @@
                             </c:if>
                         </div>
 
-                        <p class="pd-stock">Stock Available: ${product.stockQuantity}</p>
-
-                        <div class="pd17">
+                        <div class="product-action-buttons">
                             <c:choose>
                                 <c:when test="${product.stockQuantity > 0}">
-                                    <a href="#" class="pd18">Add to Bag</a>
+                                    <a href="${pageContext.request.contextPath}/checkout?productId=${product.productId}" class="buy-now-button">
+                                        Buy Now
+                                    </a>
+
+                                    <a href="${pageContext.request.contextPath}/cart?productId=${product.productId}" class="add-cart-button">
+                                        Add to Cart
+                                    </a>
                                 </c:when>
                                 <c:otherwise>
-                                    <span class="pd18 pd-out-stock">Out of Stock</span>
+                                    <span class="out-stock-button">Out of Stock</span>
                                 </c:otherwise>
                             </c:choose>
 
-                            <button class="pd19" title="Add to Wishlist">
+                            <button class="wishlist-button" title="Add to Wishlist">
                                 <i class="fa-regular fa-heart"></i>
                             </button>
                         </div>
