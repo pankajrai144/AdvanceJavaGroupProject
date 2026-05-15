@@ -108,19 +108,38 @@
                             <c:if test="${not empty sizeMessage}">
                                 <p class="size-message ${sizeMessageType}">${sizeMessage}</p>
                             </c:if>
+
+                            <c:if test="${param.cartError == 'size'}">
+                                <p class="size-message size-error">Please select an available size before adding this product to cart.</p>
+                            </c:if>
+
+                            <c:if test="${param.cartError == 'stock'}">
+                                <p class="size-message size-error">This product is currently out of stock.</p>
+                            </c:if>
                         </div>
 
                         <div class="product-action-buttons">
                             <c:choose>
-                                <c:when test="${product.stockQuantity > 0}">
-                                    <a href="${pageContext.request.contextPath}/checkout?productId=${product.productId}" class="buy-now-button">
+                                <c:when test="${product.stockQuantity > 0 && not empty selectedSize && sizeMessageType == 'size-success'}">
+                                    <a href="${pageContext.request.contextPath}/checkout?productId=${product.productId}&selectedSize=${selectedSize}" class="buy-now-button">
                                         Buy Now
                                     </a>
 
-                                    <a href="${pageContext.request.contextPath}/cart?productId=${product.productId}" class="add-cart-button">
+                                    <a href="${pageContext.request.contextPath}/cart?productId=${product.productId}&selectedSize=${selectedSize}" class="add-cart-button">
                                         Add to Cart
                                     </a>
                                 </c:when>
+
+                                <c:when test="${product.stockQuantity > 0}">
+                                    <a href="${pageContext.request.contextPath}/product?productId=${product.productId}&cartError=size" class="buy-now-button">
+                                        Buy Now
+                                    </a>
+
+                                    <a href="${pageContext.request.contextPath}/product?productId=${product.productId}&cartError=size" class="add-cart-button">
+                                        Add to Cart
+                                    </a>
+                                </c:when>
+
                                 <c:otherwise>
                                     <span class="out-stock-button">Out of Stock</span>
                                 </c:otherwise>
