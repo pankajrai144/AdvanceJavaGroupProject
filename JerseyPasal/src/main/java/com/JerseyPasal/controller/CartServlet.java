@@ -1,8 +1,8 @@
 package com.JerseyPasal.controller;
 
-import com.JerseyPasal.controller.dao.CartDAO;
+import com.JerseyPasal.controller.dao.CartItemDAO;
 import com.JerseyPasal.controller.dao.ProductDAO;
-import com.JerseyPasal.controller.model.CartModel;
+import com.JerseyPasal.controller.model.CartItemModel;
 import com.JerseyPasal.controller.model.ProductModel;
 import com.JerseyPasal.controller.model.UserModel;
 
@@ -52,7 +52,7 @@ public class CartServlet extends HttpServlet {
             String selectedSize = request.getParameter("selectedSize");
             String action = request.getParameter("action");
 
-            CartDAO cartDAO = new CartDAO();
+            CartItemDAO cartItemDAO = new CartItemDAO();
 
             if (productIdValue != null && !productIdValue.trim().isEmpty()) {
                 int productId = Integer.parseInt(productIdValue);
@@ -62,11 +62,11 @@ public class CartServlet extends HttpServlet {
                 }
 
                 if ("remove".equalsIgnoreCase(action)) {
-                    cartDAO.removeCartItem(userId, productId, selectedSize);
+                    cartItemDAO.removeCartItem(userId, productId, selectedSize);
                 } else if ("increase".equalsIgnoreCase(action)) {
-                    cartDAO.increaseCartItem(userId, productId, selectedSize);
+                    cartItemDAO.increaseCartItem(userId, productId, selectedSize);
                 } else if ("decrease".equalsIgnoreCase(action)) {
-                    cartDAO.decreaseCartItem(userId, productId, selectedSize);
+                    cartItemDAO.decreaseCartItem(userId, productId, selectedSize);
                 } else {
                     if (selectedSize == null || selectedSize.trim().isEmpty()) {
                         response.sendRedirect(request.getContextPath() + "/product?productId=" + productId + "&cartError=size");
@@ -86,15 +86,15 @@ public class CartServlet extends HttpServlet {
                         return;
                     }
 
-                    cartDAO.addProductToCart(userId, productId, selectedSize);
+                    cartItemDAO.addProductToCart(userId, productId, selectedSize);
                 }
 
                 response.sendRedirect(request.getContextPath() + "/cart");
                 return;
             }
 
-            ArrayList<CartModel> cartItems = cartDAO.getCartItemsByUserId(userId);
-            double cartTotal = cartDAO.calculateCartTotal(cartItems);
+            ArrayList<CartItemModel> cartItems = cartItemDAO.getCartItemsByUserId(userId);
+            double cartTotal = cartItemDAO.calculateCartTotal(cartItems);
 
             request.setAttribute("cartItems", cartItems);
             request.setAttribute("cartTotal", cartTotal);
@@ -103,7 +103,7 @@ public class CartServlet extends HttpServlet {
 
         } catch (Exception e) {
             e.printStackTrace();
-            request.setAttribute("cartItems", new ArrayList<CartModel>());
+            request.setAttribute("cartItems", new ArrayList<CartItemModel>());
             request.setAttribute("cartTotal", 0.0);
             request.setAttribute("error", "Unable to load cart.");
             request.getRequestDispatcher("/WEB-INF/pages/cart.jsp").forward(request, response);
