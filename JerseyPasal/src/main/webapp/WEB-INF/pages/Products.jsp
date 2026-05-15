@@ -121,9 +121,9 @@
                         <div class="product-action-buttons">
                             <c:choose>
                                 <c:when test="${product.stockQuantity > 0 && not empty selectedSize && sizeMessageType == 'size-success'}">
-                                    <a href="${pageContext.request.contextPath}/checkout?productId=${product.productId}&selectedSize=${selectedSize}" class="buy-now-button">
-                                        Buy Now
-                                    </a>
+                                    <a href="${pageContext.request.contextPath}/payment?productId=${product.productId}&selectedSize=${selectedSize}" class="buy-now-button">
+    									Buy Now
+									</a>
 
                                     <a href="${pageContext.request.contextPath}/cart?productId=${product.productId}&selectedSize=${selectedSize}" class="add-cart-button">
                                         Add to Cart
