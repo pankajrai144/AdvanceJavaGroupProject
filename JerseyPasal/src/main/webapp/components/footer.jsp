@@ -21,7 +21,7 @@
         <div class="col">
             <h4>Categories</h4>
             <a href="${pageContext.request.contextPath}/nation">Nations</a>
-            <a href="${pageContext.request.contextPath}/product">Club Jerseys</a>
+            <a href="${pageContext.request.contextPath}/clubs">Club Jerseys</a>
             <a href="${pageContext.request.contextPath}/retro">Retro Collection</a>
             <a href="${pageContext.request.contextPath}/jersey">Player Edition</a>
         </div>
