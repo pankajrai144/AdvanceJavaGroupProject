@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" isELIgnored="false"%>
+    <%@ taglib uri="jakarta.tags.core" prefix="c" %>
 <header class="h1">
     <div class="h2">
 
@@ -20,8 +21,15 @@
         </nav>
 
         <div class="h11">
-            <a href="${pageContext.request.contextPath}/login" class="h12">Sign In</a>
-            <a href="${pageContext.request.contextPath}/register" class="h13">Get Started</a>
+            <c:if test="${empty sessionScope.loggedInUser}">
+                <a href="${pageContext.request.contextPath}/login" class="h12">Sign In</a>
+               	<a href="${pageContext.request.contextPath}/register" class="h13">Get Started</a>
+    		 </c:if>
+    		 <c:if test="${not empty sessionScope.loggedInUser}">
+        		<a href="${pageContext.request.contextPath}/wishlist" class="h12">Wishlist</a>
+        		<a href="${pageContext.request.contextPath}/cart" class="h13">Cart</a>
+    		 </c:if>
+          
         </div>
 
     </div>
