@@ -55,7 +55,7 @@
       </li>
 
       <li>
-        <a href="${pageContext.request.contextPath}/profile.jsp" class="menu-link">
+        <a href="${pageContext.request.contextPath}/profile" class="menu-link">
           <i class="fa-solid fa-user"></i> Profile
         </a>
       </li>
@@ -140,8 +140,8 @@
       <div class="card">
         <h3><i class="fa-solid fa-user"></i> Account Info</h3>
         <p><strong>Email:</strong> ${sessionScope.loggedInUser.email}</p>
-        <a href="${pageContext.request.contextPath}/editprofile" class="back-link">
-        <button>Edit Profile</button>
+        <a href="${pageContext.request.contextPath}/profile" class="back-link">
+          <button>View Profile</button>
         </a>
       </div>
 
