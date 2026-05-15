@@ -131,9 +131,9 @@
                                 </c:when>
 
                                 <c:when test="${product.stockQuantity > 0}">
-                                    <a href="${pageContext.request.contextPath}/product?productId=${product.productId}&cartError=size" class="buy-now-button">
-                                        Buy Now
-                                    </a>
+                                   <a href="${pageContext.request.contextPath}/payment?productId=${product.productId}&selectedSize=${selectedSize}" class="buy-now-button">
+   									 Buy Now
+								   </a>
 
                                     <a href="${pageContext.request.contextPath}/product?productId=${product.productId}&cartError=size" class="add-cart-button">
                                         Add to Cart

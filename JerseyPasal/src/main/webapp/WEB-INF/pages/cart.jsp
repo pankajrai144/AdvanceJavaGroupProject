@@ -119,7 +119,7 @@
 
             <div class="rbx1">
                 <a href="${pageContext.request.contextPath}/product" class="rb2">Continue Shopping</a>
-                <a href="#" class="rb3">Checkout</a>
+                <a href="${pageContext.request.contextPath}/payment?source=cart" class="rb3">Checkout</a>
             </div>
         </div>
 
