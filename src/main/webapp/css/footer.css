@@ -1,0 +1,136 @@
+.footer {
+    background: #0d0d0d;
+    color: #ccc;
+    margin-top: 72px;
+    border-top: 3px solid var(--red);
+}
+
+.inner {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+    padding: 52px 48px;
+    max-width: 1400px;
+    margin: 0 auto;
+    align-items: flex-start;
+}
+
+.brand {
+    flex: 1.8;
+    min-width: 200px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1.4rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: 12px;
+}
+
+.tag {
+    font-size: 0.84rem;
+    color: #888;
+    line-height: 1.7;
+    max-width: 240px;
+}
+
+.col {
+    flex: 1;
+    min-width: 130px;
+}
+.col h4,
+.social h4 {
+    font-size: 0.72rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--white);
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.col a {
+    display: block;
+    font-size: 0.86rem;
+    color: #999;
+    margin-bottom: 10px;
+    transition: color 0.2s, padding-left 0.2s;
+}
+
+.col a:hover {
+    color: var(--white);
+    padding-left: 4px;
+}
+
+.social {
+    flex: 1;
+    min-width: 130px;
+}
+
+.icons {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #ccc;
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
+    text-decoration: none;
+}
+
+.icon:hover {
+    background: var(--red);
+    color: var(--white);
+    border-color: var(--red);
+}
+.footer-contact p {
+    font-size: 0.82rem;
+    color: #888;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.bottom {
+    text-align: center;
+    padding: 16px 32px;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    font-size: 0.78rem;
+    color: #555;
+    letter-spacing: 0.3px;
+}
+
+@media (max-width: 900px) {
+    .inner {
+        padding: 40px 32px;
+        gap: 28px;
+    }
+}
+
+@media (max-width: 600px) {
+    .inner {
+        flex-direction: column;
+        padding: 32px 20px;
+        gap: 24px;
+    }
+    .brand { flex: none; }
+    .col, .social { min-width: 100%; }
+}

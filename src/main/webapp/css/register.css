@@ -1,0 +1,277 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  height: 100vh;
+  background: #111;
+  color: #fff;
+}
+
+.auth-container {
+  display: flex;
+  height: 100vh;
+}
+.left-panel {
+  flex: 1;
+  background: url("../images/messi.jpg");
+  background-size: cover;
+  position: relative;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 60px;
+}
+
+.overlay h1 {
+  font-size: 40px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.overlay p {
+  font-size: 15px;
+  opacity: 0.85;
+}
+.right-panel {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #111;
+}
+
+.form-box {
+  width: 420px;
+  background: #1a1a1a;
+  padding: 40px;
+  border-radius: 18px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+  border: 1px solid rgba(255,255,255,0.05);
+}
+.upload-btn {
+  margin-top: 10px;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 30px;
+  background: #8b0d1f;
+  color: #fff;
+  font-size: 13px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.upload-btn:hover {
+  background: #6a0917;
+}
+.profile-upload {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.profile-upload input {
+  display: none;
+}
+
+.profile-preview {
+  width: 95px;
+  height: 95px;
+  border-radius: 50%;
+  background: #111;
+  border: 2px dashed #444;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 10px;
+  cursor: pointer;
+  overflow: hidden;
+  position: relative;
+}
+
+.profile-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: none;
+  position: absolute;
+}
+
+.profile-preview i {
+  font-size: 30px;
+  color: #888;
+}
+.form-box h2 {
+  margin-bottom: 25px;
+  font-size: 24px;
+}
+
+.form-box input {
+  width: 100%;
+  padding: 14px;
+  margin-bottom: 18px;
+  border-radius: 12px;
+  border: 1px solid #333;
+  outline: none;
+  background: #111;
+  color: #fff;
+  font-size: 14px;
+}
+
+.form-box input:focus {
+  border-color: #8b0d1f;
+  box-shadow: 0 0 0 2px rgba(139,13,31,0.25);
+}
+.date-wrapper {
+  position: relative;
+  margin-bottom: 18px;
+}
+
+.date-input {
+  padding-right: 45px;
+}
+.date-wrapper i {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 16px;
+  color: #aaa;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+.gender {
+  display: flex;
+  gap: 40px;
+  margin: 18px 0 20px;
+}
+
+.gender label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.gender input[type="radio"] {
+  accent-color: #8b0d1f;
+  width: 16px;
+  height: 16px;
+  margin: 0;
+}
+.terms {
+  margin-bottom: 22px;
+}
+
+.terms label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.terms input[type="checkbox"] {
+  accent-color: #8b0d1f;
+  width: 15px;
+  height: 15px;
+  margin: 0;
+}
+.terms a {
+  color: #fff;
+  text-decoration: underline;
+}
+.btn {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 30px;
+  background: linear-gradient(90deg, #8b0d1f, #6a0917);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 18px;
+}
+
+.btn:hover {
+  box-shadow: 0 10px 20px rgba(139,13,31,0.35);
+}
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 25px 0;
+  color: #777;
+  font-size: 12px;
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #333;
+}
+.google-btn {
+  width: 100%;
+  padding: 12px;
+  border-radius: 30px;
+  border: 1px solid #333;
+  background: #181818;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.google-icon {
+  width: 18px;
+}
+.login-text {
+  margin-top: 15px;
+  font-size: 13px;
+  text-align: center;
+  color: #aaa;
+}
+
+.login-text a {
+  color: #8b0d1f;
+  text-decoration: none;
+  
+}
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px #111 inset !important;
+  -webkit-text-fill-color: #fff !important;
+}
+@media (max-width: 900px) {
+  .auth-container {
+    flex-direction: column;
+  }
+
+  .left-panel {
+    height: 200px;
+  }
+
+  .overlay {
+    padding: 20px;
+    text-align: center;
+  }
+
+  .form-box {
+    width: 90%;
+  }
+}
