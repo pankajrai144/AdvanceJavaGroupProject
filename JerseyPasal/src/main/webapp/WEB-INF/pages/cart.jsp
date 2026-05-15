@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" isELIgnored="false"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,7 +21,15 @@
     <div class="rw1">
         <p class="rl1">Your Order</p>
         <h1 class="rh1">Cart</h1>
-        <p class="rl2">3 items in your cart</p>
+
+        <c:choose>
+            <c:when test="${not empty cartItems}">
+                <p class="rl2">${cartItems.size()} items in your cart</p>
+            </c:when>
+            <c:otherwise>
+                <p class="rl2">Your cart is empty</p>
+            </c:otherwise>
+        </c:choose>
     </div>
 </section>
 
@@ -28,76 +38,87 @@
 
         <div class="rg1">
 
-            <div class="rc1">
-                <div class="ri1">
-                    <img src="${pageContext.request.contextPath}/images/ronaldo2.jpg" alt="Portugal Home 2026" />
-                </div>
-                <div class="rd1">
-                    <p class="rn1">Portugal</p>
-                    <p class="rn2">Home Kit 2026</p>
-                    <p class="rn3">Size: M</p>
-                    <p class="rn4">Qty: 1</p>
-                </div>
-                <div class="rp1">
-                    <p class="rn5">£74.99</p>
-                    <a href="#" class="rb1">Remove</a>
-                </div>
-            </div>
+            <c:choose>
+                <c:when test="${not empty cartItems}">
 
-            <div class="rc1">
-                <div class="ri1">
-                    <img src="${pageContext.request.contextPath}/images/messi2.jpg" alt="Argentina Home 2026" />
-                </div>
-                <div class="rd1">
-                    <p class="rn1">Argentina</p>
-                    <p class="rn2">Home Kit 2026</p>
-                    <p class="rn3">Size: L</p>
-                    <p class="rn4">Qty: 1</p>
-                </div>
-                <div class="rp1">
-                    <p class="rn5">£79.99</p>
-                    <a href="#" class="rb1">Remove</a>
-                </div>
-            </div>
+                    <c:forEach var="item" items="${cartItems}">
 
-            <div class="rc1">
-                <div class="ri1">
-                    <img src="${pageContext.request.contextPath}/images/acmilan-home.jpg" alt="AC Milan Home 2024/25" />
-                </div>
-                <div class="rd1">
-                    <p class="rn1">AC Milan</p>
-                    <p class="rn2">Home Kit 2024/25</p>
-                    <p class="rn3">Size: S</p>
-                    <p class="rn4">Qty: 1</p>
-                </div>
-                <div class="rp1">
-                    <p class="rn5">£79.99</p>
-                    <a href="#" class="rb1">Remove</a>
-                </div>
-            </div>
+                        <div class="rc1">
+                            <div class="ri1">
+                                <c:choose>
+                                    <c:when test="${not empty item.product.productImage}">
+                                        <img src="${pageContext.request.contextPath}/getimage?productImage=${item.product.productImage}" 
+                                             alt="${item.product.jerseyName}" />
+                                    </c:when>
+                                    <c:otherwise>
+                                        <div class="cart-no-image">
+                                            <i class="fa-solid fa-image"></i>
+                                        </div>
+                                    </c:otherwise>
+                                </c:choose>
+                            </div>
+
+                            <div class="rd1">
+                                <p class="rn1">${item.product.teamName}</p>
+                                <p class="rn2">${item.product.jerseyName}</p>
+                                <p class="rn3">Category: ${item.product.category}</p>
+                                <p class="rn3">Size: ${item.selectedSize}</p>
+
+                                <div class="cart-quantity-box">
+                                    <a href="${pageContext.request.contextPath}/cart?productId=${item.product.productId}&selectedSize=${item.selectedSize}&action=decrease" class="quantity-btn">
+                                        <i class="fa-solid fa-minus"></i>
+                                    </a>
+
+                                    <span class="quantity-text">Qty: ${item.quantity}</span>
+
+                                    <a href="${pageContext.request.contextPath}/cart?productId=${item.product.productId}&selectedSize=${item.selectedSize}&action=increase" class="quantity-btn">
+                                        <i class="fa-solid fa-plus"></i>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="rp1">
+                                <p class="rn5">£${item.product.price * item.quantity}</p>
+                                <a href="${pageContext.request.contextPath}/cart?productId=${item.product.productId}&selectedSize=${item.selectedSize}&action=remove" class="rb1">Remove</a>
+                            </div>
+                        </div>
+
+                    </c:forEach>
+
+                </c:when>
+
+                <c:otherwise>
+                    <div class="empty-cart-box">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        <h2>Your cart is empty</h2>
+                        <p>Products added from the product page will appear here.</p>
+                        <a href="${pageContext.request.contextPath}/product" class="empty-cart-button">Continue Shopping</a>
+                    </div>
+                </c:otherwise>
+            </c:choose>
 
         </div>
 
         <div class="rs1">
             <p class="rl3">Order Summary</p>
+
             <div class="rr1">
                 <span>Subtotal</span>
-                <span>£234.97</span>
+                <span>£${cartTotal}</span>
             </div>
+
             <div class="rr1">
                 <span>Shipping</span>
                 <span>Free</span>
             </div>
-            <div class="rr1">
-                <span>Tax</span>
-                <span>£23.50</span>
-            </div>
+
             <div class="rr2">
                 <span>Total</span>
-                <span>£258.47</span>
+                <span>£${cartTotal}</span>
             </div>
+
             <div class="rbx1">
-                <a href="#" class="rb2">Continue Shopping</a>
+                <a href="${pageContext.request.contextPath}/product" class="rb2">Continue Shopping</a>
                 <a href="#" class="rb3">Checkout</a>
             </div>
         </div>
