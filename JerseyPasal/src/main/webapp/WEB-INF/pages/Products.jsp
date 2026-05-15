@@ -122,8 +122,8 @@
                             <c:choose>
                                 <c:when test="${product.stockQuantity > 0 && not empty selectedSize && sizeMessageType == 'size-success'}">
                                     <a href="${pageContext.request.contextPath}/payment?productId=${product.productId}&selectedSize=${selectedSize}" class="buy-now-button">
-    									Buy Now
-									</a>
+                                        Buy Now
+                                    </a>
 
                                     <a href="${pageContext.request.contextPath}/cart?productId=${product.productId}&selectedSize=${selectedSize}" class="add-cart-button">
                                         Add to Cart
@@ -131,9 +131,9 @@
                                 </c:when>
 
                                 <c:when test="${product.stockQuantity > 0}">
-                                   <a href="${pageContext.request.contextPath}/payment?productId=${product.productId}&selectedSize=${selectedSize}" class="buy-now-button">
-   									 Buy Now
-								   </a>
+                                    <a href="${pageContext.request.contextPath}/payment?productId=${product.productId}&selectedSize=${selectedSize}" class="buy-now-button">
+                                        Buy Now
+                                    </a>
 
                                     <a href="${pageContext.request.contextPath}/product?productId=${product.productId}&cartError=size" class="add-cart-button">
                                         Add to Cart
@@ -145,9 +145,9 @@
                                 </c:otherwise>
                             </c:choose>
 
-                            <button class="wishlist-button" title="Add to Wishlist">
+                            <a href="${pageContext.request.contextPath}/wishlist?productId=${product.productId}&action=add" class="wishlist-button" title="Add to Wishlist">
                                 <i class="fa-regular fa-heart"></i>
-                            </button>
+                            </a>
                         </div>
 
                     </div>
