@@ -2,35 +2,19 @@ package com.JerseyPasal.controller.model;
 
 public class CartModel {
 
-    private int cartItemId;
     private int cartId;
-    private ProductModel product;
-    private int quantity;
-    private String selectedSize;
+    private int userId;
+    private String createdAt;
+    private String updatedAt;
 
     public CartModel() {
     }
 
-    public CartModel(int cartItemId, int cartId, ProductModel product, int quantity, String selectedSize) {
-        this.cartItemId = cartItemId;
+    public CartModel(int cartId, int userId, String createdAt, String updatedAt) {
         this.cartId = cartId;
-        this.product = product;
-        this.quantity = quantity;
-        this.selectedSize = selectedSize;
-    }
-
-    public CartModel(ProductModel product, int quantity, String selectedSize) {
-        this.product = product;
-        this.quantity = quantity;
-        this.selectedSize = selectedSize;
-    }
-
-    public int getCartItemId() {
-        return cartItemId;
-    }
-
-    public void setCartItemId(int cartItemId) {
-        this.cartItemId = cartItemId;
+        this.userId = userId;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
 
     public int getCartId() {
@@ -41,27 +25,27 @@ public class CartModel {
         this.cartId = cartId;
     }
 
-    public ProductModel getProduct() {
-        return product;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setProduct(ProductModel product) {
-        this.product = product;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
-    public int getQuantity() {
-        return quantity;
+    public String getCreatedAt() {
+        return createdAt;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
     }
 
-    public String getSelectedSize() {
-        return selectedSize;
+    public String getUpdatedAt() {
+        return updatedAt;
     }
 
-    public void setSelectedSize(String selectedSize) {
-        this.selectedSize = selectedSize;
+    public void setUpdatedAt(String updatedAt) {
+        this.updatedAt = updatedAt;
     }
 }
