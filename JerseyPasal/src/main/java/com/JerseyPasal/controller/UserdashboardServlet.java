@@ -1,8 +1,10 @@
 package com.JerseyPasal.controller;
 
+import com.JerseyPasal.controller.dao.CartDAO;
 import com.JerseyPasal.controller.dao.OrderDAO;
 import com.JerseyPasal.controller.dao.OrderItemDAO;
 import com.JerseyPasal.controller.dao.ReviewDAO;
+import com.JerseyPasal.controller.dao.WishlistDAO;
 import com.JerseyPasal.controller.model.OrderItemModel;
 import com.JerseyPasal.controller.model.OrderModel;
 import com.JerseyPasal.controller.model.UserModel;
@@ -53,6 +55,8 @@ public class UserdashboardServlet extends HttpServlet {
             OrderDAO orderDAO = new OrderDAO();
             OrderItemDAO orderItemDAO = new OrderItemDAO();
             ReviewDAO reviewDAO = new ReviewDAO();
+            CartDAO cartDAO = new CartDAO();
+            WishlistDAO wishlistDAO = new WishlistDAO();
 
             ArrayList<OrderModel> userOrders = orderDAO.getOrdersByUserId(userId);
             HashMap<Integer, ArrayList<OrderItemModel>> orderItemsMap = new HashMap<>();
@@ -72,6 +76,10 @@ public class UserdashboardServlet extends HttpServlet {
                 }
             }
 
+            int cartCount = cartDAO.getCartCountByUserId(userId);
+            int wishlistCount = wishlistDAO.getWishlistCountByUserId(userId);
+            int reviewCount = reviewDAO.getReviewCountByUserId(userId);
+
             if ("true".equals(request.getParameter("reviewAdded"))) {
                 request.setAttribute("dashboardMessage", "<p class='success-message'>Review has been submitted successfully.</p>");
             }
@@ -79,6 +87,9 @@ public class UserdashboardServlet extends HttpServlet {
             request.setAttribute("userOrders", userOrders);
             request.setAttribute("orderItemsMap", orderItemsMap);
             request.setAttribute("reviewedMap", reviewedMap);
+            request.setAttribute("cartCount", cartCount);
+            request.setAttribute("wishlistCount", wishlistCount);
+            request.setAttribute("reviewCount", reviewCount);
 
             request.getRequestDispatcher("/WEB-INF/pages/userdashboard.jsp").forward(request, response);
 
@@ -88,6 +99,9 @@ public class UserdashboardServlet extends HttpServlet {
             request.setAttribute("userOrders", new ArrayList<OrderModel>());
             request.setAttribute("orderItemsMap", new HashMap<Integer, ArrayList<OrderItemModel>>());
             request.setAttribute("reviewedMap", new HashMap<String, Boolean>());
+            request.setAttribute("cartCount", 0);
+            request.setAttribute("wishlistCount", 0);
+            request.setAttribute("reviewCount", 0);
             request.getRequestDispatcher("/WEB-INF/pages/userdashboard.jsp").forward(request, response);
         }
 
