@@ -82,6 +82,74 @@ public class ProductDAO {
         return products;
     }
 
+    public ArrayList<ProductModel> getProductsByPage(int start, int limit) throws Exception {
+
+        ArrayList<ProductModel> products = new ArrayList<>();
+
+        Connection con = DBconfig.getConnection();
+
+        String sql = "SELECT product_id, jersey_name, team_name, size, season, price, stock_quantity, category, description, product_image, product_image_2, product_image_3, product_image_4 "
+                   + "FROM products "
+                   + "ORDER BY product_id DESC "
+                   + "LIMIT ?, ?";
+
+        PreparedStatement pst = con.prepareStatement(sql);
+
+        pst.setInt(1, start);
+        pst.setInt(2, limit);
+
+        ResultSet rs = pst.executeQuery();
+
+        while (rs.next()) {
+            ProductModel product = new ProductModel();
+
+            product.setProductId(rs.getInt("product_id"));
+            product.setJerseyName(rs.getString("jersey_name"));
+            product.setTeamName(rs.getString("team_name"));
+            product.setSize(rs.getString("size"));
+            product.setSeason(rs.getString("season"));
+            product.setPrice(rs.getDouble("price"));
+            product.setStockQuantity(rs.getInt("stock_quantity"));
+            product.setCategory(rs.getString("category"));
+            product.setDescription(rs.getString("description"));
+            product.setProductImage(rs.getString("product_image"));
+            product.setProductImage2(rs.getString("product_image_2"));
+            product.setProductImage3(rs.getString("product_image_3"));
+            product.setProductImage4(rs.getString("product_image_4"));
+
+            products.add(product);
+        }
+
+        rs.close();
+        pst.close();
+        con.close();
+
+        return products;
+    }
+
+    public int getProductCount() throws Exception {
+
+        int totalProducts = 0;
+
+        Connection con = DBconfig.getConnection();
+
+        String sql = "SELECT COUNT(*) AS total FROM products";
+
+        PreparedStatement pst = con.prepareStatement(sql);
+
+        ResultSet rs = pst.executeQuery();
+
+        if (rs.next()) {
+            totalProducts = rs.getInt("total");
+        }
+
+        rs.close();
+        pst.close();
+        con.close();
+
+        return totalProducts;
+    }
+
     public ArrayList<ProductModel> getProductsByCategory(String category) throws Exception {
 
         ArrayList<ProductModel> products = new ArrayList<>();
