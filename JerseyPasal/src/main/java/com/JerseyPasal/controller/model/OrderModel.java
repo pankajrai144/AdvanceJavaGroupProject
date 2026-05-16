@@ -7,6 +7,7 @@ public class OrderModel {
     private double orderTotal;
     private String orderStatus;
     private String orderDate;
+    private String customerName;
 
     public OrderModel() {
     }
@@ -17,6 +18,15 @@ public class OrderModel {
         this.orderTotal = orderTotal;
         this.orderStatus = orderStatus;
         this.orderDate = orderDate;
+    }
+
+    public OrderModel(int orderId, int userId, double orderTotal, String orderStatus, String orderDate, String customerName) {
+        this.orderId = orderId;
+        this.userId = userId;
+        this.orderTotal = orderTotal;
+        this.orderStatus = orderStatus;
+        this.orderDate = orderDate;
+        this.customerName = customerName;
     }
 
     public OrderModel(int userId, double orderTotal, String orderStatus) {
@@ -63,5 +73,13 @@ public class OrderModel {
 
     public void setOrderDate(String orderDate) {
         this.orderDate = orderDate;
+    }
+
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
     }
 }
