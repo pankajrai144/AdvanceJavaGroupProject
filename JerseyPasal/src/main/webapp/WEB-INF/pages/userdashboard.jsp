@@ -63,12 +63,6 @@
       </li>
 
       <li>
-        <a href="${pageContext.request.contextPath}/settings.jsp" class="menu-link">
-          <i class="fa-solid fa-gear"></i> Settings
-        </a>
-      </li>
-
-      <li>
         <a href="${pageContext.request.contextPath}/logout" class="menu-link">
           <i class="fa-solid fa-right-from-bracket"></i> Logout
         </a>
