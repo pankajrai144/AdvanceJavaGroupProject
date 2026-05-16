@@ -110,6 +110,44 @@ public class OrderDAO {
         return orders;
     }
 
+    public ArrayList<OrderModel> getOrdersByUserId(int userId) throws Exception {
+
+        ArrayList<OrderModel> orders = new ArrayList<>();
+
+        Connection con = DBconfig.getConnection();
+
+        String sql = "SELECT o.order_id, o.user_id, o.order_total, o.order_status, o.order_date, u.fullname "
+                   + "FROM orders o "
+                   + "INNER JOIN users u ON o.user_id = u.user_id "
+                   + "WHERE o.user_id = ? "
+                   + "ORDER BY o.order_id DESC";
+
+        PreparedStatement pst = con.prepareStatement(sql);
+
+        pst.setInt(1, userId);
+
+        ResultSet rs = pst.executeQuery();
+
+        while (rs.next()) {
+            OrderModel order = new OrderModel();
+
+            order.setOrderId(rs.getInt("order_id"));
+            order.setUserId(rs.getInt("user_id"));
+            order.setOrderTotal(rs.getDouble("order_total"));
+            order.setOrderStatus(rs.getString("order_status"));
+            order.setOrderDate(rs.getString("order_date"));
+            order.setCustomerName(rs.getString("fullname"));
+
+            orders.add(order);
+        }
+
+        rs.close();
+        pst.close();
+        con.close();
+
+        return orders;
+    }
+
     public ArrayList<OrderModel> getOrdersByStatus(String orderStatus) throws Exception {
 
         ArrayList<OrderModel> orders = new ArrayList<>();
