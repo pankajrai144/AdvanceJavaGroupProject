@@ -38,9 +38,12 @@ public class GuestFilter extends HttpFilter implements Filter {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         HttpServletResponse httpResponse = (HttpServletResponse) response;
 
+        httpResponse.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+        httpResponse.setHeader("Pragma", "no-cache");
+        httpResponse.setDateHeader("Expires", 0);
+
         Object loggedInUserObj = SessionUtil.getAttribute(httpRequest, "loggedInUser");
 
-       
         if (loggedInUserObj != null) {
 
             UserModel loggedInUser = (UserModel) loggedInUserObj;
@@ -56,7 +59,6 @@ public class GuestFilter extends HttpFilter implements Filter {
                 return;
             }
 
-            
             HttpSession session = httpRequest.getSession(false);
             if (session != null) {
                 session.invalidate();
