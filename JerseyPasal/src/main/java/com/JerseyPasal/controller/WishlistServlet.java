@@ -1,11 +1,18 @@
 package com.JerseyPasal.controller;
 
+import com.JerseyPasal.controller.dao.WishlistDAO;
+import com.JerseyPasal.controller.model.UserModel;
+import com.JerseyPasal.controller.model.WishlistModel;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Servlet implementation class WishlistServlet
@@ -27,8 +34,51 @@ public class WishlistServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
-        request.getRequestDispatcher("/WEB-INF/pages/wishlist.jsp").forward(request, response);
+
+        try {
+            HttpSession session = request.getSession(false);
+
+            if (session == null || session.getAttribute("loggedInUser") == null) {
+                response.sendRedirect(request.getContextPath() + "/login");
+                return;
+            }
+
+            UserModel loggedInUser = (UserModel) session.getAttribute("loggedInUser");
+            int userId = loggedInUser.getUserid();
+
+            String productIdValue = request.getParameter("productId");
+            String action = request.getParameter("action");
+
+            WishlistDAO wishlistDAO = new WishlistDAO();
+
+            if (productIdValue != null && !productIdValue.trim().isEmpty()) {
+                int productId = Integer.parseInt(productIdValue);
+
+                if ("remove".equalsIgnoreCase(action)) {
+                    wishlistDAO.removeFromWishlist(userId, productId);
+                } else {
+                    wishlistDAO.addToWishlist(userId, productId);
+                }
+
+                response.sendRedirect(request.getContextPath() + "/wishlist");
+                return;
+            }
+
+            ArrayList<WishlistModel> wishlistItems = wishlistDAO.getWishlistByUserId(userId);
+            int wishlistCount = wishlistDAO.getWishlistCountByUserId(userId);
+
+            request.setAttribute("wishlistItems", wishlistItems);
+            request.setAttribute("wishlistCount", wishlistCount);
+
+            request.getRequestDispatcher("/WEB-INF/pages/wishlist.jsp").forward(request, response);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            request.setAttribute("wishlistItems", new ArrayList<WishlistModel>());
+            request.setAttribute("wishlistCount", 0);
+            request.setAttribute("error", "Unable to load wishlist.");
+            request.getRequestDispatcher("/WEB-INF/pages/wishlist.jsp").forward(request, response);
+        }
 
 	}
 
