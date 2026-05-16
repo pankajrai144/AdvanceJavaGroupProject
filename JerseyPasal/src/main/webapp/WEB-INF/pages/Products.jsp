@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -162,67 +163,102 @@
                             <span>Reviews</span>
                             <i class="fa-solid fa-chevron-down"></i>
                         </summary>
+
                         <div class="pd24">
 
                             <div class="pd25">
-                                <p class="pd26">4.8</p>
-                                <div class="pd27">
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star-half-stroke"></i>
-                                </div>
-                                <p class="pd28">Based on 124 reviews</p>
-                                <a href="${pageContext.request.contextPath}/review" class="pd29">Write a Review</a>
+                                <c:choose>
+                                    <c:when test="${reviewCount > 0}">
+                                        <p class="pd26"><fmt:formatNumber value="${averageRating}" pattern="0.0" /></p>
+
+                                        <div class="pd27">
+                                            <c:forEach var="star" begin="1" end="5">
+                                                <c:choose>
+                                                    <c:when test="${star <= averageRating}">
+                                                        <i class="fa-solid fa-star"></i>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <i class="fa-regular fa-star"></i>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </c:forEach>
+                                        </div>
+
+                                        <p class="pd28">Based on ${reviewCount} reviews</p>
+                                    </c:when>
+
+                                    <c:otherwise>
+                                        <p class="pd26">0.0</p>
+
+                                        <div class="pd27">
+                                            <i class="fa-regular fa-star"></i>
+                                            <i class="fa-regular fa-star"></i>
+                                            <i class="fa-regular fa-star"></i>
+                                            <i class="fa-regular fa-star"></i>
+                                            <i class="fa-regular fa-star"></i>
+                                        </div>
+
+                                        <p class="pd28">No reviews yet</p>
+                                    </c:otherwise>
+                                </c:choose>
+
+                                <c:choose>
+                                    <c:when test="${canReview == true}">
+                                        <a href="${pageContext.request.contextPath}/review?productId=${product.productId}&orderId=${reviewOrderId}" class="pd29">
+                                            Write a Review
+                                        </a>
+                                    </c:when>
+
+                                    <c:when test="${alreadyReviewed == true}">
+                                        <span class="pd29 review-info-label">Reviewed</span>
+                                    </c:when>
+
+                                    <c:otherwise>
+                                        <span class="pd29 review-info-label">Verified buyers only</span>
+                                    </c:otherwise>
+                                </c:choose>
                             </div>
 
                             <div class="pd30">
 
-                                <div class="pd31">
-                                    <div class="pd32">
-                                        <div class="pd33">
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                        </div>
-                                        <span class="pd34">March 2026</span>
-                                    </div>
-                                    <p class="pd35">Carlos M.</p>
-                                    <p class="pd36">Absolutely brilliant quality. Looks and feels exactly like the match-worn version. Delivery was fast and the packaging was great.</p>
-                                </div>
+                                <c:choose>
+                                    <c:when test="${not empty reviews}">
+                                        <c:forEach var="review" items="${reviews}">
+                                            <div class="pd31">
+                                                <div class="pd32">
+                                                    <div class="pd33">
+                                                        <c:forEach var="star" begin="1" end="5">
+                                                            <c:choose>
+                                                                <c:when test="${star <= review.rating}">
+                                                                    <i class="fa-solid fa-star"></i>
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                    <i class="fa-regular fa-star"></i>
+                                                                </c:otherwise>
+                                                            </c:choose>
+                                                        </c:forEach>
+                                                    </div>
 
-                                <div class="pd31">
-                                    <div class="pd32">
-                                        <div class="pd33">
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-regular fa-star"></i>
-                                        </div>
-                                        <span class="pd34">February 2026</span>
-                                    </div>
-                                    <p class="pd35">Sophie R.</p>
-                                    <p class="pd36">Great jersey, true to size. The fabric is lightweight and breathable. Only minor thing is the badge stitching could be a bit cleaner but overall very happy.</p>
-                                </div>
+                                                    <span class="pd34">${review.reviewDate}</span>
+                                                </div>
 
-                                <div class="pd31">
-                                    <div class="pd32">
-                                        <div class="pd33">
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
+                                                <p class="pd35">${review.user.fullname}</p>
+                                                <p class="pd36">${review.reviewText}</p>
+
+                                                <c:if test="${not empty review.recommend}">
+                                                    <p class="review-recommend-text">Recommended: ${review.recommend}</p>
+                                                </c:if>
+                                            </div>
+                                        </c:forEach>
+                                    </c:when>
+
+                                    <c:otherwise>
+                                        <div class="pd31">
+                                            <p class="pd35">No reviews yet</p>
+                                            <p class="pd36">This product has not received any verified customer reviews yet.</p>
                                         </div>
-                                        <span class="pd34">January 2026</span>
-                                    </div>
-                                    <p class="pd35">Arjun T.</p>
-                                    <p class="pd36">Best football jersey I have ever bought. The authenticity tag gave me real confidence in the purchase. Will be ordering the away kit next.</p>
-                                </div>
+                                    </c:otherwise>
+                                </c:choose>
 
                             </div>
                         </div>
