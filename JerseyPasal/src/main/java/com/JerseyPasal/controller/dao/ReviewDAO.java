@@ -245,6 +245,31 @@ public class ReviewDAO {
         return reviewCount;
     }
 
+    public int getReviewCountByUserId(int userId) throws Exception {
+
+        int reviewCount = 0;
+
+        Connection con = DBconfig.getConnection();
+
+        String sql = "SELECT COUNT(*) AS total FROM reviews WHERE user_id = ?";
+
+        PreparedStatement pst = con.prepareStatement(sql);
+
+        pst.setInt(1, userId);
+
+        ResultSet rs = pst.executeQuery();
+
+        if (rs.next()) {
+            reviewCount = rs.getInt("total");
+        }
+
+        rs.close();
+        pst.close();
+        con.close();
+
+        return reviewCount;
+    }
+
     public boolean deleteReview(int reviewId) throws Exception {
 
         Connection con = DBconfig.getConnection();
