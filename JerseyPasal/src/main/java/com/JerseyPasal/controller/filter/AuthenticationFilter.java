@@ -19,7 +19,7 @@ import jakarta.servlet.http.HttpServletResponse;
 /**
  * Servlet Filter implementation class AuthenticationFilter
  */
-@WebFilter(urlPatterns = { "/userdashboard", "/admindashboard", "/profile", "/cart","/wishlist","/review", "/editprofile", "/paymentsuccess","/updateorderstatus", "/logout" })
+@WebFilter(urlPatterns = { "/userdashboard", "/admindashboard", "/profile", "/cart", "/wishlist", "/review", "/editprofile", "/payment", "/paymentsuccess", "/updateorderstatus", "/logout" })
 public class AuthenticationFilter extends HttpFilter implements Filter {
 
 	private static final long serialVersionUID = 1L;
@@ -57,7 +57,7 @@ public class AuthenticationFilter extends HttpFilter implements Filter {
 
 		String path = httpRequest.getServletPath();
 
-		if (path.equals("/admindashboard")) {
+		if (path.equals("/admindashboard") || path.equals("/updateorderstatus")) {
 			if ("admin".equalsIgnoreCase(userRole)) {
 				chain.doFilter(request, response);
 			} else {
