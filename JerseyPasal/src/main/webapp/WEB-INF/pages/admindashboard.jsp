@@ -45,10 +45,6 @@
   <main class="main">
     <div class="topbar">
       <h1>Dashboard Overview</h1>
-      <div class="top-right">
-        <input type="text" placeholder="Search..." />
-        <i class="fa fa-bell"></i>
-      </div>
     </div>
 
     <div class="stats">
