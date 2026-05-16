@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page isELIgnored="false" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="fn" uri="jakarta.tags.functions" %>
 
 <!DOCTYPE html>
 <html>
@@ -37,19 +39,19 @@
       </li>
 
       <li>
-        <a href="${pageContext.request.contextPath}/orders.jsp" class="menu-link">
+        <a href="#myOrders" class="menu-link">
           <i class="fa-solid fa-box"></i> Orders
         </a>
       </li>
 
       <li>
-        <a href="${pageContext.request.contextPath}/cart.jsp" class="menu-link">
+        <a href="${pageContext.request.contextPath}/cart" class="menu-link">
           <i class="fa-solid fa-cart-shopping"></i> Cart
         </a>
       </li>
 
       <li>
-        <a href="${pageContext.request.contextPath}/wishlist.jsp" class="menu-link">
+        <a href="${pageContext.request.contextPath}/wishlist" class="menu-link">
           <i class="fa-regular fa-heart"></i> Wishlist
         </a>
       </li>
@@ -107,12 +109,14 @@
 
     </div>
 
+    <c:out value="${dashboardMessage}" escapeXml="false" />
+
     <div class="stats">
 
       <div class="stat-card">
         <i class="fa-solid fa-box"></i>
         <h4>Orders</h4>
-        <p>3</p>
+        <p>${fn:length(userOrders)}</p>
       </div>
 
       <div class="stat-card">
@@ -130,7 +134,7 @@
       <div class="stat-card">
         <i class="fa-solid fa-star"></i>
         <h4>Reviews</h4>
-        <p>4</p>
+        <p>-</p>
       </div>
 
     </div>
@@ -147,59 +151,110 @@
 
       <div class="card">
         <h3><i class="fa-solid fa-box"></i> Orders</h3>
-        <p>You have 3 orders</p>
-        <button>View Orders</button>
+        <p>You have ${fn:length(userOrders)} orders</p>
+        <a href="#myOrders" class="back-link">
+          <button>View Orders</button>
+        </a>
       </div>
 
       <div class="card">
         <h3><i class="fa-solid fa-cart-shopping"></i> Cart</h3>
-        <p>3 items in cart</p>
-        <button>Go to Cart</button>
+        <p>View products added to your cart</p>
+        <a href="${pageContext.request.contextPath}/cart" class="back-link">
+          <button>Go to Cart</button>
+        </a>
       </div>
 
       <div class="card">
         <h3><i class="fa-regular fa-heart"></i> Wishlist</h3>
-        <p>2 saved items</p>
-        <button>View Wishlist</button>
+        <p>View your saved jerseys</p>
+        <a href="${pageContext.request.contextPath}/wishlist" class="back-link">
+          <button>View Wishlist</button>
+        </a>
       </div>
     </div>
 
-    <div class="bottom-section">
+    <div class="bottom-section" id="myOrders">
 
-      <div class="table-card">
-        <h3>Recent Orders</h3>
+      <div class="table-card order-history-card">
+        <h3>My Orders</h3>
 
-        <table>
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Product</th>
-              <th>Status</th>
-            </tr>
-          </thead>
+        <c:choose>
+          <c:when test="${not empty userOrders}">
 
-          <tbody>
-            <tr>
-              <td>#1</td>
-              <td>Argentina Jersey</td>
-              <td><span class="badge success">Delivered</span></td>
-            </tr>
+            <table>
+              <thead>
+                <tr>
+                  <th>Order ID</th>
+                  <th>Product</th>
+                  <th>Size</th>
+                  <th>Qty</th>
+                  <th>Total</th>
+                  <th>Status</th>
+                  <th>Review</th>
+                </tr>
+              </thead>
 
-            <tr>
-              <td>#2</td>
-              <td>Brazil Jersey</td>
-              <td><span class="badge pending">Pending</span></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+              <tbody>
+                <c:forEach var="order" items="${userOrders}">
+                  <c:set var="orderItems" value="${orderItemsMap[order.orderId]}" />
 
-      <div class="table-card">
-        <h3>Notifications</h3>
+                  <c:forEach var="item" items="${orderItems}">
+                    <c:set var="reviewKey" value="${order.orderId}_${item.productId}" />
+                    <c:set var="alreadyReviewed" value="${reviewedMap[reviewKey]}" />
 
-        <div class="notification">New offer available</div>
-        <div class="notification">Order is being processed</div>
+                    <tr>
+                      <td>#${order.orderId}</td>
+                      <td>${item.product.jerseyName}</td>
+                      <td>${item.selectedSize}</td>
+                      <td>${item.quantity}</td>
+                      <td>£${item.itemTotal}</td>
 
+                      <td>
+                        <c:choose>
+                          <c:when test="${order.orderStatus == 'Delivered'}">
+                            <span class="badge success">Delivered</span>
+                          </c:when>
+
+                          <c:when test="${order.orderStatus == 'Cancelled'}">
+                            <span class="badge denied">Cancelled</span>
+                          </c:when>
+
+                          <c:otherwise>
+                            <span class="badge pending">${order.orderStatus}</span>
+                          </c:otherwise>
+                        </c:choose>
+                      </td>
+
+                      <td>
+                        <c:choose>
+                          <c:when test="${order.orderStatus == 'Delivered' && alreadyReviewed == true}">
+                            <span class="review-done-label">Reviewed</span>
+                          </c:when>
+
+                          <c:when test="${order.orderStatus == 'Delivered'}">
+                            <a href="${pageContext.request.contextPath}/review?productId=${item.productId}&orderId=${order.orderId}" class="write-review-link">
+                              Write Review
+                            </a>
+                          </c:when>
+
+                          <c:otherwise>
+                            <span class="review-disabled-label">Available after delivery</span>
+                          </c:otherwise>
+                        </c:choose>
+                      </td>
+                    </tr>
+                  </c:forEach>
+                </c:forEach>
+              </tbody>
+            </table>
+
+          </c:when>
+
+          <c:otherwise>
+            <div class="notification">You have not placed any orders yet.</div>
+          </c:otherwise>
+        </c:choose>
       </div>
 
     </div>
