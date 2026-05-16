@@ -125,4 +125,31 @@ public class CartDAO {
 
         return rows > 0;
     }
+
+    public int getCartCountByUserId(int userId) throws Exception {
+
+        int cartCount = 0;
+
+        Connection con = DBconfig.getConnection();
+
+        String sql = "SELECT COALESCE(SUM(ci.quantity), 0) AS total "
+                   + "FROM cart c "
+                   + "INNER JOIN cart_items ci ON c.cart_id = ci.cart_id "
+                   + "WHERE c.user_id = ?";
+
+        PreparedStatement pst = con.prepareStatement(sql);
+        pst.setInt(1, userId);
+
+        ResultSet rs = pst.executeQuery();
+
+        if (rs.next()) {
+            cartCount = rs.getInt("total");
+        }
+
+        rs.close();
+        pst.close();
+        con.close();
+
+        return cartCount;
+    }
 }
