@@ -126,6 +126,62 @@ public class ProductDAO {
         return products;
     }
 
+    public ArrayList<ProductModel> searchProducts(String keyword) throws Exception {
+
+        ArrayList<ProductModel> products = new ArrayList<>();
+
+        Connection con = DBconfig.getConnection();
+
+        String sql = "SELECT product_id, jersey_name, team_name, size, season, price, stock_quantity, category, description, product_image, product_image_2, product_image_3, product_image_4 "
+                   + "FROM products "
+                   + "WHERE LOWER(jersey_name) LIKE ? "
+                   + "OR LOWER(team_name) LIKE ? "
+                   + "OR LOWER(size) LIKE ? "
+                   + "OR LOWER(season) LIKE ? "
+                   + "OR LOWER(category) LIKE ? "
+                   + "OR LOWER(description) LIKE ? "
+                   + "ORDER BY product_id DESC";
+
+        PreparedStatement pst = con.prepareStatement(sql);
+
+        String searchValue = "%" + keyword.toLowerCase().trim() + "%";
+
+        pst.setString(1, searchValue);
+        pst.setString(2, searchValue);
+        pst.setString(3, searchValue);
+        pst.setString(4, searchValue);
+        pst.setString(5, searchValue);
+        pst.setString(6, searchValue);
+
+        ResultSet rs = pst.executeQuery();
+
+        while (rs.next()) {
+            ProductModel product = new ProductModel();
+
+            product.setProductId(rs.getInt("product_id"));
+            product.setJerseyName(rs.getString("jersey_name"));
+            product.setTeamName(rs.getString("team_name"));
+            product.setSize(rs.getString("size"));
+            product.setSeason(rs.getString("season"));
+            product.setPrice(rs.getDouble("price"));
+            product.setStockQuantity(rs.getInt("stock_quantity"));
+            product.setCategory(rs.getString("category"));
+            product.setDescription(rs.getString("description"));
+            product.setProductImage(rs.getString("product_image"));
+            product.setProductImage2(rs.getString("product_image_2"));
+            product.setProductImage3(rs.getString("product_image_3"));
+            product.setProductImage4(rs.getString("product_image_4"));
+
+            products.add(product);
+        }
+
+        rs.close();
+        pst.close();
+        con.close();
+
+        return products;
+    }
+
     public ProductModel getProductById(int productId) throws Exception {
 
         ProductModel product = null;
