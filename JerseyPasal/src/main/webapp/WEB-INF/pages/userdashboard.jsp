@@ -116,19 +116,19 @@
       <div class="stat-card">
         <i class="fa-solid fa-cart-shopping"></i>
         <h4>Cart</h4>
-        <p>3</p>
+        <p>${cartCount}</p>
       </div>
 
       <div class="stat-card">
         <i class="fa-regular fa-heart"></i>
         <h4>Wishlist</h4>
-        <p>2</p>
+        <p>${wishlistCount}</p>
       </div>
 
       <div class="stat-card">
         <i class="fa-solid fa-star"></i>
         <h4>Reviews</h4>
-        <p>-</p>
+        <p>${reviewCount}</p>
       </div>
 
     </div>
