@@ -34,9 +34,6 @@
       <li><i class="fa fa-box"></i> Products</li>
       <li><i class="fa fa-shopping-cart"></i> Orders</li>
       <li><i class="fa fa-users"></i> Customers</li>
-      <li><i class="fa fa-credit-card"></i> Payments</li>
-      <li><i class="fa fa-chart-pie"></i> Analytics</li>
-      <li><i class="fa fa-tags"></i> Categories</li>
       <li><i class="fa fa-cog"></i> Settings</li>
     </ul>
 
@@ -70,27 +67,6 @@
           <tr><td>#101</td><td>John</td><td><span class="badge success">Delivered</span></td></tr>
           <tr><td>#102</td><td>Alice</td><td><span class="badge pending">Pending</span></td></tr>
         </table>
-      </div>
-
-      <div class="box">
-        <h3>Top Selling Jerseys</h3>
-        <p>Argentina - 120 sales</p>
-        <p>Brazil - 95 sales</p>
-        <p>France - 80 sales</p>
-      </div>
-
-      <div class="box">
-        <h3>Inventory (Rack)</h3>
-        <p>Argentina → Rack A2</p>
-        <p>Brazil → Rack B1</p>
-        <p>France → Rack C3</p>
-      </div>
-
-      <div class="box">
-        <h3>Payments</h3>
-        <p>eSewa: $4000</p>
-        <p>Khalti: $2500</p>
-        <p>Stripe: $1900</p>
       </div>
 
     </div>
@@ -185,21 +161,15 @@
 
       <table>
         <tr>
-          <th>ID</th>
-          <th>Customer</th>
+          <th>Order ID</th>
+          <th>Customer Name</th>
+          <th>Total</th>
           <th>Status</th>
-          <th>Action</th>
+          <th>Order Date</th>
+          <th>Update Status</th>
         </tr>
-        <tr>
-          <td>#101</td>
-          <td>John</td>
-          <td>Pending</td>
-          <td>
-            <button>Ship</button>
-            <button>Deliver</button>
-            <button>Cancel</button>
-          </td>
-        </tr>
+
+        <c:out value="${orderRows}" escapeXml="false" />
       </table>
     </div>
 
@@ -216,24 +186,6 @@
 
         <c:out value="${userRows}" escapeXml="false" />
       </table>
-    </div>
-
-    <div class="section">
-      <h2>Category Management</h2>
-
-      <input type="text" placeholder="New Category">
-      <button>Add Category</button>
-
-      <p>Club Jerseys</p>
-      <p>National Jerseys</p>
-    </div>
-
-    <div class="section">
-      <h2>Analytics</h2>
-
-      <p>Sales Trend</p>
-      <p>Top Categories</p>
-      <p>Most Viewed Products</p>
     </div>
 
   </main>
