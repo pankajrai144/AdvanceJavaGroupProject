@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import com.JerseyPasal.controller.model.OrderModel;
 import com.JerseyPasal.controller.utils.DBconfig;
@@ -45,7 +46,10 @@ public class OrderDAO {
 
         Connection con = DBconfig.getConnection();
 
-        String sql = "SELECT order_id, user_id, order_total, order_status, order_date FROM orders WHERE order_id = ?";
+        String sql = "SELECT o.order_id, o.user_id, o.order_total, o.order_status, o.order_date, u.fullname "
+                   + "FROM orders o "
+                   + "INNER JOIN users u ON o.user_id = u.user_id "
+                   + "WHERE o.order_id = ?";
 
         PreparedStatement pst = con.prepareStatement(sql);
 
@@ -61,6 +65,7 @@ public class OrderDAO {
             order.setOrderTotal(rs.getDouble("order_total"));
             order.setOrderStatus(rs.getString("order_status"));
             order.setOrderDate(rs.getString("order_date"));
+            order.setCustomerName(rs.getString("fullname"));
         }
 
         rs.close();
@@ -68,6 +73,79 @@ public class OrderDAO {
         con.close();
 
         return order;
+    }
+
+    public ArrayList<OrderModel> getAllOrders() throws Exception {
+
+        ArrayList<OrderModel> orders = new ArrayList<>();
+
+        Connection con = DBconfig.getConnection();
+
+        String sql = "SELECT o.order_id, o.user_id, o.order_total, o.order_status, o.order_date, u.fullname "
+                   + "FROM orders o "
+                   + "INNER JOIN users u ON o.user_id = u.user_id "
+                   + "ORDER BY o.order_id DESC";
+
+        PreparedStatement pst = con.prepareStatement(sql);
+
+        ResultSet rs = pst.executeQuery();
+
+        while (rs.next()) {
+            OrderModel order = new OrderModel();
+
+            order.setOrderId(rs.getInt("order_id"));
+            order.setUserId(rs.getInt("user_id"));
+            order.setOrderTotal(rs.getDouble("order_total"));
+            order.setOrderStatus(rs.getString("order_status"));
+            order.setOrderDate(rs.getString("order_date"));
+            order.setCustomerName(rs.getString("fullname"));
+
+            orders.add(order);
+        }
+
+        rs.close();
+        pst.close();
+        con.close();
+
+        return orders;
+    }
+
+    public ArrayList<OrderModel> getOrdersByStatus(String orderStatus) throws Exception {
+
+        ArrayList<OrderModel> orders = new ArrayList<>();
+
+        Connection con = DBconfig.getConnection();
+
+        String sql = "SELECT o.order_id, o.user_id, o.order_total, o.order_status, o.order_date, u.fullname "
+                   + "FROM orders o "
+                   + "INNER JOIN users u ON o.user_id = u.user_id "
+                   + "WHERE o.order_status = ? "
+                   + "ORDER BY o.order_id DESC";
+
+        PreparedStatement pst = con.prepareStatement(sql);
+
+        pst.setString(1, orderStatus);
+
+        ResultSet rs = pst.executeQuery();
+
+        while (rs.next()) {
+            OrderModel order = new OrderModel();
+
+            order.setOrderId(rs.getInt("order_id"));
+            order.setUserId(rs.getInt("user_id"));
+            order.setOrderTotal(rs.getDouble("order_total"));
+            order.setOrderStatus(rs.getString("order_status"));
+            order.setOrderDate(rs.getString("order_date"));
+            order.setCustomerName(rs.getString("fullname"));
+
+            orders.add(order);
+        }
+
+        rs.close();
+        pst.close();
+        con.close();
+
+        return orders;
     }
 
     public boolean updateOrderStatus(int orderId, String orderStatus) throws Exception {
