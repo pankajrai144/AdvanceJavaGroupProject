@@ -424,6 +424,26 @@ details[open] .pd23 i {
     line-height: 1.65;
 }
 
+.review-info-label {
+    cursor: default;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.review-info-label:hover {
+    border-color: #333;
+    background: transparent;
+}
+
+.review-recommend-text {
+    font-size: 0.75rem;
+    color: var(--red);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 10px;
+}
+
 .pd37 {
     width: 100%;
     border-collapse: collapse;
@@ -497,5 +517,11 @@ details[open] .pd23 i {
 
     .wishlist-button {
         width: 100%;
+    }
+
+    .pd32 {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
     }
 }
