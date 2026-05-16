@@ -1,13 +1,21 @@
 package com.JerseyPasal.controller;
 
+import com.JerseyPasal.controller.dao.OrderDAO;
+import com.JerseyPasal.controller.dao.OrderItemDAO;
 import com.JerseyPasal.controller.dao.ProductDAO;
+import com.JerseyPasal.controller.dao.ReviewDAO;
+import com.JerseyPasal.controller.model.OrderItemModel;
+import com.JerseyPasal.controller.model.OrderModel;
 import com.JerseyPasal.controller.model.ProductModel;
+import com.JerseyPasal.controller.model.ReviewModel;
+import com.JerseyPasal.controller.model.UserModel;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -35,6 +43,8 @@ public class ProductsServlet extends HttpServlet {
 		
 		try {
 			ProductDAO dao = new ProductDAO();
+            ReviewDAO reviewDAO = new ReviewDAO();
+
 			String productIdValue = request.getParameter("productId");
 			String selectedSize = request.getParameter("selectedSize");
 			String selectedImage = request.getParameter("selectedImage");
@@ -68,6 +78,35 @@ public class ProductsServlet extends HttpServlet {
 							request.setAttribute("selectedImage", selectedImage);
 						}
 					}
+
+                    ArrayList<ReviewModel> reviews = reviewDAO.getReviewsByProductId(productId);
+                    double averageRating = reviewDAO.getAverageRatingByProductId(productId);
+                    int reviewCount = reviewDAO.getReviewCountByProductId(productId);
+
+                    boolean canReview = false;
+                    boolean alreadyReviewed = false;
+                    int reviewOrderId = 0;
+
+                    HttpSession session = request.getSession(false);
+
+                    if (session != null && session.getAttribute("loggedInUser") != null) {
+                        UserModel loggedInUser = (UserModel) session.getAttribute("loggedInUser");
+                        int userId = loggedInUser.getUserid();
+
+                        alreadyReviewed = reviewDAO.hasUserReviewedProduct(userId, productId);
+                        reviewOrderId = getDeliveredOrderIdForProduct(userId, productId);
+
+                        if (reviewOrderId > 0 && !alreadyReviewed) {
+                            canReview = true;
+                        }
+                    }
+
+                    request.setAttribute("reviews", reviews);
+                    request.setAttribute("averageRating", averageRating);
+                    request.setAttribute("reviewCount", reviewCount);
+                    request.setAttribute("canReview", canReview);
+                    request.setAttribute("alreadyReviewed", alreadyReviewed);
+                    request.setAttribute("reviewOrderId", reviewOrderId);
 				}
 				
 				request.setAttribute("products", products);
@@ -122,5 +161,33 @@ public class ProductsServlet extends HttpServlet {
 			   selectedImage.equals(product.getProductImage3()) ||
 			   selectedImage.equals(product.getProductImage4());
 	}
+
+    private int getDeliveredOrderIdForProduct(int userId, int productId) throws Exception {
+
+        OrderDAO orderDAO = new OrderDAO();
+        OrderItemDAO orderItemDAO = new OrderItemDAO();
+
+        ArrayList<OrderModel> orders = orderDAO.getOrdersByUserId(userId);
+
+        if (orders == null || orders.isEmpty()) {
+            return 0;
+        }
+
+        for (OrderModel order : orders) {
+            if ("Delivered".equalsIgnoreCase(order.getOrderStatus())) {
+                ArrayList<OrderItemModel> items = orderItemDAO.getOrderItemsByOrderId(order.getOrderId());
+
+                if (items != null && !items.isEmpty()) {
+                    for (OrderItemModel item : items) {
+                        if (item.getProductId() == productId) {
+                            return order.getOrderId();
+                        }
+                    }
+                }
+            }
+        }
+
+        return 0;
+    }
 
 }
