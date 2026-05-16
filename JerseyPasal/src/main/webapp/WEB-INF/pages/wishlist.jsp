@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" isELIgnored="false"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -284,6 +285,35 @@ body {
   color: #9b9b9b;
   font-size: 0.9rem;
   line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.empty-note-box a {
+  display: inline-block;
+  background: #8b0d1f;
+  color: #ffffff;
+  text-decoration: none;
+  padding: 12px 26px;
+  border-radius: 5px;
+  font-size: 0.75rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.empty-note-box a:hover {
+  background: #6a0917;
+}
+
+.wishlist-no-image {
+  width: 100%;
+  height: 100%;
+  background: #111111;
+  color: #9b9b9b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
 }
 
 @media (max-width: 950px) {
@@ -324,15 +354,28 @@ body {
     <div class="wishlist-top-section">
       <p class="small-red-title">Saved Jerseys</p>
       <h1>My <span>Wishlist</span></h1>
-      <p>These are the jerseys saved for later. Backend connection can be added later to load the real wishlist items from the database.</p>
+      <p>Products saved from the product page will appear here so they can be viewed again later.</p>
     </div>
+
+    <c:set var="clubCount" value="0" />
+    <c:set var="nationCount" value="0" />
+
+    <c:forEach var="wish" items="${wishlistItems}">
+      <c:if test="${wish.product.category == 'Club'}">
+        <c:set var="clubCount" value="${clubCount + 1}" />
+      </c:if>
+
+      <c:if test="${wish.product.category == 'Nation'}">
+        <c:set var="nationCount" value="${nationCount + 1}" />
+      </c:if>
+    </c:forEach>
 
     <div class="wishlist-summary-row">
       <div class="wishlist-summary-box">
         <i class="fa-regular fa-heart"></i>
         <div class="summary-text">
           <span>Saved Items</span>
-          <p>3</p>
+          <p>${wishlistCount}</p>
         </div>
       </div>
 
@@ -340,7 +383,7 @@ body {
         <i class="fa-solid fa-shirt"></i>
         <div class="summary-text">
           <span>Club Kits</span>
-          <p>2</p>
+          <p>${clubCount}</p>
         </div>
       </div>
 
@@ -348,83 +391,75 @@ body {
         <i class="fa-solid fa-globe"></i>
         <div class="summary-text">
           <span>Nation Kits</span>
-          <p>1</p>
+          <p>${nationCount}</p>
         </div>
       </div>
     </div>
 
-    <div class="wishlist-list">
-
-      <div class="wishlist-product-box">
-        <div class="wishlist-image-area">
-          <img src="${pageContext.request.contextPath}/images/argentina.jpg" alt="Argentina Home Jersey">
-          <div class="wishlist-heart">
-            <i class="fa-solid fa-heart"></i>
-          </div>
-        </div>
-
-        <div class="wishlist-product-info">
-          <p class="team-name">Argentina</p>
-          <p class="jersey-name">Home Kit 2026</p>
-          <p class="jersey-description">A clean blue and white national jersey inspired by Argentina's classic football identity.</p>
-          <p class="jersey-price">£89.99</p>
-
-          <div class="wishlist-button-row">
-            <a href="${pageContext.request.contextPath}/product" class="view-product-button">View Product</a>
-            <button type="button" class="remove-wishlist-button">
-              <i class="fa-solid fa-trash"></i>
-            </button>
-          </div>
-        </div>
+    <c:if test="${not empty error}">
+      <div class="empty-note-box">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+        <h2>Wishlist Error</h2>
+        <p>${error}</p>
       </div>
+    </c:if>
 
-      <div class="wishlist-product-box">
-        <div class="wishlist-image-area">
-          <img src="${pageContext.request.contextPath}/images/realmadrid-home.jpg" alt="Real Madrid Home Jersey">
-          <div class="wishlist-heart">
-            <i class="fa-solid fa-heart"></i>
-          </div>
+    <c:choose>
+      <c:when test="${not empty wishlistItems}">
+
+        <div class="wishlist-list">
+
+          <c:forEach var="wish" items="${wishlistItems}">
+            <div class="wishlist-product-box">
+
+              <div class="wishlist-image-area">
+                <c:choose>
+                  <c:when test="${not empty wish.product.productImage}">
+                    <img src="${pageContext.request.contextPath}/getimage?productImage=${wish.product.productImage}" alt="${wish.product.jerseyName}">
+                  </c:when>
+                  <c:otherwise>
+                    <div class="wishlist-no-image">
+                      <i class="fa-solid fa-image"></i>
+                    </div>
+                  </c:otherwise>
+                </c:choose>
+
+                <div class="wishlist-heart">
+                  <i class="fa-solid fa-heart"></i>
+                </div>
+              </div>
+
+              <div class="wishlist-product-info">
+                <p class="team-name">${wish.product.teamName}</p>
+                <p class="jersey-name">${wish.product.jerseyName}</p>
+                <p class="jersey-description">${wish.product.description}</p>
+                <p class="jersey-price">£${wish.product.price}</p>
+
+                <div class="wishlist-button-row">
+                  <a href="${pageContext.request.contextPath}/product?productId=${wish.product.productId}" class="view-product-button">View Product</a>
+
+                  <a href="${pageContext.request.contextPath}/wishlist?productId=${wish.product.productId}&action=remove" class="remove-wishlist-button">
+                    <i class="fa-solid fa-trash"></i>
+                  </a>
+                </div>
+              </div>
+
+            </div>
+          </c:forEach>
+
         </div>
 
-        <div class="wishlist-product-info">
-          <p class="team-name">Real Madrid</p>
-          <p class="jersey-name">Home Kit 2024/25</p>
-          <p class="jersey-description">Classic white club jersey with gold detailing and a premium match-day look.</p>
-          <p class="jersey-price">£84.99</p>
+      </c:when>
 
-          <div class="wishlist-button-row">
-            <a href="${pageContext.request.contextPath}/product" class="view-product-button">View Product</a>
-            <button type="button" class="remove-wishlist-button">
-              <i class="fa-solid fa-trash"></i>
-            </button>
-          </div>
+      <c:otherwise>
+        <div class="empty-note-box">
+          <i class="fa-regular fa-heart"></i>
+          <h2>Your wishlist is empty</h2>
+          <p>Save products from the product page and they will appear here.</p>
+          <a href="${pageContext.request.contextPath}/product">Browse Products</a>
         </div>
-      </div>
-
-      <div class="wishlist-product-box">
-        <div class="wishlist-image-area">
-          <img src="${pageContext.request.contextPath}/images/acmilan-home.jpg" alt="AC Milan Home Jersey">
-          <div class="wishlist-heart">
-            <i class="fa-solid fa-heart"></i>
-          </div>
-        </div>
-
-        <div class="wishlist-product-info">
-          <p class="team-name">AC Milan</p>
-          <p class="jersey-name">Home Kit 2024/25</p>
-          <p class="jersey-description">Red and black club jersey with a strong classic Rossoneri design.</p>
-          <p class="jersey-price">£79.99</p>
-
-          <div class="wishlist-button-row">
-            <a href="${pageContext.request.contextPath}/product" class="view-product-button">View Product</a>
-            <button type="button" class="remove-wishlist-button">
-              <i class="fa-solid fa-trash"></i>
-            </button>
-          </div>
-        </div>
-      </div>
-
-    </div>
+      </c:otherwise>
+    </c:choose>
 
   </div>
 </section>
