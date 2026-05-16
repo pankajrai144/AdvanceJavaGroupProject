@@ -17,12 +17,18 @@ body {
 
 .sidebar {
   width: 240px;
+  height: 100vh;
   background: #1a1a1a;
   color: #ffffff;
   padding: 25px 18px;
   display: flex;
   flex-direction: column;
   border-right: 1px solid rgba(255, 255, 255, 0.07);
+  position: fixed;
+  left: 0;
+  top: 0;
+  overflow-y: auto;
+  z-index: 1000;
 }
 
 .sidebar h2 {
@@ -104,16 +110,25 @@ body {
 
 .main-content {
   flex: 1;
-  padding: 25px 30px;
+  padding: 130px 30px 25px;
   overflow-y: auto;
   background: #111111;
+  margin-left: 240px;
+  min-height: 100vh;
 }
 
 .top-bar {
+  position: fixed;
+  top: 0;
+  left: 240px;
+  right: 0;
+  z-index: 999;
+  background: #111111;
+  padding: 25px 30px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 25px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
 }
 
 .search-box {
@@ -477,7 +492,9 @@ table tr:hover td {
   }
 
   .sidebar {
+    position: static;
     width: 100%;
+    height: auto;
     flex-direction: column;
     padding: 18px;
   }
@@ -497,10 +514,15 @@ table tr:hover td {
   }
 
   .main-content {
+    margin-left: 0;
     padding: 15px;
   }
 
   .top-bar {
+    position: static;
+    padding: 0;
+    margin-bottom: 25px;
+    border-bottom: none;
     flex-direction: column;
     align-items: flex-start;
     gap: 15px;
