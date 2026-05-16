@@ -86,10 +86,7 @@
   <div class="main-content">
     <div class="top-bar">
 
-      <div class="search-box">
-        <input type="text" placeholder="Search...">
-        <i class="fa fa-search"></i>
-      </div>
+      <div></div>
 
       <div class="user-info">
         <span>${sessionScope.loggedInUser.email}</span>
