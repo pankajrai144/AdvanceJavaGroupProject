@@ -1,147 +1,92 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" isELIgnored="false"%>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Jersey Pasal Nepal's Number One Jersey Store</title>
-
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@300;400;500&display=swap"
-rel="stylesheet">
-
-<link rel="stylesheet"
-href="${pageContext.request.contextPath}/css/style.css">
-
-<link rel="stylesheet"
-href="${pageContext.request.contextPath}/css/footer.css">
-
-<link rel="stylesheet"
-href="${pageContext.request.contextPath}/css/heaader.css">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JerseyPasal Football Jerseys</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/footer.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/heaader.css">
 </head>
-
 <body>
 
-<%@ include file="components/header.jsp" %>
+<jsp:include page="/components/header.jsp"/>
 
-<section class="hero">
+<section class="section1">
 
-    <div class="badge">
+    <div class="imgbg">
+        <img src="images/goat.jpg" alt="Manchester United Home Jersey 2025" class="img">
+        <div class="overlay"></div>
+    </div>
 
-        <span class="badge-dot"></span>
+    <div class="info">
 
-        Nepal's Ultimate Football Jersey Destination
+        <h2 class="infotitle">
+            <span class="titlewhite">Where Legends</span><br>
+            <span class="titlered">Wore Their</span><br>
+            <span class="titlewhite">Colours.</span>
+        </h2>
+
+        <div class="subtags">
+            <span class="subtag">Premium Jersey</span>
+            <span class="subtag">World Cup Jersey</span>
+            <span class="subtag">Player Grade</span>
+        </div>
+
+        <p class="infodesc">From Wembley roars to Champions League nights every stitch tells a story. Shop authentic, player-grade football jerseys from the clubs and eras that defined the beautiful game.</p>
+
+        <a href="#" class="btn">Shop Now</a>
 
     </div>
 
-    <img class="hero-img"
-         src="${pageContext.request.contextPath}/images/landingPage.jpg"
-         alt="Jersey Pasal Banner">
-
-    <div class="content">
-
-        <h1 class="headline">
-
-            Own
-
-            <em>The</em>
-
-            Passion
-
-        </h1>
-
-        <p class="sub-headline">
-
-            Premium · Authentic · Worldwide Clubs
-
-        </p>
-
-        <div class="divider"></div>
-
-        <p class="body-copy">
-
-            Discover authentic football jerseys from the world's biggest clubs and leagues
-            from Premier League giants to legendary European teams.
-            Jersey Pasal delivers premium fanwear across all 77 districts of Nepal with
-            trusted quality, fast delivery, and unmatched passion for the game.
-
-        </p>
-
-        <div class="feature-tags">
-
-            <span>
-                <i class="fas fa-check-circle"></i>
-                Official Quality
-            </span>
-
-            <span>
-                <i class="fas fa-shipping-fast"></i>
-                Fast Delivery
-            </span>
-
-            <span>
-                <i class="fas fa-futbol"></i>
-                Latest Club Kits
-            </span>
-
-        </div>
-
+    <div class="scroll">
+        <span class="line"></span>
+        <span>Scroll</span>
     </div>
 
-    <div class="stats">
+</section>
 
-        <div class="stat-item">
+<section class="section2">
 
-            <span class="stat-num">
+    <div class="wrap">
 
-                500<i class="fa-solid fa-plus"></i>
-
-            </span>
-
-            <span class="stat-label">
-
-                Jerseys In Stock
-
-            </span>
-
+        <div class="head">
+            <p>Why JerseyPasal</p>
+            <h2>The World's Kit Store</h2>
         </div>
 
-        <div class="stat-item">
+        <div class="grid">
 
-            <span class="stat-num">
+            <div class="card">
+                <i class="fa-solid fa-users icon"></i>
+                <div class="number">100K+</div>
+                <div class="title">Customers Worldwide</div>
+                <div class="desc">Fans across 60+ countries trust KitKing for their kits.</div>
+            </div>
 
-                77
+            <div class="card">
+                <i class="fa-solid fa-shirt icon"></i>
+                <div class="number">1,000+</div>
+                <div class="title">Jerseys in Stock</div>
+                <div class="desc">The largest selection of club and international kits online.</div>
+            </div>
 
-            </span>
+            <div class="card">
+                <i class="fa-solid fa-globe icon"></i>
+                <div class="number">32</div>
+                <div class="title">World Cup Nations</div>
+                <div class="desc">Every team from the tournament, all in one place.</div>
+            </div>
 
-            <span class="stat-label">
-
-                Districts Delivered
-
-            </span>
-
-        </div>
-
-        <div class="stat-item">
-
-            <span class="stat-num">
-
-                10K<i class="fa-solid fa-plus"></i>
-
-            </span>
-
-            <span class="stat-label">
-
-                Happy Fans
-
-            </span>
+            <div class="card">
+                <i class="fa-solid fa-star icon"></i>
+                <div class="number">4.9</div>
+                <div class="title">Average Rating</div>
+                <div class="desc">Thousands of verified reviews from real football fans.</div>
+            </div>
 
         </div>
 
@@ -149,8 +94,7 @@ href="${pageContext.request.contextPath}/css/heaader.css">
 
 </section>
 
-<%@include file="components/footer.jsp" %>
+<jsp:include page="/components/footer.jsp"/>
 
 </body>
-
 </html>
