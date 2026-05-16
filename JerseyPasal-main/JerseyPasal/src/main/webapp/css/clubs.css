@@ -1,0 +1,475 @@
+.cs1 {
+    background: var(--black);
+    padding: 90px 40px 72px;
+    text-align: center;
+    border-bottom: 1px solid #1e1e1e;
+}
+
+.cs1 h1 {
+    font-size: 4.5rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -2px;
+    color: var(--white);
+    line-height: 1;
+    margin-bottom: 20px;
+}
+
+.cs1 h1 span {
+    color: var(--red);
+}
+
+.ct1 {
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 3.5px;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 16px;
+}
+
+.ct2 {
+    font-size: 0.92rem;
+    color: var(--mid);
+    max-width: 480px;
+    margin: 0 auto;
+    line-height: 1.7;
+}
+
+.cs3 {
+    background: var(--black);
+    padding: 80px 40px 64px;
+    text-align: center;
+    border-bottom: 1px solid #1e1e1e;
+    max-width: 100%;
+}
+
+.cs3 h2 {
+    font-size: 2.2rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: 20px;
+    letter-spacing: -0.5px;
+}
+
+.cs3 p {
+    font-size: 0.88rem;
+    color: var(--mid);
+    line-height: 1.8;
+    max-width: 680px;
+    margin: 0 auto;
+}
+
+.cs4 {
+    background: var(--black);
+    padding: 60px 40px;
+    border-bottom: 1px solid #1e1e1e;
+}
+
+.cw2 {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.ct3 {
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 28px;
+}
+
+.cg1 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    align-items: stretch;
+}
+
+.cc-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    height: 100%;
+}
+
+.cc1 {
+    background: #161616;
+    border: 1px solid #222;
+    border-radius: 6px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    height: 100%;
+}
+
+.cc1:hover {
+    transform: translateY(-6px);
+    border-color: var(--red);
+    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.45);
+}
+
+.ci2 {
+    position: relative;
+    aspect-ratio: 3 / 4;
+    background: #111;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.ci2 img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.35s ease, opacity 0.35s ease;
+}
+
+.cc1:hover .ci2 img {
+    transform: scale(1.04);
+    opacity: 0.55;
+}
+
+.view-details-box {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+}
+
+.cc1:hover .view-details-box {
+    opacity: 1;
+}
+
+.view-details-box span {
+    background: var(--red);
+    color: var(--white);
+    padding: 13px 28px;
+    border-radius: 4px;
+    font-size: 0.78rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+.ci3 {
+    padding: 18px 20px 22px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.ct4 {
+    font-size: 0.62rem;
+    font-weight: 800;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 5px;
+}
+
+.ct5 {
+    font-size: 0.95rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: 10px;
+}
+
+.ct6 {
+    font-size: 0.78rem;
+    color: var(--mid);
+    line-height: 1.6;
+    flex: 1;
+    margin-bottom: 14px;
+    min-height: 75px;
+}
+
+.ct7 {
+    font-size: 1.1rem;
+    font-weight: 900;
+    color: var(--white);
+    margin-bottom: 0;
+}
+
+.cp-section {
+    margin-top: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+}
+
+.cp1 {
+    font-size: 0.72rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--mid);
+    text-decoration: none;
+    padding: 9px 18px;
+    border: 1px solid #2a2a2a;
+    border-radius: 4px;
+    transition: color 0.2s, border-color 0.2s, background 0.2s;
+}
+
+.cp1:hover {
+    color: var(--white);
+    border-color: var(--red);
+    background: #1a1a1a;
+}
+
+.cp1.ca2 {
+    pointer-events: none;
+    opacity: 0.35;
+}
+
+.cpg1 {
+    display: flex;
+    gap: 7px;
+}
+
+.cp2 {
+    width: 36px;
+    height: 36px;
+    border: 1px solid #2a2a2a;
+    border-radius: 4px;
+    color: var(--mid);
+    text-decoration: none;
+    font-size: 0.78rem;
+    font-weight: 900;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.cp2:hover {
+    background: #1f1f1f;
+    color: var(--white);
+    border-color: #444;
+}
+
+.cp2.ca3 {
+    background: var(--red);
+    color: var(--white);
+    border-color: var(--red);
+}
+
+.cs5 {
+    background: var(--black);
+    border-top: 1px solid #1e1e1e;
+}
+
+.cw3 {
+    display: flex;
+    min-height: 520px;
+}
+
+.cl1 {
+    flex: 1;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.ci4 {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.2);
+}
+
+.cc2 {
+    position: relative;
+    z-index: 1;
+    padding: 60px 52px;
+}
+
+.cc2 > i {
+    font-size: 2rem;
+    color: var(--red);
+    display: block;
+    margin-bottom: 18px;
+}
+
+.cc2 h2 {
+    font-size: 2rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: var(--white);
+    line-height: 1.1;
+    margin-bottom: 24px;
+}
+
+.cc2 ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 32px;
+}
+
+.cc2 ul li {
+    font-size: 0.84rem;
+    color: rgba(255,255,255,0.75);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.cc2 ul li i {
+    color: var(--red);
+    font-size: 0.82rem;
+}
+
+.cb5 {
+    display: inline-block;
+    padding: 13px 34px;
+    background: var(--white);
+    color: var(--red);
+    font-size: 0.78rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s;
+}
+
+.cb5:hover {
+    background: var(--black);
+    color: var(--white);
+}
+
+.cr1 {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+}
+
+.cr1 video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.cc3 {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+    padding: 24px 28px;
+}
+
+.cc3 span {
+    display: block;
+    font-size: 0.6rem;
+    font-weight: 900;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 5px;
+}
+
+.cc3 p {
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.65);
+}
+
+@media (max-width: 1024px) {
+    .cs1 h1 {
+        font-size: 3.5rem;
+    }
+}
+
+@media (max-width: 800px) {
+    .cs1 {
+        padding: 64px 24px 52px;
+    }
+
+    .cs1 h1 {
+        font-size: 2.8rem;
+        letter-spacing: -1px;
+    }
+
+    .cs3 {
+        padding: 56px 24px 48px;
+    }
+
+    .cs3 h2 {
+        font-size: 1.8rem;
+    }
+
+    .cs4 {
+        padding: 48px 24px;
+    }
+
+    .cg1 {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .cw3 {
+        flex-direction: column;
+    }
+
+    .cl1 {
+        min-height: 400px;
+    }
+
+    .cr1 {
+        min-height: 280px;
+    }
+
+    .cc2 {
+        padding: 40px 28px;
+    }
+
+    .cc2 h2 {
+        font-size: 1.6rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .cs1 h1 {
+        font-size: 2.2rem;
+    }
+
+    .cs4 {
+        padding: 36px 16px;
+    }
+
+    .ci3 {
+        padding: 16px 16px 18px;
+    }
+
+    .cp-section {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .cp1 {
+        padding: 8px 14px;
+        font-size: 0.65rem;
+    }
+
+    .cc2 {
+        padding: 28px 20px;
+    }
+
+    .cc2 h2 {
+        font-size: 1.3rem;
+    }
+}

@@ -1,0 +1,475 @@
+.ns1 {
+    background: var(--black);
+    padding: 90px 40px 72px;
+    text-align: center;
+    border-bottom: 1px solid #1e1e1e;
+}
+
+.ns1 h1 {
+    font-size: 4.5rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -2px;
+    color: var(--white);
+    line-height: 1;
+    margin-bottom: 20px;
+}
+
+.ns1 h1 span {
+    color: var(--red);
+}
+
+.nt1 {
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 3.5px;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 16px;
+}
+
+.nt2 {
+    font-size: 0.92rem;
+    color: var(--mid);
+    max-width: 480px;
+    margin: 0 auto;
+    line-height: 1.7;
+}
+
+.ns3 {
+    background: var(--black);
+    padding: 80px 40px 64px;
+    text-align: center;
+    border-bottom: 1px solid #1e1e1e;
+    max-width: 100%;
+}
+
+.ns3 h2 {
+    font-size: 2.2rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: 20px;
+    letter-spacing: -0.5px;
+}
+
+.ns3 p {
+    font-size: 0.88rem;
+    color: var(--mid);
+    line-height: 1.8;
+    max-width: 680px;
+    margin: 0 auto;
+}
+
+.ns4 {
+    background: var(--black);
+    padding: 60px 40px;
+    border-bottom: 1px solid #1e1e1e;
+}
+
+.nw2 {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.nt3 {
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 28px;
+}
+
+.ng1 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    align-items: stretch;
+}
+
+.nc-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    height: 100%;
+}
+
+.nc1 {
+    background: #161616;
+    border: 1px solid #222;
+    border-radius: 6px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    height: 100%;
+}
+
+.nc1:hover {
+    transform: translateY(-6px);
+    border-color: var(--red);
+    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.45);
+}
+
+.ni2 {
+    position: relative;
+    aspect-ratio: 3 / 4;
+    background: #111;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.ni2 img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.35s ease, opacity 0.35s ease;
+}
+
+.nc1:hover .ni2 img {
+    transform: scale(1.04);
+    opacity: 0.55;
+}
+
+.view-details-box {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+}
+
+.nc1:hover .view-details-box {
+    opacity: 1;
+}
+
+.view-details-box span {
+    background: var(--red);
+    color: var(--white);
+    padding: 13px 28px;
+    border-radius: 4px;
+    font-size: 0.78rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+.ni3 {
+    padding: 18px 20px 22px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.nt4 {
+    font-size: 0.62rem;
+    font-weight: 800;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 5px;
+}
+
+.nt5 {
+    font-size: 0.95rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: 10px;
+}
+
+.nt6 {
+    font-size: 0.78rem;
+    color: var(--mid);
+    line-height: 1.6;
+    flex: 1;
+    margin-bottom: 14px;
+    min-height: 75px;
+}
+
+.nt7 {
+    font-size: 1.1rem;
+    font-weight: 900;
+    color: var(--white);
+    margin-bottom: 0;
+}
+
+.np-section {
+    margin-top: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+}
+
+.np-link {
+    font-size: 0.72rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--mid);
+    text-decoration: none;
+    padding: 9px 18px;
+    border: 1px solid #2a2a2a;
+    border-radius: 4px;
+    transition: color 0.2s, border-color 0.2s, background 0.2s;
+}
+
+.np-link:hover {
+    color: var(--white);
+    border-color: var(--red);
+    background: #1a1a1a;
+}
+
+.np-disabled {
+    pointer-events: none;
+    opacity: 0.35;
+}
+
+.np-number-box {
+    display: flex;
+    gap: 7px;
+}
+
+.np-number {
+    width: 36px;
+    height: 36px;
+    border: 1px solid #2a2a2a;
+    border-radius: 4px;
+    color: var(--mid);
+    text-decoration: none;
+    font-size: 0.78rem;
+    font-weight: 900;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.np-number:hover {
+    background: #1f1f1f;
+    color: var(--white);
+    border-color: #444;
+}
+
+.np-active {
+    background: var(--red);
+    color: var(--white);
+    border-color: var(--red);
+}
+
+.ns5 {
+    background: var(--black);
+    border-top: 1px solid #1e1e1e;
+}
+
+.nw3 {
+    display: flex;
+    min-height: 520px;
+}
+
+.nl1 {
+    flex: 1;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.ni4 {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.2);
+}
+
+.nc2 {
+    position: relative;
+    z-index: 1;
+    padding: 60px 52px;
+}
+
+.nc2 > i {
+    font-size: 2rem;
+    color: var(--red);
+    display: block;
+    margin-bottom: 18px;
+}
+
+.nc2 h2 {
+    font-size: 2rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: var(--white);
+    line-height: 1.1;
+    margin-bottom: 24px;
+}
+
+.nc2 ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 32px;
+}
+
+.nc2 ul li {
+    font-size: 0.84rem;
+    color: rgba(255,255,255,0.75);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.nc2 ul li i {
+    color: var(--red);
+    font-size: 0.82rem;
+}
+
+.nb5 {
+    display: inline-block;
+    padding: 13px 34px;
+    background: var(--white);
+    color: var(--red);
+    font-size: 0.78rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s;
+}
+
+.nb5:hover {
+    background: var(--black);
+    color: var(--white);
+}
+
+.nr1 {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+}
+
+.nr1 video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.nc3 {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+    padding: 24px 28px;
+}
+
+.nc3 span {
+    display: block;
+    font-size: 0.6rem;
+    font-weight: 900;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 5px;
+}
+
+.nc3 p {
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.65);
+}
+
+@media (max-width: 1024px) {
+    .ns1 h1 {
+        font-size: 3.5rem;
+    }
+}
+
+@media (max-width: 800px) {
+    .ns1 {
+        padding: 64px 24px 52px;
+    }
+
+    .ns1 h1 {
+        font-size: 2.8rem;
+        letter-spacing: -1px;
+    }
+
+    .ns3 {
+        padding: 56px 24px 48px;
+    }
+
+    .ns3 h2 {
+        font-size: 1.8rem;
+    }
+
+    .ns4 {
+        padding: 48px 24px;
+    }
+
+    .ng1 {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .nw3 {
+        flex-direction: column;
+    }
+
+    .nl1 {
+        min-height: 400px;
+    }
+
+    .nr1 {
+        min-height: 280px;
+    }
+
+    .nc2 {
+        padding: 40px 28px;
+    }
+
+    .nc2 h2 {
+        font-size: 1.6rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .ns1 h1 {
+        font-size: 2.2rem;
+    }
+
+    .ns4 {
+        padding: 36px 16px;
+    }
+
+    .ni3 {
+        padding: 16px 16px 18px;
+    }
+
+    .np-section {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .np-link {
+        padding: 8px 14px;
+        font-size: 0.65rem;
+    }
+
+    .nc2 {
+        padding: 28px 20px;
+    }
+
+    .nc2 h2 {
+        font-size: 1.3rem;
+    }
+}

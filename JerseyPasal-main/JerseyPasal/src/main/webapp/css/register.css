@@ -1,0 +1,370 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  height: auto;
+  background: #111;
+  color: #fff;
+  overflow-y: auto;
+}
+
+.auth-container {
+  display: flex;
+  min-height: 100vh;
+  height: auto;
+}
+
+.left-panel {
+  flex: 1;
+  background: url("../images/messi.jpg");
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 60px;
+}
+
+.overlay h1 {
+  font-size: 40px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #fff;
+}
+
+.overlay p {
+  font-size: 15px;
+  opacity: 0.85;
+}
+
+.right-panel {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background: #111;
+  padding: 70px 20px 40px;
+  overflow-y: auto;
+}
+
+.form-box {
+  width: 420px;
+  height: auto;
+  background: #1a1a1a;
+  padding: 40px;
+  border-radius: 18px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+.form-box h2 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 24px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.error-message {
+  width: 100%;
+  background: rgba(139, 13, 31, 0.18);
+  border: 1px solid rgba(139, 13, 31, 0.5);
+  color: #ffb3b3;
+  font-size: 13px;
+  text-align: center;
+  padding: 10px 12px;
+  border-radius: 10px;
+  margin-bottom: 16px;
+  line-height: 1.4;
+}
+
+.error-message:empty {
+  display: none;
+}
+
+.profile-upload {
+  margin-bottom: 16px;
+  color: #ddd;
+  font-size: 13px;
+  text-align: center;
+}
+
+.profile-upload > label:first-child {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 13px;
+  color: #ddd;
+  font-weight: 500;
+  text-align: left;
+}
+
+.profile-preview-box {
+  width: 60px !important;
+  height: 60px !important;
+  max-width: 60px !important;
+  max-height: 60px !important;
+  min-width: 60px !important;
+  min-height: 60px !important;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 auto 10px;
+  border: 2px solid #8b0d1f;
+  background: #111;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-preview-box img {
+  width: 60px !important;
+  height: 60px !important;
+  max-width: 60px !important;
+  max-height: 60px !important;
+  object-fit: cover;
+  display: block;
+}
+
+.profile-upload input[type="file"] {
+  display: none;
+}
+
+.upload-pic-btn {
+  display: inline-block;
+  background: #8b0d1f;
+  color: #fff;
+  padding: 8px 18px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.upload-pic-btn:hover {
+  background: #6a0917;
+}
+
+.form-box input {
+  width: 100%;
+  padding: 14px;
+  margin-bottom: 18px;
+  border-radius: 12px;
+  border: 1px solid #333;
+  outline: none;
+  transition: 0.3s;
+  font-size: 14px;
+  background: #111;
+  color: #fff;
+}
+
+.form-box input:focus {
+  border-color: #8b0d1f;
+  box-shadow: 0 0 0 2px rgba(139,13,31,0.25);
+}
+
+.date-input {
+  color: #fff;
+  background: #111;
+  cursor: pointer;
+}
+
+.date-input::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  cursor: pointer;
+  opacity: 1;
+}
+
+.date-input::-webkit-datetime-edit {
+  color: #fff;
+}
+
+.date-input::-webkit-datetime-edit-fields-wrapper {
+  color: #fff;
+}
+
+.date-input::-webkit-datetime-edit-text {
+  color: #aaa;
+}
+
+.date-input::-webkit-datetime-edit-month-field,
+.date-input::-webkit-datetime-edit-day-field,
+.date-input::-webkit-datetime-edit-year-field {
+  color: #fff;
+}
+
+.gender {
+  display: flex;
+  align-items: center;
+  gap: 35px;
+  margin: 12px 0 20px;
+  color: #ddd;
+}
+
+.gender label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.gender input {
+  accent-color: #8b0d1f;
+  width: 16px;
+  height: 16px;
+  margin: 0;
+}
+
+.terms {
+  display: flex;
+  align-items: center;
+  margin-bottom: 22px;
+  color: #ccc;
+}
+
+.terms label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.terms input {
+  accent-color: #8b0d1f;
+  width: 16px;
+  height: 16px;
+  margin: 0;
+}
+
+.terms a {
+  color: #8b0d1f;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.btn {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 30px;
+  background: linear-gradient(90deg, #8b0d1f, #6a0917);
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 10px;
+  margin-bottom: 18px;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  box-shadow: 0 10px 20px rgba(139, 13, 31, 0.35);
+}
+
+.divider {
+  text-align: center;
+  margin: 25px 0;
+  font-size: 12px;
+  color: #888;
+  position: relative;
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  position: absolute;
+  width: 40%;
+  height: 1px;
+  background: #333;
+  top: 50%;
+}
+
+.divider::before {
+  left: 0;
+}
+
+.divider::after {
+  right: 0;
+}
+
+.google-btn {
+  width: 100%;
+  padding: 13px;
+  border-radius: 40px;
+  border: 1px solid #333;
+  background: #111;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 14px;
+  transition: all 0.25s ease;
+}
+
+.google-icon {
+  width: 14px;
+  height: 14px;
+  object-fit: contain;
+}
+
+.google-btn:hover {
+  background: #1a1a1a;
+  box-shadow: 0 5px 12px rgba(0,0,0,0.5);
+}
+
+.login-text {
+  margin-top: 15px;
+  font-size: 13px;
+  text-align: center;
+  color: #aaa;
+}
+
+.login-text a {
+  color: #8b0d1f;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+@media (max-width: 900px) {
+
+  .auth-container {
+    flex-direction: column;
+  }
+
+  .left-panel {
+    height: 200px;
+    flex: none;
+  }
+
+  .overlay {
+    padding: 20px;
+    text-align: center;
+  }
+
+  .right-panel {
+    padding: 40px 20px;
+  }
+
+  .form-box {
+    width: 90%;
+  }
+}
