@@ -1,7 +1,9 @@
 package com.JerseyPasal.controller;
 
+import com.JerseyPasal.controller.dao.OrderDAO;
 import com.JerseyPasal.controller.dao.ProductDAO;
 import com.JerseyPasal.controller.dao.UserDAO;
+import com.JerseyPasal.controller.model.OrderModel;
 import com.JerseyPasal.controller.model.ProductModel;
 import com.JerseyPasal.controller.model.UserModel;
 
@@ -55,9 +57,11 @@ public class AdmindashboardServlet extends HttpServlet {
         try {
             UserDAO dao = new UserDAO();
             ProductDAO productDAO = new ProductDAO();
+            OrderDAO orderDAO = new OrderDAO();
 
             ArrayList<HashMap<String, String>> users = dao.getAllUsers();
             ArrayList<ProductModel> products = productDAO.getAllProducts();
+            ArrayList<OrderModel> orders = orderDAO.getAllOrders();
 
             String adminMessage = "";
 
@@ -71,6 +75,10 @@ public class AdmindashboardServlet extends HttpServlet {
                 adminMessage = "<p class='success-message'>Product has been updated successfully.</p>";
             } else if ("true".equals(request.getParameter("productDeleted"))) {
                 adminMessage = "<p class='success-message'>Product has been deleted successfully.</p>";
+            } else if ("true".equals(request.getParameter("orderUpdated"))) {
+                adminMessage = "<p class='success-message'>Order status has been updated successfully.</p>";
+            } else if ("true".equals(request.getParameter("orderError"))) {
+                adminMessage = "<p class='error-message'>Order status could not be updated. Please try again.</p>";
             } else if ("empty".equals(request.getParameter("productError"))) {
                 adminMessage = "<p class='error-message'>Please fill all required product fields.</p>";
             } else if ("jerseyName".equals(request.getParameter("productError"))) {
@@ -231,9 +239,69 @@ public class AdmindashboardServlet extends HttpServlet {
                 productRows.append("</tr>");
             }
 
+            StringBuilder orderRows = new StringBuilder();
+
+            if (orders != null && !orders.isEmpty()) {
+
+                for (OrderModel order : orders) {
+
+                    String status = order.getOrderStatus();
+
+                    if (status == null || status.trim().isEmpty()) {
+                        status = "Pending";
+                    }
+
+                    String statusClass = "pending";
+
+                    if ("Processing".equalsIgnoreCase(status)) {
+                        statusClass = "processing";
+                    } else if ("Shipped".equalsIgnoreCase(status)) {
+                        statusClass = "shipped";
+                    } else if ("Delivered".equalsIgnoreCase(status)) {
+                        statusClass = "success";
+                    } else if ("Cancelled".equalsIgnoreCase(status)) {
+                        statusClass = "denied";
+                    }
+
+                    String customerName = order.getCustomerName();
+
+                    if (customerName == null || customerName.trim().isEmpty()) {
+                        customerName = "User #" + order.getUserId();
+                    }
+
+                    String actionHtml =
+                            "<form action='" + request.getContextPath() + "/updateorderstatus' method='post' class='order-status-form'>" +
+                            "<input type='hidden' name='orderId' value='" + order.getOrderId() + "'>" +
+                            "<select name='orderStatus' class='order-status-select'>" +
+                            "<option value='Pending'" + ("Pending".equalsIgnoreCase(status) ? " selected" : "") + ">Pending</option>" +
+                            "<option value='Processing'" + ("Processing".equalsIgnoreCase(status) ? " selected" : "") + ">Processing</option>" +
+                            "<option value='Shipped'" + ("Shipped".equalsIgnoreCase(status) ? " selected" : "") + ">Shipped</option>" +
+                            "<option value='Delivered'" + ("Delivered".equalsIgnoreCase(status) ? " selected" : "") + ">Delivered</option>" +
+                            "<option value='Cancelled'" + ("Cancelled".equalsIgnoreCase(status) ? " selected" : "") + ">Cancelled</option>" +
+                            "</select>" +
+                            "<button type='submit' class='update-order-btn'>Update</button>" +
+                            "</form>";
+
+                    orderRows.append("<tr>");
+                    orderRows.append("<td>#").append(order.getOrderId()).append("</td>");
+                    orderRows.append("<td>").append(customerName).append("</td>");
+                    orderRows.append("<td>£").append(order.getOrderTotal()).append("</td>");
+                    orderRows.append("<td><span class='badge ").append(statusClass).append("'>").append(status).append("</span></td>");
+                    orderRows.append("<td>").append(order.getOrderDate()).append("</td>");
+                    orderRows.append("<td>").append(actionHtml).append("</td>");
+                    orderRows.append("</tr>");
+                }
+
+            } else {
+                orderRows.append("<tr>");
+                orderRows.append("<td colspan='6'>No orders found.</td>");
+                orderRows.append("</tr>");
+            }
+
             request.setAttribute("adminMessage", adminMessage);
             request.setAttribute("userRows", userRows.toString());
             request.setAttribute("productRows", productRows.toString());
+            request.setAttribute("orderRows", orderRows.toString());
 
             request.getRequestDispatcher("/WEB-INF/pages/admindashboard.jsp").forward(request, response);
 
@@ -243,6 +311,7 @@ public class AdmindashboardServlet extends HttpServlet {
             request.setAttribute("adminMessage", "<p class='error-message'>Unable to load dashboard data.</p>");
             request.setAttribute("userRows", "<tr><td colspan='4'>No users found.</td></tr>");
             request.setAttribute("productRows", "<tr><td colspan='9'>No products found.</td></tr>");
+            request.setAttribute("orderRows", "<tr><td colspan='6'>No orders found.</td></tr>");
             request.getRequestDispatcher("/WEB-INF/pages/admindashboard.jsp").forward(request, response);
         }
     }
