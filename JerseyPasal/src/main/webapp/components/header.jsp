@@ -12,7 +12,7 @@
         </div>
 
         <nav class="h4">
-            <a href="#" class="h5">Home</a>
+            <a href="${pageContext.request.contextPath}/index" class="h5">Home</a>
             <a href="${pageContext.request.contextPath}/nation" class="h5">Nations</a>
             <a href="${pageContext.request.contextPath}/clubs" class="h5">Clubs</a>
             <a href="#" class="h5">Best Sellers</a>
@@ -22,7 +22,7 @@
         <div class="h11">
 
             <form action="${pageContext.request.contextPath}/search" method="get" class="hsearch">
-                <input type="text" name="query" class="hsearchinput" placeholder="Search jerseys..." autocomplete="off" />
+                <input type="text" name="keyword" class="hsearchinput" placeholder="Search jerseys..." autocomplete="off" />
                 <button type="submit" class="hsearchbtn">Search</button>
             </form>
 
