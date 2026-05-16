@@ -113,8 +113,42 @@ public class ProductsServlet extends HttpServlet {
 				request.setAttribute("selectedProduct", selectedProduct);
 				
 			} else {
-				ArrayList<ProductModel> products = dao.getAllProducts();
+                int currentPage = 1;
+                int productsPerPage = 9;
+
+                String pageValue = request.getParameter("page");
+
+                if (pageValue != null && !pageValue.trim().isEmpty()) {
+                    try {
+                        currentPage = Integer.parseInt(pageValue);
+                    } catch (NumberFormatException e) {
+                        currentPage = 1;
+                    }
+                }
+
+                if (currentPage < 1) {
+                    currentPage = 1;
+                }
+
+                int totalProducts = dao.getProductCount();
+                int totalPages = (int) Math.ceil((double) totalProducts / productsPerPage);
+
+                if (totalPages < 1) {
+                    totalPages = 1;
+                }
+
+                if (currentPage > totalPages) {
+                    currentPage = totalPages;
+                }
+
+                int start = (currentPage - 1) * productsPerPage;
+
+				ArrayList<ProductModel> products = dao.getProductsByPage(start, productsPerPage);
+
 				request.setAttribute("products", products);
+                request.setAttribute("currentPage", currentPage);
+                request.setAttribute("totalPages", totalPages);
+                request.setAttribute("totalProducts", totalProducts);
 			}
 			
 			request.getRequestDispatcher("/WEB-INF/pages/Products.jsp").forward(request, response);
@@ -122,6 +156,9 @@ public class ProductsServlet extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 			request.setAttribute("products", new ArrayList<ProductModel>());
+            request.setAttribute("currentPage", 1);
+            request.setAttribute("totalPages", 1);
+            request.setAttribute("totalProducts", 0);
 			request.getRequestDispatcher("/WEB-INF/pages/Products.jsp").forward(request, response);
 		}
 	}
