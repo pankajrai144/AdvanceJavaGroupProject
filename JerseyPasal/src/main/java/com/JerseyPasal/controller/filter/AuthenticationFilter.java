@@ -61,16 +61,18 @@ public class AuthenticationFilter extends HttpFilter implements Filter {
 			if ("admin".equalsIgnoreCase(userRole)) {
 				chain.doFilter(request, response);
 			} else {
-				httpResponse.sendRedirect(httpRequest.getContextPath() + "/userdashboard");
+				httpResponse.sendError(HttpServletResponse.SC_FORBIDDEN);
 			}
 			return;
 		}
 
-		if (path.equals("/userdashboard")) {
+		if (path.equals("/userdashboard") || path.equals("/cart") || path.equals("/wishlist") ||
+			path.equals("/review") || path.equals("/payment") || path.equals("/paymentsuccess")) {
+
 			if ("user".equalsIgnoreCase(userRole)) {
 				chain.doFilter(request, response);
 			} else {
-				httpResponse.sendRedirect(httpRequest.getContextPath() + "/admindashboard");
+				httpResponse.sendError(HttpServletResponse.SC_FORBIDDEN);
 			}
 			return;
 		}
