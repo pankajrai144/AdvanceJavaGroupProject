@@ -1,1 +1,777 @@
-@charset "UTF-8";
+.au-hero-section{
+    position:relative;
+    min-height:100vh;
+    background:var(--black);
+    display:flex;
+    align-items:flex-end;
+    justify-content:center;
+    text-align:center;
+    overflow:hidden;
+    border-bottom:1px solid #1e1e1e;
+    padding:0 40px 70px;
+}
+
+.au-hero-image{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    object-position:center 50%;
+    transform:scale(1.08);
+    filter:
+        brightness(1.02)
+        contrast(1.03)
+        saturate(1.02);
+    image-rendering:auto;
+}
+
+.au-hero-section::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(0,0,0,0.02),
+            rgba(0,0,0,0.12),
+            rgba(0,0,0,0.45),
+            var(--black)
+        );
+}
+
+.au-hero-content{
+    position:relative;
+    z-index:1;
+    max-width:880px;
+    width:100%;
+}
+
+.au-shop-btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    padding:13px 34px;
+    background:transparent;
+    border:1.5px solid rgba(255,255,255,0.75);
+    border-radius:50px;
+    text-decoration:none;
+    font-size:0.78rem;
+    font-weight:900;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    color:#ffffff;
+    transition:all 0.3s ease;
+    margin-bottom:20px;
+}
+
+.au-shop-btn i{
+    font-size:0.65rem;
+    transition:transform 0.3s ease;
+}
+
+.au-shop-btn:hover i{
+    transform:translate(3px,-3px);
+}
+
+.au-hero-label{
+    font-size:1rem;
+    font-weight:800;
+    letter-spacing:4px;
+    text-transform:uppercase;
+    color:var(--white);
+    margin-bottom:10px;
+}
+
+.au-hero-content h1{
+    font-size:4.2rem;
+    font-weight:900;
+    line-height:1.1;
+    letter-spacing:2px;
+    color:var(--white);
+    margin-bottom:10px;
+    white-space:nowrap;
+}
+
+.au-hero-content h1 span{
+    color:#d62839;
+}
+
+.au-white-line{
+    color:var(--white) !important;
+}
+
+.au-hero-text{
+    max-width:560px;
+    margin:0 auto;
+    color:rgba(255,255,255,0.82);
+    font-size:1rem;
+    line-height:1.8;
+}
+
+.au-story-section{
+    position:relative;
+    background:var(--black);
+    padding:180px 40px 110px;
+    border-bottom:1px solid #1e1e1e;
+}
+
+.au-story-wrapper{
+    max-width:1350px;
+    margin:0 auto;
+    display:grid;
+    grid-template-columns:1.25fr 0.75fr;
+    gap:70px;
+    align-items:center;
+}
+
+.au-story-text{
+    text-align:left;
+    padding-left:0;
+    margin-left:-90px;
+}
+
+.au-small-title{
+    font-size:1.05rem;
+    font-weight:900;
+    letter-spacing:6px;
+    text-transform:uppercase;
+    color:#8b0d1f !important;
+    margin-bottom:28px;
+}
+
+.au-story-text h2{
+    font-size:4.2rem;
+    font-weight:900;
+    line-height:1.08;
+    color:#ffffff;
+    margin-bottom:30px;
+}
+
+.au-story-text p{
+    max-width:680px;
+    font-size:1.02rem;
+    line-height:1.95;
+    color:rgba(255,255,255,0.78);
+}
+
+.au-stats-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:18px;
+}
+
+.au-stat-card{
+    background:#151515;
+    border:1px solid rgba(255,255,255,0.06);
+    border-radius:16px;
+    min-height:180px;
+    padding:32px 24px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    transition:0.3s ease;
+}
+
+.au-stat-card:hover{
+    transform:translateY(-6px);
+    background:#1d1d1d;
+}
+
+.au-stat-card h3{
+    font-size:3rem;
+    font-weight:900;
+    color:#ffffff;
+    margin-bottom:12px;
+}
+
+.au-stat-card h3 span{
+    color:#d62839;
+}
+
+.au-stat-card p{
+    font-size:0.78rem;
+    font-weight:800;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    color:rgba(255,255,255,0.72);
+}
+
+.au-promise-section{
+    background:linear-gradient(135deg,var(--red),#6a0917);
+    padding:60px 40px;
+    display:flex;
+    align-items:center;
+    gap:34px;
+}
+
+.au-promise-icon{
+    width:64px;
+    height:64px;
+    border:2px solid rgba(255,255,255,0.45);
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:var(--white);
+    font-size:1.6rem;
+    flex-shrink:0;
+}
+
+.au-promise-text h2{
+    font-size:2rem;
+    font-weight:900;
+    color:var(--white);
+    margin-bottom:10px;
+}
+
+.au-promise-text p{
+    max-width:760px;
+    color:rgba(255,255,255,0.82);
+    font-size:0.86rem;
+    line-height:1.8;
+}
+
+.au-offer-section{
+    background:linear-gradient(180deg,#0c0c0c 0%,#090909 100%);
+    padding:120px 40px;
+    border-bottom:1px solid #1e1e1e;
+}
+
+.au-offer-section .au-heading-box{
+    text-align:left;
+    max-width:1500px;
+    margin-bottom:80px;
+    transform:translateX(-50px);
+}
+
+.au-heading-box .au-small-title{
+    font-size:1rem;
+    font-weight:900;
+    letter-spacing:6px;
+    text-transform:uppercase;
+    color:#8b0d1f !important;
+    margin-bottom:22px;
+}
+
+.au-heading-box h2{
+    font-size:4rem;
+    font-weight:900;
+    line-height:1.08;
+    color:#ffffff;
+    margin:0;
+    max-width:850px;
+}
+
+.au-offer-grid{
+    max-width:1500px;
+    margin:0 auto;
+    display:grid;
+    grid-template-columns:repeat(5,minmax(250px,1fr));
+    gap:24px;
+}
+
+.au-offer-card{
+    position:relative;
+    background:linear-gradient(180deg,#171717 0%,#111111 100%);
+    border:1px solid rgba(255,255,255,0.06);
+    border-radius:24px;
+    padding:38px 30px;
+    overflow:hidden;
+    transition:
+        transform 0.35s ease,
+        border-color 0.35s ease,
+        background 0.35s ease,
+        box-shadow 0.35s ease;
+}
+
+.au-offer-card::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:4px;
+    background:#8b0d1f;
+}
+
+.au-offer-card:hover{
+    transform:translateY(-10px);
+    border-color:rgba(139,13,31,0.55);
+    background:linear-gradient(180deg,#1d1d1d 0%,#151515 100%);
+    box-shadow:
+        0 18px 38px rgba(0,0,0,0.42),
+        0 0 18px rgba(139,13,31,0.14);
+}
+
+.au-offer-card i{
+    width:78px;
+    height:78px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:20px;
+    background:rgba(139,13,31,0.12);
+    color:#ffffff;
+    font-size:2rem;
+    margin-bottom:28px;
+    transition:
+        transform 0.35s ease,
+        background 0.35s ease;
+}
+
+.au-offer-card:hover i{
+    background:#8b0d1f;
+    transform:translateY(-4px);
+}
+
+.au-offer-card h3{
+    font-size:1.18rem;
+    font-weight:900;
+    color:#ffffff;
+    line-height:1.45;
+    margin-bottom:16px;
+}
+
+.au-offer-card p{
+    font-size:0.92rem;
+    line-height:1.9;
+    color:rgba(255,255,255,0.72);
+    margin:0;
+}
+
+.au-why-section{
+    background:linear-gradient(180deg,#0d0d0d 0%,#090909 100%);
+    padding:120px 40px;
+    border-bottom:1px solid #1e1e1e;
+}
+
+.au-why-section .au-heading-box{
+    max-width:1500px;
+    margin:0 auto 75px;
+    text-align:left;
+    padding-left:0;
+    margin-left:65px;
+}
+
+.au-why-grid{
+    max-width:1500px;
+    margin:0 auto;
+    display:grid;
+    grid-template-columns:repeat(5,minmax(250px,1fr));
+    gap:24px;
+}
+
+.au-why-card{
+    position:relative;
+    background:linear-gradient(180deg,#171717 0%,#111111 100%);
+    border:1px solid rgba(255,255,255,0.06);
+    border-radius:24px;
+    padding:36px 30px;
+    overflow:hidden;
+    transition:
+        transform 0.35s ease,
+        border-color 0.35s ease,
+        background 0.35s ease,
+        box-shadow 0.35s ease;
+}
+
+.au-why-card::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:4px;
+    background:#8b0d1f;
+}
+
+.au-why-card:hover{
+    transform:translateY(-10px);
+    border-color:rgba(139,13,31,0.55);
+    background:linear-gradient(180deg,#1c1c1c 0%,#151515 100%);
+    box-shadow:
+        0 18px 38px rgba(0,0,0,0.42),
+        0 0 18px rgba(139,13,31,0.14);
+}
+
+.au-card-number{
+    display:block;
+    font-size:2.6rem;
+    font-weight:900;
+    color:rgba(139,13,31,0.32);
+    line-height:1.2;
+    margin-bottom:26px;
+    letter-spacing:1px;
+    font-family:'Poppins',sans-serif;
+}
+
+.au-why-card h3{
+    font-size:1.18rem;
+    font-weight:900;
+    color:#ffffff;
+    margin-bottom:16px;
+    line-height:1.4;
+}
+
+.au-why-card p{
+    font-size:0.9rem;
+    line-height:1.9;
+    color:rgba(255,255,255,0.72);
+    margin:0;
+}
+
+.au-team-section{
+    background:var(--black);
+    padding:110px 40px;
+    border-bottom:1px solid #1e1e1e;
+}
+
+.au-team-section .au-heading-box{
+    max-width:1600px;
+    margin:0 auto 70px;
+    text-align:left;
+}
+
+.au-team-grid{
+    max-width:1600px;
+    margin:0 auto;
+    display:grid;
+    grid-template-columns:repeat(5,minmax(280px,1fr));
+    gap:24px;
+    align-items:stretch;
+}
+
+.au-team-card{
+    background:#171717;
+    border:1px solid rgba(255,255,255,0.06);
+    border-radius:24px;
+    padding:34px 30px;
+    min-height:320px;
+    transition:
+        transform 0.3s ease,
+        border-color 0.3s ease,
+        background 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.au-team-card:hover{
+    transform:translateY(-8px);
+    background:#1d1d1d;
+    border-color:#8b0d1f;
+    box-shadow:0 14px 30px rgba(0,0,0,0.35);
+}
+
+.au-team-image{
+    width:84px;
+    height:84px;
+    border-radius:50%;
+    overflow:hidden;
+    border:2px solid #8b0d1f;
+    margin-bottom:24px;
+}
+
+.au-team-image img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+}
+
+.au-team-card h3{
+    font-size:1.15rem;
+    font-weight:900;
+    color:#ffffff;
+    margin-bottom:8px;
+}
+
+.au-team-role{
+    display:block;
+    color:#8b0d1f !important;
+    font-size:0.76rem;
+    font-weight:800;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    margin-bottom:18px !important;
+}
+
+.au-team-card p{
+    width:100%;
+    max-width:none;
+    color:rgba(255,255,255,0.74);
+    font-size:0.92rem;
+    line-height:1.85;
+    margin:0;
+}
+
+.au-bottom-section{
+    background:linear-gradient(135deg,var(--red),#6a0917);
+    padding:90px 40px;
+    text-align:center;
+}
+
+.au-bottom-section h2{
+    font-size:4rem;
+    margin-bottom:18px;
+}
+
+.au-bottom-section p{
+    color:rgba(255,255,255,0.82);
+    font-size:0.92rem;
+    margin-bottom:34px;
+}
+
+.au-bottom-section a{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:12px;
+    padding:16px 42px;
+    background:#ffffff;
+    color:#8b0d1f;
+    border:2px solid transparent;
+    border-radius:60px;
+    text-decoration:none;
+    font-size:0.8rem;
+    font-weight:900;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    transition:all 0.3s ease;
+    box-shadow:0 10px 28px rgba(0,0,0,0.18);
+}
+
+@media (min-width:1600px){
+    .au-heading-box{
+        max-width:1400px;
+        margin-left:auto;
+        margin-right:auto;
+        padding-left:40px;
+    }
+
+    .au-offer-grid,
+    .au-why-grid,
+    .au-team-grid{
+        padding-left:40px;
+        padding-right:40px;
+    }
+}
+
+@media (min-width:1920px){
+    .au-heading-box{
+        max-width:1600px;
+        padding-left:80px;
+    }
+
+    .au-offer-grid,
+    .au-why-grid,
+    .au-team-grid{
+        max-width:1600px;
+        padding-left:80px;
+        padding-right:80px;
+    }
+}
+
+@media (max-width:1400px){
+    .au-offer-grid,
+    .au-why-grid,
+    .au-team-grid{
+        grid-template-columns:repeat(4,1fr);
+        gap:20px;
+    }
+}
+
+@media (max-width:1200px){
+    .au-offer-grid,
+    .au-why-grid,
+    .au-team-grid{
+        grid-template-columns:repeat(3,1fr);
+    }
+}
+
+@media (max-width:1100px){
+    .au-offer-grid,
+    .au-why-grid,
+    .au-team-grid{
+        grid-template-columns:repeat(3,1fr);
+    }
+
+    .au-heading-box h2{
+        font-size:2.8rem;
+    }
+}
+
+@media (max-width:900px){
+    .au-offer-section,
+    .au-why-section,
+    .au-team-section{
+        padding:80px 30px;
+    }
+
+    .au-offer-grid,
+    .au-why-grid,
+    .au-team-grid{
+        grid-template-columns:repeat(2,1fr);
+        gap:20px;
+    }
+
+    .au-heading-box h2{
+        font-size:2.4rem;
+    }
+
+    .au-team-image{
+        width:130px;
+        height:130px;
+    }
+
+    .au-heading-box{
+        padding-left:0;
+    }
+
+    .au-hero-content h1{
+        font-size:3.4rem;
+    }
+
+    .au-story-wrapper{
+        grid-template-columns:1fr;
+    }
+
+    .au-promise-section{
+        align-items:flex-start;
+    }
+}
+
+@media (max-width:700px){
+    .au-offer-section,
+    .au-why-section,
+    .au-team-section{
+        padding:60px 20px;
+    }
+
+    .au-heading-box{
+        margin-bottom:40px;
+        padding-left:0;
+    }
+
+    .au-heading-box .au-small-title{
+        font-size:0.8rem;
+        letter-spacing:4px;
+        margin-bottom:12px;
+    }
+
+    .au-heading-box h2{
+        font-size:1.8rem;
+    }
+
+    .au-offer-grid,
+    .au-why-grid,
+    .au-team-grid{
+        grid-template-columns:1fr;
+        gap:16px;
+        padding-left:0;
+        padding-right:0;
+    }
+
+    .au-offer-card,
+    .au-why-card,
+    .au-team-card{
+        padding:24px 20px;
+    }
+
+    .au-offer-card i{
+        font-size:2.2rem;
+    }
+
+    .au-card-number{
+        font-size:2.5rem;
+    }
+
+    .au-team-image{
+        width:120px;
+        height:120px;
+    }
+
+    .au-hero-section{
+        min-height:560px;
+        padding:0 24px 36px;
+    }
+
+    .au-hero-content h1{
+        font-size:2.4rem;
+        letter-spacing:2px;
+    }
+
+    .au-story-section,
+    .au-offer-section,
+    .au-why-section,
+    .au-team-section,
+    .au-bottom-section{
+        padding:64px 24px;
+    }
+
+    .au-promise-section{
+        padding:50px 24px;
+        flex-direction:column;
+    }
+
+    .au-stats-grid,
+    .au-offer-grid,
+    .au-why-grid,
+    .au-team-grid{
+        grid-template-columns:1fr;
+    }
+
+    .au-bottom-section h2{
+        font-size:2.5rem;
+    }
+}
+
+@media (max-width:480px){
+    .au-offer-section,
+    .au-why-section,
+    .au-team-section{
+        padding:50px 16px;
+    }
+
+    .au-heading-box h2{
+        font-size:1.5rem;
+    }
+
+    .au-offer-card h3,
+    .au-why-card h3,
+    .au-team-card h3{
+        font-size:1rem;
+    }
+
+    .au-offer-card p,
+    .au-why-card p,
+    .au-team-card p{
+        font-size:0.78rem;
+    }
+
+    .au-hero-content h1{
+        font-size:2rem;
+    }
+
+    .au-hero-label,
+    .au-small-title{
+        font-size:0.6rem;
+        letter-spacing:2.5px;
+    }
+
+    .au-shop-btn{
+        padding:10px 22px;
+        font-size:0.65rem;
+    }
+
+    .au-story-text h2,
+    .au-heading-box h2{
+        font-size:1.8rem;
+    }
+
+    .au-bottom-section h2{
+        font-size:2rem;
+    }
+}
