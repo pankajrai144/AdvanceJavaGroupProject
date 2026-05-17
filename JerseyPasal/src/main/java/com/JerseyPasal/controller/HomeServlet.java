@@ -1,11 +1,15 @@
 package com.JerseyPasal.controller;
 
+import com.JerseyPasal.controller.dao.ProductDAO;
+import com.JerseyPasal.controller.model.ProductModel;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Servlet implementation class HomeServlet
@@ -27,9 +31,25 @@ public class HomeServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
-		request.getRequestDispatcher("/WEB-INF/pages/home.jsp").forward(request, response);
 
+        try {
+            ProductDAO productDAO = new ProductDAO();
+
+            ArrayList<ProductModel> topSellingProducts = productDAO.getTopSellingProducts();
+            ArrayList<ProductModel> newArrivalProducts = productDAO.getNewArrivalProducts();
+
+            request.setAttribute("topSellingProducts", topSellingProducts);
+            request.setAttribute("newArrivalProducts", newArrivalProducts);
+
+            request.getRequestDispatcher("/WEB-INF/pages/home.jsp").forward(request, response);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+
+            request.setAttribute("topSellingProducts", new ArrayList<ProductModel>());
+            request.setAttribute("newArrivalProducts", new ArrayList<ProductModel>());
+            request.getRequestDispatcher("/WEB-INF/pages/home.jsp").forward(request, response);
+        }
 	}
 
 	/**
