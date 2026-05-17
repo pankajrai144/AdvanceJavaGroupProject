@@ -63,6 +63,29 @@ public class AdmindashboardServlet extends HttpServlet {
             ArrayList<ProductModel> products = productDAO.getAllProducts();
             ArrayList<OrderModel> orders = orderDAO.getAllOrders();
 
+            double totalRevenue = 0.0;
+            int totalOrders = 0;
+            int totalCustomers = 0;
+            int totalProducts = 0;
+
+            if (orders != null) {
+                totalOrders = orders.size();
+
+                for (OrderModel order : orders) {
+                    if (!"Cancelled".equalsIgnoreCase(order.getOrderStatus())) {
+                        totalRevenue += order.getOrderTotal();
+                    }
+                }
+            }
+
+            if (users != null) {
+                totalCustomers = users.size();
+            }
+
+            if (products != null) {
+                totalProducts = products.size();
+            }
+
             String adminMessage = "";
 
             if ("true".equals(request.getParameter("denied"))) {
@@ -240,8 +263,11 @@ public class AdmindashboardServlet extends HttpServlet {
             }
 
             StringBuilder orderRows = new StringBuilder();
+            StringBuilder recentOrderRows = new StringBuilder();
 
             if (orders != null && !orders.isEmpty()) {
+
+                int recentLimit = 0;
 
                 for (OrderModel order : orders) {
 
@@ -267,6 +293,15 @@ public class AdmindashboardServlet extends HttpServlet {
 
                     if (customerName == null || customerName.trim().isEmpty()) {
                         customerName = "User #" + order.getUserId();
+                    }
+
+                    if (recentLimit < 5) {
+                        recentOrderRows.append("<tr>");
+                        recentOrderRows.append("<td>#").append(order.getOrderId()).append("</td>");
+                        recentOrderRows.append("<td>").append(customerName).append("</td>");
+                        recentOrderRows.append("<td><span class='badge ").append(statusClass).append("'>").append(status).append("</span></td>");
+                        recentOrderRows.append("</tr>");
+                        recentLimit++;
                     }
 
                     String actionHtml =
@@ -296,12 +331,21 @@ public class AdmindashboardServlet extends HttpServlet {
                 orderRows.append("<tr>");
                 orderRows.append("<td colspan='6'>No orders found.</td>");
                 orderRows.append("</tr>");
+
+                recentOrderRows.append("<tr>");
+                recentOrderRows.append("<td colspan='3'>No recent orders found.</td>");
+                recentOrderRows.append("</tr>");
             }
 
             request.setAttribute("adminMessage", adminMessage);
             request.setAttribute("userRows", userRows.toString());
             request.setAttribute("productRows", productRows.toString());
             request.setAttribute("orderRows", orderRows.toString());
+            request.setAttribute("recentOrderRows", recentOrderRows.toString());
+            request.setAttribute("totalRevenue", String.format("%.2f", totalRevenue));
+            request.setAttribute("totalOrders", totalOrders);
+            request.setAttribute("totalCustomers", totalCustomers);
+            request.setAttribute("totalProducts", totalProducts);
 
             request.getRequestDispatcher("/WEB-INF/pages/admindashboard.jsp").forward(request, response);
 
@@ -312,6 +356,11 @@ public class AdmindashboardServlet extends HttpServlet {
             request.setAttribute("userRows", "<tr><td colspan='4'>No users found.</td></tr>");
             request.setAttribute("productRows", "<tr><td colspan='9'>No products found.</td></tr>");
             request.setAttribute("orderRows", "<tr><td colspan='6'>No orders found.</td></tr>");
+            request.setAttribute("recentOrderRows", "<tr><td colspan='3'>No recent orders found.</td></tr>");
+            request.setAttribute("totalRevenue", "0.00");
+            request.setAttribute("totalOrders", 0);
+            request.setAttribute("totalCustomers", 0);
+            request.setAttribute("totalProducts", 0);
             request.getRequestDispatcher("/WEB-INF/pages/admindashboard.jsp").forward(request, response);
         }
     }
