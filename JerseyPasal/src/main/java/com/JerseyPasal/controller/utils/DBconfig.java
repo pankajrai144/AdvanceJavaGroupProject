@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 
 public class DBconfig {
 
-    private static final String URL = "jdbc:mysql://localhost:3306/project_db";
+    private static final String URL = "jdbc:mysql://localhost:3306/jersey_pasal";
     private static final String USER = "root";
     private static final String PASSWORD = ""; 
 
@@ -18,7 +18,7 @@ public class DBconfig {
 
             conn = DriverManager.getConnection(URL, USER, PASSWORD);
 
-            System.out.println("Connected to project_db ");
+            System.out.println("Connected to jersey_pasal ");
 
         } catch (Exception e) {
             System.out.println("DB Connection Failed ");
