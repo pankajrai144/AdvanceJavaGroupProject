@@ -4,6 +4,7 @@
     color: #f0f2f5;
     overflow-x: hidden;
 }
+
 .home-content-area .home-image-banner{
     position:relative;
     width:100%;
@@ -11,6 +12,7 @@
     overflow:hidden;
     background:transparent;
 }
+
 .home-content-area .home-image-banner img{
     width:100%;
     height:100%;
@@ -20,6 +22,7 @@
     filter:brightness(1.03);
     animation:bannerMove 12s ease-in-out infinite alternate;
 }
+
 @keyframes bannerMove{
    0%{
       transform:scale(1.05) translateX(130px);
@@ -29,6 +32,7 @@
         transform:scale(1.09) translateX(100px);
     }
 }
+
 .home-content-area .home-banner-overlay {
     position:absolute;
     inset:0;
@@ -45,6 +49,7 @@
         rgba(0,0,0,0.02) 100%
     );
 }
+
 .home-content-area .home-banner-tag {
     background: rgba(227, 27, 35, 0.2);
     border: 1px solid rgba(227,27,35,0.5);
@@ -55,18 +60,22 @@
     letter-spacing: 1px;
     margin-bottom: 20px;
 }
+
 .home-content-area .home-banner-overlay h2{
     font-size:3.9rem;
     font-weight:900;
     line-height:1.05;
     margin:0;
 }
+
 .home-content-area .home-banner-overlay h2 .white-text{
     color:#eee;
 }
+
 .home-content-area .home-banner-overlay h2 .red-text{
     color:#e31b23;
 }
+
 .home-content-area .home-banner-overlay p {
     margin-top: 20px;
     font-size: 1.05rem;
@@ -82,6 +91,10 @@
     flex-wrap: wrap;
 }
 
+.home-content-area .home-banner-buttons form {
+    margin: 0;
+}
+
 .home-content-area .home-btn-red {
     background: #e31b23;
     padding: 14px 28px;
@@ -92,6 +105,11 @@
     font-size: 1rem;
     cursor: pointer;
     transition: 0.3s;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
 }
 
 .home-content-area .home-btn-red:hover {
@@ -107,10 +125,12 @@
     background: transparent;
     font-weight: 600;
     cursor: pointer;
-    display: flex;
+    display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 8px;
     transition: 0.3s;
+    text-decoration: none;
 }
 
 .home-content-area .home-btn-outline:hover {
@@ -118,6 +138,7 @@
     color: #000;
     transform: translateY(-3px);
 }
+
 @media (max-width:1200px){
 
     .home-content-area .home-banner-overlay{
@@ -242,6 +263,7 @@
         font-size:0.88rem;
     }
 }
+
 .home-content-area .home-section {
     padding: 5rem 5%;
     max-width: 1400px;
@@ -314,6 +336,9 @@
     overflow: hidden;
     height: 420px;
     cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    background: #111317;
 }
 
 .home-content-area .home-city-card img {
@@ -345,14 +370,35 @@
     font-size: 0.9rem;
     color: #ddd;
 }
+
+.home-content-area .home-no-product-image {
+    width: 100%;
+    height: 100%;
+    background: #15181f;
+    color: rgba(255,255,255,0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+}
+
+.home-content-area .home-empty-product-box {
+    background: #15181f;
+    border: 1px solid #262933;
+    border-radius: 20px;
+    padding: 2rem;
+    color: #bbb;
+    text-align: center;
+}
+
 .home-content-area .home-why-grid{
     display:grid;
     grid-template-columns:repeat(4,1fr);
-
     gap:1.5rem;
     margin-top:2rem;
     width:100%;
 }
+
 .home-content-area .home-why-card{
     background:linear-gradient(135deg,#15181f,#0f1117);
     padding:2rem 2.5rem;
@@ -389,6 +435,7 @@
     line-height:1.5;
     font-size:0.95rem;
 }
+
 .home-content-area .home-timeline {
     position: relative;
     padding: 2rem 0;
@@ -450,27 +497,46 @@
 
 .home-content-area .home-stadium-text {
     flex: 1;
+    min-width: 300px;
 }
 
 .home-content-area .home-stadium-text h3 {
     font-size: 2rem;
     margin-bottom: 1rem;
+    line-height: 1.3;
+}
+
+.home-content-area .home-stadium-text p {
+    color: #ffffff;
+    line-height: 1.7;
+    margin-bottom: 24px;
+    max-width: 620px;
+}
+
+.home-content-area .home-gift-form {
+    margin: 0;
 }
 
 .home-content-area .home-gift-btn {
-    margin-top: 1rem;
+    margin-top: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: auto;
 }
 
 .home-content-area .home-stadium-image {
     flex: 1;
+    min-width: 300px;
     display: flex;
     justify-content: flex-end;
     align-items: center;
 }
 
 .home-content-area .home-stadium-image img {
-    width: 110%;
-    max-width: 380px;
+    width: 100%;
+    max-width: 420px;
     height: auto;
     border-radius: 28px;
     object-fit: cover;
@@ -493,10 +559,8 @@
 .home-content-area .home-news-card img{
     width:100%;
     height:400px;
-
     object-fit:cover;
     object-position:center;
-
     display:block;
 }
 
@@ -606,6 +670,7 @@
             rgba(0,0,0,0.48) 100%
         );
     }
+
 	.home-content-area .home-banner-line {
         width: 42px;
     }
@@ -642,6 +707,20 @@
     .home-content-area .home-stadium-section {
         flex-direction: column;
         text-align: center;
+    }
+
+    .home-content-area .home-stadium-text {
+        width: 100%;
+    }
+
+    .home-content-area .home-stadium-text p {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .home-content-area .home-stadium-image {
+        width: 100%;
+        justify-content: center;
     }
 
     .home-content-area .home-stadium-image img {
@@ -776,6 +855,10 @@
         flex-direction: column;
         align-items: stretch;
         gap: 10px;
+    }
+
+    .home-content-area .home-banner-buttons form {
+        width: 100%;
     }
 
     .home-content-area .home-btn-red,

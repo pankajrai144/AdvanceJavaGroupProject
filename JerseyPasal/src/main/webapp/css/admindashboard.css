@@ -5,6 +5,10 @@
   font-family: 'Poppins', sans-serif;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background: #111111;
   color: #ffffff;
@@ -114,6 +118,24 @@ body {
   color: #ffffff;
 }
 
+.admin-side-link {
+  color: inherit;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  height: 100%;
+}
+
+.admin-side-link i {
+  margin-right: 0;
+}
+
+.sidebar ul li.active .admin-side-link {
+  color: #ffffff;
+}
+
 .logout {
   margin-top: auto;
   padding: 12px;
@@ -160,30 +182,6 @@ body {
   text-transform: uppercase;
   letter-spacing: 1px;
   color: #ffffff;
-}
-
-.top-right {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-}
-
-.top-right input {
-  padding: 8px 12px;
-  border-radius: 6px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  background: #1a1a1a;
-  color: #ffffff;
-  outline: none;
-  font-size: 13px;
-}
-
-.top-right input::placeholder {
-  color: rgba(255, 255, 255, 0.35);
-}
-
-.top-right input:focus {
-  border-color: #8b0d1f;
 }
 
 .stats {
@@ -361,6 +359,7 @@ button:disabled:hover {
   border-radius: 8px;
   border: 1px solid rgba(255, 255, 255, 0.07);
   margin-bottom: 20px;
+  scroll-margin-top: 105px;
 }
 
 .section h2 {

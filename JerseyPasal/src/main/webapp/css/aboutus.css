@@ -481,6 +481,10 @@
     display:block;
 }
 
+.au-team-card:nth-child(1) .au-team-image img{
+    object-position:center top;
+}
+
 .au-team-card h3{
     font-size:1.15rem;
     font-weight:900;
