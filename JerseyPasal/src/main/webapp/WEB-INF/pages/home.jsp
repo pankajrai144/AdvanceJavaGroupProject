@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" isELIgnored="false"%>
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -29,19 +29,29 @@
       <div class="home-banner-line"></div>
       <span class="home-banner-tag">Trusted by Football Fans Across Nepal</span>
 
-  			<h2>
-    <span class="white-text">Where Football</span><br>
-    <span class="white-text">Dreams Begin in</span>
-    <span class="red-text">Nepal</span>
-</h2>
+      <h2>
+        <span class="white-text">Where Football</span><br>
+        <span class="white-text">Dreams Begin in</span>
+        <span class="red-text">Nepal</span>
+      </h2>
+
       <p>
         48 Nations. One Trophy. History Awaits. The biggest FIFA World Cup in history.
         Three nations, 104 matches, and the world watching every kick. Don't miss a moment.
       </p>
 
       <div class="home-banner-buttons">
-        <button class="home-btn-red">Shop Collection <i class="fas fa-store"></i></button>
-        <button class="home-btn-outline">Team Jerseys <i class="fa-solid fa-shirt"></i></button>
+        <form action="${pageContext.request.contextPath}/product" method="get">
+          <button type="submit" class="home-btn-red">
+            Shop Collection <i class="fas fa-store"></i>
+          </button>
+        </form>
+
+        <form action="${pageContext.request.contextPath}/nation" method="get">
+          <button type="submit" class="home-btn-outline">
+            Team Jerseys <i class="fa-solid fa-shirt"></i>
+          </button>
+        </form>
       </div>
     </div>
   </div>
@@ -76,29 +86,38 @@
     <div class="home-sec-sub">Fan favorites that everyone is wearing right now</div>
 
     <div class="home-cities-grid">
-      <div class="home-city-card">
-         <img src="<c:url value='/images/portugal1.jpg'/>" alt="Portugal Jersey">
-        <div class="home-city-overlay">
-          <h3>Argentina Home Jersey</h3>
-          <p>Messi #10 · #1 Best Seller</p>
-        </div>
-      </div>
 
-      <div class="home-city-card">
-         <img src="<c:url value='/images/portugal1.jpg'/>" alt="Portugal Jersey">
-        <div class="home-city-overlay">
-          <h3>Portugal Away Jersey</h3>
-          <p>Ronaldo #7 · 2,500+ Sold</p>
-        </div>
-      </div>
+      <c:choose>
+        <c:when test="${not empty topSellingProducts}">
+          <c:forEach var="product" items="${topSellingProducts}">
+            <a href="${pageContext.request.contextPath}/product?productId=${product.productId}" class="home-city-card">
+              <c:choose>
+                <c:when test="${not empty product.productImage}">
+                  <img src="${pageContext.request.contextPath}/getimage?productImage=${product.productImage}" alt="${product.jerseyName}">
+                </c:when>
 
-      <div class="home-city-card">
-         <img src="<c:url value='/images/portugal1.jpg'/>" alt="Portugal Jersey">
-        <div class="home-city-overlay">
-          <h3>Brazil Home Jersey</h3>
-          <p>Neymar #10 · Limited Stock</p>
-        </div>
-      </div>
+                <c:otherwise>
+                  <div class="home-no-product-image">
+                    <i class="fa-solid fa-image"></i>
+                  </div>
+                </c:otherwise>
+              </c:choose>
+
+              <div class="home-city-overlay">
+                <h3>${product.jerseyName}</h3>
+                <p>${product.teamName} · £${product.price}</p>
+              </div>
+            </a>
+          </c:forEach>
+        </c:when>
+
+        <c:otherwise>
+          <div class="home-empty-product-box">
+            <p>No top selling jerseys available yet.</p>
+          </div>
+        </c:otherwise>
+      </c:choose>
+
     </div>
   </section>
 
@@ -204,8 +223,17 @@
     <div class="home-stadium-section">
       <div class="home-stadium-text">
         <h3><i class="fa-solid fa-gift"></i> The Perfect Gift for Football Lovers</h3>
-        <p>Birthday? Anniversary? Just because? A personalized jersey is the ultimate gift. We'll pack it beautifully and deliver with a smile.</p>
-        <button class="home-btn-red home-gift-btn">Shop to Gift <i class="fa-solid fa-arrow-right"></i></button>
+
+        <p>
+          Birthday? Anniversary? Just because? A personalized jersey is the ultimate gift.
+          We'll pack it beautifully and deliver with a smile.
+        </p>
+
+        <form action="${pageContext.request.contextPath}/product" method="get" class="home-gift-form">
+          <button type="submit" class="home-btn-red home-gift-btn">
+            Shop to Gift <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </form>
       </div>
 
       <div class="home-stadium-image">
@@ -218,42 +246,45 @@
     <div class="home-sec-title"><i class="fa-regular fa-bell"></i> New Arrivals</div>
     <div class="home-sec-sub">Fresh jerseys just landed in Nepal</div>
 
-    <div class="home-news-grid">
-      <div class="home-news-card">
-         <img src="<c:url value='/images/portugal1.jpg'/>" alt="Portugal Jersey">
-        <div class="home-news-info">
-          <div class="home-news-date"><i class="fa-regular fa-calendar"></i> Just Arrived</div>
-          <h3>England Home 2026</h3>
-          <p>Clean white. Classic style. Limited stock.</p>
-          <button class="home-btn-red home-small-btn">Buy Now</button>
-        </div>
-      </div>
+    <div class="home-cities-grid">
 
-      <div class="home-news-card">
-         <img src="<c:url value='/images/ronaldo3.jpg'/>" alt="Portugal Jersey">
-        <div class="home-news-info">
-          <div class="home-news-date"><i class="fa-regular fa-calendar"></i> Just Arrived</div>
-          <h3>Germany Home 2026</h3>
-          <p>Classic white and black. Pre-order open.</p>
-          <button class="home-btn-red home-small-btn">Buy Now</button>
-        </div>
-      </div>
+      <c:choose>
+        <c:when test="${not empty newArrivalProducts}">
+          <c:forEach var="product" items="${newArrivalProducts}">
+            <a href="${pageContext.request.contextPath}/product?productId=${product.productId}" class="home-city-card">
+              <c:choose>
+                <c:when test="${not empty product.productImage}">
+                  <img src="${pageContext.request.contextPath}/getimage?productImage=${product.productImage}" alt="${product.jerseyName}">
+                </c:when>
 
-      <div class="home-news-card">
-         <img src="<c:url value='/images/portugal2.jpg'/>" alt="Portugal Jersey">
-        <div class="home-news-info">
-          <div class="home-news-date"><i class="fa-regular fa-calendar"></i> Limited Edition</div>
-          <h3>Portugal Ronaldo Edition</h3>
-          <p>CR7 special. Only 50 pieces in Nepal.</p>
-          <button class="home-btn-red home-small-btn">Buy Now</button>
-        </div>
-      </div>
+                <c:otherwise>
+                  <div class="home-no-product-image">
+                    <i class="fa-solid fa-image"></i>
+                  </div>
+                </c:otherwise>
+              </c:choose>
+
+              <div class="home-city-overlay">
+                <h3>${product.jerseyName}</h3>
+                <p>${product.teamName} · £${product.price}</p>
+              </div>
+            </a>
+          </c:forEach>
+        </c:when>
+
+        <c:otherwise>
+          <div class="home-empty-product-box">
+            <p>No new arrivals available yet.</p>
+          </div>
+        </c:otherwise>
+      </c:choose>
+
     </div>
   </section>
 
   <div class="home-contact-simple">
     <h2><i class="fa-regular fa-message"></i> Questions?</h2>
-    <p>Call or WhatsApp us: <strong>+977 9800000000</strong></p>
+    <p>Call or WhatsApp us: <strong>+977 9843411719</strong></p>
     <p>Or DM us on Instagram <strong>@jerseypasal</strong></p>
   </div>
 

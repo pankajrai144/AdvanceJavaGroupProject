@@ -30,11 +30,35 @@
     </div>
 
     <ul>
-      <li class="active"><i class="fa fa-chart-line"></i> Dashboard</li>
-      <li><i class="fa fa-box"></i> Products</li>
-      <li><i class="fa fa-shopping-cart"></i> Orders</li>
-      <li><i class="fa fa-users"></i> Customers</li>
-      <li><i class="fa fa-cog"></i> Settings</li>
+      <li>
+        <a href="${pageContext.request.contextPath}/home" class="admin-side-link">
+          <i class="fa fa-home"></i> Home
+        </a>
+      </li>
+
+      <li class="active">
+        <a href="#dashboardTop" class="admin-side-link">
+          <i class="fa fa-chart-line"></i> Dashboard
+        </a>
+      </li>
+
+      <li>
+        <a href="#manageProducts" class="admin-side-link">
+          <i class="fa fa-box"></i> Manage Products
+        </a>
+      </li>
+
+      <li>
+        <a href="#manageOrders" class="admin-side-link">
+          <i class="fa fa-shopping-cart"></i> Manage Orders
+        </a>
+      </li>
+
+      <li>
+        <a href="#manageUsers" class="admin-side-link">
+          <i class="fa fa-users"></i> Manage Users
+        </a>
+      </li>
     </ul>
 
     <a href="${pageContext.request.contextPath}/logout" class="logout">
@@ -42,16 +66,31 @@
     </a>
   </aside>
 
-  <main class="main">
+  <main class="main" id="dashboardTop">
     <div class="topbar">
       <h1>Dashboard Overview</h1>
     </div>
 
     <div class="stats">
-      <div class="card"><h4>Total Revenue</h4><p>$12,400</p></div>
-      <div class="card"><h4>Orders</h4><p>320</p></div>
-      <div class="card"><h4>Customers</h4><p>150</p></div>
-      <div class="card"><h4>Products</h4><p>85</p></div>
+      <div class="card">
+        <h4>Total Revenue</h4>
+        <p>£${totalRevenue}</p>
+      </div>
+
+      <div class="card">
+        <h4>Orders</h4>
+        <p>${totalOrders}</p>
+      </div>
+
+      <div class="card">
+        <h4>Customers</h4>
+        <p>${totalCustomers}</p>
+      </div>
+
+      <div class="card">
+        <h4>Products</h4>
+        <p>${totalProducts}</p>
+      </div>
     </div>
 
     <div class="grid">
@@ -59,15 +98,19 @@
       <div class="box">
         <h3>Recent Orders</h3>
         <table>
-          <tr><th>ID</th><th>Customer</th><th>Status</th></tr>
-          <tr><td>#101</td><td>John</td><td><span class="badge success">Delivered</span></td></tr>
-          <tr><td>#102</td><td>Alice</td><td><span class="badge pending">Pending</span></td></tr>
+          <tr>
+            <th>ID</th>
+            <th>Customer</th>
+            <th>Status</th>
+          </tr>
+
+          <c:out value="${recentOrderRows}" escapeXml="false" />
         </table>
       </div>
 
     </div>
 
-    <div class="section">
+    <div class="section" id="manageProducts">
       <h2>Product Management</h2>
 
       <c:out value="${adminMessage}" escapeXml="false" />
@@ -152,7 +195,7 @@
       </table>
     </div>
 
-    <div class="section">
+    <div class="section" id="manageOrders">
       <h2>Order Management</h2>
 
       <table>
@@ -169,7 +212,7 @@
       </table>
     </div>
 
-    <div class="section">
+    <div class="section" id="manageUsers">
       <h2>User Management</h2>
 
       <table>

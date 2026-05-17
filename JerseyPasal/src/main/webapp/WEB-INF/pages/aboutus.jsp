@@ -28,10 +28,10 @@
         </a>
 
         <p class="au-hero-label">Nepal's Number One Jersey Store</p>
-			<h1>
-    The Home of <span>Authentic</span><br>
-    <span class="au-white-line">Jerseys in Nepal</span>
-</h1>
+        <h1>
+            The Home of <span>Authentic</span><br>
+            <span class="au-white-line">Jerseys in Nepal</span>
+        </h1>
 
         <p class="au-hero-text">
             From the biggest leagues to your doorstep we deliver passion, identity, and<br>
@@ -179,15 +179,6 @@
     <div class="au-team-grid">
         <div class="au-team-card">
             <div class="au-team-image">
-                <img src="${pageContext.request.contextPath}/images/eijkeyalPakhrin.jpeg" alt="Eijkeyal Pakhrin">
-            </div>
-            <h3>Eijkeyal Pakhrin</h3>
-            <p class="au-team-role">Backend &amp; Frontend Developer</p>
-            <p>Through my journey in technology, I've built strong confidence in solving problems creatively. I approach challenges by breaking them into manageable parts and finding practical, innovative solutions making me more resilient and continuously learning.</p>
-        </div>
-
-        <div class="au-team-card">
-            <div class="au-team-image">
                 <img src="${pageContext.request.contextPath}/images/pankajRai.jpg" alt="Pankaj Rai">
             </div>
             <h3>Pankaj Rai</h3>
@@ -197,9 +188,18 @@
 
         <div class="au-team-card">
             <div class="au-team-image">
+                <img src="${pageContext.request.contextPath}/images/eijkeyalPakhrin.jpeg" alt="Eijkeyal Pakhrin">
+            </div>
+            <h3>Eijkeyal Pakhrin</h3>
+            <p class="au-team-role">Backend &amp; Frontend Developer</p>
+            <p>Through my journey in technology, I've built strong confidence in solving problems creatively. I approach challenges by breaking them into manageable parts and finding practical, innovative solutions making me more resilient and continuously learning.</p>
+        </div>
+
+        <div class="au-team-card">
+            <div class="au-team-image">
                 <img src="${pageContext.request.contextPath}/images/bisrutAdhikari.jpg" alt="Bisrut Adhikari">
             </div>
-            <h3>Bishrut Adhikari</h3>
+            <h3>Bishrut Raj Adhikari</h3>
             <p class="au-team-role">Backend &amp; Frontend Developer</p>
             <p>Designs modern and user-friendly interfaces for a better experience. Brings a creative mindset to backend systems, ensuring smooth functionality that powers the Jersey Pasal platform.</p>
         </div>
