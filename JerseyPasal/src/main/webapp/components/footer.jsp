@@ -12,18 +12,15 @@
         <div class="col">
             <h4>Quick Links</h4>
             <a href="${pageContext.request.contextPath}/home">Home</a>
-            <a href="${pageContext.request.contextPath}/products">Best Sellers</a>
-            <a href="${pageContext.request.contextPath}/retro">Retro Jerseys</a>
-            <a href="${pageContext.request.contextPath}/about">About Us</a>
+            <a href="${pageContext.request.contextPath}/retro">Retro</a>
+            <a href="${pageContext.request.contextPath}/aboutus">About Us</a>
             <a href="#">Contact</a>
         </div>
 
         <div class="col">
             <h4>Categories</h4>
             <a href="${pageContext.request.contextPath}/nation">Nations</a>
-            <a href="${pageContext.request.contextPath}/clubs">Club Jerseys</a>
-            <a href="${pageContext.request.contextPath}/retro">Retro Collection</a>
-            <a href="${pageContext.request.contextPath}/jersey">Player Edition</a>
+            <a href="${pageContext.request.contextPath}/clubs">Clubs</a>
         </div>
         
         <div class="col">
@@ -42,7 +39,6 @@
                 <a href="#" title="Facebook" class="icon">f</a>
                 <a href="#" title="YouTube" class="icon">&#9654;</a>
                 <a href="#" title="X / Twitter" class="icon">X</a>
-                <a href="#" title="TikTok" class="icon">&#9835;</a>
             </div>
         </div>
 
