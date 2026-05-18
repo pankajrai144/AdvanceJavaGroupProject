@@ -129,46 +129,106 @@
 </div>
    	 </div>
 </section>
+<div class="home-content-area">
 
-<section class="au-why-section">
-    <div class="au-heading-box">
-        <p class="au-small-title">Why Choose Us</p>
-        <h2>The Jersey Pasal Difference</h2>
+ <section class="home-section">
+    <div class="home-sec-title"><i class="fa-regular fa-star"></i> Why Choose Jersey Pasal</div>
+    <div class="home-sec-sub">Your trusted destination for authentic football jerseys and World Cup 2026 merchandise</div>
+
+    <div class="home-why-grid">
+      <div class="home-why-card">
+        <span class="home-why-icon"><i class="fa-regular fa-circle-check"></i></span>
+        <h3>100% Authentic</h3>
+        <p>Every jersey is sourced from licensed manufacturers authentic or clearly labelled replica. Never fake.</p>
+      </div>
+	<div class="home-why-card">
+    	<span class="home-why-icon"><i class="fa-solid fa-globe"></i></span>
+    	<h3>Inspired by Global Football Culture</h3>
+    	<p>We bring the passion of world football closer to fans with stylish designs inspired by clubs and international teams.</p>
+	</div>
+
+      <div class="home-why-card">
+        <span class="home-why-icon"><i class="fa-solid fa-arrow-rotate-left"></i></span>
+        <h3>Easy Returns</h3>
+        <p>Changed your mind? Free 30-day returns on all unworn jerseys with no questions asked.</p>
+      </div>
+
+      <div class="home-why-card">
+        <span class="home-why-icon"><i class="fa-solid fa-lock"></i></span>
+        <h3>Secure Payment</h3>
+        <p>Shop with confidence. We accept all major cards, PayPal, and buy-now-pay-later options.</p>
+      </div>
+
+	 <div class="home-why-card">
+    <span class="home-why-icon">
+        <i class="fa-solid fa-users"></i>
+    </span><h3>Customer First Approach</h3>
+    <p>We are committed to providing trusted service, premium quality, and a seamless shopping experience for every football fan.</p>
+</div>		
+
+      <div class="home-why-card">
+        <span class="home-why-icon"><i class="fa-solid fa-handshake"></i></span>
+        <h3>Official Partnerships</h3>
+        <p>Partnered with Adidas, Nike, Puma and more for direct access to the latest drops.</p>
+      </div>
+
+      <div class="home-why-card">
+        <span class="home-why-icon"><i class="fa-solid fa-headset"></i></span>
+        <h3>24/7 Support</h3>
+        <p>Our fan support team is always online chat, email, or WhatsApp, any time of day.</p>
+      </div>
+
+      <div class="home-why-card">
+        <span class="home-why-icon"><i class="fa-solid fa-certificate"></i></span>
+        <h3>Nepal's Number One Store</h3>
+        <p>10,000+ happy customers. Most trusted jersey pasal in Nepal.</p>
+      </div>
     </div>
+  </section>
 
-    <div class="au-why-grid">
-        <div class="au-why-card">
-            <p class="au-card-number">01</p>
-            <h3>100% Quality Guarantee</h3>
-            <p>Every product is inspected before dispatch. Not satisfied? We offer easy returns, no questions asked.</p>
-        </div>
+  <section class="home-section">
+    <div class="home-sec-title"><i class="fa-regular fa-star"></i> Our Journey</div>
+    <div class="home-sec-sub">From a small shop to Nepal's Number One jersey store</div>
 
-        <div class="au-why-card">
-            <p class="au-card-number">02</p>
-            <h3>Trusted &amp; Verified Products</h3>
-            <p>We source directly from licensed suppliers. Every jersey is verified for authenticity before it reaches our store.</p>
+    <div class="home-timeline">
+      <div class="home-timeline-item">
+        <div class="home-timeline-date">2023</div>
+        <div class="home-timeline-content">
+          <h3><i class="fa-solid fa-store"></i> Humble Beginnings</h3>
+          <p>Started as a small jersey shop in Kathmandu</p>
         </div>
+        <div class="home-timeline-dot"></div>
+      </div>
 
-        <div class="au-why-card">
-            <p class="au-card-number">03</p>
-            <h3>Fast Order Processing</h3>
-            <p>Orders processed within 24 hours. Kathmandu Valley in 1–2 days, nationwide in 3–5 days.</p>
+      <div class="home-timeline-item">
+        <div class="home-timeline-date">2024</div>
+        <div class="home-timeline-content">
+          <h3><i class="fa-solid fa-globe"></i> Online Store Launch</h3>
+          <p>Brought authentic jerseys to every corner of Nepal</p>
         </div>
+        <div class="home-timeline-dot"></div>
+      </div>
 
-        <div class="au-why-card">
-            <p class="au-card-number">04</p>
-            <h3>Dedicated Customer Support</h3>
-            <p>Our team is available on WhatsApp, Messenger, and email 7 days a week to help with orders and sizing.</p>
+      <div class="home-timeline-item">
+        <div class="home-timeline-date">2025</div>
+        <div class="home-timeline-content">
+          <h3><i class="fa-solid fa-users"></i> 10,000+ Happy Customers</h3>
+          <p>Nepal's most trusted name for football jerseys</p>
         </div>
+        <div class="home-timeline-dot"></div>
+      </div>
 
-        <div class="au-why-card">
-            <p class="au-card-number">05</p>
-            <h3>Best Prices in Nepal</h3>
-            <p>Fair, transparent pricing with no hidden charges  plus regular deals, discounts, and loyalty rewards.</p>
+      <div class="home-timeline-item">
+        <div class="home-timeline-date">2026</div>
+        <div class="home-timeline-content">
+          <h3><i class="fa-solid fa-trophy"></i> World Cup Collection</h3>
+          <p>Official jerseys for all 48 Nations. Available now</p>
         </div>
+        <div class="home-timeline-dot"></div>
+      </div>
     </div>
-</section>
-
+  </section>
+</div>
 <section class="au-team-section">
     <div class="au-heading-box">
         <p class="au-small-title">The People Behind It</p>
