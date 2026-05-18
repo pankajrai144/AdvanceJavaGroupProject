@@ -63,12 +63,6 @@
       </li>
 
       <li>
-        <a href="${pageContext.request.contextPath}/logout" class="menu-link">
-          <i class="fa-solid fa-right-from-bracket"></i> Logout
-        </a>
-      </li>
-
-      <li>
         <form action="${pageContext.request.contextPath}/confirmdelete" 
               method="get"
               class="delete-account-form">
@@ -78,6 +72,13 @@
           </button>
 
         </form>
+      </li>
+
+      <li class="logout-menu-item">
+        <a href="${pageContext.request.contextPath}/logout" class="logout-link">
+          <i class="fa-solid fa-right-from-bracket"></i>
+          <span>Logout</span>
+        </a>
       </li>
 
     </ul>

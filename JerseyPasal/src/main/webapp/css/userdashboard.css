@@ -47,10 +47,19 @@ body {
 
 .sidebar-menu {
   list-style: none;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }
 
 .sidebar-menu li {
   margin-bottom: 8px;
+}
+
+.logout-menu-item {
+  margin-top: auto;
+  padding-top: 30px;
+  margin-bottom: 0;
 }
 
 .menu-link {
@@ -78,6 +87,40 @@ body {
 .sidebar-menu .active {
   background: #8b0d1f;
   color: #ffffff;
+}
+
+.sidebar-menu .logout-menu-item .logout-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  width: fit-content;
+  padding: 0 14px;
+  background: transparent;
+  color: #e74c3c !important;
+  border-radius: 0;
+  font-size: 13px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.sidebar-menu .logout-menu-item .logout-link i {
+  color: #e74c3c !important;
+  font-size: 14px;
+}
+
+.sidebar-menu .logout-menu-item .logout-link span {
+  color: #e74c3c !important;
+}
+
+.sidebar-menu .logout-menu-item .logout-link:hover {
+  background: transparent !important;
+  color: #e74c3c !important;
+}
+
+.sidebar-menu .logout-menu-item .logout-link:hover i,
+.sidebar-menu .logout-menu-item .logout-link:hover span {
+  color: #e74c3c !important;
 }
 
 .delete-account-form {
@@ -501,8 +544,20 @@ table tr:hover td {
 
   .sidebar-menu {
     display: flex;
+    flex-direction: row;
     overflow-x: auto;
     gap: 8px;
+    flex: none;
+  }
+
+  .logout-menu-item {
+    margin-top: 0;
+    padding-top: 0;
+  }
+
+  .sidebar-menu .logout-menu-item .logout-link {
+    width: auto;
+    padding: 11px 14px;
   }
 
   .sidebar-menu li {
