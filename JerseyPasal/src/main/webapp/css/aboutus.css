@@ -263,11 +263,11 @@
     text-align:left;
     max-width:1500px;
     margin-bottom:20px;
-    margin-left:-10px;
+    margin-left:-5px;
 }
 
 .au-heading-box .au-small-title{
-    font-size:0.72rem;
+    font-size:0.85rem;
     font-weight:900;
     letter-spacing:3px;
     text-transform:uppercase;
@@ -276,7 +276,7 @@
 }
 
 .au-heading-box h2{
-    font-size:2rem;
+    font-size:2.5rem;
     font-weight:900;
     text-transform:uppercase;
     line-height:1.08;
@@ -286,10 +286,10 @@
 }
 
 .au-offer-grid{
-    max-width:1500px;
-    margin:0 auto;
+    max-width:1480px;
+    margin:0 auto 0 20px;
     display:grid;
-    grid-template-columns:repeat(5,minmax(250px,1fr));
+    grid-template-columns:repeat(5,minmax(260px,1fr));
     gap:24px;
 }
 
@@ -297,8 +297,8 @@
     position:relative;
     background:linear-gradient(180deg,#171717 0%,#111111 100%);
     border:1px solid rgba(255,255,255,0.06);
-    border-radius:24px;
-    padding:38px 30px;
+    border-radius:26px;
+    padding:40px 30px;
     overflow:hidden;
     transition:
         transform 0.35s ease,
@@ -327,16 +327,16 @@
 }
 
 .au-offer-card i{
-    width:78px;
-    height:78px;
+    width:85px;
+    height:85px;
     display:flex;
     align-items:center;
     justify-content:center;
-    border-radius:20px;
+    border-radius:22px;
     background:rgba(139,13,31,0.12);
     color:#ffffff;
-    font-size:2rem;
-    margin-bottom:28px;
+    font-size:2.3rem;
+    margin-bottom:30px;
     transition:
         transform 0.35s ease,
         background 0.35s ease;
@@ -348,23 +348,309 @@
 }
 
 .au-offer-card h3{
-    font-size:0.82rem;
+    font-size:0.95rem;
     font-weight:900;
     text-transform:uppercase;
     letter-spacing:1px;
     color:#ffffff;
     line-height:1.45;
-    margin-bottom:16px;
+    margin-bottom:17px;
 }
 
 .au-offer-card p{
-    font-size:0.76rem;
+    font-size:0.84rem;
     font-weight:500;
-    line-height:1.5;
+    line-height:1.6;
     color:rgba(255,255,255,0.72);
     margin:0;
 }
+.home-content-area .home-section {
+    padding: 6rem 5%;
+    max-width: 1600px;
+    margin: 0 auto;
+}
 
+.home-content-area .home-sec-title {
+    font-size: 3.2rem;
+    font-weight: 800;
+    margin-bottom: 1.2rem;
+    letter-spacing: -0.5px;
+    text-align: center;
+}
+
+.home-content-area .home-sec-title i {
+    margin-right: 12px;
+    color: #8b0d1f;
+}
+
+.home-content-area .home-sec-sub {
+    font-size: 1.2rem;
+    color: #aaa;
+    margin-bottom: 3.5rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.home-content-area .home-why-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    margin-top: 2.5rem;
+    width: 100%;
+}
+
+.home-content-area .home-why-card {
+    background: linear-gradient(135deg, #1a1a1a, #111);
+    padding: 2.5rem;
+    border-radius: 24px;
+    border: 1px solid #222;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+}
+
+.home-content-area .home-why-card:hover {
+    transform: translateY(-8px);
+    border-color: #8b0d1f;
+    box-shadow: 0 15px 35px rgba(139, 13, 31, 0.15);
+}
+
+.home-content-area .home-why-icon {
+    font-size: 3rem;
+    color: #8b0d1f;
+    margin-bottom: 1.5rem;
+    display: inline-block;
+}
+
+.home-content-area .home-why-card h3 {
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.home-content-area .home-why-card p {
+    color: #bbb;
+    font-size: 1rem;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.home-content-area .home-timeline {
+    position: relative;
+    padding: 2.5rem 0;
+}
+
+.home-content-area .home-timeline::before {
+    content: '';
+    position: absolute;
+    left: 500px;
+    transform: translateX(0);
+    width: 4px;
+    height: 100%;
+    background: #8b0d1f;
+}
+
+.home-content-area .home-timeline-item {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 2.5rem;
+    position: relative;
+    padding-left: 530px;
+}
+
+.home-content-area .home-timeline-date {
+    width: auto;
+    min-width: 100px;
+    text-align: left;
+    padding-right: 2rem;
+    font-weight: 800;
+    font-size: 1.5rem;
+    color: #8b0d1f;
+}
+
+.home-content-area .home-timeline-content {
+    width: calc(100% - 120px);
+    background: #1a1a1a;
+    padding: 1.5rem 2rem;
+    border-radius: 20px;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #bbb;
+}
+
+.home-content-area .home-timeline-content h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: #ffffff;
+}
+
+.home-content-area .home-timeline-content h3 i {
+    color: #8b0d1f;
+    margin-right: 8px;
+}
+
+.home-content-area .home-timeline-content p {
+    margin: 0;
+}
+
+.home-content-area .home-timeline-dot {
+    position: absolute;
+    left: 492px;
+    transform: translateX(0);
+    width: 16px;
+    height: 16px;
+    background: #8b0d1f;
+    border-radius: 50%;
+    top: 20px;
+}
+
+
+@media (max-width: 1400px) {
+    .home-content-area .home-timeline::before {
+        left: 400px;
+    }
+    .home-content-area .home-timeline-item {
+        padding-left: 430px;
+    }
+    .home-content-area .home-timeline-dot {
+        left: 392px;
+    }
+}
+
+@media (max-width: 1200px) {
+    .home-content-area .home-timeline::before {
+        left: 300px;
+    }
+    .home-content-area .home-timeline-item {
+        padding-left: 330px;
+    }
+    .home-content-area .home-timeline-dot {
+        left: 292px;
+    }
+    .home-content-area .home-timeline-date {
+        font-size: 1.3rem;
+        min-width: 90px;
+    }
+    .home-content-area .home-timeline-content {
+        width: calc(100% - 100px);
+        padding: 1.2rem 1.8rem;
+    }
+    .home-content-area .home-timeline-content h3 {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 992px) {
+    .home-content-area .home-timeline::before {
+        left: 30px;
+    }
+    .home-content-area .home-timeline-item {
+        flex-direction: column;
+        padding-left: 60px;
+    }
+    .home-content-area .home-timeline-date {
+        width: 100%;
+        text-align: left;
+        padding-left: 0;
+        margin-bottom: 0.5rem;
+        font-size: 1.2rem;
+    }
+    .home-content-area .home-timeline-content {
+        width: 100%;
+        padding: 1rem 1.5rem;
+    }
+    .home-content-area .home-timeline-dot {
+        left: 22px;
+        top: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .home-content-area .home-timeline {
+        padding: 1.5rem 0;
+    }
+    .home-content-area .home-timeline-item {
+        margin-bottom: 1.8rem;
+        padding-left: 55px;
+    }
+    .home-content-area .home-timeline::before {
+        left: 25px;
+    }
+    .home-content-area .home-timeline-dot {
+        left: 17px;
+        width: 14px;
+        height: 14px;
+    }
+    .home-content-area .home-timeline-date {
+        font-size: 1rem;
+        min-width: auto;
+    }
+    .home-content-area .home-timeline-content {
+        padding: 0.8rem 1.2rem;
+        font-size: 0.9rem;
+    }
+    .home-content-area .home-timeline-content h3 {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .home-content-area .home-timeline-item {
+        padding-left: 50px;
+        margin-bottom: 1.5rem;
+    }
+    .home-content-area .home-timeline::before {
+        left: 20px;
+    }
+    .home-content-area .home-timeline-dot {
+        left: 12px;
+        width: 12px;
+        height: 12px;
+        top: 16px;
+    }
+    .home-content-area .home-timeline-date {
+        font-size: 0.9rem;
+    }
+    .home-content-area .home-timeline-content {
+        padding: 0.7rem 1rem;
+        font-size: 0.85rem;
+    }
+    .home-content-area .home-timeline-content h3 {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .home-content-area .home-timeline-item {
+        padding-left: 45px;
+        margin-bottom: 1.2rem;
+    }
+    .home-content-area .home-timeline::before {
+        left: 18px;
+    }
+    .home-content-area .home-timeline-dot {
+        left: 10px;
+        width: 10px;
+        height: 10px;
+        top: 14px;
+    }
+    .home-content-area .home-timeline-date {
+        font-size: 0.85rem;
+    }
+    .home-content-area .home-timeline-content {
+        padding: 0.6rem 0.8rem;
+        font-size: 0.8rem;
+    }
+    .home-content-area .home-timeline-content h3 {
+        font-size: 0.85rem;
+    }
+}
 .au-why-section{
     background:linear-gradient(180deg,#0d0d0d 0%,#090909 100%);
     padding:120px 40px;
@@ -1037,4 +1323,3 @@
         width:100%;
     }
 }
-
