@@ -5,18 +5,14 @@
 <header class="h1">
     <div class="h2">
 
-        <div class="h3">
-            <a href="${pageContext.request.contextPath}/index" class="logo">
-                <span class="text">JerseyPasal</span>
-            </a>
-        </div>
+        <a href="${pageContext.request.contextPath}/index" class="logo">JerseyPasal</a>
 
         <nav class="h4">
-            <a href="${pageContext.request.contextPath}/index" class="h5">Home</a>
+            <a href="${pageContext.request.contextPath}/home" class="h5">Home</a>
             <a href="${pageContext.request.contextPath}/nation" class="h5">Nations</a>
             <a href="${pageContext.request.contextPath}/clubs" class="h5">Clubs</a>
-            <a href="#" class="h5">Best Sellers</a>
             <a href="${pageContext.request.contextPath}/retro" class="h5">Retro</a>
+            <a href="${pageContext.request.contextPath}/aboutus" class="h5">About Us</a>
         </nav>
 
         <div class="h11">
