@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" isELIgnored="false"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 
 <!DOCTYPE html>
 <html>
@@ -27,7 +28,9 @@
 
       <h2>Create Account</h2>
 
-      <div class="error-message">${error}</div>
+      <c:if test="${not empty error}">
+        <div class="register-error-message">${error}</div>
+      </c:if>
 
       <div class="profile-upload">
         <div class="profile-preview-box">
@@ -44,6 +47,7 @@
       <input type="text" name="email" placeholder="Email Address" value="${email}">
 
       <input type="text" name="phone" placeholder="Phone Number" value="${phone}">
+
       <input type="date" name="registrationDate" id="registrationDate" class="date-input" value="${registrationDate}">
 
       <input type="password" name="password" placeholder="Password">

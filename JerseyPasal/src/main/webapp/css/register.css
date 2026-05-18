@@ -78,20 +78,19 @@ body {
   color: #fff;
 }
 
-.error-message {
+.error-message,
+.register-error-message {
   width: 100%;
-  background: rgba(139, 13, 31, 0.18);
-  border: 1px solid rgba(139, 13, 31, 0.5);
-  color: #ffb3b3;
-  font-size: 13px;
+  color: #ff4d4d;
+  font-size: 0.76rem;
+  font-weight: 600;
   text-align: center;
-  padding: 10px 12px;
-  border-radius: 10px;
-  margin-bottom: 16px;
-  line-height: 1.4;
+  margin: 6px 0 12px;
+  line-height: 1.35;
 }
 
-.error-message:empty {
+.error-message:empty,
+.register-error-message:empty {
   display: none;
 }
 

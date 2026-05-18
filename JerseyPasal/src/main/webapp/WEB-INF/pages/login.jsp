@@ -33,7 +33,7 @@
       </p>
 
       <c:if test="${not empty error}">
-        <p style="color:red; text-align:center;">${error}</p>
+        <p class="login-error-message">${error}</p>
       </c:if>
 
       <div class="input-group">

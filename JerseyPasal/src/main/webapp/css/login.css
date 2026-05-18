@@ -1,7 +1,7 @@
 body {
   margin: 0;
   font-family: 'Poppins', sans-serif;
-  background: #111; 
+  background: #111;
   color: #fff;
 }
 
@@ -50,7 +50,8 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #111; 
+  background: #111;
+}
 
 .auth-box {
   width: 380px;
@@ -75,7 +76,7 @@ body {
 }
 
 .top-text a {
-  color: #8b0d1f; 
+  color: #8b0d1f;
   font-weight: 600;
   text-decoration: none;
 }
@@ -83,6 +84,15 @@ body {
 .top-text a:hover {
   color: #6a0917;
   text-decoration: underline;
+}
+
+.login-error-message {
+  color: #ff4d4d;
+  text-align: center;
+  font-size: 0.76rem;
+  font-weight: 600;
+  margin: 6px 0 12px;
+  line-height: 1.35;
 }
 
 .input-group {
@@ -216,7 +226,7 @@ body {
 }
 
 .google-btn img {
-  width: 16px; 
+  width: 16px;
   height: 16px;
 }
 
@@ -248,5 +258,4 @@ body {
     margin: 20px auto;
     padding: 25px;
   }
-}
 }
