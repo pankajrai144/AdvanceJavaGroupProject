@@ -14,7 +14,7 @@
             <a href="${pageContext.request.contextPath}/home">Home</a>
             <a href="${pageContext.request.contextPath}/retro">Retro</a>
             <a href="${pageContext.request.contextPath}/aboutus">About Us</a>
-            <a href="#">Contact</a>
+            <a href="${pageContext.request.contextPath}/contact">Contact Us</a>
         </div>
 
         <div class="col">
@@ -25,26 +25,16 @@
         
         <div class="col">
             <h4>Customer Care</h4>
-            <a href="#">FAQ</a>
-            <a href="#">Size Guide</a>
-            <a href="#">Returns Policy</a>
-            <a href="#">Track Order</a>
-            <a href="#">Shipping Info</a>
-        </div>
-        
-        <div class="social">
-            <h4>Follow Us</h4>
-            <div class="icons">
-                <a href="#" title="Instagram" class="icon">&#128247;</a>
-                <a href="#" title="Facebook" class="icon">f</a>
-                <a href="#" title="YouTube" class="icon">&#9654;</a>
-                <a href="#" title="X / Twitter" class="icon">X</a>
-            </div>
+            <a>FAQ</a>
+            <a>Size Guide</a>
+            <a>Returns Policy</a>
+            <a>Track Order</a>
+            <a>Shipping Info</a>
         </div>
 
     </div>
     <div class="bottom">
-        <p>&copy; 2025 KitKing. All rights reserved.</p>
+        <p>&copy; 2025 JerseyPasal. All rights reserved.</p>
     </div>
 
 </footer>
