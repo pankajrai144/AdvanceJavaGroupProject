@@ -38,7 +38,7 @@
 
         <p class="infodesc">From Wembley roars to Champions League nights every stitch tells a story. Shop authentic, player-grade football jerseys from the clubs and eras that defined the beautiful game.</p>
 
-        <a href="#" class="btn">Shop Now</a>
+        <a href="${pageContext.request.contextPath}/home" class="btn">Shop Now</a>
 
     </div>
 
