@@ -29,57 +29,92 @@
             <div class="pd2">
 
                 <div class="pd3">
+
+                    <c:if test="${not empty product.productImage}">
+                        <input type="radio" name="productImageChoice" id="productImageOne" class="pd-image-radio" checked>
+                    </c:if>
+
+                    <c:if test="${not empty product.productImage2}">
+                        <input type="radio" name="productImageChoice" id="productImageTwo" class="pd-image-radio">
+                    </c:if>
+
+                    <c:if test="${not empty product.productImage3}">
+                        <input type="radio" name="productImageChoice" id="productImageThree" class="pd-image-radio">
+                    </c:if>
+
+                    <c:if test="${not empty product.productImage4}">
+                        <input type="radio" name="productImageChoice" id="productImageFour" class="pd-image-radio">
+                    </c:if>
+
                     <div class="pd4">
                         <c:choose>
-                            <c:when test="${not empty selectedImage}">
-                                <img id="mainProductImage"
-                                     src="${pageContext.request.contextPath}/getimage?productImage=${selectedImage}" 
-                                     alt="${product.jerseyName}" />
-                            </c:when>
                             <c:when test="${not empty product.productImage}">
-                                <img id="mainProductImage"
-                                     src="${pageContext.request.contextPath}/getimage?productImage=${product.productImage}" 
-                                     alt="${product.jerseyName}" />
+                                <div class="pd-main-image pd-main-one">
+                                    <img src="${pageContext.request.contextPath}/getimage?productImage=${product.productImage}" 
+                                         alt="${product.jerseyName}" />
+                                </div>
                             </c:when>
+
                             <c:otherwise>
                                 <div class="pd-no-image">
                                     <i class="fa-solid fa-image"></i>
                                 </div>
                             </c:otherwise>
                         </c:choose>
+
+                        <c:if test="${not empty product.productImage2}">
+                            <div class="pd-main-image pd-main-two">
+                                <img src="${pageContext.request.contextPath}/getimage?productImage=${product.productImage2}" 
+                                     alt="${product.jerseyName}" />
+                            </div>
+                        </c:if>
+
+                        <c:if test="${not empty product.productImage3}">
+                            <div class="pd-main-image pd-main-three">
+                                <img src="${pageContext.request.contextPath}/getimage?productImage=${product.productImage3}" 
+                                     alt="${product.jerseyName}" />
+                            </div>
+                        </c:if>
+
+                        <c:if test="${not empty product.productImage4}">
+                            <div class="pd-main-image pd-main-four">
+                                <img src="${pageContext.request.contextPath}/getimage?productImage=${product.productImage4}" 
+                                     alt="${product.jerseyName}" />
+                            </div>
+                        </c:if>
                     </div>
 
                     <div class="pd5">
                         <c:if test="${not empty product.productImage}">
-                            <a href="${pageContext.request.contextPath}/product?productId=${product.productId}&selectedImage=${product.productImage}">
+                            <label for="productImageOne" class="pd-thumb-label">
                                 <img src="${pageContext.request.contextPath}/getimage?productImage=${product.productImage}" 
                                      alt="${product.jerseyName}" 
                                      class="pd6" />
-                            </a>
+                            </label>
                         </c:if>
 
                         <c:if test="${not empty product.productImage2}">
-                            <a href="${pageContext.request.contextPath}/product?productId=${product.productId}&selectedImage=${product.productImage2}">
+                            <label for="productImageTwo" class="pd-thumb-label">
                                 <img src="${pageContext.request.contextPath}/getimage?productImage=${product.productImage2}" 
                                      alt="${product.jerseyName}" 
                                      class="pd6" />
-                            </a>
+                            </label>
                         </c:if>
 
                         <c:if test="${not empty product.productImage3}">
-                            <a href="${pageContext.request.contextPath}/product?productId=${product.productId}&selectedImage=${product.productImage3}">
+                            <label for="productImageThree" class="pd-thumb-label">
                                 <img src="${pageContext.request.contextPath}/getimage?productImage=${product.productImage3}" 
                                      alt="${product.jerseyName}" 
                                      class="pd6" />
-                            </a>
+                            </label>
                         </c:if>
 
                         <c:if test="${not empty product.productImage4}">
-                            <a href="${pageContext.request.contextPath}/product?productId=${product.productId}&selectedImage=${product.productImage4}">
+                            <label for="productImageFour" class="pd-thumb-label">
                                 <img src="${pageContext.request.contextPath}/getimage?productImage=${product.productImage4}" 
                                      alt="${product.jerseyName}" 
                                      class="pd6" />
-                            </a>
+                            </label>
                         </c:if>
                     </div>
                 </div>

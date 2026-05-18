@@ -19,6 +19,10 @@
     gap: 14px;
 }
 
+.pd-image-radio {
+    display: none;
+}
+
 .pd4 {
     width: 100%;
     aspect-ratio: 3 / 4;
@@ -26,6 +30,7 @@
     border: 1px solid #222;
     border-radius: 6px;
     overflow: hidden;
+    position: relative;
 }
 
 .pd4 img {
@@ -35,16 +40,41 @@
     display: block;
 }
 
+.pd-main-image {
+    width: 100%;
+    height: 100%;
+    display: none;
+}
+
+.pd-main-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+#productImageOne:checked ~ .pd4 .pd-main-one,
+#productImageTwo:checked ~ .pd4 .pd-main-two,
+#productImageThree:checked ~ .pd4 .pd-main-three,
+#productImageFour:checked ~ .pd4 .pd-main-four {
+    display: block;
+}
+
 .pd5 {
     display: flex;
     gap: 10px;
 }
 
-.pd5 a {
+.pd5 a,
+.pd-thumb-label {
     width: calc(25% - 8px);
     aspect-ratio: 1 / 1;
     display: block;
     text-decoration: none;
+}
+
+.pd-thumb-label {
+    cursor: pointer;
 }
 
 .pd6 {
@@ -61,6 +91,24 @@
 
 .pd6:hover {
     border-color: var(--red);
+}
+
+#productImageOne:checked ~ .pd5 label[for="productImageOne"] .pd6,
+#productImageTwo:checked ~ .pd5 label[for="productImageTwo"] .pd6,
+#productImageThree:checked ~ .pd5 label[for="productImageThree"] .pd6,
+#productImageFour:checked ~ .pd5 label[for="productImageFour"] .pd6 {
+    border-color: var(--red);
+}
+
+.pd-no-image {
+    width: 100%;
+    height: 100%;
+    background: #161616;
+    color: var(--mid);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
 }
 
 .pd7 {
