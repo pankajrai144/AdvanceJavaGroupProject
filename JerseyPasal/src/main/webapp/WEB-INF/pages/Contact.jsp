@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/footer.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/heaader.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/Contact.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/contact.css">
 </head>
 <body>
 
