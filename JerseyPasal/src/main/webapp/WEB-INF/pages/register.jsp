@@ -16,7 +16,7 @@
 <div class="auth-container">
   <div class="left-panel">
     <div class="overlay">
-      <h1>⚽ Jersey Pasal</h1>
+      <h1>Jersey Pasal</h1>
       <p>Create your account and explore premium jerseys</p>
     </div>
   </div>
@@ -44,8 +44,6 @@
       <input type="text" name="email" placeholder="Email Address" value="${email}">
 
       <input type="text" name="phone" placeholder="Phone Number" value="${phone}">
-
-      <label class="date-label">Registration Date</label>
       <input type="date" name="registrationDate" id="registrationDate" class="date-input" value="${registrationDate}">
 
       <input type="password" name="password" placeholder="Password">
@@ -70,13 +68,6 @@
       </div>
 
       <button type="submit" class="btn">Create Account</button>
-
-      <div class="divider">OR</div>
-
-      <button type="button" class="google-btn">
-        <img src="https://developers.google.com/identity/images/g-logo.png" class="google-icon" alt="Google">
-        Continue with Google
-      </button>
 
       <p class="login-text">
         Already have an account?
