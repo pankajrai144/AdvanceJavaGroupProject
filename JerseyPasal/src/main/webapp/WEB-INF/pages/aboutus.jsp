@@ -122,13 +122,12 @@
             <h3>Authentic &amp; Replica</h3>
             <p>Choose between official player versions and premium fan replicas with top-quality materials.</p>
         </div>
-
-        <div class="au-offer-card">
-            <i class="fa-solid fa-pen-nib"></i>
-            <h3>Custom Name &amp; Number</h3>
-            <p>Personalize your jersey with your favorite player name or your own — perfect for match days.</p>
-        </div>
-    </div>
+		<div class="au-offer-card">
+    <i class="fa-solid fa-headset"></i>
+    <h3>Dedicated Customer Support</h3>
+    <p>Our support team is always ready to assist you with quick responses, reliable service, and a seamless shopping experience.</p>
+</div>
+   	 </div>
 </section>
 
 <section class="au-why-section">
@@ -165,7 +164,7 @@
         <div class="au-why-card">
             <p class="au-card-number">05</p>
             <h3>Best Prices in Nepal</h3>
-            <p>Fair, transparent pricing with no hidden charges — plus regular deals, discounts, and loyalty rewards.</p>
+            <p>Fair, transparent pricing with no hidden charges  plus regular deals, discounts, and loyalty rewards.</p>
         </div>
     </div>
 </section>
@@ -223,15 +222,15 @@
         </div>
     </div>
 </section>
-
 <section class="au-bottom-section">
     <h2>Ready to Wear Your Passion?</h2>
     <p>Browse our full collection and find your perfect jersey today.</p>
-
-    <a href="${pageContext.request.contextPath}/product">
-        Shop Now
-        <i class="fa-solid fa-arrow-up-right-from-square"></i>
-    </a>
+    <div class="au-button-wrapper">
+        <a href="${pageContext.request.contextPath}/contact" class="au-contact-white-btn">
+            <i class="fa-solid fa-headset"></i>
+            Contact Us
+        </a>
+    </div>
 </section>
 
 <%@ include file="/components/footer.jsp" %>
