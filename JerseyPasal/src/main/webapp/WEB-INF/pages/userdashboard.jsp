@@ -75,7 +75,7 @@
       </li>
 
       <li class="logout-menu-item">
-        <a href="${pageContext.request.contextPath}/logout" class="logout-link">
+        <a href="${pageContext.request.contextPath}/logout" class="menu-link logout-link">
           <i class="fa-solid fa-right-from-bracket"></i>
           <span>Logout</span>
         </a>
