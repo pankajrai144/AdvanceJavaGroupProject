@@ -519,6 +519,7 @@ details[open] .pd23 i {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 22px;
+    align-items: stretch;
 }
 
 .product-list-card {
@@ -528,6 +529,9 @@ details[open] .pd23 i {
     border-radius: 8px;
     overflow: hidden;
     transition: 0.25s;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 .product-list-card:hover {
@@ -542,6 +546,7 @@ details[open] .pd23 i {
     background: #111111;
     overflow: hidden;
     text-decoration: none;
+    flex-shrink: 0;
 }
 
 .product-list-image-box img {
@@ -569,6 +574,9 @@ details[open] .pd23 i {
 
 .product-list-info {
     padding: 18px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
 }
 
 .product-list-team {
@@ -578,6 +586,7 @@ details[open] .pd23 i {
     text-transform: uppercase;
     letter-spacing: 2px;
     margin-bottom: 8px;
+    min-height: 16px;
 }
 
 .product-list-info h3 {
@@ -587,10 +596,12 @@ details[open] .pd23 i {
     text-transform: uppercase;
     line-height: 1.35;
     margin-bottom: 8px;
+    min-height: 28px;
 }
 
 .product-list-category {
     display: inline-block;
+    width: fit-content;
     background: #111111;
     border: 1px solid #333333;
     color: var(--mid);
@@ -608,13 +619,16 @@ details[open] .pd23 i {
     font-size: 0.78rem;
     line-height: 1.6;
     margin-bottom: 14px;
-    min-height: 42px;
+    min-height: 88px;
+    max-height: 88px;
+    overflow: hidden;
 }
 
 .product-list-price {
     color: var(--white);
     font-size: 1.15rem;
     font-weight: 900;
+    margin-top: auto;
     margin-bottom: 16px;
 }
 
@@ -633,6 +647,7 @@ details[open] .pd23 i {
     align-items: center;
     justify-content: center;
     transition: 0.2s;
+    flex-shrink: 0;
 }
 
 .product-list-btn:hover {
@@ -759,6 +774,11 @@ details[open] .pd23 i {
 
     .product-list-grid {
         grid-template-columns: 1fr;
+    }
+
+    .product-list-description {
+        min-height: auto;
+        max-height: none;
     }
 
     .product-pagination {

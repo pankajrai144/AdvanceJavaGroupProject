@@ -52,7 +52,7 @@ select.forminput option {
 
 .formtextarea {
     resize: vertical;
-    min-height: 130px;
+    min-height: 160px;
 }
 
 .btnfull {
@@ -61,6 +61,28 @@ select.forminput option {
     border: none;
     cursor: pointer;
     font-family: inherit;
+}
+
+.contact-error {
+    background: #2b0f0f;
+    color: #ffb3b3;
+    border: 1px solid #8b1e1e;
+    padding: 12px 15px;
+    border-radius: 4px;
+    margin-bottom: 18px;
+    font-size: 0.85rem;
+    line-height: 1.5;
+}
+
+.contact-success {
+    background: #102617;
+    color: #9df0b4;
+    border: 1px solid #237a3a;
+    padding: 12px 15px;
+    border-radius: 4px;
+    margin-bottom: 18px;
+    font-size: 0.85rem;
+    line-height: 1.5;
 }
 
 @media (max-width: 600px) {
