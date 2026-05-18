@@ -270,6 +270,34 @@ public class ReviewDAO {
         return reviewCount;
     }
 
+    public String getMostReviewedProduct() throws Exception {
+
+        String mostReviewedProduct = "No reviews yet";
+
+        Connection con = DBconfig.getConnection();
+
+        String sql = "SELECT p.jersey_name, p.team_name, COUNT(r.review_id) AS total_reviews "
+                   + "FROM reviews r "
+                   + "INNER JOIN products p ON r.product_id = p.product_id "
+                   + "GROUP BY p.product_id, p.jersey_name, p.team_name "
+                   + "ORDER BY total_reviews DESC "
+                   + "LIMIT 1";
+
+        PreparedStatement pst = con.prepareStatement(sql);
+
+        ResultSet rs = pst.executeQuery();
+
+        if (rs.next()) {
+            mostReviewedProduct = rs.getString("jersey_name") + " - " + rs.getString("team_name") + " (" + rs.getInt("total_reviews") + " reviews)";
+        }
+
+        rs.close();
+        pst.close();
+        con.close();
+
+        return mostReviewedProduct;
+    }
+
     public boolean deleteReview(int reviewId) throws Exception {
 
         Connection con = DBconfig.getConnection();

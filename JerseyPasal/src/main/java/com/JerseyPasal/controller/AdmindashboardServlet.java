@@ -2,6 +2,7 @@ package com.JerseyPasal.controller;
 
 import com.JerseyPasal.controller.dao.OrderDAO;
 import com.JerseyPasal.controller.dao.ProductDAO;
+import com.JerseyPasal.controller.dao.ReviewDAO;
 import com.JerseyPasal.controller.dao.UserDAO;
 import com.JerseyPasal.controller.model.OrderModel;
 import com.JerseyPasal.controller.model.ProductModel;
@@ -58,6 +59,7 @@ public class AdmindashboardServlet extends HttpServlet {
             UserDAO dao = new UserDAO();
             ProductDAO productDAO = new ProductDAO();
             OrderDAO orderDAO = new OrderDAO();
+            ReviewDAO reviewDAO = new ReviewDAO();
 
             ArrayList<HashMap<String, String>> users = dao.getAllUsers();
             ArrayList<ProductModel> products = productDAO.getAllProducts();
@@ -85,6 +87,14 @@ public class AdmindashboardServlet extends HttpServlet {
             if (products != null) {
                 totalProducts = products.size();
             }
+
+            int pendingOrders = orderDAO.getOrderCountByStatus("Pending");
+            int deliveredOrders = orderDAO.getOrderCountByStatus("Delivered");
+            int lowStockProducts = productDAO.getLowStockProductCount();
+
+            String lowestStockProduct = productDAO.getLowestStockProduct();
+            String mostOrderedProduct = orderDAO.getMostOrderedProduct();
+            String mostReviewedProduct = reviewDAO.getMostReviewedProduct();
 
             String adminMessage = "";
 
@@ -346,6 +356,12 @@ public class AdmindashboardServlet extends HttpServlet {
             request.setAttribute("totalOrders", totalOrders);
             request.setAttribute("totalCustomers", totalCustomers);
             request.setAttribute("totalProducts", totalProducts);
+            request.setAttribute("pendingOrders", pendingOrders);
+            request.setAttribute("deliveredOrders", deliveredOrders);
+            request.setAttribute("lowStockProducts", lowStockProducts);
+            request.setAttribute("lowestStockProduct", lowestStockProduct);
+            request.setAttribute("mostOrderedProduct", mostOrderedProduct);
+            request.setAttribute("mostReviewedProduct", mostReviewedProduct);
 
             request.getRequestDispatcher("/WEB-INF/pages/admindashboard.jsp").forward(request, response);
 
@@ -361,6 +377,13 @@ public class AdmindashboardServlet extends HttpServlet {
             request.setAttribute("totalOrders", 0);
             request.setAttribute("totalCustomers", 0);
             request.setAttribute("totalProducts", 0);
+            request.setAttribute("pendingOrders", 0);
+            request.setAttribute("deliveredOrders", 0);
+            request.setAttribute("lowStockProducts", 0);
+            request.setAttribute("lowestStockProduct", "No low stock products");
+            request.setAttribute("mostOrderedProduct", "No orders yet");
+            request.setAttribute("mostReviewedProduct", "No reviews yet");
+
             request.getRequestDispatcher("/WEB-INF/pages/admindashboard.jsp").forward(request, response);
         }
     }

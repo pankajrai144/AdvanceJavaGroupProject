@@ -186,6 +186,61 @@ public class OrderDAO {
         return orders;
     }
 
+    public int getOrderCountByStatus(String orderStatus) throws Exception {
+
+        int orderCount = 0;
+
+        Connection con = DBconfig.getConnection();
+
+        String sql = "SELECT COUNT(*) AS total FROM orders WHERE order_status = ?";
+
+        PreparedStatement pst = con.prepareStatement(sql);
+
+        pst.setString(1, orderStatus);
+
+        ResultSet rs = pst.executeQuery();
+
+        if (rs.next()) {
+            orderCount = rs.getInt("total");
+        }
+
+        rs.close();
+        pst.close();
+        con.close();
+
+        return orderCount;
+    }
+
+    public String getMostOrderedProduct() throws Exception {
+
+        String mostOrderedProduct = "No orders yet";
+
+        Connection con = DBconfig.getConnection();
+
+        String sql = "SELECT p.jersey_name, p.team_name, SUM(oi.quantity) AS total_ordered "
+                   + "FROM order_items oi "
+                   + "INNER JOIN products p ON oi.product_id = p.product_id "
+                   + "INNER JOIN orders o ON oi.order_id = o.order_id "
+                   + "WHERE o.order_status <> 'Cancelled' "
+                   + "GROUP BY p.product_id, p.jersey_name, p.team_name "
+                   + "ORDER BY total_ordered DESC "
+                   + "LIMIT 1";
+
+        PreparedStatement pst = con.prepareStatement(sql);
+
+        ResultSet rs = pst.executeQuery();
+
+        if (rs.next()) {
+            mostOrderedProduct = rs.getString("jersey_name") + " - " + rs.getString("team_name");
+        }
+
+        rs.close();
+        pst.close();
+        con.close();
+
+        return mostOrderedProduct;
+    }
+
     public boolean updateOrderStatus(int orderId, String orderStatus) throws Exception {
 
         Connection con = DBconfig.getConnection();

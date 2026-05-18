@@ -110,6 +110,59 @@
 
     </div>
 
+    <div class="section dashboard-report-section">
+      <h2>Dashboard Reports</h2>
+
+      <div class="report-card-grid">
+        <div class="report-card">
+          <div class="report-icon">
+            <i class="fa-solid fa-hourglass-half"></i>
+          </div>
+          <div class="report-info">
+            <h4>Pending Orders</h4>
+            <p>${pendingOrders}</p>
+          </div>
+        </div>
+
+        <div class="report-card">
+          <div class="report-icon">
+            <i class="fa-solid fa-circle-check"></i>
+          </div>
+          <div class="report-info">
+            <h4>Delivered Orders</h4>
+            <p>${deliveredOrders}</p>
+          </div>
+        </div>
+
+        <div class="report-card">
+          <div class="report-icon">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+          </div>
+          <div class="report-info">
+            <h4>Low Stock Products</h4>
+            <p>${lowStockProducts}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="report-summary-grid">
+        <div class="report-summary-box">
+          <h4><i class="fa-solid fa-box-open"></i> Lowest Stock Product</h4>
+          <p>${lowestStockProduct}</p>
+        </div>
+
+        <div class="report-summary-box">
+          <h4><i class="fa-solid fa-fire"></i> Most Ordered Jersey</h4>
+          <p>${mostOrderedProduct}</p>
+        </div>
+
+        <div class="report-summary-box">
+          <h4><i class="fa-solid fa-star"></i> Most Reviewed Jersey</h4>
+          <p>${mostReviewedProduct}</p>
+        </div>
+      </div>
+    </div>
+
     <div class="section" id="manageProducts">
       <h2>Product Management</h2>
 

@@ -32,7 +32,7 @@ public class LogoutServlet extends HttpServlet {
 		
 		SessionUtil.invalidateSession(request);
 		
-		response.sendRedirect(request.getContextPath() + "/login");
+		response.sendRedirect(request.getContextPath() + "/index");
 	}
 
 	/**

@@ -279,6 +279,56 @@ public class ProductDAO {
         return products;
     }
 
+    public int getLowStockProductCount() throws Exception {
+
+        int lowStockCount = 0;
+
+        Connection con = DBconfig.getConnection();
+
+        String sql = "SELECT COUNT(*) AS total FROM products WHERE stock_quantity > 0 AND stock_quantity <= 5";
+
+        PreparedStatement pst = con.prepareStatement(sql);
+
+        ResultSet rs = pst.executeQuery();
+
+        if (rs.next()) {
+            lowStockCount = rs.getInt("total");
+        }
+
+        rs.close();
+        pst.close();
+        con.close();
+
+        return lowStockCount;
+    }
+
+    public String getLowestStockProduct() throws Exception {
+
+        String lowestStockProduct = "No low stock products";
+
+        Connection con = DBconfig.getConnection();
+
+        String sql = "SELECT jersey_name, team_name, stock_quantity "
+                   + "FROM products "
+                   + "WHERE stock_quantity > 0 "
+                   + "ORDER BY stock_quantity ASC, product_id DESC "
+                   + "LIMIT 1";
+
+        PreparedStatement pst = con.prepareStatement(sql);
+
+        ResultSet rs = pst.executeQuery();
+
+        if (rs.next()) {
+            lowestStockProduct = rs.getString("jersey_name") + " - " + rs.getString("team_name") + " (" + rs.getInt("stock_quantity") + " left)";
+        }
+
+        rs.close();
+        pst.close();
+        con.close();
+
+        return lowestStockProduct;
+    }
+
     public ArrayList<ProductModel> searchProducts(String keyword) throws Exception {
 
         ArrayList<ProductModel> products = new ArrayList<>();
