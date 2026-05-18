@@ -107,17 +107,18 @@ img { width: 100%; display: block; object-fit: cover; }
     line-height: 1.75;
     max-width: 460px;
 }
-
 .btn {
-    display: inline-block;
-    padding: 13px 34px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 32px;
     background: var(--red);
     color: var(--white);
     font-weight: 900;
     font-size: 0.82rem;
     text-transform: uppercase;
     letter-spacing: 1.5px;
-    border-radius: 4px;
+    border-radius: 50px;
     transition: background 0.2s, color 0.2s;
     align-self: flex-start;
 }
