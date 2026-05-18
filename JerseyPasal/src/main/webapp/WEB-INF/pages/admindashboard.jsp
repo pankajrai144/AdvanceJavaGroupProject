@@ -43,6 +43,12 @@
       </li>
 
       <li>
+        <a href="#manageUsers" class="admin-side-link">
+          <i class="fa fa-users"></i> Manage Users
+        </a>
+      </li>
+
+      <li>
         <a href="#manageProducts" class="admin-side-link">
           <i class="fa fa-box"></i> Manage Products
         </a>
@@ -55,8 +61,8 @@
       </li>
 
       <li>
-        <a href="#manageUsers" class="admin-side-link">
-          <i class="fa fa-users"></i> Manage Users
+        <a href="#contactMessages" class="admin-side-link">
+          <i class="fa fa-envelope"></i> Contact Messages
         </a>
       </li>
     </ul>
@@ -94,7 +100,6 @@
     </div>
 
     <div class="grid">
-
       <div class="box">
         <h3>Recent Orders</h3>
         <table>
@@ -107,7 +112,6 @@
           <c:out value="${recentOrderRows}" escapeXml="false" />
         </table>
       </div>
-
     </div>
 
     <div class="section dashboard-report-section">
@@ -161,6 +165,21 @@
           <p>${mostReviewedProduct}</p>
         </div>
       </div>
+    </div>
+
+    <div class="section" id="manageUsers">
+      <h2>User Management</h2>
+
+      <table>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+
+        <c:out value="${userRows}" escapeXml="false" />
+      </table>
     </div>
 
     <div class="section" id="manageProducts">
@@ -265,18 +284,20 @@
       </table>
     </div>
 
-    <div class="section" id="manageUsers">
-      <h2>User Management</h2>
+    <div class="section" id="contactMessages">
+      <h2>Contact Messages</h2>
 
       <table>
         <tr>
-          <th>Name</th>
+          <th>Full Name</th>
           <th>Email</th>
-          <th>Status</th>
-          <th>Action</th>
+          <th>Phone</th>
+          <th>Subject</th>
+          <th>Message</th>
+          <th>Submitted At</th>
         </tr>
 
-        <c:out value="${userRows}" escapeXml="false" />
+        <c:out value="${contactRows}" escapeXml="false" />
       </table>
     </div>
 

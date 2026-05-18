@@ -1,5 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" isELIgnored="false"%>
+
+<%
+String error = (String) request.getAttribute("error");
+String success = (String) request.getAttribute("success");
+
+String subject = request.getAttribute("subject") != null ? (String) request.getAttribute("subject") : "";
+String message = request.getAttribute("message") != null ? (String) request.getAttribute("message") : "";
+%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,44 +34,32 @@
         </div>
 
         <div class="contactform">
+
+            <% if (error != null) { %>
+                <p class="contact-error"><%= error %></p>
+            <% } %>
+
+            <% if (success != null) { %>
+                <p class="contact-success"><%= success %></p>
+            <% } %>
+
             <form action="${pageContext.request.contextPath}/contact" method="post">
-
-                <div class="formrow">
-                    <div class="formgroup">
-                        <label class="formlabel" for="firstName">First Name</label>
-                        <input class="forminput" type="text" id="firstName" name="firstName" placeholder="e.g. Rohit">
-                    </div>
-                    <div class="formgroup">
-                        <label class="formlabel" for="lastName">Last Name</label>
-                        <input class="forminput" type="text" id="lastName" name="lastName" placeholder="e.g. Sharma">
-                    </div>
-                </div>
-
-                <div class="formgroup">
-                    <label class="formlabel" for="email">Email Address</label>
-                    <input class="forminput" type="text" id="email" name="email" placeholder="you@example.com">
-                </div>
-
-                <div class="formgroup">
-                    <label class="formlabel" for="phone">Phone Number</label>
-                    <input class="forminput" type="text" id="phone" name="phone" placeholder="+977 98XXXXXXXX">
-                </div>
 
                 <div class="formgroup">
                     <label class="formlabel" for="subject">Subject</label>
                     <select class="forminput" id="subject" name="subject">
-                        <option value="" disabled selected>Select a topic</option>
-                        <option value="order">Order Enquiry</option>
-                        <option value="return">Return or Exchange</option>
-                        <option value="product">Product Question</option>
-                        <option value="wholesale">Wholesale or Bulk Order</option>
-                        <option value="other">Other</option>
+                        <option value="" disabled <%= subject.equals("") ? "selected" : "" %>>Select a topic</option>
+                        <option value="order" <%= subject.equals("order") ? "selected" : "" %>>Order Enquiry</option>
+                        <option value="return" <%= subject.equals("return") ? "selected" : "" %>>Return or Exchange</option>
+                        <option value="product" <%= subject.equals("product") ? "selected" : "" %>>Product Question</option>
+                        <option value="wholesale" <%= subject.equals("wholesale") ? "selected" : "" %>>Wholesale or Bulk Order</option>
+                        <option value="other" <%= subject.equals("other") ? "selected" : "" %>>Other</option>
                     </select>
                 </div>
 
                 <div class="formgroup">
                     <label class="formlabel" for="message">Message</label>
-                    <textarea class="forminput formtextarea" id="message" name="message" placeholder="Tell us how we can help you..."></textarea>
+                    <textarea class="forminput formtextarea" id="message" name="message" placeholder="Tell us how we can help you..."><%= message %></textarea>
                 </div>
 
                 <button type="submit" class="btn btnfull">

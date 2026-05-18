@@ -1,5 +1,6 @@
 package com.JerseyPasal.controller;
 
+import com.JerseyPasal.controller.dao.ContactDAO;
 import com.JerseyPasal.controller.dao.OrderDAO;
 import com.JerseyPasal.controller.dao.ProductDAO;
 import com.JerseyPasal.controller.dao.ReviewDAO;
@@ -60,10 +61,12 @@ public class AdmindashboardServlet extends HttpServlet {
             ProductDAO productDAO = new ProductDAO();
             OrderDAO orderDAO = new OrderDAO();
             ReviewDAO reviewDAO = new ReviewDAO();
+            ContactDAO contactDAO = new ContactDAO();
 
             ArrayList<HashMap<String, String>> users = dao.getAllUsers();
             ArrayList<ProductModel> products = productDAO.getAllProducts();
             ArrayList<OrderModel> orders = orderDAO.getAllOrders();
+            ArrayList<HashMap<String, String>> contactMessages = contactDAO.getAllContactMessages();
 
             double totalRevenue = 0.0;
             int totalOrders = 0;
@@ -347,11 +350,65 @@ public class AdmindashboardServlet extends HttpServlet {
                 recentOrderRows.append("</tr>");
             }
 
+            StringBuilder contactRows = new StringBuilder();
+
+            if (contactMessages != null && !contactMessages.isEmpty()) {
+
+                for (HashMap<String, String> contact : contactMessages) {
+
+                    String fullname = contact.get("fullname");
+                    String email = contact.get("email");
+                    String phone = contact.get("phone");
+                    String subject = contact.get("subject");
+                    String message = contact.get("message");
+                    String submittedAt = contact.get("submitted_at");
+
+                    if (fullname == null) {
+                        fullname = "";
+                    }
+
+                    if (email == null) {
+                        email = "";
+                    }
+
+                    if (phone == null) {
+                        phone = "";
+                    }
+
+                    if (subject == null) {
+                        subject = "";
+                    }
+
+                    if (message == null) {
+                        message = "";
+                    }
+
+                    if (submittedAt == null) {
+                        submittedAt = "";
+                    }
+
+                    contactRows.append("<tr>");
+                    contactRows.append("<td>").append(fullname).append("</td>");
+                    contactRows.append("<td>").append(email).append("</td>");
+                    contactRows.append("<td>").append(phone).append("</td>");
+                    contactRows.append("<td>").append(subject).append("</td>");
+                    contactRows.append("<td>").append(message).append("</td>");
+                    contactRows.append("<td>").append(submittedAt).append("</td>");
+                    contactRows.append("</tr>");
+                }
+
+            } else {
+                contactRows.append("<tr>");
+                contactRows.append("<td colspan='6'>No contact messages found.</td>");
+                contactRows.append("</tr>");
+            }
+
             request.setAttribute("adminMessage", adminMessage);
             request.setAttribute("userRows", userRows.toString());
             request.setAttribute("productRows", productRows.toString());
             request.setAttribute("orderRows", orderRows.toString());
             request.setAttribute("recentOrderRows", recentOrderRows.toString());
+            request.setAttribute("contactRows", contactRows.toString());
             request.setAttribute("totalRevenue", String.format("%.2f", totalRevenue));
             request.setAttribute("totalOrders", totalOrders);
             request.setAttribute("totalCustomers", totalCustomers);
@@ -373,6 +430,7 @@ public class AdmindashboardServlet extends HttpServlet {
             request.setAttribute("productRows", "<tr><td colspan='9'>No products found.</td></tr>");
             request.setAttribute("orderRows", "<tr><td colspan='6'>No orders found.</td></tr>");
             request.setAttribute("recentOrderRows", "<tr><td colspan='3'>No recent orders found.</td></tr>");
+            request.setAttribute("contactRows", "<tr><td colspan='6'>No contact messages found.</td></tr>");
             request.setAttribute("totalRevenue", "0.00");
             request.setAttribute("totalOrders", 0);
             request.setAttribute("totalCustomers", 0);
