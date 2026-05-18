@@ -151,8 +151,7 @@
 <section class="ns5">
     <div class="nw3">
 
-        <div class="nl1">
-            <img src="${pageContext.request.contextPath}/images/worldcup-authentic.jpg" alt="Authentic World Cup Jersey" class="ni4" />
+        <div class="nl1">.
             <div class="nc2">
                 <i class="fa-solid fa-shield-halved"></i>
                 <h2>100% Authentic<br>World Cup Jerseys</h2>
@@ -163,15 +162,14 @@
                     <li><i class="fa-solid fa-circle-check"></i> Tournament badge embroidered on chest</li>
                     <li><i class="fa-solid fa-circle-check"></i> Sourced direct from manufacturer</li>
                 </ul>
-                <a href="${pageContext.request.contextPath}/product" class="nb5">Shop All World Cup Kits</a>
+                <a href="${pageContext.request.contextPath}/nation" class="nb5">Shop All World Cup Kits</a>
             </div>
         </div>
 
         <div class="nr1">
-            <video src="${pageContext.request.contextPath}/videos/jersey-story.mp4" autoplay muted loop poster="${pageContext.request.contextPath}/images/video-poster.jpg"></video>
+            <video src="${pageContext.request.contextPath}/Videos/Nike1.mp4" autoplay muted loop></video>
             <div class="nc3">
-                <span>Behind the Kit</span>
-                <p>How the 2026 World Cup jerseys were made</p>
+                <span>Nike Winner Stays</span>
             </div>
         </div>
 
