@@ -56,13 +56,6 @@
       </div>
 
       <button type="submit" class="login-btn">Sign In</button>
-
-      <div class="divider">OR</div>
-
-      <button type="button" class="google-btn">
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" alt="Google">
-        Sign in with Google
-      </button>
     </form>
   </div>
 </div>
