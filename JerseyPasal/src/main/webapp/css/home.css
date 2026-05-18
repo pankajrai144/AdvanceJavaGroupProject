@@ -1,7 +1,7 @@
 .home-content-area {
-    font-family: 'Barlow', sans-serif;
-    background-color: #0a0c10;
-    color: #f0f2f5;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #111;
+    color: #ffffff;
     overflow-x: hidden;
 }
 
@@ -19,7 +19,7 @@
     object-fit:cover;
     object-position:0% center;
     display:block;
-    filter:brightness(1.03);
+    filter:brightness(0.55);
     animation:bannerMove 12s ease-in-out infinite alternate;
 }
 
@@ -42,17 +42,16 @@
     align-items:flex-start;
     padding:500px 6% 70px;
     background:linear-gradient(
-        to right,
-        rgba(0,0,0,0.58) 0%,
-        rgba(0,0,0,0.38) 40%,
-        rgba(0,0,0,0.16) 70%,
-        rgba(0,0,0,0.02) 100%
+        to top,
+        rgba(0, 0, 0, 0.82) 0%,
+        rgba(0, 0, 0, 0.38) 45%,
+        rgba(0, 0, 0, 0.10) 100%
     );
 }
 
 .home-content-area .home-banner-tag {
-    background: rgba(227, 27, 35, 0.2);
-    border: 1px solid rgba(227,27,35,0.5);
+    background: rgba(139, 13, 31, 0.2);
+    border: 1px solid rgba(139, 13, 31, 0.5);
     color: #fff;
     padding: 6px 14px;
     border-radius: 30px;
@@ -69,17 +68,17 @@
 }
 
 .home-content-area .home-banner-overlay h2 .white-text{
-    color:#eee;
+    color:#ffffff;
 }
 
 .home-content-area .home-banner-overlay h2 .red-text{
-    color:#e31b23;
+    color:#8b0d1f;
 }
 
 .home-content-area .home-banner-overlay p {
     margin-top: 20px;
     font-size: 1.05rem;
-    color: #ccc;
+    color: rgba(255, 255, 255, 0.65);
     max-width: 620px;
     line-height: 1.7;
 }
@@ -96,7 +95,7 @@
 }
 
 .home-content-area .home-btn-red {
-    background: #e31b23;
+    background: #8b0d1f;
     padding: 14px 28px;
     border-radius: 50px;
     color: #fff;
@@ -114,7 +113,8 @@
 
 .home-content-area .home-btn-red:hover {
     transform: translateY(-3px);
-    background: #ff2a2a;
+    background: #ffffff;
+    color: #8b0d1f;
 }
 
 .home-content-area .home-btn-outline {
@@ -135,7 +135,7 @@
 
 .home-content-area .home-btn-outline:hover {
     background: #fff;
-    color: #000;
+    color: #8b0d1f;
     transform: translateY(-3px);
 }
 
@@ -281,7 +281,7 @@
 
 .home-content-area .home-sec-sub {
     font-size: 1.1rem;
-    color: #aaa;
+    color: #666;
     margin-bottom: 3rem;
     max-width: 700px;
     margin-left: auto;
@@ -296,22 +296,22 @@
 }
 
 .home-content-area .home-story-card {
-    background: linear-gradient(135deg, #15181f, #0f1117);
+    background: linear-gradient(135deg, #1a1a1a, #111);
     padding: 2rem;
     border-radius: 28px;
-    border: 1px solid #262933;
+    border: 1px solid #222;
     transition: 0.3s;
 }
 
 .home-content-area .home-story-card:hover {
     transform: translateY(-5px);
-    border-color: #e31b23;
+    border-color: #8b0d1f;
 }
 
 .home-content-area .home-story-icon {
     font-size: 2.5rem;
     margin-bottom: 1rem;
-    color: #e31b23;
+    color: #8b0d1f;
 }
 
 .home-content-area .home-story-card h3 {
@@ -320,7 +320,7 @@
 }
 
 .home-content-area .home-story-card p {
-    color: #bbb;
+    color: #666;
     line-height: 1.5;
 }
 
@@ -338,7 +338,7 @@
     cursor: pointer;
     text-decoration: none;
     color: inherit;
-    background: #111317;
+    background: #1a1a1a;
 }
 
 .home-content-area .home-city-card img {
@@ -374,7 +374,7 @@
 .home-content-area .home-no-product-image {
     width: 100%;
     height: 100%;
-    background: #15181f;
+    background: #1a1a1a;
     color: rgba(255,255,255,0.35);
     display: flex;
     align-items: center;
@@ -383,11 +383,11 @@
 }
 
 .home-content-area .home-empty-product-box {
-    background: #15181f;
-    border: 1px solid #262933;
+    background: #1a1a1a;
+    border: 1px solid #222;
     border-radius: 20px;
     padding: 2rem;
-    color: #bbb;
+    color: #666;
     text-align: center;
 }
 
@@ -400,10 +400,10 @@
 }
 
 .home-content-area .home-why-card{
-    background:linear-gradient(135deg,#15181f,#0f1117);
+    background:linear-gradient(135deg,#1a1a1a,#111);
     padding:2rem 2.5rem;
     border-radius:24px;
-    border:1px solid #262933;
+    border:1px solid #222;
     transition:all 0.3s ease;
     display:flex;
     flex-direction:column;
@@ -413,13 +413,13 @@
 
 .home-content-area .home-why-card:hover{
     transform:translateY(-8px);
-    border-color:#e31b23;
-    box-shadow:0 15px 35px rgba(227,27,35,0.15);
+    border-color:#8b0d1f;
+    box-shadow:0 15px 35px rgba(139,13,31,0.15);
 }
 
 .home-content-area .home-why-icon{
     font-size:2.5rem;
-    color:#e31b23;
+    color:#8b0d1f;
     margin-bottom:1.2rem;
     display:inline-block;
 }
@@ -431,7 +431,7 @@
 }
 
 .home-content-area .home-why-card p{
-    color:#bbb;
+    color:#666;
     line-height:1.5;
     font-size:0.95rem;
 }
@@ -448,7 +448,7 @@
     transform: translateX(-50%);
     width: 4px;
     height: 100%;
-    background: #e31b23;
+    background: #8b0d1f;
 }
 
 .home-content-area .home-timeline-item {
@@ -464,12 +464,12 @@
     padding-right: 2rem;
     font-weight: 800;
     font-size: 1.3rem;
-    color: #e31b23;
+    color: #8b0d1f;
 }
 
 .home-content-area .home-timeline-content {
     width: 45%;
-    background: #15181f;
+    background: #1a1a1a;
     padding: 1rem 1.5rem;
     border-radius: 20px;
 }
@@ -480,13 +480,13 @@
     transform: translateX(-50%);
     width: 14px;
     height: 14px;
-    background: #e31b23;
+    background: #8b0d1f;
     border-radius: 50%;
     top: 20px;
 }
 
 .home-content-area .home-stadium-section {
-    background: linear-gradient(135deg, #0e1118, #080a0e);
+    background: linear-gradient(135deg, #161616, #111);
     border-radius: 40px;
     padding: 3rem;
     display: flex;
@@ -550,7 +550,7 @@
 }
 
 .home-content-area .home-news-card{
-    background:#111317;
+    background:#1a1a1a;
     border-radius:20px;
     overflow:hidden;
     min-height:460px;
@@ -569,7 +569,7 @@
 }
 
 .home-content-area .home-news-date {
-    color: #e31b23;
+    color: #8b0d1f;
     font-size: 0.8rem;
     margin-bottom: 0.5rem;
 }
@@ -586,7 +586,7 @@
 }
 
 .home-content-area .home-contact-simple strong {
-    color: #e31b23;
+    color: #8b0d1f;
 }
 
 .home-content-area .home-contact-simple p:last-child {
@@ -664,10 +664,10 @@
     .home-content-area .home-banner-overlay {
         padding: 60px 5% 50px;
         background: linear-gradient(
-            to right,
-            rgba(0,0,0,0.92) 0%,
-            rgba(0,0,0,0.78) 55%,
-            rgba(0,0,0,0.48) 100%
+            to top,
+            rgba(0, 0, 0, 0.92) 0%,
+            rgba(0, 0, 0, 0.78) 55%,
+            rgba(0, 0, 0, 0.48) 100%
         );
     }
 
@@ -746,10 +746,10 @@
         justify-content: center;
         padding: 50px 6% 40px;
         background: linear-gradient(
-            to right,
-            rgba(0,0,0,0.96) 0%,
-            rgba(0,0,0,0.84) 60%,
-            rgba(0,0,0,0.55) 100%
+            to top,
+            rgba(0, 0, 0, 0.96) 0%,
+            rgba(0, 0, 0, 0.84) 60%,
+            rgba(0, 0, 0, 0.55) 100%
         );
     }
 
