@@ -152,7 +152,6 @@
     <div class="cw3">
 
         <div class="cl1">
-            <img src="${pageContext.request.contextPath}/images/club-authentic.jpg" alt="Authentic Club Jersey" class="ci4" />
             <div class="cc2">
                 <i class="fa-solid fa-shield-halved"></i>
                 <h2>100% Authentic<br>Club Jerseys</h2>
@@ -163,15 +162,15 @@
                     <li><i class="fa-solid fa-circle-check"></i> Season badge embroidered on chest</li>
                     <li><i class="fa-solid fa-circle-check"></i> Sourced direct from manufacturer</li>
                 </ul>
-                <a href="${pageContext.request.contextPath}/product" class="cb5">Shop All Club Kits</a>
+                <a href="${pageContext.request.contextPath}/clubs" class="cb5">Shop All Club Kits</a>
             </div>
         </div>
 
         <div class="cr1">
-            <video src="${pageContext.request.contextPath}/videos/club-story.mp4" autoplay muted loop poster="${pageContext.request.contextPath}/images/club-video-poster.jpg"></video>
+
+		<video src="${pageContext.request.contextPath}/Videos/Nike2.mp4" autoplay muted loop></video>
             <div class="cc3">
-                <span>Behind the Kit</span>
-                <p>How the 2024/25 club jerseys were made</p>
+                <span>Nike Football The Last Game</span>
             </div>
         </div>
 
