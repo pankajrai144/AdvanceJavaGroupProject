@@ -55,7 +55,7 @@
     padding:13px 34px;
     background:transparent;
     border:1.5px solid rgba(255,255,255,0.75);
-    border-radius:4px;
+    border-radius:50px;
     text-decoration:none;
     font-size:0.82rem;
     font-weight:900;
@@ -72,6 +72,16 @@
 }
 
 .au-shop-btn:hover i{
+    transform:translate(3px,-3px);
+}
+.au-shop-btn:hover{
+    background:#ffffff;
+    color:#0a0a0a;
+    border-color:#ffffff;
+}
+
+.au-shop-btn:hover i{
+    color:#0a0a0a;
     transform:translate(3px,-3px);
 }
 
@@ -565,7 +575,7 @@
     background:#ffffff;
     color:#8b0d1f;
     border:2px solid transparent;
-    border-radius:4px;
+    border-radius:50px;
     text-decoration:none;
     font-size:0.82rem;
     font-weight:900;
@@ -574,6 +584,17 @@
     transition:all 0.3s ease;
     box-shadow:0 10px 28px rgba(0,0,0,0.18);
 }
+.au-contact-white-btn:hover{
+    background:#8b0d1f;
+    color:#ffffff;
+    border-color:#ffffff;
+}
+
+.au-contact-white-btn:hover i{
+    color:#ffffff;
+    transform:translate(3px,-3px);
+}
+
 @media (min-width:1600px){
     .au-heading-box{
         max-width:1400px;
