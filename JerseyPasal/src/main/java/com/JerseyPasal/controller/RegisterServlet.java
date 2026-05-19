@@ -140,7 +140,7 @@ public class RegisterServlet extends HttpServlet {
             return "Full name is required.";
         }
 
-        if (!fullname.trim().matches("^[A-Za-z ]+$")) {
+        if (!fullname.trim().matches("^[A-Za-z ]{2,50}$")) {
             return "Full name should only contain letters and spaces.";
         }
 
@@ -148,7 +148,7 @@ public class RegisterServlet extends HttpServlet {
             return "Email address is required.";
         }
 
-        if (!email.trim().matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")) {
+        if (!email.trim().matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$")) {
             return "Please enter a valid email address.";
         }
 
@@ -156,7 +156,7 @@ public class RegisterServlet extends HttpServlet {
             return "Phone number is required.";
         }
 
-        if (!phone.trim().matches("[0-9]{10}")) {
+        if (!phone.trim().matches("^[0-9]{10}$")) {
             return "Phone number must contain exactly 10 digits.";
         }
 
@@ -187,8 +187,16 @@ public class RegisterServlet extends HttpServlet {
             return "Address is required.";
         }
 
+        if (address.trim().length() > 255) {
+            return "Address must be less than 255 characters.";
+        }
+
         if (gender == null || gender.trim().isEmpty()) {
             return "Please select your gender.";
+        }
+
+        if (!gender.trim().equals("Male") && !gender.trim().equals("Female")) {
+            return "Please select a valid gender.";
         }
 
         if (terms == null || !terms.equals("agree")) {
@@ -200,10 +208,18 @@ public class RegisterServlet extends HttpServlet {
             return "Please upload a profile picture.";
         }
 
+        String fileName = profilePic.getSubmittedFileName().trim().toLowerCase();
         String contentType = profilePic.getContentType();
 
         if (contentType == null || !contentType.startsWith("image/")) {
             return "Please upload only an image file.";
+        }
+
+        if (!fileName.endsWith(".jpg") &&
+            !fileName.endsWith(".jpeg") &&
+            !fileName.endsWith(".png") &&
+            !fileName.endsWith(".webp")) {
+            return "Please upload only JPG, JPEG, PNG or WEBP image files.";
         }
 
         if (profilePic.getSize() == 0) {

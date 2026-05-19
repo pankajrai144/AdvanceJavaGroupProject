@@ -1,13 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" isELIgnored="false"%>
-
-<%
-String error = (String) request.getAttribute("error");
-String success = (String) request.getAttribute("success");
-
-String subject = request.getAttribute("subject") != null ? (String) request.getAttribute("subject") : "";
-String message = request.getAttribute("message") != null ? (String) request.getAttribute("message") : "";
-%>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -35,31 +28,35 @@ String message = request.getAttribute("message") != null ? (String) request.getA
 
         <div class="contactform">
 
-            <% if (error != null) { %>
-                <p class="contact-error"><%= error %></p>
-            <% } %>
+            <c:if test="${not empty error}">
+                <p class="contact-error">
+                    <c:out value="${error}" />
+                </p>
+            </c:if>
 
-            <% if (success != null) { %>
-                <p class="contact-success"><%= success %></p>
-            <% } %>
+            <c:if test="${not empty success}">
+                <p class="contact-success">
+                    <c:out value="${success}" />
+                </p>
+            </c:if>
 
             <form action="${pageContext.request.contextPath}/contact" method="post">
 
                 <div class="formgroup">
                     <label class="formlabel" for="subject">Subject</label>
                     <select class="forminput" id="subject" name="subject">
-                        <option value="" disabled <%= subject.equals("") ? "selected" : "" %>>Select a topic</option>
-                        <option value="order" <%= subject.equals("order") ? "selected" : "" %>>Order Enquiry</option>
-                        <option value="return" <%= subject.equals("return") ? "selected" : "" %>>Return or Exchange</option>
-                        <option value="product" <%= subject.equals("product") ? "selected" : "" %>>Product Question</option>
-                        <option value="wholesale" <%= subject.equals("wholesale") ? "selected" : "" %>>Wholesale or Bulk Order</option>
-                        <option value="other" <%= subject.equals("other") ? "selected" : "" %>>Other</option>
+                        <option value="" disabled <c:if test="${empty subject}">selected</c:if>>Select a topic</option>
+                        <option value="order" <c:if test="${subject == 'order'}">selected</c:if>>Order Enquiry</option>
+                        <option value="return" <c:if test="${subject == 'return'}">selected</c:if>>Return or Exchange</option>
+                        <option value="product" <c:if test="${subject == 'product'}">selected</c:if>>Product Question</option>
+                        <option value="wholesale" <c:if test="${subject == 'wholesale'}">selected</c:if>>Wholesale or Bulk Order</option>
+                        <option value="other" <c:if test="${subject == 'other'}">selected</c:if>>Other</option>
                     </select>
                 </div>
 
                 <div class="formgroup">
                     <label class="formlabel" for="message">Message</label>
-                    <textarea class="forminput formtextarea" id="message" name="message" placeholder="Tell us how we can help you..."><%= message %></textarea>
+                    <textarea class="forminput formtextarea" id="message" name="message" placeholder="Tell us how we can help you..."><c:out value="${message}" /></textarea>
                 </div>
 
                 <button type="submit" class="btn btnfull">

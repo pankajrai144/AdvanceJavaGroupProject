@@ -50,7 +50,6 @@ public class EditProfileServlet extends HttpServlet {
 		}
 
         request.getRequestDispatcher("/WEB-INF/pages/editProfile.jsp").forward(request, response);
-
 	}
 
 	/**
@@ -66,7 +65,15 @@ public class EditProfileServlet extends HttpServlet {
 			return;
 		}
 
-		UserModel loggedInUser = (UserModel) session.getAttribute("loggedInUser");
+		Object loggedInUserObj = session.getAttribute("loggedInUser");
+
+		if (!(loggedInUserObj instanceof UserModel)) {
+			session.invalidate();
+			response.sendRedirect(request.getContextPath() + "/login");
+			return;
+		}
+
+		UserModel loggedInUser = (UserModel) loggedInUserObj;
 
 		String fullname = request.getParameter("fullname");
 		String email = request.getParameter("email");
@@ -82,7 +89,8 @@ public class EditProfileServlet extends HttpServlet {
 
 		String registrationDate = loggedInUser.getRegistrationDate();
 
-		if (fullname.isEmpty() || registrationDate == null || registrationDate.trim().isEmpty() || email.isEmpty() || phone.isEmpty() || address.isEmpty() || gender.isEmpty()) {
+		if (fullname.isEmpty() || registrationDate == null || registrationDate.trim().isEmpty() ||
+		    email.isEmpty() || phone.isEmpty() || address.isEmpty() || gender.isEmpty()) {
 			session.setAttribute("error", "All fields are required.");
 			response.sendRedirect(request.getContextPath() + "/editprofile");
 			return;
@@ -94,7 +102,7 @@ public class EditProfileServlet extends HttpServlet {
 			return;
 		}
 
-		if (!email.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")) {
+		if (!email.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$")) {
 			session.setAttribute("error", "Please enter a valid email address.");
 			response.sendRedirect(request.getContextPath() + "/editprofile");
 			return;
@@ -106,8 +114,29 @@ public class EditProfileServlet extends HttpServlet {
 			return;
 		}
 
-		if (!gender.equals("Male") && !gender.equals("Female") && !gender.equals("Other")) {
+		if (address.length() > 255) {
+			session.setAttribute("error", "Address must be less than 255 characters.");
+			response.sendRedirect(request.getContextPath() + "/editprofile");
+			return;
+		}
+
+		if (!gender.equals("Male") && !gender.equals("Female")) {
 			session.setAttribute("error", "Invalid gender selected.");
+			response.sendRedirect(request.getContextPath() + "/editprofile");
+			return;
+		}
+
+		try {
+			if (loggedInUser.getEmail() != null &&
+			    !email.equalsIgnoreCase(loggedInUser.getEmail()) &&
+			    userDAO.emailExists(email)) {
+				session.setAttribute("error", "This email is already used by another account.");
+				response.sendRedirect(request.getContextPath() + "/editprofile");
+				return;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			session.setAttribute("error", "Unable to check email availability.");
 			response.sendRedirect(request.getContextPath() + "/editprofile");
 			return;
 		}
@@ -117,10 +146,28 @@ public class EditProfileServlet extends HttpServlet {
 		Part profilePic = request.getPart("profilePic");
 
 		if (profilePic != null && profilePic.getSize() > 0) {
+			String submittedFileName = profilePic.getSubmittedFileName();
 			String contentType = profilePic.getContentType();
+
+			if (submittedFileName == null || submittedFileName.trim().isEmpty()) {
+				session.setAttribute("error", "Invalid profile image.");
+				response.sendRedirect(request.getContextPath() + "/editprofile");
+				return;
+			}
+
+			String fileName = submittedFileName.trim().toLowerCase();
 
 			if (contentType == null || !contentType.startsWith("image/")) {
 				session.setAttribute("error", "Only image files are allowed.");
+				response.sendRedirect(request.getContextPath() + "/editprofile");
+				return;
+			}
+
+			if (!fileName.endsWith(".jpg") &&
+			    !fileName.endsWith(".jpeg") &&
+			    !fileName.endsWith(".png") &&
+			    !fileName.endsWith(".webp")) {
+				session.setAttribute("error", "Please upload only JPG, JPEG, PNG or WEBP image files.");
 				response.sendRedirect(request.getContextPath() + "/editprofile");
 				return;
 			}
@@ -131,7 +178,7 @@ public class EditProfileServlet extends HttpServlet {
 				return;
 			}
 
-			String extension = FileUploadUtil.getFileExtension(profilePic.getSubmittedFileName());
+			String extension = FileUploadUtil.getFileExtension(submittedFileName);
 			String cleanEmail = FileUploadUtil.cleanEmailForFileName(email);
 			profileImageName = cleanEmail + extension;
 			FileUploadUtil.saveFile(profilePic, UPLOAD_DIR, profileImageName);
@@ -166,10 +213,9 @@ public class EditProfileServlet extends HttpServlet {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			session.setAttribute("error", "Database error: " + e.getMessage());
+			session.setAttribute("error", "Unable to update profile. Please try again.");
 		}
 
 		response.sendRedirect(request.getContextPath() + "/editprofile");
 	}
-
 }

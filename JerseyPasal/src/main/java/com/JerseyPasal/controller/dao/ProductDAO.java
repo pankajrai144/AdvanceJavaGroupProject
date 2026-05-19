@@ -475,4 +475,26 @@ public class ProductDAO {
 
         return rows > 0;
     }
+
+    public boolean reduceStockQuantity(int productId, int quantity) throws Exception {
+
+        Connection con = DBconfig.getConnection();
+
+        String sql = "UPDATE products "
+                   + "SET stock_quantity = stock_quantity - ? "
+                   + "WHERE product_id = ? AND stock_quantity >= ?";
+
+        PreparedStatement pst = con.prepareStatement(sql);
+
+        pst.setInt(1, quantity);
+        pst.setInt(2, productId);
+        pst.setInt(3, quantity);
+
+        int rows = pst.executeUpdate();
+
+        pst.close();
+        con.close();
+
+        return rows > 0;
+    }
 }

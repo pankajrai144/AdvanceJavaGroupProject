@@ -26,7 +26,7 @@
       </div>
 
       <h4>Admin</h4>
-      <p>${sessionScope.loggedInUser.email}</p>
+      <p><c:out value="${sessionScope.loggedInUser.email}" /></p>
     </div>
 
     <ul>
@@ -80,22 +80,22 @@
     <div class="stats">
       <div class="card">
         <h4>Total Revenue</h4>
-        <p>£${totalRevenue}</p>
+        <p>£<c:out value="${totalRevenue}" /></p>
       </div>
 
       <div class="card">
         <h4>Orders</h4>
-        <p>${totalOrders}</p>
+        <p><c:out value="${totalOrders}" /></p>
       </div>
 
       <div class="card">
         <h4>Customers</h4>
-        <p>${totalCustomers}</p>
+        <p><c:out value="${totalCustomers}" /></p>
       </div>
 
       <div class="card">
         <h4>Products</h4>
-        <p>${totalProducts}</p>
+        <p><c:out value="${totalProducts}" /></p>
       </div>
     </div>
 
@@ -109,7 +109,16 @@
             <th>Status</th>
           </tr>
 
-          <c:out value="${recentOrderRows}" escapeXml="false" />
+          <c:choose>
+            <c:when test="${not empty recentOrderRows}">
+              <c:out value="${recentOrderRows}" escapeXml="false" />
+            </c:when>
+            <c:otherwise>
+              <tr>
+                <td colspan="3">No recent orders found.</td>
+              </tr>
+            </c:otherwise>
+          </c:choose>
         </table>
       </div>
     </div>
@@ -124,7 +133,7 @@
           </div>
           <div class="report-info">
             <h4>Pending Orders</h4>
-            <p>${pendingOrders}</p>
+            <p><c:out value="${pendingOrders}" /></p>
           </div>
         </div>
 
@@ -134,7 +143,7 @@
           </div>
           <div class="report-info">
             <h4>Delivered Orders</h4>
-            <p>${deliveredOrders}</p>
+            <p><c:out value="${deliveredOrders}" /></p>
           </div>
         </div>
 
@@ -144,7 +153,7 @@
           </div>
           <div class="report-info">
             <h4>Low Stock Products</h4>
-            <p>${lowStockProducts}</p>
+            <p><c:out value="${lowStockProducts}" /></p>
           </div>
         </div>
       </div>
@@ -152,17 +161,17 @@
       <div class="report-summary-grid">
         <div class="report-summary-box">
           <h4><i class="fa-solid fa-box-open"></i> Lowest Stock Product</h4>
-          <p>${lowestStockProduct}</p>
+          <p><c:out value="${lowestStockProduct}" /></p>
         </div>
 
         <div class="report-summary-box">
           <h4><i class="fa-solid fa-fire"></i> Most Ordered Jersey</h4>
-          <p>${mostOrderedProduct}</p>
+          <p><c:out value="${mostOrderedProduct}" /></p>
         </div>
 
         <div class="report-summary-box">
           <h4><i class="fa-solid fa-star"></i> Most Reviewed Jersey</h4>
-          <p>${mostReviewedProduct}</p>
+          <p><c:out value="${mostReviewedProduct}" /></p>
         </div>
       </div>
     </div>
@@ -178,14 +187,27 @@
           <th>Action</th>
         </tr>
 
-        <c:out value="${userRows}" escapeXml="false" />
+        <c:choose>
+          <c:when test="${not empty userRows}">
+            <c:out value="${userRows}" escapeXml="false" />
+          </c:when>
+          <c:otherwise>
+            <tr>
+              <td colspan="4">No users found.</td>
+            </tr>
+          </c:otherwise>
+        </c:choose>
       </table>
     </div>
 
     <div class="section" id="manageProducts">
       <h2>Product Management</h2>
 
-      <c:out value="${adminMessage}" escapeXml="false" />
+      <c:if test="${not empty adminMessage}">
+        <div class="admin-message">
+          <c:out value="${adminMessage}" escapeXml="false" />
+        </div>
+      </c:if>
 
       <form class="form-grid" action="${pageContext.request.contextPath}/adminproduct" method="post" enctype="multipart/form-data">
         <input type="text" name="jerseyName" placeholder="Jersey Name">
@@ -263,7 +285,16 @@
           <th>Action</th>
         </tr>
 
-        <c:out value="${productRows}" escapeXml="false" />
+        <c:choose>
+          <c:when test="${not empty productRows}">
+            <c:out value="${productRows}" escapeXml="false" />
+          </c:when>
+          <c:otherwise>
+            <tr>
+              <td colspan="9">No products found.</td>
+            </tr>
+          </c:otherwise>
+        </c:choose>
       </table>
     </div>
 
@@ -280,7 +311,16 @@
           <th>Update Status</th>
         </tr>
 
-        <c:out value="${orderRows}" escapeXml="false" />
+        <c:choose>
+          <c:when test="${not empty orderRows}">
+            <c:out value="${orderRows}" escapeXml="false" />
+          </c:when>
+          <c:otherwise>
+            <tr>
+              <td colspan="6">No orders found.</td>
+            </tr>
+          </c:otherwise>
+        </c:choose>
       </table>
     </div>
 
@@ -297,7 +337,16 @@
           <th>Submitted At</th>
         </tr>
 
-        <c:out value="${contactRows}" escapeXml="false" />
+        <c:choose>
+          <c:when test="${not empty contactRows}">
+            <c:out value="${contactRows}" escapeXml="false" />
+          </c:when>
+          <c:otherwise>
+            <tr>
+              <td colspan="6">No contact messages found.</td>
+            </tr>
+          </c:otherwise>
+        </c:choose>
       </table>
     </div>
 

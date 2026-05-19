@@ -11,6 +11,10 @@ public class RegisterService {
 
         String hashedPassword = PasswordUtil.getHashPassword(password.trim());
 
+        if (profileImageName == null) {
+            profileImageName = "";
+        }
+
         UserDAO dao = new UserDAO();
         dao.insertUser(
                 fullname.trim(),
@@ -20,7 +24,7 @@ public class RegisterService {
                 hashedPassword,
                 address.trim(),
                 gender.trim(),
-                profileImageName
+                profileImageName.trim()
         );
     }
 }

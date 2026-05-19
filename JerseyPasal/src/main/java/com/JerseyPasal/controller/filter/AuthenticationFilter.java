@@ -15,6 +15,7 @@ import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 /**
  * Servlet Filter implementation class AuthenticationFilter
@@ -69,24 +70,34 @@ public class AuthenticationFilter extends HttpFilter implements Filter {
 			return;
 		}
 
+		if (!(loggedInUserObj instanceof UserModel)) {
+			HttpSession session = httpRequest.getSession(false);
+
+			if (session != null) {
+				session.invalidate();
+			}
+
+			httpResponse.sendRedirect(httpRequest.getContextPath() + "/login");
+			return;
+		}
+
 		UserModel loggedInUser = (UserModel) loggedInUserObj;
 		String userRole = loggedInUser.getRole();
+		String path = httpRequest.getServletPath();
+
+		if (path.equals("/logout")) {
+			chain.doFilter(request, response);
+			return;
+		}
 
 		if (userRole == null || userRole.trim().isEmpty()) {
 			httpResponse.sendError(HttpServletResponse.SC_FORBIDDEN);
 			return;
 		}
 
-		String path = httpRequest.getServletPath();
+		userRole = userRole.trim();
 
-		if (path.equals("/admindashboard") ||
-			path.equals("/updateorderstatus") ||
-			path.equals("/adminproduct") ||
-			path.equals("/editproduct") ||
-			path.equals("/deleteproduct") ||
-			path.equals("/approveuser") ||
-			path.equals("/denyuser")) {
-
+		if (isAdminPath(path)) {
 			if ("admin".equalsIgnoreCase(userRole)) {
 				chain.doFilter(request, response);
 			} else {
@@ -95,27 +106,12 @@ public class AuthenticationFilter extends HttpFilter implements Filter {
 			return;
 		}
 
-		if (path.equals("/userdashboard") ||
-			path.equals("/profile") ||
-			path.equals("/editprofile") ||
-			path.equals("/cart") ||
-			path.equals("/wishlist") ||
-			path.equals("/review") ||
-			path.equals("/payment") ||
-			path.equals("/paymentsuccess") ||
-			path.equals("/confirmdelete") ||
-			path.equals("/deleteaccount")) {
-
+		if (isUserPath(path)) {
 			if ("user".equalsIgnoreCase(userRole)) {
 				chain.doFilter(request, response);
 			} else {
 				httpResponse.sendError(HttpServletResponse.SC_FORBIDDEN);
 			}
-			return;
-		}
-
-		if (path.equals("/logout")) {
-			chain.doFilter(request, response);
 			return;
 		}
 
@@ -126,4 +122,26 @@ public class AuthenticationFilter extends HttpFilter implements Filter {
 		// TODO Auto-generated method stub
 	}
 
+	private boolean isAdminPath(String path) {
+		return path.equals("/admindashboard") ||
+			   path.equals("/updateorderstatus") ||
+			   path.equals("/adminproduct") ||
+			   path.equals("/editproduct") ||
+			   path.equals("/deleteproduct") ||
+			   path.equals("/approveuser") ||
+			   path.equals("/denyuser");
+	}
+
+	private boolean isUserPath(String path) {
+		return path.equals("/userdashboard") ||
+			   path.equals("/profile") ||
+			   path.equals("/editprofile") ||
+			   path.equals("/cart") ||
+			   path.equals("/wishlist") ||
+			   path.equals("/review") ||
+			   path.equals("/payment") ||
+			   path.equals("/paymentsuccess") ||
+			   path.equals("/confirmdelete") ||
+			   path.equals("/deleteaccount");
+	}
 }

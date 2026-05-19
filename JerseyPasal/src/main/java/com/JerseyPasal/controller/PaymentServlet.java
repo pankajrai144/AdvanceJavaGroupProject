@@ -69,6 +69,19 @@ public class PaymentServlet extends HttpServlet {
                     return;
                 }
 
+                String cartStockMessage = checkCartStock(cartItems);
+
+                if (cartStockMessage != null) {
+                    request.setAttribute("error", cartStockMessage);
+                    request.setAttribute("paymentSource", "cart");
+                    request.setAttribute("cartItems", cartItems);
+                    request.setAttribute("paymentAmount", paymentAmount);
+                    request.setAttribute("loggedInUser", loggedInUser);
+
+                    request.getRequestDispatcher("/WEB-INF/pages/payment.jsp").forward(request, response);
+                    return;
+                }
+
                 request.setAttribute("paymentSource", "cart");
                 request.setAttribute("cartItems", cartItems);
                 request.setAttribute("paymentAmount", paymentAmount);
@@ -156,13 +169,81 @@ public class PaymentServlet extends HttpServlet {
                 paymentMethod == null || paymentMethod.trim().isEmpty()) {
 
                 request.setAttribute("error", "Please fill all required payment details.");
-                doGet(request, response);
+                reloadPaymentPage(request, response, loggedInUser, paymentSource, productIdValue, selectedSize);
                 return;
+            }
+
+            fullName = fullName.trim();
+            email = email.trim();
+            phone = phone.trim();
+            address = address.trim();
+            paymentMethod = paymentMethod.trim();
+
+            if (!fullName.matches("^[A-Za-z ]{2,50}$")) {
+                request.setAttribute("error", "Full name must contain letters only.");
+                reloadPaymentPage(request, response, loggedInUser, paymentSource, productIdValue, selectedSize);
+                return;
+            }
+
+            if (!email.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$")) {
+                request.setAttribute("error", "Please enter a valid email address.");
+                reloadPaymentPage(request, response, loggedInUser, paymentSource, productIdValue, selectedSize);
+                return;
+            }
+
+            if (!phone.matches("^[0-9]{7,15}$")) {
+                request.setAttribute("error", "Phone number must contain 7 to 15 digits only.");
+                reloadPaymentPage(request, response, loggedInUser, paymentSource, productIdValue, selectedSize);
+                return;
+            }
+
+            if (!"Card".equalsIgnoreCase(paymentMethod) &&
+                !"Cash on Delivery".equalsIgnoreCase(paymentMethod)) {
+                request.setAttribute("error", "Please select a valid payment method.");
+                reloadPaymentPage(request, response, loggedInUser, paymentSource, productIdValue, selectedSize);
+                return;
+            }
+
+            String cardLastFour = "";
+            String paymentStatus = "Pending";
+
+            if ("Card".equalsIgnoreCase(paymentMethod)) {
+                if (cardHolderName == null || cardHolderName.trim().isEmpty() ||
+                    cardNumber == null || cardNumber.trim().isEmpty()) {
+
+                    request.setAttribute("error", "Please fill card details for card payment.");
+                    reloadPaymentPage(request, response, loggedInUser, paymentSource, productIdValue, selectedSize);
+                    return;
+                }
+
+                cardHolderName = cardHolderName.trim();
+                cardNumber = cardNumber.replaceAll("\\s+", "");
+
+                if (!cardHolderName.matches("^[A-Za-z ]{2,50}$")) {
+                    request.setAttribute("error", "Card holder name must contain letters only.");
+                    reloadPaymentPage(request, response, loggedInUser, paymentSource, productIdValue, selectedSize);
+                    return;
+                }
+
+                if (!cardNumber.matches("^[0-9]{13,19}$")) {
+                    request.setAttribute("error", "Card number must contain 13 to 19 digits.");
+                    reloadPaymentPage(request, response, loggedInUser, paymentSource, productIdValue, selectedSize);
+                    return;
+                }
+
+                cardLastFour = cardNumber.substring(cardNumber.length() - 4);
+                paymentStatus = "Paid";
+
+            } else if ("Cash on Delivery".equalsIgnoreCase(paymentMethod)) {
+                cardHolderName = "";
+                cardLastFour = "";
+                paymentStatus = "Pending";
             }
 
             OrderDAO orderDAO = new OrderDAO();
             OrderItemDAO orderItemDAO = new OrderItemDAO();
             PaymentDAO paymentDAO = new PaymentDAO();
+            ProductDAO productDAO = new ProductDAO();
 
             double orderTotal = 0.0;
             int orderId = 0;
@@ -178,10 +259,41 @@ public class PaymentServlet extends HttpServlet {
                     return;
                 }
 
+                String cartStockMessage = checkCartStock(cartItems);
+
+                if (cartStockMessage != null) {
+                    request.setAttribute("error", cartStockMessage);
+                    reloadPaymentPage(request, response, loggedInUser, paymentSource, productIdValue, selectedSize);
+                    return;
+                }
+
                 OrderModel order = new OrderModel(userId, orderTotal, "Pending");
                 orderId = orderDAO.createOrder(order);
 
-                orderItemDAO.addCartItemsToOrder(orderId, cartItems);
+                if (orderId <= 0) {
+                    request.setAttribute("error", "Unable to create order.");
+                    reloadPaymentPage(request, response, loggedInUser, paymentSource, productIdValue, selectedSize);
+                    return;
+                }
+
+                boolean orderItemsAdded = orderItemDAO.addCartItemsToOrder(orderId, cartItems);
+
+                if (!orderItemsAdded) {
+                    request.setAttribute("error", "Unable to add cart items to order.");
+                    reloadPaymentPage(request, response, loggedInUser, paymentSource, productIdValue, selectedSize);
+                    return;
+                }
+
+                for (CartItemModel cartItem : cartItems) {
+                    boolean stockReduced = productDAO.reduceStockQuantity(cartItem.getProduct().getProductId(), cartItem.getQuantity());
+
+                    if (!stockReduced) {
+                        request.setAttribute("error", "Unable to update stock for " + cartItem.getProduct().getJerseyName() + ".");
+                        reloadPaymentPage(request, response, loggedInUser, paymentSource, productIdValue, selectedSize);
+                        return;
+                    }
+                }
+
                 cartItemDAO.clearCartItems(userId);
 
             } else {
@@ -194,7 +306,6 @@ public class PaymentServlet extends HttpServlet {
                 int productId = Integer.parseInt(productIdValue);
                 selectedSize = selectedSize.trim().toUpperCase();
 
-                ProductDAO productDAO = new ProductDAO();
                 ProductModel product = productDAO.getProductById(productId);
 
                 if (product == null || product.getStockQuantity() <= 0) {
@@ -212,6 +323,12 @@ public class PaymentServlet extends HttpServlet {
                 OrderModel order = new OrderModel(userId, orderTotal, "Pending");
                 orderId = orderDAO.createOrder(order);
 
+                if (orderId <= 0) {
+                    request.setAttribute("error", "Unable to create order.");
+                    reloadPaymentPage(request, response, loggedInUser, paymentSource, productIdValue, selectedSize);
+                    return;
+                }
+
                 OrderItemModel orderItem = new OrderItemModel(
                     orderId,
                     product.getProductId(),
@@ -221,46 +338,31 @@ public class PaymentServlet extends HttpServlet {
                     product.getPrice()
                 );
 
-                orderItemDAO.addOrderItem(orderItem);
-            }
+                boolean orderItemAdded = orderItemDAO.addOrderItem(orderItem);
 
-            String cardLastFour = "";
-            String paymentStatus = "Pending";
-
-            if ("Card".equalsIgnoreCase(paymentMethod)) {
-                if (cardHolderName == null || cardHolderName.trim().isEmpty() ||
-                    cardNumber == null || cardNumber.trim().isEmpty()) {
-
-                    request.setAttribute("error", "Please fill card details for card payment.");
-                    doGet(request, response);
+                if (!orderItemAdded) {
+                    request.setAttribute("error", "Unable to add product to order.");
+                    reloadPaymentPage(request, response, loggedInUser, paymentSource, productIdValue, selectedSize);
                     return;
                 }
 
-                cardNumber = cardNumber.replaceAll("\\s+", "");
+                boolean stockReduced = productDAO.reduceStockQuantity(product.getProductId(), 1);
 
-                if (cardNumber.length() < 4) {
-                    request.setAttribute("error", "Please enter a valid card number.");
-                    doGet(request, response);
+                if (!stockReduced) {
+                    request.setAttribute("error", "Unable to update product stock.");
+                    reloadPaymentPage(request, response, loggedInUser, paymentSource, productIdValue, selectedSize);
                     return;
                 }
-
-                cardLastFour = cardNumber.substring(cardNumber.length() - 4);
-                paymentStatus = "Paid";
-
-            } else if ("Cash on Delivery".equalsIgnoreCase(paymentMethod)) {
-                cardHolderName = "";
-                cardLastFour = "";
-                paymentStatus = "Pending";
             }
 
             PaymentModel payment = new PaymentModel(
                 orderId,
                 userId,
-                fullName.trim(),
-                email.trim(),
-                phone.trim(),
-                address.trim(),
-                paymentMethod.trim(),
+                fullName,
+                email,
+                phone,
+                address,
+                paymentMethod,
                 cardHolderName,
                 cardLastFour,
                 orderTotal,
@@ -268,6 +370,12 @@ public class PaymentServlet extends HttpServlet {
             );
 
             int paymentId = paymentDAO.createPayment(payment);
+
+            if (paymentId <= 0) {
+                request.setAttribute("error", "Unable to save payment details.");
+                reloadPaymentPage(request, response, loggedInUser, paymentSource, productIdValue, selectedSize);
+                return;
+            }
 
             response.sendRedirect(request.getContextPath() + "/paymentsuccess?orderId=" + orderId + "&paymentId=" + paymentId);
 
@@ -277,6 +385,81 @@ public class PaymentServlet extends HttpServlet {
             request.getRequestDispatcher("/WEB-INF/pages/payment.jsp").forward(request, response);
         }
 	}
+
+    private void reloadPaymentPage(HttpServletRequest request, HttpServletResponse response, UserModel loggedInUser,
+                                   String paymentSource, String productIdValue, String selectedSize)
+            throws ServletException, IOException {
+
+        try {
+            request.setAttribute("loggedInUser", loggedInUser);
+
+            if ("cart".equalsIgnoreCase(paymentSource)) {
+                CartItemDAO cartItemDAO = new CartItemDAO();
+
+                int userId = loggedInUser.getUserid();
+                ArrayList<CartItemModel> cartItems = cartItemDAO.getCartItemsByUserId(userId);
+                double paymentAmount = cartItemDAO.calculateCartTotal(cartItems);
+
+                request.setAttribute("paymentSource", "cart");
+                request.setAttribute("cartItems", cartItems);
+                request.setAttribute("paymentAmount", paymentAmount);
+
+                request.getRequestDispatcher("/WEB-INF/pages/payment.jsp").forward(request, response);
+                return;
+            }
+
+            if (productIdValue != null && !productIdValue.trim().isEmpty()) {
+                int productId = Integer.parseInt(productIdValue);
+
+                ProductDAO productDAO = new ProductDAO();
+                ProductModel product = productDAO.getProductById(productId);
+
+                request.setAttribute("paymentSource", "product");
+                request.setAttribute("product", product);
+                request.setAttribute("selectedSize", selectedSize);
+                request.setAttribute("paymentAmount", product != null ? product.getPrice() : 0);
+
+                request.getRequestDispatcher("/WEB-INF/pages/payment.jsp").forward(request, response);
+                return;
+            }
+
+            response.sendRedirect(request.getContextPath() + "/product");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            request.setAttribute("error", "Unable to reload payment page.");
+            request.getRequestDispatcher("/WEB-INF/pages/payment.jsp").forward(request, response);
+        }
+    }
+
+    private String checkCartStock(ArrayList<CartItemModel> cartItems) {
+
+        if (cartItems == null || cartItems.isEmpty()) {
+            return "Your cart is empty.";
+        }
+
+        for (CartItemModel cartItem : cartItems) {
+            if (cartItem.getProduct() == null) {
+                return "One of the products in your cart is no longer available.";
+            }
+
+            ProductModel product = cartItem.getProduct();
+
+            if (product.getStockQuantity() <= 0) {
+                return product.getJerseyName() + " is currently out of stock.";
+            }
+
+            if (cartItem.getQuantity() > product.getStockQuantity()) {
+                return "Only " + product.getStockQuantity() + " stock available for " + product.getJerseyName() + ".";
+            }
+
+            if (!isSizeAvailable(product.getSize(), cartItem.getSelectedSize())) {
+                return "Selected size is not available for " + product.getJerseyName() + ".";
+            }
+        }
+
+        return null;
+    }
 
     private boolean isSizeAvailable(String availableSizes, String selectedSize) {
         if (availableSizes == null || availableSizes.trim().isEmpty() ||

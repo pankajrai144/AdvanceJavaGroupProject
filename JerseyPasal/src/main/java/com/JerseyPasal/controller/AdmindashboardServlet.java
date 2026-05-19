@@ -167,26 +167,18 @@ public class AdmindashboardServlet extends HttpServlet {
 
                 for (HashMap<String, String> user : users) {
 
-                    String userid = user.get("userid");
-                    String fullname = user.get("fullname");
-                    String email = user.get("email");
-                    String status = user.get("approval_status");
+                    String userid = safeValue(user.get("userid"));
+                    String fullname = safeValue(user.get("fullname"));
+                    String email = safeValue(user.get("email"));
+                    String status = safeValue(user.get("approval_status"));
 
-                    if (userid == null) {
-                        userid = "";
-                    }
-
-                    if (fullname == null) {
-                        fullname = "";
-                    }
-
-                    if (email == null) {
-                        email = "";
-                    }
-
-                    if (status == null || status.trim().isEmpty()) {
+                    if (status.trim().isEmpty()) {
                         status = "approved";
                     }
+
+                    String safeUserId = htmlEscape(userid);
+                    String safeFullname = htmlEscape(fullname);
+                    String safeEmail = htmlEscape(email);
 
                     String statusHtml;
                     String actionHtml;
@@ -197,7 +189,7 @@ public class AdmindashboardServlet extends HttpServlet {
                         actionHtml =
                                 "<form action='" + request.getContextPath() + "/approveuser' method='post' " +
                                 "onsubmit=\"return confirm('Are you sure you want to approve this user?');\">" +
-                                "<input type='hidden' name='userid' value='" + userid + "'>" +
+                                "<input type='hidden' name='userid' value='" + safeUserId + "'>" +
                                 "<button type='submit' class='approve-btn'>Approve</button>" +
                                 "</form>";
 
@@ -210,14 +202,14 @@ public class AdmindashboardServlet extends HttpServlet {
                         actionHtml =
                                 "<form action='" + request.getContextPath() + "/denyuser' method='post' " +
                                 "onsubmit=\"return confirm('Are you sure you want to deny this user?');\">" +
-                                "<input type='hidden' name='userid' value='" + userid + "'>" +
+                                "<input type='hidden' name='userid' value='" + safeUserId + "'>" +
                                 "<button type='submit' class='deny-btn'>Deny</button>" +
                                 "</form>";
                     }
 
                     userRows.append("<tr>");
-                    userRows.append("<td>").append(fullname).append("</td>");
-                    userRows.append("<td>").append(email).append("</td>");
+                    userRows.append("<td>").append(safeFullname).append("</td>");
+                    userRows.append("<td>").append(safeEmail).append("</td>");
                     userRows.append("<td>").append(statusHtml).append("</td>");
                     userRows.append("<td>").append(actionHtml).append("</td>");
                     userRows.append("</tr>");
@@ -258,13 +250,13 @@ public class AdmindashboardServlet extends HttpServlet {
 
                     productRows.append("<tr>");
                     productRows.append("<td>").append(imageHtml).append("</td>");
-                    productRows.append("<td>").append(product.getJerseyName()).append("</td>");
-                    productRows.append("<td>").append(product.getTeamName()).append("</td>");
-                    productRows.append("<td>").append(product.getSize()).append("</td>");
-                    productRows.append("<td>").append(product.getSeason()).append("</td>");
+                    productRows.append("<td>").append(htmlEscape(product.getJerseyName())).append("</td>");
+                    productRows.append("<td>").append(htmlEscape(product.getTeamName())).append("</td>");
+                    productRows.append("<td>").append(htmlEscape(product.getSize())).append("</td>");
+                    productRows.append("<td>").append(htmlEscape(product.getSeason())).append("</td>");
                     productRows.append("<td>$").append(product.getPrice()).append("</td>");
                     productRows.append("<td>").append(product.getStockQuantity()).append("</td>");
-                    productRows.append("<td>").append(product.getCategory()).append("</td>");
+                    productRows.append("<td>").append(htmlEscape(product.getCategory())).append("</td>");
                     productRows.append("<td>").append(actionHtml).append("</td>");
                     productRows.append("</tr>");
                 }
@@ -308,11 +300,15 @@ public class AdmindashboardServlet extends HttpServlet {
                         customerName = "User #" + order.getUserId();
                     }
 
+                    String safeCustomerName = htmlEscape(customerName);
+                    String safeStatus = htmlEscape(status);
+                    String safeOrderDate = htmlEscape(order.getOrderDate());
+
                     if (recentLimit < 5) {
                         recentOrderRows.append("<tr>");
                         recentOrderRows.append("<td>#").append(order.getOrderId()).append("</td>");
-                        recentOrderRows.append("<td>").append(customerName).append("</td>");
-                        recentOrderRows.append("<td><span class='badge ").append(statusClass).append("'>").append(status).append("</span></td>");
+                        recentOrderRows.append("<td>").append(safeCustomerName).append("</td>");
+                        recentOrderRows.append("<td><span class='badge ").append(statusClass).append("'>").append(safeStatus).append("</span></td>");
                         recentOrderRows.append("</tr>");
                         recentLimit++;
                     }
@@ -332,10 +328,10 @@ public class AdmindashboardServlet extends HttpServlet {
 
                     orderRows.append("<tr>");
                     orderRows.append("<td>#").append(order.getOrderId()).append("</td>");
-                    orderRows.append("<td>").append(customerName).append("</td>");
+                    orderRows.append("<td>").append(safeCustomerName).append("</td>");
                     orderRows.append("<td>£").append(order.getOrderTotal()).append("</td>");
-                    orderRows.append("<td><span class='badge ").append(statusClass).append("'>").append(status).append("</span></td>");
-                    orderRows.append("<td>").append(order.getOrderDate()).append("</td>");
+                    orderRows.append("<td><span class='badge ").append(statusClass).append("'>").append(safeStatus).append("</span></td>");
+                    orderRows.append("<td>").append(safeOrderDate).append("</td>");
                     orderRows.append("<td>").append(actionHtml).append("</td>");
                     orderRows.append("</tr>");
                 }
@@ -356,44 +352,20 @@ public class AdmindashboardServlet extends HttpServlet {
 
                 for (HashMap<String, String> contact : contactMessages) {
 
-                    String fullname = contact.get("fullname");
-                    String email = contact.get("email");
-                    String phone = contact.get("phone");
-                    String subject = contact.get("subject");
-                    String message = contact.get("message");
-                    String submittedAt = contact.get("submitted_at");
-
-                    if (fullname == null) {
-                        fullname = "";
-                    }
-
-                    if (email == null) {
-                        email = "";
-                    }
-
-                    if (phone == null) {
-                        phone = "";
-                    }
-
-                    if (subject == null) {
-                        subject = "";
-                    }
-
-                    if (message == null) {
-                        message = "";
-                    }
-
-                    if (submittedAt == null) {
-                        submittedAt = "";
-                    }
+                    String fullname = safeValue(contact.get("fullname"));
+                    String email = safeValue(contact.get("email"));
+                    String phone = safeValue(contact.get("phone"));
+                    String subject = safeValue(contact.get("subject"));
+                    String message = safeValue(contact.get("message"));
+                    String submittedAt = safeValue(contact.get("submitted_at"));
 
                     contactRows.append("<tr>");
-                    contactRows.append("<td>").append(fullname).append("</td>");
-                    contactRows.append("<td>").append(email).append("</td>");
-                    contactRows.append("<td>").append(phone).append("</td>");
-                    contactRows.append("<td>").append(subject).append("</td>");
-                    contactRows.append("<td>").append(message).append("</td>");
-                    contactRows.append("<td>").append(submittedAt).append("</td>");
+                    contactRows.append("<td>").append(htmlEscape(fullname)).append("</td>");
+                    contactRows.append("<td>").append(htmlEscape(email)).append("</td>");
+                    contactRows.append("<td>").append(htmlEscape(phone)).append("</td>");
+                    contactRows.append("<td>").append(htmlEscape(subject)).append("</td>");
+                    contactRows.append("<td>").append(htmlEscape(message)).append("</td>");
+                    contactRows.append("<td>").append(htmlEscape(submittedAt)).append("</td>");
                     contactRows.append("</tr>");
                 }
 
@@ -450,5 +422,26 @@ public class AdmindashboardServlet extends HttpServlet {
             throws ServletException, IOException {
 
         doGet(request, response);
+    }
+
+    private String safeValue(String value) {
+        if (value == null) {
+            return "";
+        }
+
+        return value;
+    }
+
+    private String htmlEscape(String value) {
+        if (value == null) {
+            return "";
+        }
+
+        return value
+                .replace("&", "&amp;")
+                .replace("<", "&lt;")
+                .replace(">", "&gt;")
+                .replace("\"", "&quot;")
+                .replace("'", "&#x27;");
     }
 }

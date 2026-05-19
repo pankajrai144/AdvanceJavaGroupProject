@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8" isELIgnored="false"%>
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -240,14 +240,14 @@ body {
 
   <c:if test="${not empty sessionScope.message}">
     <div class="alert alert-success">
-      <i class="fa-solid fa-circle-check"></i> ${sessionScope.message}
+      <i class="fa-solid fa-circle-check"></i> <c:out value="${sessionScope.message}" />
     </div>
     <c:remove var="message" scope="session" />
   </c:if>
 
   <c:if test="${not empty sessionScope.error}">
     <div class="alert alert-error">
-      <i class="fa-solid fa-circle-exclamation"></i> ${sessionScope.error}
+      <i class="fa-solid fa-circle-exclamation"></i> <c:out value="${sessionScope.error}" />
     </div>
     <c:remove var="error" scope="session" />
   </c:if>
@@ -276,27 +276,27 @@ body {
 
     <div class="input-group">
       <label>Full Name</label>
-      <input type="text" name="fullname" value="${sessionScope.loggedInUser.fullname}">
+      <input type="text" name="fullname" value="<c:out value='${sessionScope.loggedInUser.fullname}' />">
     </div>
 
     <div class="input-group">
       <label>Registration Date</label>
-      <input type="date" name="registrationDate" value="${sessionScope.loggedInUser.registrationDate}" readonly>
+      <input type="date" name="registrationDate" value="<c:out value='${sessionScope.loggedInUser.registrationDate}' />" readonly>
     </div>
 
     <div class="input-group">
       <label>Email</label>
-      <input type="text" name="email" value="${sessionScope.loggedInUser.email}">
+      <input type="text" name="email" value="<c:out value='${sessionScope.loggedInUser.email}' />">
     </div>
 
     <div class="input-group">
       <label>Phone</label>
-      <input type="text" name="phone" value="${sessionScope.loggedInUser.phone}">
+      <input type="text" name="phone" value="<c:out value='${sessionScope.loggedInUser.phone}' />">
     </div>
 
     <div class="input-group">
       <label>Address</label>
-      <textarea name="address">${sessionScope.loggedInUser.address}</textarea>
+      <textarea name="address"><c:out value="${sessionScope.loggedInUser.address}" /></textarea>
     </div>
 
     <div class="input-group">
@@ -305,7 +305,6 @@ body {
         <option value="">Select Gender</option>
         <option value="Male" <c:if test="${sessionScope.loggedInUser.gender == 'Male'}">selected</c:if>>Male</option>
         <option value="Female" <c:if test="${sessionScope.loggedInUser.gender == 'Female'}">selected</c:if>>Female</option>
-        <option value="Other" <c:if test="${sessionScope.loggedInUser.gender == 'Other'}">selected</c:if>>Other</option>
       </select>
     </div>
 
