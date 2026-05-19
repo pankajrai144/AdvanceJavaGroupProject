@@ -2,28 +2,19 @@ package com.JerseyPasal.controller.utils;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public class DBconfig {
 
     private static final String URL = "jdbc:mysql://localhost:3306/jersey_pasal";
     private static final String USER = "root";
-    private static final String PASSWORD = ""; 
+    private static final String PASSWORD = "";
 
-    public static Connection getConnection() {
+    public static Connection getConnection() throws SQLException, ClassNotFoundException {
 
-        Connection conn = null;
+        Class.forName("com.mysql.cj.jdbc.Driver");
 
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-
-            conn = DriverManager.getConnection(URL, USER, PASSWORD);
-
-            System.out.println("Connected to jersey_pasal ");
-
-        } catch (Exception e) {
-            System.out.println("DB Connection Failed ");
-            e.printStackTrace();
-        }
+        Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
 
         return conn;
     }
