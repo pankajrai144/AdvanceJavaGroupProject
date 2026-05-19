@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/heaader.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/footer.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/payment.css">
 </head>
 <body>
@@ -64,78 +65,81 @@
 
             <hr class="pd1">
 
-            <div class="pg1">
+            <div class="pg1 payment-choice-area">
                 <p class="ps1">Payment Details</p>
 
+                <input type="radio" id="paymentCard" name="paymentMethod" value="Card" class="payment-radio" checked>
+                <input type="radio" id="paymentCash" name="paymentMethod" value="Cash on Delivery" class="payment-radio">
+
                 <div class="pfw1" style="margin-bottom: 16px;">
-                    <label class="pla1" for="paymentMethod">Payment Method</label>
-                    <div class="psw1">
-                        <select class="pse1" id="paymentMethod" name="paymentMethod">
-                            <option value="">Select payment method</option>
-                            <option value="Card">Card</option>
-                            <option value="Cash on Delivery">Cash on Delivery</option>
-                        </select>
+                    <label class="pla1">Payment Method</label>
+
+                    <div class="payment-method-box">
+                        <label for="paymentCard" class="payment-method-option">Card</label>
+                        <label for="paymentCash" class="payment-method-option">Cash on Delivery</label>
                     </div>
                 </div>
 
-                <div class="pfw1" style="margin-bottom: 16px;">
-                    <label class="pla1" for="cardHolderName">Name on Card</label>
-                    <input class="pin1" type="text" id="cardHolderName" name="cardHolderName" placeholder="Name on card">
-                </div>
-
-                <div class="pfw1" style="margin-bottom: 16px;">
-                    <label class="pla1" for="cardNumber">Card Number</label>
-                    <div class="pcw1">
-                        <input class="pin1" type="text" id="cardNumber" name="cardNumber" placeholder="0000 0000 0000 0000">
-                        <div class="pci1">
-                            <span>Visa</span>
-                            <span>MC</span>
-                            <span>Amex</span>
-                        </div>
+                <div class="card-details-box">
+                    <div class="pfw1" style="margin-bottom: 16px;">
+                        <label class="pla1" for="cardHolderName">Name on Card</label>
+                        <input class="pin1" type="text" id="cardHolderName" name="cardHolderName" placeholder="Name on card">
                     </div>
-                </div>
 
-                <div class="pr2" style="margin-bottom: 16px;">
-                    <div class="pfw1">
-                        <label class="pla1" for="expiryMonth">Expiry Month</label>
-                        <div class="psw1">
-                            <select class="pse1" id="expiryMonth" name="expiryMonth">
-                                <option value="">MM</option>
-                                <option value="01">01 – Jan</option>
-                                <option value="02">02 – Feb</option>
-                                <option value="03">03 – Mar</option>
-                                <option value="04">04 – Apr</option>
-                                <option value="05">05 – May</option>
-                                <option value="06">06 – Jun</option>
-                                <option value="07">07 – Jul</option>
-                                <option value="08">08 – Aug</option>
-                                <option value="09">09 – Sep</option>
-                                <option value="10">10 – Oct</option>
-                                <option value="11">11 – Nov</option>
-                                <option value="12">12 – Dec</option>
-                            </select>
+                    <div class="pfw1" style="margin-bottom: 16px;">
+                        <label class="pla1" for="cardNumber">Card Number</label>
+                        <div class="pcw1">
+                            <input class="pin1" type="text" id="cardNumber" name="cardNumber" placeholder="0000 0000 0000 0000">
+                            <div class="pci1">
+                                <span>Visa</span>
+                                <span>MC</span>
+                                <span>Amex</span>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="pfw1">
-                        <label class="pla1" for="expiryYear">Expiry Year</label>
-                        <div class="psw1">
-                            <select class="pse1" id="expiryYear" name="expiryYear">
-                                <option value="">YY</option>
-                                <option value="26">2026</option>
-                                <option value="27">2027</option>
-                                <option value="28">2028</option>
-                                <option value="29">2029</option>
-                                <option value="30">2030</option>
-                                <option value="31">2031</option>
-                                <option value="32">2032</option>
-                            </select>
+                    <div class="pr2" style="margin-bottom: 16px;">
+                        <div class="pfw1">
+                            <label class="pla1" for="expiryMonth">Expiry Month</label>
+                            <div class="psw1">
+                                <select class="pse1" id="expiryMonth" name="expiryMonth">
+                                    <option value="">MM</option>
+                                    <option value="01">01 – Jan</option>
+                                    <option value="02">02 – Feb</option>
+                                    <option value="03">03 – Mar</option>
+                                    <option value="04">04 – Apr</option>
+                                    <option value="05">05 – May</option>
+                                    <option value="06">06 – Jun</option>
+                                    <option value="07">07 – Jul</option>
+                                    <option value="08">08 – Aug</option>
+                                    <option value="09">09 – Sep</option>
+                                    <option value="10">10 – Oct</option>
+                                    <option value="11">11 – Nov</option>
+                                    <option value="12">12 – Dec</option>
+                                </select>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="pfw1">
-                        <label class="pla1" for="cvv">CVV</label>
-                        <input class="pin1" type="text" id="cvv" name="cvv" placeholder="•••">
+                        <div class="pfw1">
+                            <label class="pla1" for="expiryYear">Expiry Year</label>
+                            <div class="psw1">
+                                <select class="pse1" id="expiryYear" name="expiryYear">
+                                    <option value="">YY</option>
+                                    <option value="26">2026</option>
+                                    <option value="27">2027</option>
+                                    <option value="28">2028</option>
+                                    <option value="29">2029</option>
+                                    <option value="30">2030</option>
+                                    <option value="31">2031</option>
+                                    <option value="32">2032</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="pfw1">
+                            <label class="pla1" for="cvv">CVV</label>
+                            <input class="pin1" type="text" id="cvv" name="cvv" placeholder="•••">
+                        </div>
                     </div>
                 </div>
             </div>
