@@ -7,22 +7,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Retro Kits — JerseyPasal</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/heaader.css">
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/footer.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/heaader.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/footer.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/retro.css">
 </head>
 <body>
 
 <%@ include file="/components/header.jsp" %>
+
 <div class="retrobanner">
     <div class="bannerinner">
-        <p class="bannertop">Est. 1998 — Collector Series</p>
-        <h1 class="retrotitle">The Retro Kit<br>Collection</h1>
-        <p class="bannersub">Authentic jerseys from football's greatest chapters</p>
+        <p class="bannertop">Est. 1998 — Dynasties</p>
+        <h1 class="retrotitle">The Retro Dynasties</h1>
+        <p class="bannersub">Legends, Eras & the Clubs That Defined Football</p>
     </div>
 </div>
 
-<!-- Manchester United -->
 <div class="newsrow">
     <div class="newswrap">
 
@@ -31,7 +31,7 @@
                 <img src="${pageContext.request.contextPath}/images/united3.jpg" alt="Beckham">
             </div>
             <div class="newscaption">
-                <span>Manchester United Collection</span>
+                <span>Manchester United FC</span>
                 <span>Old Trafford, 1999</span>
             </div>
         </div>
@@ -41,7 +41,7 @@
             <h2 class="newshead">The Treble Winners</h2>
             <div class="newsrule"></div>
             <p class="newsquote">" The greatest comeback in football history. "</p>
-            <p class="newsbody">It was the night that defined a generation. Barcelona, 26th May 1999. Two goals down in stoppage time, United completed the most dramatic comeback the sport has ever seen. Beckham, Scholes, Keane — this is the shirt they wore.</p>
+            <p class="newsbody">Founded in 1878 as Newton Heath, Manchester United grew into one of the most decorated clubs in the world under Sir Alex Ferguson. The 1998–99 season stands as their finest hour — winning the Premier League, FA Cup, and UEFA Champions League in a single campaign. The late goals at Camp Nou by Sheringham and Solskjær cemented their place in football immortality.</p>
             <div class="newsstats">
                 <div class="newsstat">
                     <span class="newsval">1878</span>
@@ -57,7 +57,7 @@
                 </div>
             </div>
             <div class="newsrule"></div>
-            <a href="#" class="newsbtn">Shop Man Utd Retro</a>
+            <p class="newsbody">Key figures of the era: Peter Schmeichel, Roy Keane, David Beckham, Andy Cole, and Ole Gunnar Solskjær. Ferguson's United played with an intensity and belief that made them near-impossible to beat — even in the final seconds.</p>
         </div>
 
     </div>
@@ -65,7 +65,6 @@
 
 <div class="newsdivider">----------------------------------</div>
 
-<!-- AC Milan -->
 <div class="newsrow">
     <div class="newswrap">
 
@@ -74,7 +73,7 @@
             <h2 class="newshead">The Rossoneri Dynasty</h2>
             <div class="newsrule"></div>
             <p class="newsquote">" Milan. The most beautiful shirt in the world. "</p>
-            <p class="newsbody">Old Trafford, 28th May 2003. The all-Italian final that showcased Milan at the peak of their powers. Maldini, Nesta, Shevchenko — a side built for the ages. Own the exact shirt worn on that unforgettable night.</p>
+            <p class="newsbody">AC Milan's dominance in the late 1980s and early 2000s represents one of the greatest dynasties in European football. Under Arrigo Sacchi and later Carlo Ancelotti, Milan built squads of unmatched tactical discipline and individual brilliance. Their 2002–03 Champions League triumph, decided on penalties against Juventus, marked the peak of a golden generation.</p>
             <div class="newsstats">
                 <div class="newsstat">
                     <span class="newsval">1899</span>
@@ -90,7 +89,7 @@
                 </div>
             </div>
             <div class="newsrule"></div>
-            <a href="#" class="newsbtn">Shop AC Milan Retro</a>
+            <p class="newsbody">Paolo Maldini, Alessandro Nesta, Clarence Seedorf, Kaká, and Andriy Shevchenko were the pillars of this era. Maldini alone spent 25 years at the club, becoming the symbol of loyalty and excellence in modern football.</p>
         </div>
 
         <div class="newsleft">
@@ -105,6 +104,8 @@
 
     </div>
 </div>
+
+<div class="newsdivider">----------------------------------</div>
 
 <%@ include file="/components/footer.jsp" %>
 
