@@ -49,17 +49,18 @@ public class GuestFilter extends HttpFilter implements Filter {
             UserModel loggedInUser = (UserModel) loggedInUserObj;
             String role = loggedInUser.getRole();
 
-            if ("admin".equalsIgnoreCase(role)) {
+            if (role != null && "admin".equalsIgnoreCase(role)) {
                 httpResponse.sendRedirect(httpRequest.getContextPath() + "/admindashboard");
                 return;
             }
 
-            if ("user".equalsIgnoreCase(role)) {
+            if (role != null && "user".equalsIgnoreCase(role)) {
                 httpResponse.sendRedirect(httpRequest.getContextPath() + "/userdashboard");
                 return;
             }
 
             HttpSession session = httpRequest.getSession(false);
+
             if (session != null) {
                 session.invalidate();
             }

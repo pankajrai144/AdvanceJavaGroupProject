@@ -19,7 +19,26 @@ import jakarta.servlet.http.HttpServletResponse;
 /**
  * Servlet Filter implementation class AuthenticationFilter
  */
-@WebFilter(urlPatterns = { "/userdashboard", "/admindashboard", "/profile", "/cart", "/wishlist", "/review", "/editprofile", "/payment", "/paymentsuccess", "/updateorderstatus", "/logout" })
+@WebFilter(urlPatterns = { 
+		"/userdashboard", 
+		"/admindashboard", 
+		"/profile", 
+		"/editprofile", 
+		"/cart", 
+		"/wishlist", 
+		"/review", 
+		"/payment", 
+		"/paymentsuccess", 
+		"/confirmdelete", 
+		"/deleteaccount", 
+		"/updateorderstatus", 
+		"/adminproduct", 
+		"/editproduct", 
+		"/deleteproduct", 
+		"/approveuser", 
+		"/denyuser", 
+		"/logout" 
+})
 public class AuthenticationFilter extends HttpFilter implements Filter {
 
 	private static final long serialVersionUID = 1L;
@@ -45,9 +64,7 @@ public class AuthenticationFilter extends HttpFilter implements Filter {
 
 		Object loggedInUserObj = SessionUtil.getAttribute(httpRequest, "loggedInUser");
 
-		boolean isLoggedIn = loggedInUserObj != null;
-
-		if (!isLoggedIn) {
+		if (loggedInUserObj == null) {
 			httpResponse.sendRedirect(httpRequest.getContextPath() + "/login");
 			return;
 		}
@@ -55,9 +72,21 @@ public class AuthenticationFilter extends HttpFilter implements Filter {
 		UserModel loggedInUser = (UserModel) loggedInUserObj;
 		String userRole = loggedInUser.getRole();
 
+		if (userRole == null || userRole.trim().isEmpty()) {
+			httpResponse.sendError(HttpServletResponse.SC_FORBIDDEN);
+			return;
+		}
+
 		String path = httpRequest.getServletPath();
 
-		if (path.equals("/admindashboard") || path.equals("/updateorderstatus")) {
+		if (path.equals("/admindashboard") ||
+			path.equals("/updateorderstatus") ||
+			path.equals("/adminproduct") ||
+			path.equals("/editproduct") ||
+			path.equals("/deleteproduct") ||
+			path.equals("/approveuser") ||
+			path.equals("/denyuser")) {
+
 			if ("admin".equalsIgnoreCase(userRole)) {
 				chain.doFilter(request, response);
 			} else {
@@ -66,14 +95,27 @@ public class AuthenticationFilter extends HttpFilter implements Filter {
 			return;
 		}
 
-		if (path.equals("/userdashboard") || path.equals("/cart") || path.equals("/wishlist") ||
-			path.equals("/review") || path.equals("/payment") || path.equals("/paymentsuccess")) {
+		if (path.equals("/userdashboard") ||
+			path.equals("/profile") ||
+			path.equals("/editprofile") ||
+			path.equals("/cart") ||
+			path.equals("/wishlist") ||
+			path.equals("/review") ||
+			path.equals("/payment") ||
+			path.equals("/paymentsuccess") ||
+			path.equals("/confirmdelete") ||
+			path.equals("/deleteaccount")) {
 
 			if ("user".equalsIgnoreCase(userRole)) {
 				chain.doFilter(request, response);
 			} else {
 				httpResponse.sendError(HttpServletResponse.SC_FORBIDDEN);
 			}
+			return;
+		}
+
+		if (path.equals("/logout")) {
+			chain.doFilter(request, response);
 			return;
 		}
 
