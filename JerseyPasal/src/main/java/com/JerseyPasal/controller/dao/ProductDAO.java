@@ -194,6 +194,136 @@ public class ProductDAO {
         return products;
     }
 
+    public ArrayList<ProductModel> getFilteredProductsByCategory(String category, String size, Double minPrice, Double maxPrice) throws Exception {
+
+        ArrayList<ProductModel> products = new ArrayList<>();
+
+        Connection con = DBconfig.getConnection();
+
+        String sql = "SELECT product_id, jersey_name, team_name, size, season, price, stock_quantity, category, description, product_image, product_image_2, product_image_3, product_image_4 "
+                   + "FROM products "
+                   + "WHERE category = ? ";
+
+        ArrayList<Object> values = new ArrayList<>();
+
+        values.add(category);
+
+        if (size != null && !size.trim().isEmpty()) {
+            sql += "AND FIND_IN_SET(?, REPLACE(size, ' ', '')) > 0 ";
+            values.add(size.trim());
+        }
+
+        if (minPrice != null) {
+            sql += "AND price >= ? ";
+            values.add(minPrice);
+        }
+
+        if (maxPrice != null) {
+            sql += "AND price <= ? ";
+            values.add(maxPrice);
+        }
+
+        sql += "ORDER BY product_id DESC";
+
+        PreparedStatement pst = con.prepareStatement(sql);
+
+        for (int i = 0; i < values.size(); i++) {
+            pst.setObject(i + 1, values.get(i));
+        }
+
+        ResultSet rs = pst.executeQuery();
+
+        while (rs.next()) {
+            ProductModel product = new ProductModel();
+
+            product.setProductId(rs.getInt("product_id"));
+            product.setJerseyName(rs.getString("jersey_name"));
+            product.setTeamName(rs.getString("team_name"));
+            product.setSize(rs.getString("size"));
+            product.setSeason(rs.getString("season"));
+            product.setPrice(rs.getDouble("price"));
+            product.setStockQuantity(rs.getInt("stock_quantity"));
+            product.setCategory(rs.getString("category"));
+            product.setDescription(rs.getString("description"));
+            product.setProductImage(rs.getString("product_image"));
+            product.setProductImage2(rs.getString("product_image_2"));
+            product.setProductImage3(rs.getString("product_image_3"));
+            product.setProductImage4(rs.getString("product_image_4"));
+
+            products.add(product);
+        }
+
+        rs.close();
+        pst.close();
+        con.close();
+
+        return products;
+    }
+
+    public ArrayList<ProductModel> getFilteredProducts(String size, Double minPrice, Double maxPrice) throws Exception {
+
+        ArrayList<ProductModel> products = new ArrayList<>();
+
+        Connection con = DBconfig.getConnection();
+
+        String sql = "SELECT product_id, jersey_name, team_name, size, season, price, stock_quantity, category, description, product_image, product_image_2, product_image_3, product_image_4 "
+                   + "FROM products "
+                   + "WHERE 1 = 1 ";
+
+        ArrayList<Object> values = new ArrayList<>();
+
+        if (size != null && !size.trim().isEmpty()) {
+            sql += "AND FIND_IN_SET(?, REPLACE(size, ' ', '')) > 0 ";
+            values.add(size.trim());
+        }
+
+        if (minPrice != null) {
+            sql += "AND price >= ? ";
+            values.add(minPrice);
+        }
+
+        if (maxPrice != null) {
+            sql += "AND price <= ? ";
+            values.add(maxPrice);
+        }
+
+        sql += "ORDER BY product_id DESC";
+
+        PreparedStatement pst = con.prepareStatement(sql);
+
+        for (int i = 0; i < values.size(); i++) {
+            pst.setObject(i + 1, values.get(i));
+        }
+
+        ResultSet rs = pst.executeQuery();
+
+        while (rs.next()) {
+            ProductModel product = new ProductModel();
+
+            product.setProductId(rs.getInt("product_id"));
+            product.setJerseyName(rs.getString("jersey_name"));
+            product.setTeamName(rs.getString("team_name"));
+            product.setSize(rs.getString("size"));
+            product.setSeason(rs.getString("season"));
+            product.setPrice(rs.getDouble("price"));
+            product.setStockQuantity(rs.getInt("stock_quantity"));
+            product.setCategory(rs.getString("category"));
+            product.setDescription(rs.getString("description"));
+            product.setProductImage(rs.getString("product_image"));
+            product.setProductImage2(rs.getString("product_image_2"));
+            product.setProductImage3(rs.getString("product_image_3"));
+            product.setProductImage4(rs.getString("product_image_4"));
+
+            products.add(product);
+        }
+
+        rs.close();
+        pst.close();
+        con.close();
+
+        return products;
+    }
+
     public ArrayList<ProductModel> getTopSellingProducts() throws Exception {
 
         ArrayList<ProductModel> products = new ArrayList<>();

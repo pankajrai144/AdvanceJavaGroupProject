@@ -563,6 +563,104 @@ details[open] .pd23 i {
     letter-spacing: 0.5px;
 }
 
+.product-filter-box {
+    width: 100%;
+    background: #161616;
+    border: 1px solid #252525;
+    border-radius: 8px;
+    padding: 18px;
+    margin-bottom: 28px;
+    display: flex;
+    align-items: flex-end;
+    gap: 14px;
+    flex-wrap: wrap;
+}
+
+.product-filter-field {
+    flex: 1;
+    min-width: 180px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.product-filter-field label {
+    color: var(--mid);
+    font-size: 0.68rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+.product-filter-field select,
+.product-filter-field input {
+    width: 100%;
+    height: 44px;
+    background: #111111;
+    border: 1px solid #333333;
+    border-radius: 4px;
+    color: var(--white);
+    font-size: 0.82rem;
+    font-weight: 700;
+    padding: 0 12px;
+    outline: none;
+}
+
+.product-filter-field select:focus,
+.product-filter-field input:focus {
+    border-color: var(--red);
+}
+
+.product-filter-field input::placeholder {
+    color: rgba(255, 255, 255, 0.35);
+}
+
+.product-filter-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    min-width: 190px;
+}
+
+.product-filter-actions button,
+.product-filter-actions a {
+    height: 44px;
+    padding: 0 18px;
+    border-radius: 4px;
+    font-size: 0.72rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.product-filter-actions button {
+    background: var(--red);
+    color: var(--white);
+    border: 1px solid var(--red);
+}
+
+.product-filter-actions button:hover {
+    background: var(--red-dark);
+    border-color: var(--red-dark);
+}
+
+.product-filter-actions a {
+    background: transparent;
+    color: var(--white);
+    border: 1px solid #333333;
+}
+
+.product-filter-actions a:hover {
+    border-color: var(--red);
+    color: var(--red);
+}
+
 .product-list-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -767,6 +865,20 @@ details[open] .pd23 i {
         font-size: 1.8rem;
     }
 
+    .product-filter-box {
+        align-items: stretch;
+    }
+
+    .product-filter-actions {
+        width: 100%;
+        min-width: 100%;
+    }
+
+    .product-filter-actions button,
+    .product-filter-actions a {
+        flex: 1;
+    }
+
     .product-list-grid {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -818,6 +930,23 @@ details[open] .pd23 i {
 
     .product-list-heading h1 {
         font-size: 1.45rem;
+    }
+
+    .product-filter-box {
+        padding: 14px;
+    }
+
+    .product-filter-field {
+        min-width: 100%;
+    }
+
+    .product-filter-actions {
+        flex-direction: column;
+    }
+
+    .product-filter-actions button,
+    .product-filter-actions a {
+        width: 100%;
     }
 
     .product-list-grid {

@@ -10,6 +10,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 /**
@@ -35,7 +37,48 @@ public class ClubsServlet extends HttpServlet {
 
 		try {
 			ProductDAO dao = new ProductDAO();
-			ArrayList<ProductModel> allClubProducts = dao.getProductsByCategory("Club");
+
+			String size = request.getParameter("size");
+			String minPriceValue = request.getParameter("minPrice");
+			String maxPriceValue = request.getParameter("maxPrice");
+
+			Double minPrice = null;
+			Double maxPrice = null;
+			String filterError = null;
+
+			if (minPriceValue != null && !minPriceValue.trim().isEmpty()) {
+				try {
+					minPrice = Double.parseDouble(minPriceValue.trim());
+
+					if (minPrice < 0) {
+						minPrice = null;
+						filterError = "Minimum price cannot be negative.";
+					}
+				} catch (NumberFormatException e) {
+					filterError = "Minimum price must be a valid number.";
+				}
+			}
+
+			if (maxPriceValue != null && !maxPriceValue.trim().isEmpty()) {
+				try {
+					maxPrice = Double.parseDouble(maxPriceValue.trim());
+
+					if (maxPrice < 0) {
+						maxPrice = null;
+						filterError = "Maximum price cannot be negative.";
+					}
+				} catch (NumberFormatException e) {
+					filterError = "Maximum price must be a valid number.";
+				}
+			}
+
+			if (minPrice != null && maxPrice != null && minPrice > maxPrice) {
+				filterError = "Minimum price cannot be greater than maximum price.";
+				minPrice = null;
+				maxPrice = null;
+			}
+
+			ArrayList<ProductModel> allClubProducts = dao.getFilteredProductsByCategory("Club", size, minPrice, maxPrice);
 
 			int productsPerPage = 9;
 			int currentPage = 1;
@@ -74,9 +117,25 @@ public class ClubsServlet extends HttpServlet {
 				clubProducts = new ArrayList<>(allClubProducts.subList(startIndex, endIndex));
 			}
 
+			String filterQuery = "";
+
+			if (size != null && !size.trim().isEmpty()) {
+				filterQuery += "&size=" + URLEncoder.encode(size.trim(), StandardCharsets.UTF_8);
+			}
+
+			if (minPriceValue != null && !minPriceValue.trim().isEmpty()) {
+				filterQuery += "&minPrice=" + URLEncoder.encode(minPriceValue.trim(), StandardCharsets.UTF_8);
+			}
+
+			if (maxPriceValue != null && !maxPriceValue.trim().isEmpty()) {
+				filterQuery += "&maxPrice=" + URLEncoder.encode(maxPriceValue.trim(), StandardCharsets.UTF_8);
+			}
+
 			request.setAttribute("clubProducts", clubProducts);
 			request.setAttribute("currentPage", currentPage);
 			request.setAttribute("totalPages", totalPages);
+			request.setAttribute("filterQuery", filterQuery);
+			request.setAttribute("filterError", filterError);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -84,6 +143,7 @@ public class ClubsServlet extends HttpServlet {
 			request.setAttribute("clubProducts", new ArrayList<ProductModel>());
 			request.setAttribute("currentPage", 1);
 			request.setAttribute("totalPages", 1);
+			request.setAttribute("filterQuery", "");
 		}
 
 		request.getRequestDispatcher("/WEB-INF/pages/clubs.jsp").forward(request, response);

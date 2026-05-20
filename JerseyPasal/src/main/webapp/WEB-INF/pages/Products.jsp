@@ -346,7 +346,7 @@
 
     </c:when>
 
-    <c:when test="${not empty products}">
+    <c:otherwise>
 
         <section class="product-list-section">
             <div class="product-list-wrap">
@@ -355,6 +355,10 @@
                     <p>Continue Shopping</p>
                     <h1>All Products</h1>
 
+                    <c:if test="${not empty filterError}">
+                        <span class="product-list-count">${filterError}</span>
+                    </c:if>
+
                     <c:if test="${totalProducts > 0}">
                         <span class="product-list-count">
                             Showing page ${currentPage} of ${totalPages}
@@ -362,49 +366,93 @@
                     </c:if>
                 </div>
 
-                <div class="product-list-grid">
+                <form action="${pageContext.request.contextPath}/product" method="get" class="product-filter-box">
 
-                    <c:forEach var="product" items="${products}">
-                        <div class="product-list-card">
+                    <div class="product-filter-field">
+                        <label for="size">Size</label>
+                        <select name="size" id="size">
+                            <option value="" ${empty param.size ? 'selected' : ''}>All Sizes</option>
+                            <option value="XS" ${param.size == 'XS' ? 'selected' : ''}>XS</option>
+                            <option value="S" ${param.size == 'S' ? 'selected' : ''}>S</option>
+                            <option value="M" ${param.size == 'M' ? 'selected' : ''}>M</option>
+                            <option value="L" ${param.size == 'L' ? 'selected' : ''}>L</option>
+                            <option value="XL" ${param.size == 'XL' ? 'selected' : ''}>XL</option>
+                            <option value="XXL" ${param.size == 'XXL' ? 'selected' : ''}>XXL</option>
+                        </select>
+                    </div>
 
-                            <a href="${pageContext.request.contextPath}/product?productId=${product.productId}" class="product-list-image-box">
-                                <c:choose>
-                                    <c:when test="${not empty product.productImage}">
-                                        <img src="${pageContext.request.contextPath}/getimage?productImage=${product.productImage}" 
-                                             alt="${product.jerseyName}">
-                                    </c:when>
+                    <div class="product-filter-field">
+                        <label for="minPrice">Min Price</label>
+                        <input type="number" name="minPrice" id="minPrice" placeholder="Min price" value="${param.minPrice}">
+                    </div>
 
-                                    <c:otherwise>
-                                        <div class="product-list-no-image">
-                                            <i class="fa-solid fa-image"></i>
-                                        </div>
-                                    </c:otherwise>
-                                </c:choose>
-                            </a>
+                    <div class="product-filter-field">
+                        <label for="maxPrice">Max Price</label>
+                        <input type="number" name="maxPrice" id="maxPrice" placeholder="Max price" value="${param.maxPrice}">
+                    </div>
 
-                            <div class="product-list-info">
-                                <p class="product-list-team">${product.teamName}</p>
-                                <h3>${product.jerseyName}</h3>
-                                <p class="product-list-category">${product.category} Jersey</p>
-                                <p class="product-list-description">${product.description}</p>
-                                <p class="product-list-price">£${product.price}</p>
+                    <div class="product-filter-actions">
+                        <button type="submit">Filter</button>
+                        <a href="${pageContext.request.contextPath}/product">Clear</a>
+                    </div>
 
-                                <a href="${pageContext.request.contextPath}/product?productId=${product.productId}" class="product-list-btn">
-                                    View Details
-                                </a>
-                            </div>
+                </form>
+
+                <c:choose>
+                    <c:when test="${not empty products}">
+                        <div class="product-list-grid">
+
+                            <c:forEach var="product" items="${products}">
+                                <div class="product-list-card">
+
+                                    <a href="${pageContext.request.contextPath}/product?productId=${product.productId}" class="product-list-image-box">
+                                        <c:choose>
+                                            <c:when test="${not empty product.productImage}">
+                                                <img src="${pageContext.request.contextPath}/getimage?productImage=${product.productImage}" 
+                                                     alt="${product.jerseyName}">
+                                            </c:when>
+
+                                            <c:otherwise>
+                                                <div class="product-list-no-image">
+                                                    <i class="fa-solid fa-image"></i>
+                                                </div>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </a>
+
+                                    <div class="product-list-info">
+                                        <p class="product-list-team">${product.teamName}</p>
+                                        <h3>${product.jerseyName}</h3>
+                                        <p class="product-list-category">${product.category} Jersey</p>
+                                        <p class="product-list-description">${product.description}</p>
+                                        <p class="product-list-price">£${product.price}</p>
+
+                                        <a href="${pageContext.request.contextPath}/product?productId=${product.productId}" class="product-list-btn">
+                                            View Details
+                                        </a>
+                                    </div>
+
+                                </div>
+                            </c:forEach>
 
                         </div>
-                    </c:forEach>
+                    </c:when>
 
-                </div>
+                    <c:otherwise>
+                        <div class="pd-empty-box">
+                            <i class="fa-solid fa-box-open"></i>
+                            <h2>No products available</h2>
+                            <p>Products matching your selected filter will appear here.</p>
+                        </div>
+                    </c:otherwise>
+                </c:choose>
 
                 <c:if test="${totalPages > 1}">
                     <div class="product-pagination">
 
                         <c:choose>
                             <c:when test="${currentPage > 1}">
-                                <a href="${pageContext.request.contextPath}/product?page=${currentPage - 1}" class="pagination-btn">
+                                <a href="${pageContext.request.contextPath}/product?page=${currentPage - 1}${filterQuery}" class="pagination-btn">
                                     Previous
                                 </a>
                             </c:when>
@@ -421,7 +469,7 @@
                                 </c:when>
 
                                 <c:otherwise>
-                                    <a href="${pageContext.request.contextPath}/product?page=${pageNumber}" class="pagination-number">
+                                    <a href="${pageContext.request.contextPath}/product?page=${pageNumber}${filterQuery}" class="pagination-number">
                                         ${pageNumber}
                                     </a>
                                 </c:otherwise>
@@ -430,7 +478,7 @@
 
                         <c:choose>
                             <c:when test="${currentPage < totalPages}">
-                                <a href="${pageContext.request.contextPath}/product?page=${currentPage + 1}" class="pagination-btn">
+                                <a href="${pageContext.request.contextPath}/product?page=${currentPage + 1}${filterQuery}" class="pagination-btn">
                                     Next
                                 </a>
                             </c:when>
@@ -446,16 +494,6 @@
             </div>
         </section>
 
-    </c:when>
-
-    <c:otherwise>
-        <section class="pd1">
-            <div class="pd-empty-box">
-                <i class="fa-solid fa-box-open"></i>
-                <h2>No products available</h2>
-                <p>Products added by admin will appear here.</p>
-            </div>
-        </section>
     </c:otherwise>
 
 </c:choose>

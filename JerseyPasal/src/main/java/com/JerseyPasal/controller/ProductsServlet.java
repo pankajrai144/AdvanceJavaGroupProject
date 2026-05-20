@@ -18,6 +18,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 /**
@@ -113,6 +115,48 @@ public class ProductsServlet extends HttpServlet {
 				request.setAttribute("selectedProduct", selectedProduct);
 				
 			} else {
+                String size = request.getParameter("size");
+                String minPriceValue = request.getParameter("minPrice");
+                String maxPriceValue = request.getParameter("maxPrice");
+
+                Double minPrice = null;
+                Double maxPrice = null;
+                String filterError = null;
+
+                if (minPriceValue != null && !minPriceValue.trim().isEmpty()) {
+                    try {
+                        minPrice = Double.parseDouble(minPriceValue.trim());
+
+                        if (minPrice < 0) {
+                            minPrice = null;
+                            filterError = "Minimum price cannot be negative.";
+                        }
+                    } catch (NumberFormatException e) {
+                        filterError = "Minimum price must be a valid number.";
+                    }
+                }
+
+                if (maxPriceValue != null && !maxPriceValue.trim().isEmpty()) {
+                    try {
+                        maxPrice = Double.parseDouble(maxPriceValue.trim());
+
+                        if (maxPrice < 0) {
+                            maxPrice = null;
+                            filterError = "Maximum price cannot be negative.";
+                        }
+                    } catch (NumberFormatException e) {
+                        filterError = "Maximum price must be a valid number.";
+                    }
+                }
+
+                if (minPrice != null && maxPrice != null && minPrice > maxPrice) {
+                    filterError = "Minimum price cannot be greater than maximum price.";
+                    minPrice = null;
+                    maxPrice = null;
+                }
+
+                ArrayList<ProductModel> allProducts = dao.getFilteredProducts(size, minPrice, maxPrice);
+
                 int currentPage = 1;
                 int productsPerPage = 9;
 
@@ -126,29 +170,50 @@ public class ProductsServlet extends HttpServlet {
                     }
                 }
 
-                if (currentPage < 1) {
-                    currentPage = 1;
-                }
-
-                int totalProducts = dao.getProductCount();
+                int totalProducts = allProducts.size();
                 int totalPages = (int) Math.ceil((double) totalProducts / productsPerPage);
 
                 if (totalPages < 1) {
                     totalPages = 1;
                 }
 
+                if (currentPage < 1) {
+                    currentPage = 1;
+                }
+
                 if (currentPage > totalPages) {
                     currentPage = totalPages;
                 }
 
-                int start = (currentPage - 1) * productsPerPage;
+                int startIndex = (currentPage - 1) * productsPerPage;
+                int endIndex = Math.min(startIndex + productsPerPage, totalProducts);
 
-				ArrayList<ProductModel> products = dao.getProductsByPage(start, productsPerPage);
+                ArrayList<ProductModel> products = new ArrayList<>();
+
+                if (totalProducts > 0) {
+                    products = new ArrayList<>(allProducts.subList(startIndex, endIndex));
+                }
+
+                String filterQuery = "";
+
+                if (size != null && !size.trim().isEmpty()) {
+                    filterQuery += "&size=" + URLEncoder.encode(size.trim(), StandardCharsets.UTF_8);
+                }
+
+                if (minPriceValue != null && !minPriceValue.trim().isEmpty()) {
+                    filterQuery += "&minPrice=" + URLEncoder.encode(minPriceValue.trim(), StandardCharsets.UTF_8);
+                }
+
+                if (maxPriceValue != null && !maxPriceValue.trim().isEmpty()) {
+                    filterQuery += "&maxPrice=" + URLEncoder.encode(maxPriceValue.trim(), StandardCharsets.UTF_8);
+                }
 
 				request.setAttribute("products", products);
                 request.setAttribute("currentPage", currentPage);
                 request.setAttribute("totalPages", totalPages);
                 request.setAttribute("totalProducts", totalProducts);
+                request.setAttribute("filterQuery", filterQuery);
+                request.setAttribute("filterError", filterError);
 			}
 			
 			request.getRequestDispatcher("/WEB-INF/pages/Products.jsp").forward(request, response);
@@ -159,6 +224,7 @@ public class ProductsServlet extends HttpServlet {
             request.setAttribute("currentPage", 1);
             request.setAttribute("totalPages", 1);
             request.setAttribute("totalProducts", 0);
+            request.setAttribute("filterQuery", "");
 			request.getRequestDispatcher("/WEB-INF/pages/Products.jsp").forward(request, response);
 		}
 	}

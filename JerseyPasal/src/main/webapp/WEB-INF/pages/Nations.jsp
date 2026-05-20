@@ -43,12 +43,48 @@
                 <span class="product-list-count">${error}</span>
             </c:if>
 
+            <c:if test="${not empty filterError}">
+                <span class="product-list-count">${filterError}</span>
+            </c:if>
+
             <c:if test="${totalPages > 0}">
                 <span class="product-list-count">
                     Showing page ${currentPage} of ${totalPages}
                 </span>
             </c:if>
         </div>
+
+        <form action="${pageContext.request.contextPath}/nation" method="get" class="product-filter-box">
+
+            <div class="product-filter-field">
+                <label for="size">Size</label>
+                <select name="size" id="size">
+                    <option value="" ${empty param.size ? 'selected' : ''}>All Sizes</option>
+                    <option value="XS" ${param.size == 'XS' ? 'selected' : ''}>XS</option>
+                    <option value="S" ${param.size == 'S' ? 'selected' : ''}>S</option>
+                    <option value="M" ${param.size == 'M' ? 'selected' : ''}>M</option>
+                    <option value="L" ${param.size == 'L' ? 'selected' : ''}>L</option>
+                    <option value="XL" ${param.size == 'XL' ? 'selected' : ''}>XL</option>
+                    <option value="XXL" ${param.size == 'XXL' ? 'selected' : ''}>XXL</option>
+                </select>
+            </div>
+
+            <div class="product-filter-field">
+                <label for="minPrice">Min Price</label>
+                <input type="number" name="minPrice" id="minPrice" placeholder="Min price" value="${param.minPrice}">
+            </div>
+
+            <div class="product-filter-field">
+                <label for="maxPrice">Max Price</label>
+                <input type="number" name="maxPrice" id="maxPrice" placeholder="Max price" value="${param.maxPrice}">
+            </div>
+
+            <div class="product-filter-actions">
+                <button type="submit">Filter</button>
+                <a href="${pageContext.request.contextPath}/nation">Clear</a>
+            </div>
+
+        </form>
 
         <c:choose>
             <c:when test="${not empty nationProducts}">
@@ -106,7 +142,7 @@
 
                 <c:choose>
                     <c:when test="${currentPage > 1}">
-                        <a href="${pageContext.request.contextPath}/nation?page=${currentPage - 1}" class="pagination-btn">
+                        <a href="${pageContext.request.contextPath}/nation?page=${currentPage - 1}${filterQuery}" class="pagination-btn">
                             Previous
                         </a>
                     </c:when>
@@ -123,7 +159,7 @@
                         </c:when>
 
                         <c:otherwise>
-                            <a href="${pageContext.request.contextPath}/nation?page=${pageNumber}" class="pagination-number">
+                            <a href="${pageContext.request.contextPath}/nation?page=${pageNumber}${filterQuery}" class="pagination-number">
                                 ${pageNumber}
                             </a>
                         </c:otherwise>
@@ -132,7 +168,7 @@
 
                 <c:choose>
                     <c:when test="${currentPage < totalPages}">
-                        <a href="${pageContext.request.contextPath}/nation?page=${currentPage + 1}" class="pagination-btn">
+                        <a href="${pageContext.request.contextPath}/nation?page=${currentPage + 1}${filterQuery}" class="pagination-btn">
                             Next
                         </a>
                     </c:when>
