@@ -10,22 +10,38 @@
     border-bottom:1px solid #1e1e1e;
     padding:0 40px 70px;
 }
-
-.au-hero-image{
-    position:absolute;
-    inset:0;
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    object-position:center 50%;
-    transform:scale(1.08);
-    filter:
-        brightness(1.02)
-        contrast(1.03)
-        saturate(1.02);
-    image-rendering:auto;
+.au-hero-image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 20%;
+    transform: scale(1);
+    filter: brightness(1.02) contrast(1.03) saturate(1.02);
+    image-rendering: auto;
+    animation: gentleZoomIn 8s ease-out forwards, slowPulse 12s ease-in-out infinite 2s;
 }
-
+@keyframes gentleZoomIn {
+    0% {
+        transform: scale(1.05);
+        filter: brightness(0.98) contrast(1) saturate(1);
+    }
+    100% {
+        transform: scale(1);
+        filter: brightness(1.02) contrast(1.03) saturate(1.02);
+    }
+}
+@keyframes slowPulse {
+    0%, 100% {
+        transform: scale(1);
+        filter: brightness(1.02) contrast(1.03) saturate(1.02);
+    }
+    50% {
+        transform: scale(1.02);
+        filter: brightness(1.05) contrast(1.04) saturate(1.04);
+    }
+}
 .au-hero-section::after{
     content:"";
     position:absolute;
@@ -57,11 +73,11 @@
     border:1.5px solid rgba(255,255,255,0.75);
     border-radius:50px;
     text-decoration:none;
-    font-size:0.82rem;
+    font-size:1rem;
     font-weight:900;
     letter-spacing:1.5px;
     text-transform:uppercase;
-    color:#ffffff;
+    color:white;
     transition:all 0.3s ease;
     margin-bottom:20px;
 }
@@ -784,8 +800,8 @@
 }
 
 .au-team-image{
-    width:84px;
-    height:84px;
+    width:100px;
+    height:100px;
     border-radius:50%;
     overflow:hidden;
     border:2px solid #8b0d1f;
@@ -880,446 +896,755 @@
     color:#ffffff;
     transform:translate(3px,-3px);
 }
-
-@media (min-width:1600px){
-    .au-heading-box{
-        max-width:1400px;
-        margin-left:auto;
-        margin-right:auto;
-        padding-left:40px;
-    }
-
+@media (max-width: 1400px) {
     .au-offer-grid,
     .au-why-grid,
-    .au-team-grid{
-        padding-left:40px;
-        padding-right:40px;
+    .au-team-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+    }
+    
+    .au-hero-image {
+        object-position: center 25%;
     }
 }
 
-@media (min-width:1920px){
-    .au-heading-box{
-        max-width:1600px;
-        padding-left:80px;
+@media (max-width: 1300px) {
+    .au-story-wrapper {
+        gap: 50px;
     }
-
+    .au-story-text {
+        margin-left: -30px;
+    }
     .au-offer-grid,
     .au-why-grid,
-    .au-team-grid{
-        max-width:1600px;
-        padding-left:80px;
-        padding-right:80px;
+    .au-team-grid {
+        gap: 20px;
     }
-}
-
-@media (max-width:1400px){
-    .au-offer-grid,
-    .au-why-grid,
-    .au-team-grid{
-        grid-template-columns:repeat(4,1fr);
-        gap:20px;
-    }
-}
-
-@media (max-width:1200px){
-    .au-offer-grid,
-    .au-why-grid,
-    .au-team-grid{
-        grid-template-columns:repeat(3,1fr);
-    }
-}
-
-@media (max-width:1100px){
-    .au-offer-grid,
-    .au-why-grid,
-    .au-team-grid{
-        grid-template-columns:repeat(3,1fr);
-    }
-
-    .au-heading-box h2{
-        font-size:2.8rem;
-    }
-}
-
-@media (max-width:900px){
-    .au-offer-section,
-    .au-why-section,
-    .au-team-section{
-        padding:80px 30px;
-    }
-
-    .au-offer-grid,
-    .au-why-grid,
-    .au-team-grid{
-        grid-template-columns:repeat(2,1fr);
-        gap:20px;
-    }
-
-    .au-heading-box h2{
-        font-size:2.4rem;
-    }
-
-    .au-team-image{
-        width:130px;
-        height:130px;
-    }
-
-    .au-heading-box{
-        padding-left:0;
-    }
-
-    .au-hero-content h1{
-        font-size:3.4rem;
-    }
-
-    .au-story-wrapper{
-        grid-template-columns:1fr;
-    }
-
-    .au-promise-section{
-        align-items:flex-start;
-    }
-}
-
-@media (max-width:700px){
-    .au-offer-section,
-    .au-why-section,
-    .au-team-section{
-        padding:60px 20px;
-    }
-
-    .au-heading-box{
-        margin-bottom:40px;
-        padding-left:0;
-    }
-
-    .au-heading-box .au-small-title{
-        font-size:0.8rem;
-        letter-spacing:4px;
-        margin-bottom:12px;
-    }
-
-    .au-heading-box h2{
-        font-size:1.8rem;
-    }
-
-    .au-offer-grid,
-    .au-why-grid,
-    .au-team-grid{
-        grid-template-columns:1fr;
-        gap:16px;
-        padding-left:0;
-        padding-right:0;
-    }
-
     .au-offer-card,
     .au-why-card,
-    .au-team-card{
-        padding:24px 20px;
+    .au-team-card {
+        padding: 30px 24px;
     }
-
-    .au-offer-card i{
-        font-size:2.2rem;
+    .au-hero-image {
+        object-position: center 30%;
     }
+}
 
-    .au-card-number{
-        font-size:2.5rem;
+@media (max-width: 1200px) {
+    .au-offer-grid,
+    .au-why-grid,
+    .au-team-grid {
+        grid-template-columns: repeat(3, 1fr);
     }
-
-    .au-team-image{
-        width:120px;
-        height:120px;
+    .au-hero-content h1 {
+        font-size: 3.8rem;
+        white-space: normal;
     }
-
-    .au-hero-section{
-        min-height:560px;
-        padding:0 24px 36px;
+    .au-story-text {
+        margin-left: 0;
     }
-
-    .au-hero-content h1{
-        font-size:2.4rem;
-        letter-spacing:2px;
+    .au-story-text h2 {
+        font-size: 2.2rem;
     }
+    .au-hero-image {
+        object-position: center 35%;
+    }
+}
 
+@media (max-width: 1100px) {
+    .au-offer-grid,
+    .au-why-grid,
+    .au-team-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .au-heading-box h2 {
+        font-size: 2.8rem;
+    }
+    .au-story-wrapper {
+        grid-template-columns: 1fr;
+        gap: 60px;
+    }
+    .au-story-text {
+        margin-left: 0;
+        text-align: center;
+    }
+    .au-story-text p {
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .au-stats-grid {
+        max-width: 600px;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 1024px) {
+    .au-hero-content h1 {
+        font-size: 3.2rem;
+        white-space: normal;
+    }
+    .au-story-section {
+        padding: 120px 30px 90px;
+    }
+    .au-story-wrapper {
+        grid-template-columns: 1fr;
+        gap: 60px;
+    }
+    .au-story-text {
+        margin-left: 0;
+        text-align: center;
+    }
+    .au-story-text h2 {
+        font-size: 2.2rem;
+    }
+    .au-offer-grid,
+    .au-why-grid,
+    .au-team-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .au-offer-section .au-heading-box {
+        transform: none;
+    }
+    .au-why-section .au-heading-box {
+        margin-left: 0;
+        text-align: center;
+    }
+    .au-team-section .au-heading-box {
+        text-align: center;
+    }
+    .au-heading-box {
+        text-align: center;
+    }
+    .au-hero-image {
+        object-position: center 30%;
+    }
+}
+
+@media (max-width: 992px) {
+    .au-hero-section {
+        min-height: 80vh;
+        padding: 0 30px 60px;
+    }
+    .au-hero-content h1 {
+        font-size: 3rem;
+        white-space: normal;
+    }
+    .au-hero-text {
+        font-size: 0.9rem;
+        max-width: 90%;
+        margin: 0 auto;
+    }
+    .au-story-section {
+        padding: 100px 30px 80px;
+    }
+    .au-story-text h2 {
+        font-size: 2rem;
+    }
+    .au-story-text p {
+        font-size: 0.95rem;
+    }
+    .au-stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+    .au-stat-card {
+        min-height: 160px;
+        padding: 28px 20px;
+    }
+    .au-stat-card h3 {
+        font-size: 2rem;
+    }
+    .au-offer-section,
+    .au-why-section,
+    .au-team-section {
+        padding: 90px 30px;
+    }
+    .au-offer-grid,
+    .au-why-grid,
+    .au-team-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+    .au-offer-card,
+    .au-why-card,
+    .au-team-card {
+        padding: 30px 24px;
+    }
+    .au-heading-box h2 {
+        font-size: 2.4rem;
+    }
+    .au-promise-section {
+        padding: 50px 30px;
+        gap: 25px;
+    }
+    .au-promise-text h2 {
+        font-size: 1.8rem;
+    }
+    .au-promise-text p {
+        font-size: 0.85rem;
+    }
+    .au-bottom-section {
+        padding: 70px 30px;
+    }
+    .au-bottom-section h2 {
+        font-size: 1.8rem;
+    }
+    .au-hero-image {
+        object-position: center 25%;
+        animation: none;
+    }
+    @keyframes gentleZoomIn {
+        0% {
+            transform: scale(1);
+            filter: brightness(0.98) contrast(1) saturate(1);
+        }
+        100% {
+            transform: scale(1);
+            filter: brightness(1.02) contrast(1.03) saturate(1.02);
+        }
+    }
+    @keyframes slowPulse {
+        0%, 100% {
+            transform: scale(1);
+            filter: brightness(1.02) contrast(1.03) saturate(1.02);
+        }
+        50% {
+            transform: scale(1);
+            filter: brightness(1.03) contrast(1.04) saturate(1.04);
+        }
+    }
+}
+
+@media (max-width: 900px) {
+    .au-offer-section,
+    .au-why-section,
+    .au-team-section {
+        padding: 80px 30px;
+    }
+    .au-offer-grid,
+    .au-why-grid,
+    .au-team-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+    .au-heading-box h2 {
+        font-size: 2.4rem;
+    }
+    .au-team-image {
+        width: 130px;
+        height: 130px;
+    }
+    .au-heading-box {
+        padding-left: 0;
+    }
+    .au-hero-content h1 {
+        font-size: 2.8rem;
+    }
+    .au-story-wrapper {
+        grid-template-columns: 1fr;
+    }
+    .au-promise-section {
+        align-items: flex-start;
+    }
+}
+
+@media (max-width: 800px) {
+    .au-hero-section {
+        min-height: 70vh;
+        padding: 0 20px 50px;
+    }
+    .au-hero-content h1 {
+        font-size: 2.6rem;
+        white-space: normal;
+    }
+    .au-hero-label {
+        font-size: 0.65rem;
+        letter-spacing: 2.5px;
+    }
+    .au-shop-btn {
+        padding: 12px 28px;
+        font-size: 0.85rem;
+    }
+    .au-story-text h2 {
+        font-size: 1.8rem;
+    }
+    .au-small-title {
+        font-size: 0.7rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .au-hero-section {
+        min-height: 700px;
+        padding: 0 24px 50px;
+    }
+    .au-hero-content h1 {
+        font-size: 2.6rem;
+        line-height: 1.1;
+        white-space: normal;
+    }
+    .au-hero-text {
+        font-size: 0.85rem;
+        max-width: 100%;
+    }
+    .au-shop-btn {
+        padding: 12px 26px;
+        font-size: 0.75rem;
+    }
+    .au-story-text h2,
+    .au-heading-box h2 {
+        font-size: 2rem;
+    }
+    .au-promise-section {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+    .au-promise-text h2 {
+        font-size: 1.7rem;
+    }
+    .au-offer-grid,
+    .au-why-grid,
+    .au-team-grid {
+        grid-template-columns: 1fr;
+    }
+    .au-team-card {
+        min-height: auto;
+    }
+    .au-team-image {
+        width: 100px;
+        height: 100px;
+    }
+    .au-stats-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    .au-stat-card {
+        min-height: auto;
+        padding: 25px 20px;
+    }
+    .au-hero-image {
+        object-position: center 20%;
+    }
+    .au-story-section {
+        padding: 80px 20px 60px;
+    }
+    .au-offer-section,
+    .au-why-section,
+    .au-team-section {
+        padding: 70px 20px;
+    }
+    .au-heading-box {
+        margin-bottom: 40px;
+    }
+    .au-heading-box .au-small-title {
+        font-size: 0.7rem !important;
+        letter-spacing: 3px;
+    }
+}
+
+@media (max-width: 700px) {
+    .au-offer-section,
+    .au-why-section,
+    .au-team-section {
+        padding: 60px 20px;
+    }
+    .au-heading-box {
+        margin-bottom: 40px;
+        padding-left: 0;
+    }
+    .au-heading-box .au-small-title {
+        font-size: 0.7rem;
+        letter-spacing: 4px;
+        margin-bottom: 12px;
+    }
+    .au-heading-box h2 {
+        font-size: 1.8rem;
+    }
+    .au-offer-grid,
+    .au-why-grid,
+    .au-team-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .au-offer-card,
+    .au-why-card,
+    .au-team-card {
+        padding: 24px 20px;
+    }
+    .au-offer-card i {
+        font-size: 2.2rem;
+    }
+    .au-card-number {
+        font-size: 2.5rem;
+    }
+    .au-team-image {
+        width: 120px;
+        height: 120px;
+    }
+    .au-hero-section {
+        min-height: 560px;
+        padding: 0 24px 36px;
+    }
+    .au-hero-content h1 {
+        font-size: 2.4rem;
+        letter-spacing: 2px;
+    }
     .au-story-section,
     .au-offer-section,
     .au-why-section,
     .au-team-section,
-    .au-bottom-section{
-        padding:64px 24px;
+    .au-bottom-section {
+        padding: 64px 24px;
     }
-
-    .au-promise-section{
-        padding:50px 24px;
-        flex-direction:column;
+    .au-promise-section {
+        padding: 50px 24px;
+        flex-direction: column;
     }
-
     .au-stats-grid,
     .au-offer-grid,
     .au-why-grid,
-    .au-team-grid{
-        grid-template-columns:1fr;
+    .au-team-grid {
+        grid-template-columns: 1fr;
     }
-
-    .au-bottom-section h2{
-        font-size:2.5rem;
-    }
-}
-
-@media (max-width:480px){
-    .au-offer-section,
-    .au-why-section,
-    .au-team-section{
-        padding:50px 16px;
-    }
-
-    .au-heading-box h2{
-        font-size:1.5rem;
-    }
-
-    .au-offer-card h3,
-    .au-why-card h3,
-    .au-team-card h3{
-        font-size:1rem;
-    }
-
-    .au-offer-card p,
-    .au-why-card p,
-    .au-team-card p{
-        font-size:0.78rem;
-    }
-
-    .au-hero-content h1{
-        font-size:2rem;
-    }
-
-    .au-hero-label,
-    .au-small-title{
-        font-size:0.6rem;
-        letter-spacing:2.5px;
-    }
-
-    .au-shop-btn{
-        padding:10px 22px;
-        font-size:0.65rem;
-    }
-
-    .au-story-text h2,
-    .au-heading-box h2{
-        font-size:1.8rem;
-    }
-
-    .au-bottom-section h2{
-        font-size:2rem;
-    }
-}
-@media (max-width:1300px){
-
-    .au-story-wrapper{
-        gap:50px;
-    }
-
-    .au-story-text{
-        margin-left:-30px;
-    }
-
-    .au-offer-grid,
-    .au-why-grid,
-    .au-team-grid{
-        gap:20px;
-    }
-
-    .au-offer-card,
-    .au-why-card,
-    .au-team-card{
-        padding:30px 24px;
+    .au-bottom-section h2 {
+        font-size: 2rem;
     }
 }
 
-@media (max-width:1024px){
-
-    .au-hero-content h1{
-        font-size:3.2rem;
-        white-space:normal;
+@media (max-width: 600px) {
+    .au-hero-section {
+        min-height: 620px;
     }
-
-    .au-story-section{
-        padding:120px 30px 90px;
+    .au-hero-content h1 {
+        font-size: 2.2rem;
+        white-space: normal;
     }
-
-    .au-story-wrapper{
-        grid-template-columns:1fr;
-        gap:60px;
+    .au-hero-text {
+        font-size: 0.85rem;
+        line-height: 1.7;
     }
-
-    .au-story-text{
-        margin-left:0;
-    }
-
-    .au-story-text h2{
-        font-size:2.2rem;
-    }
-
-    .au-offer-grid,
-    .au-why-grid,
-    .au-team-grid{
-        grid-template-columns:repeat(2,1fr);
-    }
-
-    .au-offer-section .au-heading-box{
-        transform:none;
-    }
-
-    .au-why-section .au-heading-box{
-        margin-left:0;
-    }
-}
-
-@media (max-width:768px){
-
-    .au-hero-section{
-        min-height:700px;
-        padding:0 24px 50px;
-    }
-
-    .au-hero-content h1{
-        font-size:2.6rem;
-        line-height:1.1;
-    }
-
-    .au-hero-text{
-        font-size:0.95rem;
-    }
-
-    .au-shop-btn{
-        padding:12px 26px;
-        font-size:0.75rem;
-    }
-
-    .au-story-text h2,
-    .au-heading-box h2{
-        font-size:2rem;
-    }
-
-    .au-promise-section{
-        flex-direction:column;
-        align-items:flex-start;
-        gap:20px;
-    }
-
-    .au-promise-text h2{
-        font-size:1.7rem;
-    }
-
-    .au-offer-grid,
-    .au-why-grid,
-    .au-team-grid{
-        grid-template-columns:1fr;
-    }
-
-    .au-team-card{
-        min-height:auto;
-    }
-
-    .au-team-image{
-        width:100px;
-        height:100px;
-    }
-}
-
-@media (max-width:600px){
-
-    .au-hero-section{
-        min-height:620px;
-    }
-
-    .au-hero-content h1{
-        font-size:2.2rem;
-    }
-
-    .au-hero-text{
-        font-size:0.85rem;
-        line-height:1.7;
-    }
-
     .au-story-section,
     .au-offer-section,
     .au-why-section,
     .au-team-section,
-    .au-bottom-section{
-        padding:55px 18px;
+    .au-bottom-section {
+        padding: 55px 18px;
     }
-
     .au-story-text h2,
-    .au-heading-box h2{
-        font-size:1.7rem;
-        line-height:1.2;
+    .au-heading-box h2 {
+        font-size: 1.7rem;
+        line-height: 1.2;
     }
-
     .au-offer-card,
     .au-why-card,
-    .au-team-card{
-        border-radius:18px;
+    .au-team-card {
+        border-radius: 18px;
     }
-
-    .au-stat-card{
-        min-height:150px;
-        padding:24px 18px;
+    .au-stat-card {
+        min-height: 150px;
+        padding: 24px 18px;
     }
-
-    .au-stat-card h3{
-        font-size:1.8rem;
+    .au-stat-card h3 {
+        font-size: 1.8rem;
     }
-
-    .au-team-image{
-        width:90px;
-        height:90px;
+    .au-team-image {
+        width: 90px;
+        height: 90px;
+    }
+    .au-hero-image {
+        object-position: center 15%;
+    }
+    .au-shop-btn {
+        padding: 10px 24px;
+        font-size: 0.7rem;
+        width: auto;
+        min-width: 180px;
+    }
+    .au-story-text p {
+        font-size: 0.85rem;
+    }
+    .au-promise-text h2 {
+        font-size: 1.5rem;
+    }
+    .au-promise-text p {
+        font-size: 0.8rem;
+    }
+    .au-bottom-section h2 {
+        font-size: 1.5rem;
+    }
+    .au-bottom-section p {
+        font-size: 0.8rem;
     }
 }
 
-@media (max-width:380px){
-
-    .au-hero-content h1{
-        font-size:1.8rem;
+@media (max-width: 480px) {
+    .au-offer-section,
+    .au-why-section,
+    .au-team-section {
+        padding: 50px 16px;
     }
-
-    .au-story-text h2,
-    .au-heading-box h2,
-    .au-bottom-section h2{
-        font-size:1.5rem;
+    .au-heading-box h2 {
+        font-size: 1.5rem;
     }
-
-    .au-small-title,
-    .au-hero-label{
-        font-size:0.58rem;
-        letter-spacing:2px;
-    }
-
-    .au-offer-card,
-    .au-why-card,
-    .au-team-card{
-        padding:20px 16px;
-    }
-
     .au-offer-card h3,
     .au-why-card h3,
-    .au-team-card h3{
-        font-size:0.92rem;
+    .au-team-card h3 {
+        font-size: 1rem;
     }
-
     .au-offer-card p,
     .au-why-card p,
-    .au-team-card p{
-        font-size:0.76rem;
-        line-height:1.6;
+    .au-team-card p {
+        font-size: 0.78rem;
     }
-
-    .au-team-image{
-        width:82px;
-        height:82px;
+    .au-hero-content h1 {
+        font-size: 2rem;
+        white-space: normal;
     }
+    .au-hero-label,
+    .au-small-title {
+        font-size: 0.6rem;
+        letter-spacing: 2.5px;
+    }
+    .au-shop-btn {
+        padding: 10px 22px;
+        font-size: 0.65rem;
+        min-width: 160px;
+    }
+    .au-story-text h2,
+    .au-heading-box h2 {
+        font-size: 1.5rem;
+    }
+    .au-bottom-section h2 {
+        font-size: 1.5rem;
+    }
+    .au-hero-image {
+        object-position: center 10%;
+        filter: brightness(1) contrast(1.05) saturate(1.05);
+    }
+    .au-hero-section::after {
+        background: linear-gradient(
+            to bottom,
+            rgba(0,0,0,0.05),
+            rgba(0,0,0,0.2),
+            rgba(0,0,0,0.6),
+            var(--black)
+        );
+    }
+    .au-stat-card h3 {
+        font-size: 1.6rem;
+    }
+    .au-stat-card p {
+        font-size: 0.7rem;
+    }
+    .au-card-number {
+        font-size: 2rem;
+    }
+    .au-offer-card i {
+        width: 70px;
+        height: 70px;
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+    }
+}
 
-    .au-shop-btn{
-        width:100%;
+@media (max-width: 380px) {
+    .au-hero-content h1 {
+        font-size: 1.8rem;
+        white-space: normal;
+    }
+    .au-story-text h2,
+    .au-heading-box h2,
+    .au-bottom-section h2 {
+        font-size: 1.3rem;
+    }
+    .au-small-title,
+    .au-hero-label {
+        font-size: 0.58rem;
+        letter-spacing: 2px;
+    }
+    .au-offer-card,
+    .au-why-card,
+    .au-team-card {
+        padding: 20px 16px;
+    }
+    .au-offer-card h3,
+    .au-why-card h3,
+    .au-team-card h3 {
+        font-size: 0.92rem;
+    }
+    .au-offer-card p,
+    .au-why-card p,
+    .au-team-card p {
+        font-size: 0.76rem;
+        line-height: 1.6;
+    }
+    .au-team-image {
+        width: 82px;
+        height: 82px;
+    }
+    .au-shop-btn {
+        width: 100%;
+        min-width: auto;
+    }
+    .au-hero-content h1 br {
+        display: none;
+    }
+    .au-hero-text {
+        font-size: 0.75rem;
+    }
+    .au-story-text p {
+        font-size: 0.8rem;
+    }
+    .au-promise-text h2 {
+        font-size: 1.3rem;
+    }
+    .au-promise-text p {
+        font-size: 0.75rem;
+    }
+    .au-stat-card {
+        padding: 20px 15px;
+    }
+    .au-stat-card h3 {
+        font-size: 1.4rem;
+    }
+}
+
+@media (max-width: 320px) {
+    .au-hero-content h1 {
+        font-size: 1.5rem;
+    }
+    .au-hero-label {
+        font-size: 0.5rem;
+        letter-spacing: 1.5px;
+    }
+    .au-shop-btn {
+        padding: 8px 18px;
+        font-size: 0.6rem;
+    }
+    .au-story-text h2 {
+        font-size: 1.2rem;
+    }
+    .au-heading-box h2 {
+        font-size: 1.2rem;
+    }
+    .au-offer-card,
+    .au-why-card,
+    .au-team-card {
+        padding: 16px 12px;
+    }
+    .au-offer-card h3,
+    .au-why-card h3 {
+        font-size: 0.85rem;
+    }
+    .au-team-image {
+        width: 70px;
+        height: 70px;
+    }
+    .au-team-card h3 {
+        font-size: 0.9rem;
+    }
+    .au-team-role {
+        font-size: 0.6rem;
+    }
+    .au-stat-card h3 {
+        font-size: 1.2rem;
+    }
+}
+
+@media (min-width: 1921px) {
+    .au-hero-image {
+        object-position: center 20%;
+    }
+    .au-heading-box {
+        max-width: 1600px;
+        padding-left: 80px;
+    }
+    .au-offer-grid,
+    .au-why-grid,
+    .au-team-grid {
+        max-width: 1600px;
+        padding-left: 80px;
+        padding-right: 80px;
+        margin: 0 auto;
+    }
+    .au-hero-content h1 {
+        font-size: 5.5rem;
+    }
+    .au-hero-text {
+        font-size: 1rem;
+        max-width: 700px;
+    }
+    .au-story-text h2 {
+        font-size: 3rem;
+    }
+    .au-heading-box h2 {
+        font-size: 3rem;
+    }
+}
+
+@media (min-width: 1600px) and (max-width: 1920px) {
+    .au-heading-box {
+        max-width: 1400px;
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: 40px;
+    }
+    .au-offer-grid,
+    .au-why-grid,
+    .au-team-grid {
+        padding-left: 40px;
+        padding-right: 40px;
+        margin: 0 auto;
+    }
+    .au-hero-image {
+        object-position: center 20%;
+    }
+}
+
+@media (max-height: 700px) and (min-width: 768px) {
+    .au-hero-section {
+        min-height: 90vh;
+    }
+    .au-hero-content h1 {
+        font-size: 3rem;
+    }
+    .au-hero-text {
+        font-size: 0.85rem;
+    }
+    .au-shop-btn {
+        padding: 10px 28px;
+    }
+}
+
+@media (orientation: landscape) and (max-width: 900px) {
+    .au-hero-section {
+        min-height: 100vh;
+    }
+    .au-hero-content h1 {
+        font-size: 2rem;
+    }
+    .au-hero-text {
+        font-size: 0.75rem;
+        max-width: 70%;
+    }
+    .au-shop-btn {
+        padding: 8px 20px;
+        font-size: 0.65rem;
+    }
+    .au-offer-grid,
+    .au-why-grid,
+    .au-team-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .au-stat-card {
+        min-height: auto;
+        padding: 15px;
+    }
+    .au-stat-card h3 {
+        font-size: 1.4rem;
     }
 }
