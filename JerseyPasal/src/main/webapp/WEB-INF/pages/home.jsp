@@ -28,12 +28,15 @@
     <div class="home-banner-overlay">
       <div class="home-banner-line"></div>
       <span class="home-banner-tag">Trusted by Football Fans Across Nepal</span>
-
-      <h2>
-        <span class="white-text">Where Football</span><br>
-        <span class="white-text">Dreams Begin in</span>
-        <span class="red-text">Nepal</span>
-      </h2>
+		
+		  <h2>
+		    <span class="white-text">Where</span>
+		    <span class="red-text">Football</span><br>
+		    <span class="white-text">Dreams</span>
+		    <span class="red-text">Begin</span>
+		    <span class="white-text">in</span>
+		    <span class="white-text">Nepal</span>
+		</h2>
 
       <p>
         48 Nations. One Trophy. History Awaits. The biggest FIFA World Cup in history.
