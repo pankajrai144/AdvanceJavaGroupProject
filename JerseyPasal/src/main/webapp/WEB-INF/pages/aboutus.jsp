@@ -256,7 +256,7 @@
 
         <div class="au-team-card">
             <div class="au-team-image">
-                <img src="${pageContext.request.contextPath}/images/bisrutAdhikari.jpg" alt="Bisrut Adhikari">
+                <img src="${pageContext.request.contextPath}/images/bisrutAdhikari.png" alt="Bisrut Adhikari">
             </div>
             <h3>Bishrut Raj Adhikari</h3>
             <p class="au-team-role">Backend &amp; Frontend Developer</p>
@@ -265,7 +265,7 @@
 
         <div class="au-team-card">
             <div class="au-team-image">
-                <img src="${pageContext.request.contextPath}/images/kriteeKhadka.jpg" alt="Kritee Khadka">
+                <img src="${pageContext.request.contextPath}/images/kriteeKhadka.png" alt="Kritee Khadka">
             </div>
             <h3>Kritee Khadka</h3>
             <p class="au-team-role">Frontend Developer &amp; UI/UX Designer</p>
@@ -274,7 +274,7 @@
 
         <div class="au-team-card">
             <div class="au-team-image">
-                <img src="${pageContext.request.contextPath}/images/manishaShah.jpg" alt="Manisha Shah">
+                <img src="${pageContext.request.contextPath}/images/manishaShah.png" alt="Manisha Shah">
             </div>
             <h3>Manisha Shah</h3>
             <p class="au-team-role">Frontend Developer &amp; UI/UX Designer</p>
