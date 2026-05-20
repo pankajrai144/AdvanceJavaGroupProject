@@ -12,53 +12,57 @@
     overflow:hidden;
     background:transparent;
 }
-
-.home-content-area .home-image-banner img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    object-position:0% center;
-    display:block;
-    filter:brightness(0.55);
-    animation:bannerMove 12s ease-in-out infinite alternate;
+.home-content-area .home-image-banner {
+    position: relative;
+    width: 100%;
+    height: 100svh;
+    overflow: hidden;
+    background: #1a1a1a;  
 }
 
-@keyframes bannerMove{
-   0%{
-      transform:scale(1.05) translateX(130px);
-   }
-    100%{
-        transform:scale(1.09) translateX(100px);
+.home-content-area .home-image-banner img {
+    width: auto;           
+    height: 100%;          
+    object-fit: cover;
+    object-position: 50% 35%;
+    display: block;
+    animation: bannerMove 12s ease-in-out infinite alternate;
+}
+
+@keyframes bannerMove {
+    0% {
+        transform: scale(1) translateX(30px);
+    }
+    100% {
+        transform: scale(1) translateX(50px);
     }
 }
-
 .home-content-area .home-banner-overlay {
-    position:absolute;
-    inset:0;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:flex-start;
-    padding:500px 6% 70px;
-    background:linear-gradient(
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 500px 6% 70px;
+    background: linear-gradient(
         to top,
-        rgba(0, 0, 0, 0.82) 0%,
-        rgba(0, 0, 0, 0.38) 45%,
-        rgba(0, 0, 0, 0.10) 100%
+        rgba(0, 0, 0, 0.45) 0%,
+        rgba(0, 0, 0, 0.15) 45%,
+        rgba(0, 0, 0, 0) 100%
     );
 }
-
 .home-content-area .home-banner-tag {
-    background: rgba(139, 13, 31, 0.2);
-    border: 1px solid rgba(139, 13, 31, 0.5);
-    color: #fff;
-    padding: 6px 14px;
-    border-radius: 30px;
-    font-size: 12px;
+    background: transparent;
+    border: none;
+    color: #ffffff;
+    padding: 0;
+    border-radius: 0;
+    font-size: 18px;
     letter-spacing: 1px;
     margin-bottom: 20px;
+    font-weight: 500;
 }
-
 .home-content-area .home-banner-overlay h2{
     font-size:4.6rem;
     font-weight:900;
@@ -79,7 +83,7 @@
 .home-content-area .home-banner-overlay p {
     margin-top: 20px;
     font-size: 0.88rem;
-    color: rgba(255, 255, 255, 0.65);
+    color:#ffffff;
     max-width: 620px;
     line-height: 1.75;
 }
@@ -143,107 +147,6 @@
     background: #fff;
     color: #8b0d1f;
     transform: translateY(-3px);
-}
-
-@media (max-width:1200px){
-    .home-content-area .home-banner-overlay{
-        padding:380px 4% 60px;
-    }
-    .home-content-area .home-banner-overlay h2{
-        font-size:3.6rem;
-    }
-    .home-content-area .home-banner-overlay p{
-        max-width:560px;
-    }
-}
-
-@media (max-width:992px){
-    .home-content-area .home-image-banner{
-        height:82svh;
-    }
-    .home-content-area .home-image-banner img{
-        object-position:15% center;
-    }
-    .home-content-area .home-banner-overlay{
-        padding:320px 5% 50px;
-    }
-    .home-content-area .home-banner-overlay h2{
-        font-size:2.8rem;
-        line-height:1.08;
-    }
-    .home-content-area .home-banner-overlay p{
-        font-size:0.85rem;
-        max-width:520px;
-    }
-    .home-content-area .home-btn-red,
-    .home-content-area .home-btn-outline{
-        padding:12px 28px;
-        font-size:0.8rem;
-    }
-}
-
-@media (max-width:768px){
-    .home-content-area .home-image-banner{
-        height:78svh;
-    }
-    .home-content-area .home-image-banner img{
-        object-position:22% center;
-    }
-    .home-content-area .home-banner-overlay{
-        padding:260px 6% 45px;
-    }
-    .home-content-area .home-banner-tag{
-        font-size:11px;
-        padding:5px 12px;
-    }
-    .home-content-area .home-banner-overlay h2{
-        font-size:2.4rem;
-        max-width:100%;
-    }
-    .home-content-area .home-banner-overlay p{
-        font-size:0.82rem;
-        max-width:100%;
-        line-height:1.6;
-    }
-    .home-content-area .home-banner-buttons{
-        gap:12px;
-    }
-    .home-content-area .home-btn-red,
-    .home-content-area .home-btn-outline{
-        padding:10px 24px;
-        font-size:0.78rem;
-    }
-}
-
-@media (max-width:576px){
-    .home-content-area .home-image-banner{
-        height:74svh;
-    }
-    .home-content-area .home-image-banner img{
-        object-position:28% center;
-    }
-    .home-content-area .home-banner-overlay{
-        padding:210px 6% 35px;
-    }
-    .home-content-area .home-banner-overlay h2{
-        font-size:2rem;
-        line-height:1.1;
-    }
-    .home-content-area .home-banner-overlay p{
-        font-size:0.78rem;
-        margin-top:16px;
-    }
-    .home-content-area .home-banner-buttons{
-        width:100%;
-        flex-direction:column;
-        align-items:flex-start;
-    }
-    .home-content-area .home-btn-red,
-    .home-content-area .home-btn-outline{
-        width:auto;
-        padding:10px 20px;
-        font-size:0.75rem;
-    }
 }
 
 .home-content-area .home-section {
@@ -374,7 +277,6 @@
     font-size: 1rem;
     text-align: center;
 }
-
 
 .home-content-area .home-stadium-section {
     background: linear-gradient(135deg, #161616, #111);
@@ -518,6 +420,39 @@
     .home-content-area .home-news-grid {
         gap: 3rem;
     }
+    .home-content-area .home-image-banner img {
+        width: 100%;
+        height: 100%;
+        object-position: 50% 35%;
+    }
+    @keyframes bannerMove {
+        0% { transform: scale(1) translateX(0px); }
+        100% { transform: scale(1.05) translateX(-10px); }
+    }
+}
+
+@media (min-width: 1600px) and (max-width: 1920px) {
+    .home-content-area .home-banner-overlay h2 {
+        font-size: 5rem;
+    }
+    .home-content-area .home-banner-overlay p {
+        font-size: 1rem;
+        max-width: 650px;
+    }
+    .home-content-area .home-section {
+        padding: 6rem 8%;
+    }
+}
+
+@media (min-width: 1401px) and (max-width: 1599px) {
+    .home-content-area .home-banner-overlay h2 {
+        font-size: 4.2rem;
+    }
+    .home-content-area .home-story-grid,
+    .home-content-area .home-cities-grid,
+    .home-content-area .home-news-grid {
+        gap: 2rem;
+    }
 }
 
 @media (max-width: 1400px) {
@@ -540,10 +475,6 @@
         font-size: 1rem;
         max-width: 560px;
     }
-    .home-content-area .home-why-grid {
-        grid-template-columns: repeat(4, 1fr);
-        gap: 1.5rem;
-    }
 }
 
 @media (max-width: 1200px) {
@@ -553,6 +484,9 @@
     }
     .home-content-area .home-image-banner img {
         transform: scale(1.02);
+        width: 100%;
+        height: 100%;
+        object-position: 55% 35%;
     }
     .home-content-area .home-banner-overlay {
         padding: 70px 6% 55px;
@@ -566,6 +500,12 @@
         max-width: 500px;
         line-height: 1.6;
     }
+    .home-content-area .home-banner-overlay {
+        padding: 380px 4% 60px;
+    }
+    .home-content-area .home-banner-overlay p {
+        max-width: 560px;
+    }
     .home-content-area .home-btn-red,
     .home-content-area .home-btn-outline {
         padding: 12px 28px;
@@ -577,22 +517,22 @@
     .home-content-area .home-sec-title {
         font-size: 2.8rem;
     }
-    .home-content-area .home-why-grid {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 1.5rem;
-    }
 }
 
 @media (max-width: 992px) {
     .home-content-area .home-image-banner {
         min-height: 560px;
-        height: 74vh;
+        height: 82svh;
     }
     .home-content-area .home-image-banner img {
         transform: scale(1.08);
+        width: 100%;
+        height: 100%;
+        object-position: 45% 30%;
+        animation: none;
     }
     .home-content-area .home-banner-overlay {
-        padding: 60px 5% 50px;
+        padding: 320px 5% 50px;
         background: linear-gradient(
             to top,
             rgba(0, 0, 0, 0.92) 0%,
@@ -605,13 +545,14 @@
         padding: 5px 12px;
     }
     .home-content-area .home-banner-overlay h2 {
-        font-size: 3rem;
+        font-size: 2.8rem;
         max-width: 460px;
+        line-height: 1.08;
     }
     .home-content-area .home-banner-overlay p {
         margin-top: 16px;
         font-size: 0.85rem;
-        max-width: 430px;
+        max-width: 520px;
     }
     .home-content-area .home-banner-buttons {
         margin-top: 24px;
@@ -619,8 +560,8 @@
     }
     .home-content-area .home-btn-red,
     .home-content-area .home-btn-outline {
-        padding: 11px 24px;
-        font-size: 0.78rem;
+        padding: 12px 28px;
+        font-size: 0.8rem;
     }
     .home-content-area .home-section {
         padding: 4rem 4%;
@@ -638,10 +579,6 @@
         grid-template-columns: repeat(2, 1fr);
         gap: 1.8rem;
     }
-    .home-content-area .home-why-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1.5rem;
-    }
     .home-content-area .home-stadium-section {
         padding: 2.5rem;
         flex-direction: column;
@@ -657,40 +594,35 @@
     .home-content-area .home-stadium-image {
         justify-content: center;
     }
-    .home-timeline::before {
-        left: 30px !important;
+    .home-content-area .home-city-card {
+        height: 380px;
     }
-    .home-timeline-item {
-        flex-direction: column;
+    .home-content-area .home-city-overlay h3 {
+        font-size: 1.6rem;
     }
-    .home-timeline-date {
-        width: 100% !important;
-        text-align: left !important;
-        padding-left: 60px !important;
-        padding-right: 0 !important;
-        margin-bottom: 0.5rem;
+    .home-content-area .home-news-card {
+        min-height: auto;
     }
-    .home-timeline-content {
-        width: 100% !important;
-        padding-left: 60px !important;
-    }
-    .home-timeline-dot {
-        left: 30px !important;
+    .home-content-area .home-news-card img {
+        height: 320px;
     }
 }
 
 @media (max-width: 768px) {
     .home-content-area .home-image-banner {
         min-height: 500px;
-        height: 68vh;
+        height: 78svh;
     }
     .home-content-area .home-image-banner img {
         transform: scale(1.12);
-        object-position: 25% center;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: 50% 25%;
     }
     .home-content-area .home-banner-overlay {
         justify-content: center;
-        padding: 50px 6% 40px;
+        padding: 260px 6% 45px;
         background: linear-gradient(
             to top,
             rgba(0, 0, 0, 0.96) 0%,
@@ -699,18 +631,18 @@
         );
     }
     .home-content-area .home-banner-tag {
-        font-size: 10px;
-        padding: 5px 10px;
+        font-size: 11px;
+        padding: 5px 12px;
         margin-bottom: 16px;
     }
     .home-content-area .home-banner-overlay h2 {
-        font-size: 2.5rem;
+        font-size: 2.4rem;
         line-height: 1.15;
         max-width: 100%;
     }
     .home-content-area .home-banner-overlay p {
         font-size: 0.82rem;
-        line-height: 1.5;
+        line-height: 1.6;
         max-width: 100%;
         margin-top: 14px;
     }
@@ -721,8 +653,8 @@
     }
     .home-content-area .home-btn-red,
     .home-content-area .home-btn-outline {
-        padding: 10px 22px;
-        font-size: 0.75rem;
+        padding: 10px 24px;
+        font-size: 0.78rem;
     }
     .home-content-area .home-section {
         padding: 3.5rem 5%;
@@ -750,19 +682,6 @@
     .home-content-area .home-story-card h3 {
         font-size: 1.5rem;
     }
-    .home-content-area .home-why-grid {
-        grid-template-columns: 1fr;
-        gap: 1.2rem;
-    }
-    .home-content-area .home-why-card {
-        padding: 1.8rem;
-    }
-    .home-content-area .home-why-icon {
-        font-size: 2.5rem;
-    }
-    .home-content-area .home-why-card h3 {
-        font-size: 1.4rem;
-    }
     .home-content-area .home-city-card {
         height: 380px;
     }
@@ -782,9 +701,6 @@
     .home-content-area .home-stadium-image img {
         max-width: 100%;
     }
-    .home-content-area .home-news-card {
-        min-height: auto;
-    }
     .home-content-area .home-news-card img {
         height: 280px;
     }
@@ -794,41 +710,41 @@
     .home-content-area .home-news-info h3 {
         font-size: 1.2rem;
     }
-    .home-timeline-date {
-        font-size: 1.2rem !important;
-    }
 }
 
 @media (max-width: 576px) {
     .home-content-area .home-image-banner {
         min-height: 480px;
-        height: 70vh;
+        height: 74svh;
     }
     .home-content-area .home-image-banner img {
         transform: scale(1.16);
-        object-position: 30% center;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: 45% 20%;
     }
     .home-content-area .home-banner-overlay {
-        padding: 40px 5% 35px;
+        padding: 210px 6% 35px;
     }
     .home-content-area .home-banner-tag {
-        font-size: 9px;
+        font-size: 10px;
         padding: 4px 9px;
         margin-bottom: 12px;
     }
     .home-content-area .home-banner-overlay h2 {
         font-size: 2rem;
-        line-height: 1.2;
+        line-height: 1.1;
     }
     .home-content-area .home-banner-overlay p {
         font-size: 0.78rem;
-        line-height: 1.45;
-        margin-top: 12px;
+        line-height: 1.5;
+        margin-top: 16px;
     }
     .home-content-area .home-banner-buttons {
         width: 100%;
         flex-direction: column;
-        align-items: stretch;
+        align-items: flex-start;
         gap: 12px;
         margin-top: 18px;
     }
@@ -837,11 +753,10 @@
     }
     .home-content-area .home-btn-red,
     .home-content-area .home-btn-outline {
-        width: 100%;
+        width: auto;
         justify-content: center;
-        text-align: center;
-        padding: 12px 20px;
-        font-size: 0.72rem;
+        padding: 10px 20px;
+        font-size: 0.75rem;
     }
     .home-content-area .home-section {
         padding: 3rem 4%;
@@ -899,31 +814,38 @@
     .home-content-area .home-news-info p {
         font-size: 0.85rem;
     }
-    .home-timeline-date {
-        font-size: 1rem !important;
-    }
-    .home-timeline-content {
-        font-size: 0.85rem !important;
-    }
 }
 
 @media (max-width: 480px) {
     .home-content-area .home-image-banner {
         min-height: 440px;
-        height: auto;
+        height: 70svh;
     }
     .home-content-area .home-image-banner img {
         transform: scale(1.2);
-        object-position: 35% center;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: 40% 15%;
     }
     .home-content-area .home-banner-overlay {
-        padding: 35px 5% 30px;
+        padding: 180px 5% 30px;
     }
     .home-content-area .home-banner-overlay h2 {
-        font-size: 1.75rem;
+        font-size: 1.8rem;
+        letter-spacing: -1px;
+    }
+    .home-content-area .home-banner-tag {
+        font-size: 10px;
+        margin-bottom: 12px;
     }
     .home-content-area .home-banner-overlay p {
         font-size: 0.75rem;
+        margin-top: 12px;
+    }
+    .home-content-area .home-banner-buttons {
+        margin-top: 20px;
+        gap: 10px;
     }
     .home-content-area .home-btn-red,
     .home-content-area .home-btn-outline {
@@ -958,8 +880,18 @@
 }
 
 @media (max-width: 360px) {
+    .home-content-area .home-image-banner {
+        min-height: 400px;
+        height: 65svh;
+    }
     .home-content-area .home-banner-overlay h2 {
         font-size: 1.5rem;
+    }
+    .home-content-area .home-banner-tag {
+        font-size: 9px;
+    }
+    .home-content-area .home-banner-overlay p {
+        font-size: 0.7rem;
     }
     .home-content-area .home-sec-title {
         font-size: 1.4rem;
@@ -976,5 +908,10 @@
     }
     .home-content-area .home-stadium-text h3 {
         font-size: 1.2rem;
+    }
+    .home-content-area .home-btn-red,
+    .home-content-area .home-btn-outline {
+        padding: 8px 14px;
+        font-size: 0.65rem;
     }
 }
