@@ -86,7 +86,7 @@ img { width: 100%; display: block; object-fit: cover; }
 }
 
 .infotitle {
-    font-size: 4.6rem;
+    font-size: 4rem;
     font-weight: 900;
     text-transform: uppercase;
     line-height: 1.0;
@@ -253,4 +253,598 @@ img { width: 100%; display: block; object-fit: cover; }
     .grid { grid-template-columns: 1fr 1fr; }
     .section2 { padding: 48px 20px; }
     .head h2 { font-size: 1.5rem; }
+}
+@media (min-width: 1921px) {
+    .info {
+        bottom: 120px;
+        left: 80px;
+        max-width: 800px;
+        gap: 30px;
+    }
+    .infotitle {
+        font-size: 6rem;
+        letter-spacing: -2px;
+    }
+    .infodesc {
+        font-size: 1.1rem;
+        max-width: 600px;
+        line-height: 1.8;
+    }
+    .subtag {
+        font-size: 0.75rem;
+        padding: 6px 16px;
+    }
+    .btn {
+        padding: 18px 42px;
+        font-size: 1rem;
+    }
+    .wrap {
+        max-width: 1600px;
+    }
+    .head h2 {
+        font-size: 2.8rem;
+    }
+    .head p {
+        font-size: 0.85rem;
+        letter-spacing: 4px;
+    }
+    .grid {
+        gap: 3px;
+    }
+    .card {
+        padding: 48px 36px;
+        gap: 14px;
+    }
+    .icon {
+        font-size: 2.8rem;
+    }
+    .number {
+        font-size: 2.8rem;
+    }
+    .title {
+        font-size: 1rem;
+    }
+    .desc {
+        font-size: 0.9rem;
+    }
+    .scroll {
+        bottom: 40px;
+        right: 48px;
+    }
+}
+
+@media (min-width: 1440px) and (max-width: 1920px) {
+    .info {
+        bottom: 100px;
+        left: 60px;
+        max-width: 700px;
+    }
+    .infotitle {
+        font-size: 5.2rem;
+    }
+    .infodesc {
+        font-size: 0.95rem;
+        max-width: 520px;
+    }
+    .wrap {
+        max-width: 1300px;
+    }
+    .card {
+        padding: 40px 32px;
+    }
+}
+
+@media (min-width: 1200px) and (max-width: 1439px) {
+    .info {
+        bottom: 80px;
+        left: 48px;
+        max-width: 580px;
+    }
+    .infotitle {
+        font-size: 4.2rem;
+    }
+    .wrap {
+        max-width: 1100px;
+    }
+}
+
+@media (max-width: 1199px) and (min-width: 1025px) {
+    .info {
+        bottom: 70px;
+        left: 40px;
+        max-width: 520px;
+    }
+    .infotitle {
+        font-size: 3.8rem;
+    }
+    .infodesc {
+        font-size: 0.85rem;
+        max-width: 440px;
+    }
+    .btn {
+        padding: 12px 28px;
+        font-size: 0.78rem;
+    }
+    .grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    .card {
+        padding: 30px 24px;
+    }
+    .number {
+        font-size: 2rem;
+    }
+    .title {
+        font-size: 0.78rem;
+    }
+}
+
+@media (max-width: 1024px) {
+    .infotitle { 
+        font-size: 3.6rem; 
+    }
+    .info { 
+        max-width: 480px;
+        bottom: 60px;
+        left: 40px;
+        gap: 16px;
+    }
+    .grid { 
+        grid-template-columns: repeat(2, 1fr); 
+    }
+    .section2 {
+        padding: 56px 32px;
+    }
+    .head {
+        margin-bottom: 40px;
+    }
+    .head h2 {
+        font-size: 1.8rem;
+    }
+    .card {
+        padding: 32px 24px;
+    }
+    .scroll {
+        bottom: 20px;
+        right: 20px;
+    }
+    .imgbg .img {
+        object-position: 70% center;
+    }
+}
+
+@media (max-width: 991px) and (min-width: 769px) {
+    .section1 {
+        height: 85vh;
+    }
+    .info {
+        bottom: 50px;
+        left: 32px;
+        right: 32px;
+        max-width: 500px;
+        gap: 16px;
+    }
+    .infotitle {
+        font-size: 3.2rem;
+        letter-spacing: -1px;
+    }
+    .infodesc {
+        font-size: 0.85rem;
+        max-width: 100%;
+    }
+    .subtag {
+        font-size: 0.55rem;
+        padding: 4px 10px;
+        letter-spacing: 2px;
+    }
+    .btn {
+        padding: 12px 28px;
+        font-size: 0.75rem;
+    }
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2px;
+    }
+    .card {
+        padding: 28px 20px;
+    }
+    .number {
+        font-size: 1.8rem;
+    }
+    .icon {
+        font-size: 1.8rem;
+    }
+    .title {
+        font-size: 0.75rem;
+    }
+    .desc {
+        font-size: 0.7rem;
+    }
+    .section2 {
+        padding: 48px 24px;
+    }
+    .head h2 {
+        font-size: 1.6rem;
+    }
+    .head p {
+        font-size: 0.65rem;
+        letter-spacing: 2.5px;
+    }
+    .scroll {
+        bottom: 16px;
+        right: 16px;
+    }
+}
+
+@media (max-width: 800px) {
+    .info { 
+        bottom: 40px; 
+        left: 28px; 
+        right: 28px; 
+        max-width: 100%; 
+        gap: 14px;
+    }
+    .infotitle { 
+        font-size: 2.8rem;
+        letter-spacing: -1px;
+    }
+    .scroll { 
+        right: 20px;
+        bottom: 20px;
+    }
+    .subtag {
+        font-size: 0.52rem;
+        padding: 3px 8px;
+        letter-spacing: 1.5px;
+    }
+    .infodesc {
+        font-size: 0.82rem;
+        line-height: 1.6;
+        max-width: 100%;
+    }
+    .btn {
+        padding: 10px 24px;
+        font-size: 0.72rem;
+    }
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .card {
+        padding: 24px 16px;
+    }
+    .number {
+        font-size: 1.6rem;
+    }
+    .icon {
+        font-size: 1.6rem;
+    }
+    .title {
+        font-size: 0.7rem;
+        letter-spacing: 0.5px;
+    }
+    .section2 {
+        padding: 40px 20px;
+    }
+    .head {
+        margin-bottom: 32px;
+    }
+    .head h2 {
+        font-size: 1.4rem;
+    }
+}
+
+@media (max-width: 767px) and (min-width: 481px) {
+    .section1 {
+        height: 80vh;
+    }
+    .info {
+        bottom: 35px;
+        left: 20px;
+        right: 20px;
+        gap: 12px;
+    }
+    .infotitle {
+        font-size: 2.4rem;
+        line-height: 1.1;
+    }
+    .subtags {
+        gap: 6px;
+    }
+    .subtag {
+        font-size: 0.48rem;
+        padding: 3px 8px;
+    }
+    .infodesc {
+        font-size: 0.78rem;
+        line-height: 1.5;
+    }
+    .btn {
+        padding: 10px 20px;
+        font-size: 0.7rem;
+    }
+    .grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 2px;
+    }
+    .card {
+        padding: 20px 14px;
+        gap: 8px;
+    }
+    .icon {
+        font-size: 1.5rem;
+    }
+    .number {
+        font-size: 1.5rem;
+    }
+    .title {
+        font-size: 0.68rem;
+    }
+    .desc {
+        font-size: 0.65rem;
+    }
+    .section2 {
+        padding: 32px 16px;
+    }
+    .head h2 {
+        font-size: 1.3rem;
+    }
+    .head p {
+        font-size: 0.6rem;
+        margin-bottom: 6px;
+    }
+    .scroll {
+        bottom: 12px;
+        right: 12px;
+    }
+    .line {
+        height: 25px;
+    }
+}
+
+@media (max-width: 480px) {
+    .info { 
+        bottom: 28px; 
+        left: 20px; 
+        right: 20px; 
+        gap: 12px;
+    }
+    .infotitle { 
+        font-size: 2rem;
+        letter-spacing: -0.5px;
+    }
+    .grid { 
+        grid-template-columns: 1fr 1fr; 
+    }
+    .section2 { 
+        padding: 36px 16px; 
+    }
+    .head h2 { 
+        font-size: 1.3rem;
+        letter-spacing: 0;
+    }
+    .head p {
+        font-size: 0.55rem;
+        letter-spacing: 2px;
+    }
+    .infodesc {
+        font-size: 0.75rem;
+        line-height: 1.5;
+    }
+    .subtag {
+        font-size: 0.45rem;
+        padding: 2px 6px;
+        letter-spacing: 1px;
+    }
+    .btn {
+        padding: 8px 18px;
+        font-size: 0.65rem;
+        gap: 6px;
+    }
+    .card {
+        padding: 18px 12px;
+        gap: 6px;
+    }
+    .icon {
+        font-size: 1.3rem;
+        margin-bottom: 0;
+    }
+    .number {
+        font-size: 1.3rem;
+    }
+    .title {
+        font-size: 0.65rem;
+        letter-spacing: 0.5px;
+    }
+    .desc {
+        font-size: 0.6rem;
+        line-height: 1.4;
+    }
+    .scroll {
+        bottom: 10px;
+        right: 10px;
+        font-size: 0.5rem;
+        gap: 4px;
+    }
+    .line {
+        height: 20px;
+    }
+    .imgbg .img {
+        object-position: 70% center;
+        filter: brightness(0.6);
+    }
+    .overlay {
+        background: linear-gradient(
+            to top,
+            rgba(0, 0, 0, 0.95) 0%,
+            rgba(0, 0, 0, 0.65) 60%,
+            rgba(0, 0, 0, 0.30) 100%
+        );
+    }
+}
+
+@media (max-width: 360px) {
+    :root {
+        --header-h: 60px;
+    }
+    .section1 {
+        height: 75vh;
+    }
+    .info {
+        bottom: 20px;
+        left: 15px;
+        right: 15px;
+        gap: 10px;
+    }
+    .infotitle {
+        font-size: 1.6rem;
+        line-height: 1.15;
+    }
+    .subtag {
+        font-size: 0.4rem;
+        padding: 2px 5px;
+        letter-spacing: 0.5px;
+    }
+    .infodesc {
+        font-size: 0.7rem;
+        line-height: 1.45;
+    }
+    .btn {
+        padding: 8px 16px;
+        font-size: 0.6rem;
+        gap: 4px;
+    }
+    .grid {
+        gap: 1px;
+    }
+    .card {
+        padding: 14px 10px;
+        gap: 5px;
+    }
+    .icon {
+        font-size: 1.1rem;
+    }
+    .number {
+        font-size: 1.1rem;
+    }
+    .title {
+        font-size: 0.6rem;
+    }
+    .desc {
+        font-size: 0.55rem;
+        line-height: 1.3;
+    }
+    .section2 {
+        padding: 28px 12px;
+    }
+    .head {
+        margin-bottom: 24px;
+    }
+    .head h2 {
+        font-size: 1.1rem;
+    }
+    .head p {
+        font-size: 0.5rem;
+        letter-spacing: 1.5px;
+        margin-bottom: 4px;
+    }
+    .scroll {
+        bottom: 8px;
+        right: 8px;
+        font-size: 0.45rem;
+    }
+    .line {
+        height: 15px;
+    }
+}
+
+@media (max-height: 700px) and (max-width: 768px) {
+    .info {
+        bottom: 20px;
+        gap: 8px;
+    }
+    .infotitle {
+        font-size: 1.8rem;
+    }
+    .subtag {
+        padding: 2px 6px;
+    }
+    .btn {
+        padding: 6px 16px;
+    }
+    .scroll {
+        bottom: 10px;
+        right: 10px;
+    }
+    .section2 {
+        padding: 30px 20px;
+    }
+    .head {
+        margin-bottom: 25px;
+    }
+    .card {
+        padding: 15px 10px;
+    }
+    .icon {
+        font-size: 1.2rem;
+    }
+    .number {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 900px) and (orientation: landscape) {
+    .section1 {
+        height: 90vh;
+    }
+    .info {
+        bottom: 25px;
+        gap: 10px;
+    }
+    .infotitle {
+        font-size: 2rem;
+    }
+    .subtag {
+        font-size: 0.5rem;
+        padding: 2px 8px;
+    }
+    .infodesc {
+        font-size: 0.7rem;
+        max-width: 60%;
+    }
+    .btn {
+        padding: 8px 20px;
+        font-size: 0.65rem;
+    }
+    .scroll {
+        bottom: 15px;
+        right: 15px;
+    }
+    .grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    .card {
+        padding: 20px 12px;
+    }
+    .icon {
+        font-size: 1.4rem;
+    }
+    .number {
+        font-size: 1.4rem;
+    }
+}
+
+@media (min-resolution: 192dpi) {
+    .imgbg .img {
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background: #111;
+    }
+    .section2 {
+        background: #161616;
+    }
 }
