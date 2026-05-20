@@ -18,7 +18,7 @@
 <section class="section1">
 
     <div class="imgbg">
-        <img src="images/goat.jpg" alt="Manchester United Home Jersey 2025" class="img">
+        <img src="images/manchester.jpg" alt="Manchester United Home Jersey 2025" class="img">
         <div class="overlay"></div>
     </div>
 
