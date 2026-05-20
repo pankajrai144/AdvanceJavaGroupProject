@@ -37,7 +37,7 @@
       </c:if>
 
       <div class="input-group">
-        <input type="email" name="email" placeholder="Email Address" value="${rememberedEmail}">
+        <input type="text" name="email" placeholder="Email Address" value="${rememberedEmail}">
       </div>
 
       <div class="input-group password-group">

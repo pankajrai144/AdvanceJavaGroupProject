@@ -36,6 +36,8 @@ public class UserDAO {
             pst.setString(7, gender);
             pst.setString(8, profileImageName);
             pst.setString(9, "user");
+
+            // New users are kept denied until the admin approves their account.
             pst.setString(10, "denied");
 
             pst.executeUpdate();
@@ -91,6 +93,7 @@ public class UserDAO {
                 if (rs.next()) {
                     String role = rs.getString("role");
 
+                    // Default role is used when old or incomplete user records have no role value.
                     if (role == null || role.trim().isEmpty()) {
                         role = "user";
                     } else {
