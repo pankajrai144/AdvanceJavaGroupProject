@@ -19,7 +19,7 @@
 <jsp:include page="/components/header.jsp"/>
 
 <section class="au-hero-section">
-    <img src="${pageContext.request.contextPath}/images/aboutus.jpg" alt="About Jersey Pasal" class="au-hero-image">
+    <img src="${pageContext.request.contextPath}/images/goats.jpg" alt="About Jersey Pasal" class="au-hero-image">
 
     <div class="au-hero-content">
         <a href="${pageContext.request.contextPath}/product" class="au-shop-btn">
@@ -28,10 +28,10 @@
         </a>
 
         <p class="au-hero-label">Nepal's Number One Jersey Store</p>
-        <h1>
-            The Home of <span>Authentic</span><br>
-            <span class="au-white-line">Jerseys in Nepal</span>
-        </h1>
+			<h1>
+    The Home of <span>Authentic</span><br>
+    <span class="au-white-line">Jerseys in Nepal</span>
+</h1>
 
         <p class="au-hero-text">
             From the biggest leagues to your doorstep we deliver passion, identity, and<br>
@@ -122,113 +122,54 @@
             <h3>Authentic &amp; Replica</h3>
             <p>Choose between official player versions and premium fan replicas with top-quality materials.</p>
         </div>
-		<div class="au-offer-card">
-    <i class="fa-solid fa-headset"></i>
-    <h3>Dedicated Customer Support</h3>
-    <p>Our support team is always ready to assist you with quick responses, reliable service, and a seamless shopping experience.</p>
-</div>
-   	 </div>
+
+        <div class="au-offer-card">
+            <i class="fa-solid fa-pen-nib"></i>
+            <h3>Custom Name &amp; Number</h3>
+            <p>Personalize your jersey with your favorite player name or your own — perfect for match days.</p>
+        </div>
+    </div>
 </section>
-<div class="home-content-area">
 
- <section class="home-section">
-    <div class="home-sec-title"><i class="fa-regular fa-star"></i> Why Choose Jersey Pasal</div>
-    <div class="home-sec-sub">Your trusted destination for authentic football jerseys and World Cup 2026 merchandise</div>
-
-    <div class="home-why-grid">
-      <div class="home-why-card">
-        <span class="home-why-icon"><i class="fa-regular fa-circle-check"></i></span>
-        <h3>100% Authentic</h3>
-        <p>Every jersey is sourced from licensed manufacturers authentic or clearly labelled replica. Never fake.</p>
-      </div>
-	<div class="home-why-card">
-    	<span class="home-why-icon"><i class="fa-solid fa-globe"></i></span>
-    	<h3>Inspired by Global Football Culture</h3>
-    	<p>We bring the passion of world football closer to fans with stylish designs inspired by clubs and international teams.</p>
-	</div>
-
-      <div class="home-why-card">
-        <span class="home-why-icon"><i class="fa-solid fa-arrow-rotate-left"></i></span>
-        <h3>Easy Returns</h3>
-        <p>Changed your mind? Free 30-day returns on all unworn jerseys with no questions asked.</p>
-      </div>
-
-      <div class="home-why-card">
-        <span class="home-why-icon"><i class="fa-solid fa-lock"></i></span>
-        <h3>Secure Payment</h3>
-        <p>Shop with confidence. We accept all major cards, PayPal, and buy-now-pay-later options.</p>
-      </div>
-
-	 <div class="home-why-card">
-    <span class="home-why-icon">
-        <i class="fa-solid fa-users"></i>
-    </span><h3>Customer First Approach</h3>
-    <p>We are committed to providing trusted service, premium quality, and a seamless shopping experience for every football fan.</p>
-</div>		
-
-      <div class="home-why-card">
-        <span class="home-why-icon"><i class="fa-solid fa-handshake"></i></span>
-        <h3>Official Partnerships</h3>
-        <p>Partnered with Adidas, Nike, Puma and more for direct access to the latest drops.</p>
-      </div>
-
-      <div class="home-why-card">
-        <span class="home-why-icon"><i class="fa-solid fa-headset"></i></span>
-        <h3>24/7 Support</h3>
-        <p>Our fan support team is always online chat, email, or WhatsApp, any time of day.</p>
-      </div>
-
-      <div class="home-why-card">
-        <span class="home-why-icon"><i class="fa-solid fa-certificate"></i></span>
-        <h3>Nepal's Number One Store</h3>
-        <p>10,000+ happy customers. Most trusted jersey pasal in Nepal.</p>
-      </div>
+<section class="au-why-section">
+    <div class="au-heading-box">
+        <p class="au-small-title">Why Choose Us</p>
+        <h2>The Jersey Pasal Difference</h2>
     </div>
-  </section>
 
-  <section class="home-section">
-    <div class="home-sec-title"><i class="fa-regular fa-star"></i> Our Journey</div>
-    <div class="home-sec-sub">From a small shop to Nepal's Number One jersey store</div>
-
-    <div class="home-timeline">
-      <div class="home-timeline-item">
-        <div class="home-timeline-date">2023</div>
-        <div class="home-timeline-content">
-          <h3><i class="fa-solid fa-store"></i> Humble Beginnings</h3>
-          <p>Started as a small jersey shop in Kathmandu</p>
+    <div class="au-why-grid">
+        <div class="au-why-card">
+            <p class="au-card-number">01</p>
+            <h3>100% Quality Guarantee</h3>
+            <p>Every product is inspected before dispatch. Not satisfied? We offer easy returns, no questions asked.</p>
         </div>
-        <div class="home-timeline-dot"></div>
-      </div>
 
-      <div class="home-timeline-item">
-        <div class="home-timeline-date">2024</div>
-        <div class="home-timeline-content">
-          <h3><i class="fa-solid fa-globe"></i> Online Store Launch</h3>
-          <p>Brought authentic jerseys to every corner of Nepal</p>
+        <div class="au-why-card">
+            <p class="au-card-number">02</p>
+            <h3>Trusted &amp; Verified Products</h3>
+            <p>We source directly from licensed suppliers. Every jersey is verified for authenticity before it reaches our store.</p>
         </div>
-        <div class="home-timeline-dot"></div>
-      </div>
 
-      <div class="home-timeline-item">
-        <div class="home-timeline-date">2025</div>
-        <div class="home-timeline-content">
-          <h3><i class="fa-solid fa-users"></i> 10,000+ Happy Customers</h3>
-          <p>Nepal's most trusted name for football jerseys</p>
+        <div class="au-why-card">
+            <p class="au-card-number">03</p>
+            <h3>Fast Order Processing</h3>
+            <p>Orders processed within 24 hours. Kathmandu Valley in 1–2 days, nationwide in 3–5 days.</p>
         </div>
-        <div class="home-timeline-dot"></div>
-      </div>
 
-      <div class="home-timeline-item">
-        <div class="home-timeline-date">2026</div>
-        <div class="home-timeline-content">
-          <h3><i class="fa-solid fa-trophy"></i> World Cup Collection</h3>
-          <p>Official jerseys for all 48 Nations. Available now</p>
+        <div class="au-why-card">
+            <p class="au-card-number">04</p>
+            <h3>Dedicated Customer Support</h3>
+            <p>Our team is available on WhatsApp, Messenger, and email 7 days a week to help with orders and sizing.</p>
         </div>
-        <div class="home-timeline-dot"></div>
-      </div>
+
+        <div class="au-why-card">
+            <p class="au-card-number">05</p>
+            <h3>Best Prices in Nepal</h3>
+            <p>Fair, transparent pricing with no hidden charges — plus regular deals, discounts, and loyalty rewards.</p>
+        </div>
     </div>
-  </section>
-</div>
+</section>
+
 <section class="au-team-section">
     <div class="au-heading-box">
         <p class="au-small-title">The People Behind It</p>
@@ -236,15 +177,6 @@
     </div>
 
     <div class="au-team-grid">
-        <div class="au-team-card">
-            <div class="au-team-image">
-                <img src="${pageContext.request.contextPath}/images/pankajRai.jpg" alt="Pankaj Rai">
-            </div>
-            <h3>Pankaj Rai</h3>
-            <p class="au-team-role">Team Leader &amp; Backend Developer</p>
-            <p>A motivated, detail-oriented individual with strong organizational, communication, and problem solving skills. Demonstrates high responsibility and dedication capable of working both independently and collaboratively to deliver efficient results.</p>
-        </div>
-
         <div class="au-team-card">
             <div class="au-team-image">
                 <img src="${pageContext.request.contextPath}/images/eijkeyalPakhrin.jpeg" alt="Eijkeyal Pakhrin">
@@ -256,9 +188,18 @@
 
         <div class="au-team-card">
             <div class="au-team-image">
+                <img src="${pageContext.request.contextPath}/images/pankajRai.jpg" alt="Pankaj Rai">
+            </div>
+            <h3>Pankaj Rai</h3>
+            <p class="au-team-role">Team Leader &amp; Backend Developer</p>
+            <p>A motivated, detail-oriented individual with strong organizational, communication, and problem solving skills. Demonstrates high responsibility and dedication capable of working both independently and collaboratively to deliver efficient results.</p>
+        </div>
+
+        <div class="au-team-card">
+            <div class="au-team-image">
                 <img src="${pageContext.request.contextPath}/images/bisrutAdhikari.jpg" alt="Bisrut Adhikari">
             </div>
-            <h3>Bishrut Raj Adhikari</h3>
+            <h3>Bishrut Adhikari</h3>
             <p class="au-team-role">Backend &amp; Frontend Developer</p>
             <p>Designs modern and user-friendly interfaces for a better experience. Brings a creative mindset to backend systems, ensuring smooth functionality that powers the Jersey Pasal platform.</p>
         </div>
@@ -282,15 +223,15 @@
         </div>
     </div>
 </section>
+
 <section class="au-bottom-section">
     <h2>Ready to Wear Your Passion?</h2>
     <p>Browse our full collection and find your perfect jersey today.</p>
-    <div class="au-button-wrapper">
-        <a href="${pageContext.request.contextPath}/contact" class="au-contact-white-btn">
-            <i class="fa-solid fa-headset"></i>
-            Contact Us
-        </a>
-    </div>
+
+    <a href="${pageContext.request.contextPath}/product">
+        Shop Now
+        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+    </a>
 </section>
 
 <%@ include file="/components/footer.jsp" %>
