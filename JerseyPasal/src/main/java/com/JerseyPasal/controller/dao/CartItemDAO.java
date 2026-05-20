@@ -26,6 +26,8 @@ public class CartItemDAO {
 
         pst.setInt(1, cartId);
         pst.setInt(2, productId);
+
+        // Size is stored in one format so the same size is not treated differently.
         pst.setString(3, selectedSize.trim().toUpperCase());
 
         int rows = pst.executeUpdate();
@@ -79,7 +81,10 @@ public class CartItemDAO {
             item.setCartItemId(rs.getInt("cart_item_id"));
             item.setCartId(rs.getInt("cart_id"));
             item.setProductId(rs.getInt("product_id"));
+
+            // Product details are attached to each cart item so the cart page can display full jersey information.
             item.setProduct(product);
+
             item.setSelectedSize(rs.getString("selected_size"));
             item.setQuantity(rs.getInt("quantity"));
             item.setAddedAt(rs.getString("added_at"));
@@ -126,6 +131,7 @@ public class CartItemDAO {
 
         int quantity = getCartItemQuantity(cartId, productId, selectedSize);
 
+        // If only one item is left, decreasing it removes the item from the cart.
         if (quantity <= 1) {
             return removeCartItem(userId, productId, selectedSize);
         }

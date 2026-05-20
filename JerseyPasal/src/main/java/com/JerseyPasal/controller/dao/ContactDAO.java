@@ -53,6 +53,8 @@ public class ContactDAO {
             contact.put("phone", rs.getString("phone"));
             contact.put("subject", rs.getString("subject"));
             contact.put("message", rs.getString("message"));
+
+            // Timestamp is converted to text so it can be displayed easily on the admin page.
             contact.put("submitted_at", String.valueOf(rs.getTimestamp("submitted_at")));
 
             contactMessages.add(contact);

@@ -50,6 +50,7 @@ public class ApproveUserServlet extends HttpServlet {
 
         UserModel loggedInUser = (UserModel) session.getAttribute("loggedInUser");
 
+        // Only admin users are allowed to approve member accounts.
         if (loggedInUser.getRole() == null || !loggedInUser.getRole().equalsIgnoreCase("admin")) {
             response.sendRedirect(request.getContextPath() + "/login");
             return;
@@ -66,6 +67,8 @@ public class ApproveUserServlet extends HttpServlet {
             int userId = Integer.parseInt(userIdValue);
 
             UserDAO dao = new UserDAO();
+
+            // The DAO updates the selected user's approval status in the database.
             boolean approved = dao.approveUser(userId);
 
             if (approved) {

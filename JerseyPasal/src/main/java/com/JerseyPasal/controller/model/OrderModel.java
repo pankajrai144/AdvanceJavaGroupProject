@@ -1,5 +1,6 @@
 package com.JerseyPasal.controller.model;
 
+// This model stores the main order details used for user orders and admin order management.
 public class OrderModel {
 
     private int orderId;

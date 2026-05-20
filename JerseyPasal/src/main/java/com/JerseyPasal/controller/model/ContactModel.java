@@ -1,5 +1,6 @@
 package com.JerseyPasal.controller.model;
 
+// This model holds a user's contact message before it is saved or displayed.
 public class ContactModel {
 
     private int contactId;

@@ -72,6 +72,7 @@ public class NationsServlet extends HttpServlet {
                 }
             }
 
+            // Invalid price range is cleared so the page can still show nation products safely.
             if (minPrice != null && maxPrice != null && minPrice > maxPrice) {
                 filterError = "Minimum price cannot be greater than maximum price.";
                 minPrice = null;
@@ -113,12 +114,14 @@ public class NationsServlet extends HttpServlet {
 
             ArrayList<ProductModel> nationProducts = new ArrayList<>();
 
+            // Only the products for the selected page are sent to the JSP.
             if (totalProducts > 0) {
                 nationProducts = new ArrayList<>(allNationProducts.subList(startIndex, endIndex));
             }
 
             String filterQuery = "";
 
+            // Filter values are kept in the page links so pagination does not reset the selected filters.
             if (size != null && !size.trim().isEmpty()) {
                 filterQuery += "&size=" + URLEncoder.encode(size.trim(), StandardCharsets.UTF_8);
             }
@@ -139,6 +142,8 @@ public class NationsServlet extends HttpServlet {
 
         } catch (Exception e) {
             e.printStackTrace();
+
+            // Empty product data is sent so the nation page can still load after an error.
             request.setAttribute("error", "Unable to load nation products.");
             request.setAttribute("nationProducts", new ArrayList<ProductModel>());
             request.setAttribute("currentPage", 1);

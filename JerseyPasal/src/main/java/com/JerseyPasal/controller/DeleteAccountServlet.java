@@ -45,9 +45,12 @@ public class DeleteAccountServlet extends HttpServlet {
             String email = loggedInUser.getEmail();
 
             UserDAO dao = new UserDAO();
+
+            // The account is soft deleted so the user record is kept but login is blocked.
             boolean deleted = dao.softDeleteUser(email);
 
             if (deleted) {
+                // The session is cleared after deletion so the user cannot continue using the account.
                 session.invalidate();
                 response.sendRedirect(request.getContextPath() + "/login?deleted=true");
             } else {

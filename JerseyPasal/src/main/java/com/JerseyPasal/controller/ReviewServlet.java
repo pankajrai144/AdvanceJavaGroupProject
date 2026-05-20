@@ -62,6 +62,7 @@ public class ReviewServlet extends HttpServlet {
             ReviewDAO reviewDAO = new ReviewDAO();
             ProductDAO productDAO = new ProductDAO();
 
+            // Review page is opened only for products from the user's delivered orders.
             boolean canReview = reviewDAO.canUserReviewProduct(userId, productId, orderId);
 
             if (!canReview) {
@@ -70,6 +71,7 @@ public class ReviewServlet extends HttpServlet {
                 return;
             }
 
+            // A user should not submit more than one review for the same product.
             boolean alreadyReviewed = reviewDAO.hasUserReviewedProduct(userId, productId);
 
             if (alreadyReviewed) {
@@ -159,6 +161,7 @@ public class ReviewServlet extends HttpServlet {
 
             ReviewDAO reviewDAO = new ReviewDAO();
 
+            // Permission is checked again before saving in case the request was changed manually.
             boolean canReview = reviewDAO.canUserReviewProduct(userId, productId, orderId);
 
             if (!canReview) {

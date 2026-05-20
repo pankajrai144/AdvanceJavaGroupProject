@@ -20,6 +20,7 @@ public class CartDAO {
 
         ResultSet rs = selectPst.executeQuery();
 
+        // If the user already has a cart, the same cart is reused.
         if (rs.next()) {
             int cartId = rs.getInt("cart_id");
 
@@ -43,6 +44,7 @@ public class CartDAO {
 
         int cartId = 0;
 
+        // The generated cart id is needed so items can be added to this new cart later.
         if (generatedKeys.next()) {
             cartId = generatedKeys.getInt(1);
         }
@@ -142,6 +144,7 @@ public class CartDAO {
 
         ResultSet rs = pst.executeQuery();
 
+        // COALESCE keeps the count as 0 when the user has no items in the cart.
         if (rs.next()) {
             cartCount = rs.getInt("total");
         }

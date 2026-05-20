@@ -63,6 +63,7 @@ public class ProductsServlet extends HttpServlet {
 					if (selectedSize != null && !selectedSize.trim().isEmpty()) {
 						selectedSize = selectedSize.trim().toUpperCase();
 
+						// The selected size is checked before allowing the user to continue with this product.
 						if (isSizeAvailable(selectedProduct.getSize(), selectedSize)) {
 							request.setAttribute("sizeMessage", "Size " + selectedSize + " is available.");
 							request.setAttribute("sizeMessageType", "size-success");
@@ -76,6 +77,7 @@ public class ProductsServlet extends HttpServlet {
 					if (selectedImage != null && !selectedImage.trim().isEmpty()) {
 						selectedImage = selectedImage.trim();
 
+						// The image is accepted only if it belongs to the selected product.
 						if (isProductImageAvailable(selectedProduct, selectedImage)) {
 							request.setAttribute("selectedImage", selectedImage);
 						}
@@ -96,6 +98,8 @@ public class ProductsServlet extends HttpServlet {
                         int userId = loggedInUser.getUserid();
 
                         alreadyReviewed = reviewDAO.hasUserReviewedProduct(userId, productId);
+
+                        // A user can review only if they have a delivered order for this product.
                         reviewOrderId = getDeliveredOrderIdForProduct(userId, productId);
 
                         if (reviewOrderId > 0 && !alreadyReviewed) {
@@ -149,6 +153,7 @@ public class ProductsServlet extends HttpServlet {
                     }
                 }
 
+                // Invalid price range is cleared so the product page can still load safely.
                 if (minPrice != null && maxPrice != null && minPrice > maxPrice) {
                     filterError = "Minimum price cannot be greater than maximum price.";
                     minPrice = null;
@@ -190,12 +195,14 @@ public class ProductsServlet extends HttpServlet {
 
                 ArrayList<ProductModel> products = new ArrayList<>();
 
+                // Only products for the current page are passed to the JSP.
                 if (totalProducts > 0) {
                     products = new ArrayList<>(allProducts.subList(startIndex, endIndex));
                 }
 
                 String filterQuery = "";
 
+                // Filter values are kept in pagination links so selected filters are not lost.
                 if (size != null && !size.trim().isEmpty()) {
                     filterQuery += "&size=" + URLEncoder.encode(size.trim(), StandardCharsets.UTF_8);
                 }
@@ -220,6 +227,8 @@ public class ProductsServlet extends HttpServlet {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
+
+            // Empty product data is sent so the product page can still open after an error.
 			request.setAttribute("products", new ArrayList<ProductModel>());
             request.setAttribute("currentPage", 1);
             request.setAttribute("totalPages", 1);

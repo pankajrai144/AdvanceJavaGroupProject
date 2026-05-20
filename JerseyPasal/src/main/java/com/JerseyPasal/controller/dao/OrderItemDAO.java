@@ -47,6 +47,8 @@ public class OrderItemDAO {
 
         for (CartItemModel cartItem : cartItems) {
             double priceEach = cartItem.getProduct().getPrice();
+
+            // The item total is saved at checkout so the order keeps the correct price record.
             double itemTotal = priceEach * cartItem.getQuantity();
 
             pst.setInt(1, orderId);
@@ -109,7 +111,10 @@ public class OrderItemDAO {
             item.setOrderItemId(rs.getInt("order_item_id"));
             item.setOrderId(rs.getInt("order_id"));
             item.setProductId(rs.getInt("product_id"));
+
+            // Product details are attached so the order page can show the jersey information clearly.
             item.setProduct(product);
+
             item.setSelectedSize(rs.getString("selected_size"));
             item.setQuantity(rs.getInt("quantity"));
             item.setPriceEach(rs.getDouble("price_each"));

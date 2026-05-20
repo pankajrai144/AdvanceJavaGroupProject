@@ -67,6 +67,7 @@ public class EditProfileServlet extends HttpServlet {
 
 		Object loggedInUserObj = session.getAttribute("loggedInUser");
 
+		// Invalid session data is cleared before sending the user back to login.
 		if (!(loggedInUserObj instanceof UserModel)) {
 			session.invalidate();
 			response.sendRedirect(request.getContextPath() + "/login");
@@ -127,6 +128,7 @@ public class EditProfileServlet extends HttpServlet {
 		}
 
 		try {
+			// Email uniqueness is checked only when the user changes their current email.
 			if (loggedInUser.getEmail() != null &&
 			    !email.equalsIgnoreCase(loggedInUser.getEmail()) &&
 			    userDAO.emailExists(email)) {
@@ -180,7 +182,10 @@ public class EditProfileServlet extends HttpServlet {
 
 			String extension = FileUploadUtil.getFileExtension(submittedFileName);
 			String cleanEmail = FileUploadUtil.cleanEmailForFileName(email);
+
+			// The email is used in the image name so each user's profile image stays separate.
 			profileImageName = cleanEmail + extension;
+
 			FileUploadUtil.saveFile(profilePic, UPLOAD_DIR, profileImageName);
 		}
 
@@ -205,6 +210,7 @@ public class EditProfileServlet extends HttpServlet {
 				loggedInUser.setGender(gender);
 				loggedInUser.setProfileImage(profileImageName);
 
+				// Session user data is refreshed so the new profile details appear without logging in again.
 				session.setAttribute("loggedInUser", loggedInUser);
 				session.setAttribute("message", "Profile updated successfully.");
 			} else {

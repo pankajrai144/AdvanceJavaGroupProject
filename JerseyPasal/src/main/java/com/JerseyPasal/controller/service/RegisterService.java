@@ -9,6 +9,7 @@ public class RegisterService {
                              String password, String address, String gender,
                              String profileImageName) throws Exception {
 
+        // The password is hashed before saving the new user account.
         String hashedPassword = PasswordUtil.getHashPassword(password.trim());
 
         if (profileImageName == null) {
@@ -16,6 +17,8 @@ public class RegisterService {
         }
 
         UserDAO dao = new UserDAO();
+
+        // User input is cleaned here before passing it to the database layer.
         dao.insertUser(
                 fullname.trim(),
                 email.trim().toLowerCase(),

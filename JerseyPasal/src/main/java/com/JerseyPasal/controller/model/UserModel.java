@@ -1,5 +1,6 @@
 package com.JerseyPasal.controller.model;
 
+// This model stores user account details, including role and approval status for login control.
 public class UserModel {
 
     private int userid;

@@ -12,6 +12,8 @@ public class SessionUtil {
 
         HttpSession session = request.getSession(true);
         session.setAttribute(name, value);
+
+        // Session timeout is set here so inactive users are logged out automatically.
         session.setMaxInactiveInterval(seconds);
     }
 
@@ -20,6 +22,7 @@ public class SessionUtil {
             return null;
         }
 
+        // Existing session is used only if it is already available.
         HttpSession session = request.getSession(false);
         return (session != null) ? session.getAttribute(name) : null;
     }
@@ -44,6 +47,7 @@ public class SessionUtil {
         HttpSession session = request.getSession(false);
 
         if (session != null) {
+            // The whole session is cleared during logout or invalid access.
             session.invalidate();
         }
     }

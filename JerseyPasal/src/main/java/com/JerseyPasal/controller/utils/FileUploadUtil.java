@@ -13,6 +13,8 @@ public class FileUploadUtil {
 
     public static boolean isImage(Part part) {
         String contentType = part.getContentType();
+
+        // Only image files are accepted for upload.
         return contentType != null && contentType.startsWith("image/");
     }
 
@@ -25,6 +27,7 @@ public class FileUploadUtil {
     }
 
     public static String cleanEmailForFileName(String email) {
+        // Email is cleaned so it can be safely used as part of a file name.
         return email.replaceAll("[^a-zA-Z0-9]", "_");
     }
 
@@ -38,6 +41,7 @@ public class FileUploadUtil {
         Path filePath = uploadPath.resolve(fileName);
 
         try (InputStream inputStream = part.getInputStream()) {
+            // Existing files with the same name are replaced to keep the latest uploaded image.
             Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
         }
     }

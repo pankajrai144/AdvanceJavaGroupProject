@@ -25,7 +25,10 @@ public class CartItemModel {
     public CartItemModel(int cartItemId, int cartId, ProductModel product, String selectedSize, int quantity, String addedAt) {
         this.cartItemId = cartItemId;
         this.cartId = cartId;
+
+        // Product object is used when the cart page needs full jersey details, not only the product id.
         this.product = product;
+
         this.selectedSize = selectedSize;
         this.quantity = quantity;
         this.addedAt = addedAt;
@@ -78,7 +81,6 @@ public class CartItemModel {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
-
 
     public String getAddedAt() {
         return addedAt;

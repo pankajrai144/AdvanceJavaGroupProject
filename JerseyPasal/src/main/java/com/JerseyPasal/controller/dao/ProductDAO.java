@@ -208,6 +208,7 @@ public class ProductDAO {
 
         values.add(category);
 
+        // Optional filters are added only when the user selects them.
         if (size != null && !size.trim().isEmpty()) {
             sql += "AND FIND_IN_SET(?, REPLACE(size, ' ', '')) > 0 ";
             values.add(size.trim());
@@ -227,6 +228,7 @@ public class ProductDAO {
 
         PreparedStatement pst = con.prepareStatement(sql);
 
+        // Values are bound after the query is built to keep filtering flexible and safe.
         for (int i = 0; i < values.size(); i++) {
             pst.setObject(i + 1, values.get(i));
         }
@@ -272,6 +274,7 @@ public class ProductDAO {
 
         ArrayList<Object> values = new ArrayList<>();
 
+        // This method filters products across all categories.
         if (size != null && !size.trim().isEmpty()) {
             sql += "AND FIND_IN_SET(?, REPLACE(size, ' ', '')) > 0 ";
             values.add(size.trim());
@@ -477,6 +480,7 @@ public class ProductDAO {
 
         PreparedStatement pst = con.prepareStatement(sql);
 
+        // The keyword is prepared once and reused for all searchable product fields.
         String searchValue = "%" + keyword.toLowerCase().trim() + "%";
 
         pst.setString(1, searchValue);
@@ -618,6 +622,8 @@ public class ProductDAO {
 
         pst.setInt(1, quantity);
         pst.setInt(2, productId);
+
+        // Stock is reduced only when enough quantity is still available.
         pst.setInt(3, quantity);
 
         int rows = pst.executeUpdate();

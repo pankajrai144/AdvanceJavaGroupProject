@@ -1,5 +1,6 @@
 package com.JerseyPasal.controller.model;
 
+// This model stores the basic cart record that belongs to a user.
 public class CartModel {
 
     private int cartId;

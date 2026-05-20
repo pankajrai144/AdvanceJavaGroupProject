@@ -41,6 +41,7 @@ public class GetImageServlet extends HttpServlet {
 
 			productImage = productImage.trim();
 
+			// Product image names are checked to stop users from accessing files outside the upload folder.
 			if (productImage.contains("..") || productImage.contains("/") || productImage.contains("\\")) {
 				response.sendError(HttpServletResponse.SC_BAD_REQUEST);
 				return;
@@ -62,6 +63,7 @@ public class GetImageServlet extends HttpServlet {
 
 			String cleanEmail = FileUploadUtil.cleanEmailForFileName(email);
 
+			// Profile images are found using the cleaned email because the extension may be different.
 			File[] matches = folder.listFiles((dir, fileName) -> fileName.startsWith(cleanEmail + "."));
 
 			if (matches == null || matches.length == 0) {
@@ -82,6 +84,7 @@ public class GetImageServlet extends HttpServlet {
 		response.setContentType(contentType);
 		response.setContentLength((int) imageFile.length());
 
+		// The image file is written directly to the response so it can be shown in JSP image tags.
 		Files.copy(imageFile.toPath(), response.getOutputStream());
 	}
 

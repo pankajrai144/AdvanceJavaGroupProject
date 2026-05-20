@@ -45,7 +45,11 @@ public class ReviewModel {
         this.reviewText = reviewText;
         this.recommend = recommend;
         this.reviewDate = reviewDate;
+
+        // Product details are included when reviews need to show the related jersey information.
         this.product = product;
+
+        // User details are included when reviews need to show who wrote them.
         this.user = user;
     }
 

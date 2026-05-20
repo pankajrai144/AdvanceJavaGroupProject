@@ -50,6 +50,7 @@ public class DeleteProductServlet extends HttpServlet {
 
 		UserModel loggedInUser = (UserModel) session.getAttribute("loggedInUser");
 
+		// Only admin users are allowed to delete products.
 		if (loggedInUser.getRole() == null || !loggedInUser.getRole().equalsIgnoreCase("admin")) {
 			response.sendRedirect(request.getContextPath() + "/login");
 			return;
@@ -66,6 +67,8 @@ public class DeleteProductServlet extends HttpServlet {
 			int productId = Integer.parseInt(productIdValue);
 			
 			ProductDAO dao = new ProductDAO();
+
+			// The selected product is removed using its product id from the admin dashboard.
 			boolean deleted = dao.deleteProduct(productId);
 			
 			if (deleted) {

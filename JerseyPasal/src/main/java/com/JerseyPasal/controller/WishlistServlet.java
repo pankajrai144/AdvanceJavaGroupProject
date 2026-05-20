@@ -54,6 +54,7 @@ public class WishlistServlet extends HttpServlet {
             if (productIdValue != null && !productIdValue.trim().isEmpty()) {
                 int productId = Integer.parseInt(productIdValue);
 
+                // The same servlet handles both adding and removing wishlist products.
                 if ("remove".equalsIgnoreCase(action)) {
                     wishlistDAO.removeFromWishlist(userId, productId);
                 } else {
@@ -74,6 +75,8 @@ public class WishlistServlet extends HttpServlet {
 
         } catch (Exception e) {
             e.printStackTrace();
+
+            // Empty wishlist data is sent so the wishlist page can still open after an error.
             request.setAttribute("wishlistItems", new ArrayList<WishlistModel>());
             request.setAttribute("wishlistCount", 0);
             request.setAttribute("error", "Unable to load wishlist.");

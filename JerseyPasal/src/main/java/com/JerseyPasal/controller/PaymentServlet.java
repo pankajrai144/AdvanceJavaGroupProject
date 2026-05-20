@@ -109,6 +109,7 @@ public class PaymentServlet extends HttpServlet {
                     return;
                 }
 
+                // Buy Now also checks size availability before opening the payment page.
                 if (!isSizeAvailable(product.getSize(), selectedSize)) {
                     response.sendRedirect(request.getContextPath() + "/product?productId=" + productId + "&cartError=size");
                     return;
@@ -231,6 +232,7 @@ public class PaymentServlet extends HttpServlet {
                     return;
                 }
 
+                // Only the last four card digits are saved, not the full card number.
                 cardLastFour = cardNumber.substring(cardNumber.length() - 4);
                 paymentStatus = "Paid";
 
@@ -268,6 +270,8 @@ public class PaymentServlet extends HttpServlet {
                 }
 
                 OrderModel order = new OrderModel(userId, orderTotal, "Pending");
+
+                // The order is created first so all selected cart items can be linked to it.
                 orderId = orderDAO.createOrder(order);
 
                 if (orderId <= 0) {
@@ -294,6 +298,7 @@ public class PaymentServlet extends HttpServlet {
                     }
                 }
 
+                // Cart is cleared only after the order items and stock updates are completed.
                 cartItemDAO.clearCartItems(userId);
 
             } else {
@@ -393,6 +398,7 @@ public class PaymentServlet extends HttpServlet {
         try {
             request.setAttribute("loggedInUser", loggedInUser);
 
+            // The payment page is rebuilt with the same cart or product data after validation errors.
             if ("cart".equalsIgnoreCase(paymentSource)) {
                 CartItemDAO cartItemDAO = new CartItemDAO();
 

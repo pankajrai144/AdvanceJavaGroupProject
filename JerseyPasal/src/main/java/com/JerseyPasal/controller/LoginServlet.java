@@ -34,6 +34,7 @@ public class LoginServlet extends HttpServlet {
         if (cookies != null) {
             for (Cookie cookie : cookies) {
                 if ("rememberEmail".equals(cookie.getName())) {
+                    // Saved email is loaded so the login form can be pre-filled.
                     request.setAttribute("rememberedEmail", cookie.getValue());
                     request.setAttribute("rememberChecked", "checked");
                     break;
@@ -104,6 +105,7 @@ public class LoginServlet extends HttpServlet {
                 HttpSession oldSession = request.getSession(false);
 
                 if (oldSession != null) {
+                    // The old session is cleared before creating a fresh login session.
                     oldSession.invalidate();
                 }
 
@@ -111,6 +113,7 @@ public class LoginServlet extends HttpServlet {
 
                 String role = loggedInUser.getRole();
 
+                // Users are redirected based on their role after successful login.
                 if (role != null && role.equalsIgnoreCase("admin")) {
                     response.sendRedirect(request.getContextPath() + "/admindashboard");
                 } else {
@@ -119,6 +122,7 @@ public class LoginServlet extends HttpServlet {
 
             } else {
 
+                // Separate checks give clearer messages for denied or deleted accounts.
                 if (service.isUserDenied(email, password)) {
 
                     request.setAttribute("error", "Your account is not approved yet. Please wait for admin approval.");

@@ -62,6 +62,7 @@ public class ContactServlet extends HttpServlet {
         String subject = request.getParameter("subject");
         String message = request.getParameter("message");
 
+        // The entered values are kept so the user does not have to retype them after validation errors.
         request.setAttribute("subject", subject);
         request.setAttribute("message", message);
 
@@ -86,12 +87,15 @@ public class ContactServlet extends HttpServlet {
         try {
             int userId = loggedInUser.getUserid();
 
+            // The contact message is linked with the logged-in user before saving.
             ContactModel contact = new ContactModel(userId, subject.trim(), message.trim());
 
             boolean saved = contactDAO.saveContactMessage(contact);
 
             if (saved) {
                 request.setAttribute("success", "Your message has been sent successfully.");
+
+                // Form values are cleared only after the message is saved successfully.
                 request.removeAttribute("subject");
                 request.removeAttribute("message");
             } else {

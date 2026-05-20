@@ -64,6 +64,7 @@ public class WishlistDAO {
 
         ResultSet rs = pst.executeQuery();
 
+        // This checks the wishlist status so the page can show the correct add or remove option.
         if (rs.next()) {
             exists = true;
         }
@@ -117,7 +118,10 @@ public class WishlistDAO {
             wishlist.setWishlistId(rs.getInt("wishlist_id"));
             wishlist.setUserId(rs.getInt("user_id"));
             wishlist.setProductId(rs.getInt("product_id"));
+
+            // Product details are attached so the wishlist page can display full jersey information.
             wishlist.setProduct(product);
+
             wishlist.setAddedAt(rs.getString("added_at"));
 
             wishlistItems.add(wishlist);

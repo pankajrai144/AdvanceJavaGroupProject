@@ -53,6 +53,7 @@ public class RegisterServlet extends HttpServlet {
             String error = validateRegisterForm(fullname, email, phone, registrationDate, password, address, gender, terms, profilePic);
 
             if (error != null) {
+                // Valid form values are kept so the user does not need to retype everything after an error.
                 setRegisterFormAttributes(request, fullname, email, phone, registrationDate, address, gender, terms);
                 request.setAttribute("error", error);
                 request.getRequestDispatcher("/WEB-INF/pages/register.jsp").forward(request, response);
@@ -69,6 +70,7 @@ public class RegisterServlet extends HttpServlet {
 
             UserDAO dao = new UserDAO();
 
+            // Email is checked again before saving to avoid duplicate user accounts.
             if (dao.emailExists(email)) {
                 setRegisterFormAttributes(request, fullname, email, phone, registrationDate, address, gender, terms);
                 request.setAttribute("error", "This email is already registered. Please use another email.");
@@ -78,12 +80,15 @@ public class RegisterServlet extends HttpServlet {
 
             String extension = FileUploadUtil.getFileExtension(profilePic.getSubmittedFileName());
             String cleanEmail = FileUploadUtil.cleanEmailForFileName(email);
+
+            // The profile image name is based on the cleaned email so it stays unique for each user.
             String profileImageName = cleanEmail + extension;
 
             FileUploadUtil.saveFile(profilePic, UPLOAD_DIR, profileImageName);
 
             RegisterService service = new RegisterService();
 
+            // Registration service handles password hashing before the user is inserted.
             service.registerUser(fullname, email, phone, registrationDate, password, address, gender, profileImageName);
 
             response.sendRedirect(request.getContextPath() + "/login?registered=true");
@@ -167,6 +172,7 @@ public class RegisterServlet extends HttpServlet {
         try {
             LocalDate selectedDate = LocalDate.parse(registrationDate.trim());
 
+            // Registration date must match today's date, not a past or future date.
             if (!selectedDate.isEqual(LocalDate.now())) {
                 return "Registration date must be today's date.";
             }

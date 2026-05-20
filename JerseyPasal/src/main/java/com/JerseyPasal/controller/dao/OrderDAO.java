@@ -29,6 +29,7 @@ public class OrderDAO {
 
         int orderId = 0;
 
+        // The new order id is needed to save related order items after creating the order.
         if (generatedKeys.next()) {
             orderId = generatedKeys.getInt(1);
         }
@@ -65,6 +66,8 @@ public class OrderDAO {
             order.setOrderTotal(rs.getDouble("order_total"));
             order.setOrderStatus(rs.getString("order_status"));
             order.setOrderDate(rs.getString("order_date"));
+
+            // Customer name is loaded with the order so the admin can identify who placed it.
             order.setCustomerName(rs.getString("fullname"));
         }
 
@@ -230,6 +233,7 @@ public class OrderDAO {
 
         ResultSet rs = pst.executeQuery();
 
+        // Cancelled orders are ignored so the result shows only successful order demand.
         if (rs.next()) {
             mostOrderedProduct = rs.getString("jersey_name") + " - " + rs.getString("team_name");
         }

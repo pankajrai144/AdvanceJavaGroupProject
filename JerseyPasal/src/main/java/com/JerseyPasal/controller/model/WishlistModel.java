@@ -21,7 +21,10 @@ public class WishlistModel {
     public WishlistModel(int wishlistId, int userId, ProductModel product, String addedAt) {
         this.wishlistId = wishlistId;
         this.userId = userId;
+
+        // Product object is used when the wishlist page needs full jersey details, not only the product id.
         this.product = product;
+
         this.addedAt = addedAt;
     }
 

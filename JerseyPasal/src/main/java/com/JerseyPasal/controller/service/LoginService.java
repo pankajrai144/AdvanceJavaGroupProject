@@ -13,6 +13,8 @@ public class LoginService {
         }
 
         String cleanEmail = email.trim().toLowerCase();
+
+        // The entered password is hashed before matching it with the stored password.
         String hashedPassword = PasswordUtil.getHashPassword(password.trim());
 
         UserDAO dao = new UserDAO();
@@ -31,6 +33,7 @@ public class LoginService {
 
         UserDAO dao = new UserDAO();
 
+        // This is checked separately so a denied user can receive the correct login message.
         return dao.isUserDenied(cleanEmail, hashedPassword);
     }
 
@@ -45,6 +48,7 @@ public class LoginService {
 
         UserDAO dao = new UserDAO();
 
+        // Deleted accounts are checked separately to stop removed users from logging in again.
         return dao.isUserDeleted(cleanEmail, hashedPassword);
     }
 }

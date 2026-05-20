@@ -54,6 +54,7 @@ public class EditProductServlet extends HttpServlet {
 
 		UserModel loggedInUser = (UserModel) session.getAttribute("loggedInUser");
 
+		// Only admin users are allowed to open the product edit page.
 		if (loggedInUser.getRole() == null || !loggedInUser.getRole().equalsIgnoreCase("admin")) {
 			response.sendRedirect(request.getContextPath() + "/login");
 			return;
@@ -70,6 +71,8 @@ public class EditProductServlet extends HttpServlet {
 			int productId = Integer.parseInt(productIdValue);
 			
 			ProductDAO dao = new ProductDAO();
+
+			// The existing product is loaded so its current details can be shown in the edit form.
 			ProductModel product = dao.getProductById(productId);
 			
 			if (product == null) {
@@ -101,6 +104,7 @@ public class EditProductServlet extends HttpServlet {
 
 		UserModel loggedInUser = (UserModel) session.getAttribute("loggedInUser");
 
+		// Only admin users are allowed to update products.
 		if (loggedInUser.getRole() == null || !loggedInUser.getRole().equalsIgnoreCase("admin")) {
 			response.sendRedirect(request.getContextPath() + "/login");
 			return;
@@ -283,6 +287,7 @@ public class EditProductServlet extends HttpServlet {
 			String productImageName3 = existingImage3;
 			String productImageName4 = existingImage4;
 			
+			// Existing images are kept unless the admin uploads a new set of four images.
 			if (!productImages.isEmpty()) {
 				
 				if (productImages.size() != 4) {
@@ -350,6 +355,8 @@ public class EditProductServlet extends HttpServlet {
 			product.setProductImage4(productImageName4);
 			
 			ProductDAO dao = new ProductDAO();
+
+			// The updated product model is passed to the DAO to save the changes.
 			boolean updated = dao.updateProduct(product);
 			
 			if (updated) {
@@ -391,6 +398,7 @@ public class EditProductServlet extends HttpServlet {
 		
 		extension = extension.toLowerCase();
 		
+		// Only common web image formats are accepted for product images.
 		return extension.equals(".jpg") ||
 			   extension.equals(".jpeg") ||
 			   extension.equals(".png") ||
@@ -407,6 +415,7 @@ public class EditProductServlet extends HttpServlet {
 		
 		extension = extension.toLowerCase();
 		
+		// A timestamp is added so uploaded product images do not easily overwrite each other.
 		return "product_" + imageType + "_" + System.currentTimeMillis() + extension;
 	}
 

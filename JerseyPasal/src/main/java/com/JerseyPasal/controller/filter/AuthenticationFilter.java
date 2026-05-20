@@ -59,6 +59,7 @@ public class AuthenticationFilter extends HttpFilter implements Filter {
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
 		HttpServletResponse httpResponse = (HttpServletResponse) response;
 
+		// These headers stop protected pages from being shown again after logout using the browser back button.
 		httpResponse.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
 		httpResponse.setHeader("Pragma", "no-cache");
 		httpResponse.setDateHeader("Expires", 0);
@@ -70,6 +71,7 @@ public class AuthenticationFilter extends HttpFilter implements Filter {
 			return;
 		}
 
+		// If the session has unexpected data, it is cleared before sending the user back to login.
 		if (!(loggedInUserObj instanceof UserModel)) {
 			HttpSession session = httpRequest.getSession(false);
 
@@ -97,6 +99,7 @@ public class AuthenticationFilter extends HttpFilter implements Filter {
 
 		userRole = userRole.trim();
 
+		// Admin pages are only allowed for users with the admin role.
 		if (isAdminPath(path)) {
 			if ("admin".equalsIgnoreCase(userRole)) {
 				chain.doFilter(request, response);
@@ -106,6 +109,7 @@ public class AuthenticationFilter extends HttpFilter implements Filter {
 			return;
 		}
 
+		// Customer pages are only allowed for normal logged-in users.
 		if (isUserPath(path)) {
 			if ("user".equalsIgnoreCase(userRole)) {
 				chain.doFilter(request, response);

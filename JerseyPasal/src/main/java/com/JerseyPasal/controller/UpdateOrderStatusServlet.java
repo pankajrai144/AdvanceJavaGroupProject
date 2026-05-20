@@ -50,6 +50,7 @@ public class UpdateOrderStatusServlet extends HttpServlet {
 
             UserModel loggedInUser = (UserModel) session.getAttribute("loggedInUser");
 
+            // Only admin users are allowed to update order status.
             if (loggedInUser.getRole() == null || !loggedInUser.getRole().equalsIgnoreCase("admin")) {
                 response.sendRedirect(request.getContextPath() + "/userdashboard");
                 return;
@@ -66,6 +67,7 @@ public class UpdateOrderStatusServlet extends HttpServlet {
 
             orderStatus = orderStatus.trim();
 
+            // The status is checked before updating so invalid values cannot be saved.
             if (!isValidOrderStatus(orderStatus)) {
                 response.sendRedirect(request.getContextPath() + "/admindashboard?orderError=true");
                 return;
@@ -74,6 +76,8 @@ public class UpdateOrderStatusServlet extends HttpServlet {
             int orderId = Integer.parseInt(orderIdValue);
 
             OrderDAO orderDAO = new OrderDAO();
+
+            // The selected order is updated using the order id and chosen status.
             boolean updated = orderDAO.updateOrderStatus(orderId, orderStatus);
 
             if (updated) {

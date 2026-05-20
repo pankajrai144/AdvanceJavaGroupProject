@@ -61,6 +61,7 @@ public class CartServlet extends HttpServlet {
                     selectedSize = selectedSize.trim().toUpperCase();
                 }
 
+                // Cart item actions are handled here before loading the cart page again.
                 if ("remove".equalsIgnoreCase(action)) {
                     cartItemDAO.removeCartItem(userId, productId, selectedSize);
                 } else if ("increase".equalsIgnoreCase(action)) {
@@ -81,6 +82,7 @@ public class CartServlet extends HttpServlet {
                         return;
                     }
 
+                    // The selected size must exist in the product's available size list.
                     if (!isSizeAvailable(product.getSize(), selectedSize)) {
                         response.sendRedirect(request.getContextPath() + "/product?productId=" + productId + "&cartError=size");
                         return;
@@ -103,6 +105,8 @@ public class CartServlet extends HttpServlet {
 
         } catch (Exception e) {
             e.printStackTrace();
+
+            // Empty cart data is sent so the cart page can still open after an error.
             request.setAttribute("cartItems", new ArrayList<CartItemModel>());
             request.setAttribute("cartTotal", 0.0);
             request.setAttribute("error", "Unable to load cart.");

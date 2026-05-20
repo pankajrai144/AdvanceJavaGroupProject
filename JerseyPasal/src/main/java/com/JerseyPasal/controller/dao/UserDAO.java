@@ -144,6 +144,7 @@ public class UserDAO {
 
                     String role = rs.getString("role");
 
+                    // Role value is cleaned before storing it in the session user object.
                     if (role == null || role.trim().isEmpty()) {
                         role = "user";
                     } else {
@@ -158,6 +159,7 @@ public class UserDAO {
 
                     String approvalStatus = rs.getString("approval_status");
 
+                    // Missing approval status is treated as denied for safer login control.
                     if (approvalStatus == null || approvalStatus.trim().isEmpty()) {
                         approvalStatus = "denied";
                     } else {

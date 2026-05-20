@@ -29,14 +29,20 @@ public class OrderItemModel {
         this.productId = productId;
         this.selectedSize = selectedSize;
         this.quantity = quantity;
+
+        // This stores the product price at the time the order was placed.
         this.priceEach = priceEach;
+
         this.itemTotal = itemTotal;
     }
 
     public OrderItemModel(int orderItemId, int orderId, ProductModel product, String selectedSize, int quantity, double priceEach, double itemTotal) {
         this.orderItemId = orderItemId;
         this.orderId = orderId;
+
+        // Product object is used when the order page needs full jersey details, not only the product id.
         this.product = product;
+
         this.selectedSize = selectedSize;
         this.quantity = quantity;
         this.priceEach = priceEach;

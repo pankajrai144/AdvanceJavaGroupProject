@@ -64,12 +64,15 @@ public class UserdashboardServlet extends HttpServlet {
 
             if (userOrders != null && !userOrders.isEmpty()) {
                 for (OrderModel order : userOrders) {
+                    // Order items are stored by order id so the JSP can display items under the correct order.
                     ArrayList<OrderItemModel> orderItems = orderItemDAO.getOrderItemsByOrderId(order.getOrderId());
                     orderItemsMap.put(order.getOrderId(), orderItems);
 
                     if (orderItems != null && !orderItems.isEmpty()) {
                         for (OrderItemModel item : orderItems) {
                             boolean alreadyReviewed = reviewDAO.hasUserReviewedProduct(userId, item.getProductId());
+
+                            // This key helps the dashboard know whether each ordered product has already been reviewed.
                             reviewedMap.put(order.getOrderId() + "_" + item.getProductId(), alreadyReviewed);
                         }
                     }
@@ -95,6 +98,8 @@ public class UserdashboardServlet extends HttpServlet {
 
         } catch (Exception e) {
             e.printStackTrace();
+
+            // Safe empty values are sent so the dashboard can still load after an error.
             request.setAttribute("dashboardMessage", "<p class='error-message'>Unable to load dashboard orders.</p>");
             request.setAttribute("userOrders", new ArrayList<OrderModel>());
             request.setAttribute("orderItemsMap", new HashMap<Integer, ArrayList<OrderItemModel>>());

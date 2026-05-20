@@ -43,6 +43,7 @@ public class DenyUserServlet extends HttpServlet {
 
         UserModel loggedInUser = (UserModel) session.getAttribute("loggedInUser");
 
+        // Only admin users are allowed to deny member accounts.
         if (loggedInUser.getRole() == null || !loggedInUser.getRole().equalsIgnoreCase("admin")) {
             response.sendRedirect(request.getContextPath() + "/login");
             return;
@@ -59,6 +60,8 @@ public class DenyUserServlet extends HttpServlet {
             int userId = Integer.parseInt(userIdValue);
 
             UserDAO dao = new UserDAO();
+
+            // The DAO updates the selected user's approval status to denied.
             boolean denied = dao.denyUser(userId);
 
             if (denied) {

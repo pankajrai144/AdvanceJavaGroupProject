@@ -51,6 +51,7 @@ public class AdmindashboardServlet extends HttpServlet {
         UserModel loggedInUser = (UserModel) loggedInUserObj;
         String userRole = loggedInUser.getRole();
 
+        // Only admin users are allowed to open the admin dashboard.
         if (userRole == null || !userRole.equalsIgnoreCase("admin")) {
             response.sendRedirect(request.getContextPath() + "/userdashboard");
             return;
@@ -76,6 +77,7 @@ public class AdmindashboardServlet extends HttpServlet {
             if (orders != null) {
                 totalOrders = orders.size();
 
+                // Cancelled orders are not counted as revenue.
                 for (OrderModel order : orders) {
                     if (!"Cancelled".equalsIgnoreCase(order.getOrderStatus())) {
                         totalRevenue += order.getOrderTotal();
@@ -101,6 +103,7 @@ public class AdmindashboardServlet extends HttpServlet {
 
             String adminMessage = "";
 
+            // Messages are selected from query parameters after admin actions are completed.
             if ("true".equals(request.getParameter("denied"))) {
                 adminMessage = "<p class='success-message'>User account has been denied successfully.</p>";
             } else if ("true".equals(request.getParameter("approved"))) {
@@ -183,6 +186,7 @@ public class AdmindashboardServlet extends HttpServlet {
                     String statusHtml;
                     String actionHtml;
 
+                    // The action button changes depending on the user's approval status.
                     if ("denied".equalsIgnoreCase(status)) {
                         statusHtml = "<span class='badge denied'>Denied</span>";
 
@@ -304,6 +308,7 @@ public class AdmindashboardServlet extends HttpServlet {
                     String safeStatus = htmlEscape(status);
                     String safeOrderDate = htmlEscape(order.getOrderDate());
 
+                    // Only the latest five orders are shown in the recent orders summary.
                     if (recentLimit < 5) {
                         recentOrderRows.append("<tr>");
                         recentOrderRows.append("<td>#").append(order.getOrderId()).append("</td>");
@@ -397,6 +402,7 @@ public class AdmindashboardServlet extends HttpServlet {
         } catch (Exception e) {
             e.printStackTrace();
 
+            // Safe fallback values allow the dashboard page to load even when database data cannot be fetched.
             request.setAttribute("adminMessage", "<p class='error-message'>Unable to load dashboard data.</p>");
             request.setAttribute("userRows", "<tr><td colspan='4'>No users found.</td></tr>");
             request.setAttribute("productRows", "<tr><td colspan='9'>No products found.</td></tr>");

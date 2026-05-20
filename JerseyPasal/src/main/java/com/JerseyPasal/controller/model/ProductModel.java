@@ -1,5 +1,6 @@
 package com.JerseyPasal.controller.model;
 
+// This model stores the jersey product details used across product listing, cart, wishlist, and order pages.
 public class ProductModel {
 
     private int productId;

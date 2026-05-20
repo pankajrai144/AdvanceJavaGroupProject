@@ -45,6 +45,7 @@ public class SearchServlet extends HttpServlet {
 
             keyword = keyword.trim();
 
+            // Very short search text is avoided to prevent weak or unclear search results.
             if (keyword.length() < 3) {
                 request.setAttribute("searchKeyword", keyword);
                 request.setAttribute("searchProducts", new ArrayList<ProductModel>());
@@ -54,6 +55,8 @@ public class SearchServlet extends HttpServlet {
             }
 
             ProductDAO productDAO = new ProductDAO();
+
+            // The keyword is searched across product details such as jersey name, team, category, size, and season.
             ArrayList<ProductModel> searchProducts = productDAO.searchProducts(keyword);
 
             request.setAttribute("searchKeyword", keyword);
@@ -67,6 +70,8 @@ public class SearchServlet extends HttpServlet {
 
         } catch (Exception e) {
             e.printStackTrace();
+
+            // Empty search data is sent so the search page can still open after an error.
             request.setAttribute("searchKeyword", "");
             request.setAttribute("searchProducts", new ArrayList<ProductModel>());
             request.setAttribute("searchMessage", "Unable to search products. Please try again.");

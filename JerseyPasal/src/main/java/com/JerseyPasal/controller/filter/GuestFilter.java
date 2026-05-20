@@ -38,6 +38,7 @@ public class GuestFilter extends HttpFilter implements Filter {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         HttpServletResponse httpResponse = (HttpServletResponse) response;
 
+        // These headers prevent login and register pages from being cached after session changes.
         httpResponse.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
         httpResponse.setHeader("Pragma", "no-cache");
         httpResponse.setDateHeader("Expires", 0);
@@ -46,6 +47,7 @@ public class GuestFilter extends HttpFilter implements Filter {
 
         if (loggedInUserObj != null) {
 
+            // Invalid session data is cleared before the user is sent back to login.
             if (!(loggedInUserObj instanceof UserModel)) {
                 HttpSession session = httpRequest.getSession(false);
 
@@ -60,11 +62,13 @@ public class GuestFilter extends HttpFilter implements Filter {
             UserModel loggedInUser = (UserModel) loggedInUserObj;
             String role = loggedInUser.getRole();
 
+            // Logged-in admins should not be allowed to open guest pages again.
             if (role != null && "admin".equalsIgnoreCase(role.trim())) {
                 httpResponse.sendRedirect(httpRequest.getContextPath() + "/admindashboard");
                 return;
             }
 
+            // Logged-in users are redirected back to their own dashboard.
             if (role != null && "user".equalsIgnoreCase(role.trim())) {
                 httpResponse.sendRedirect(httpRequest.getContextPath() + "/userdashboard");
                 return;

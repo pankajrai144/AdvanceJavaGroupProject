@@ -51,6 +51,7 @@ public class ReviewDAO {
 
         ResultSet rs = pst.executeQuery();
 
+        // This prevents the same user from reviewing the same product more than once.
         if (rs.next()) {
             exists = true;
         }
@@ -84,6 +85,7 @@ public class ReviewDAO {
 
         ResultSet rs = pst.executeQuery();
 
+        // Reviews are allowed only after the user has bought and received the product.
         if (rs.next()) {
             canReview = true;
         }
@@ -129,6 +131,8 @@ public class ReviewDAO {
             review.setReviewText(rs.getString("review_text"));
             review.setRecommend(rs.getString("recommend"));
             review.setReviewDate(rs.getString("review_date"));
+
+            // User details are attached so the product page can show who wrote the review.
             review.setUser(user);
 
             reviews.add(review);
@@ -182,6 +186,8 @@ public class ReviewDAO {
             review.setReviewText(rs.getString("review_text"));
             review.setRecommend(rs.getString("recommend"));
             review.setReviewDate(rs.getString("review_date"));
+
+            // User and product details are included so the admin can understand each review clearly.
             review.setUser(user);
             review.setProduct(product);
 
@@ -287,6 +293,7 @@ public class ReviewDAO {
 
         ResultSet rs = pst.executeQuery();
 
+        // This gives a simple dashboard summary of the product with the most customer feedback.
         if (rs.next()) {
             mostReviewedProduct = rs.getString("jersey_name") + " - " + rs.getString("team_name") + " (" + rs.getInt("total_reviews") + " reviews)";
         }

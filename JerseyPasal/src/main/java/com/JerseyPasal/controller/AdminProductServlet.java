@@ -62,6 +62,7 @@ public class AdminProductServlet extends HttpServlet {
 
 		UserModel loggedInUser = (UserModel) session.getAttribute("loggedInUser");
 
+		// Only admin users are allowed to add products.
 		if (loggedInUser.getRole() == null || !loggedInUser.getRole().equalsIgnoreCase("admin")) {
 			response.sendRedirect(request.getContextPath() + "/login");
 			return;
@@ -259,6 +260,7 @@ public class AdminProductServlet extends HttpServlet {
 				return;
 			}
 			
+			// Images are saved only after all product data and image validation has passed.
 			FileUploadUtil.saveFile(productImage, UPLOAD_DIR, productImageName);
 			FileUploadUtil.saveFile(productImage2, UPLOAD_DIR, productImageName2);
 			FileUploadUtil.saveFile(productImage3, UPLOAD_DIR, productImageName3);
@@ -321,6 +323,7 @@ public class AdminProductServlet extends HttpServlet {
 		
 		extension = extension.toLowerCase();
 		
+		// Only common web image formats are allowed for product uploads.
 		return extension.equals(".jpg") ||
 			   extension.equals(".jpeg") ||
 			   extension.equals(".png") ||
@@ -337,6 +340,7 @@ public class AdminProductServlet extends HttpServlet {
 		
 		extension = extension.toLowerCase();
 		
+		// A timestamp is added so uploaded product images do not easily overwrite each other.
 		return "product_" + imageType + "_" + System.currentTimeMillis() + extension;
 	}
 

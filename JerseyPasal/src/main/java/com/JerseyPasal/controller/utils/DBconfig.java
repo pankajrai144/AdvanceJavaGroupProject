@@ -12,6 +12,7 @@ public class DBconfig {
 
     public static Connection getConnection() throws SQLException, ClassNotFoundException {
 
+        // MySQL driver is loaded before creating the database connection.
         Class.forName("com.mysql.cj.jdbc.Driver");
 
         Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);

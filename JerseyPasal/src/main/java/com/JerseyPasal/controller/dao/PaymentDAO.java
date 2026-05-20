@@ -27,7 +27,10 @@ public class PaymentDAO {
         pst.setString(6, payment.getAddress());
         pst.setString(7, payment.getPaymentMethod());
         pst.setString(8, payment.getCardHolderName());
+
+        // Only the last four card digits are stored, not the full card number.
         pst.setString(9, payment.getCardLastFour());
+
         pst.setDouble(10, payment.getAmount());
         pst.setString(11, payment.getPaymentStatus());
 
@@ -37,6 +40,7 @@ public class PaymentDAO {
 
         int paymentId = 0;
 
+        // The generated payment id is used to identify the saved payment record.
         if (generatedKeys.next()) {
             paymentId = generatedKeys.getInt(1);
         }

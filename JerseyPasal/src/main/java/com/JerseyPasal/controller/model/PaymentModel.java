@@ -31,7 +31,10 @@ public class PaymentModel {
         this.address = address;
         this.paymentMethod = paymentMethod;
         this.cardHolderName = cardHolderName;
+
+        // Only the last four card digits are kept for display and reference.
         this.cardLastFour = cardLastFour;
+
         this.amount = amount;
         this.paymentStatus = paymentStatus;
         this.paymentDate = paymentDate;
@@ -48,7 +51,10 @@ public class PaymentModel {
         this.address = address;
         this.paymentMethod = paymentMethod;
         this.cardHolderName = cardHolderName;
+
+        // Only the last four card digits are kept for display and reference.
         this.cardLastFour = cardLastFour;
+
         this.amount = amount;
         this.paymentStatus = paymentStatus;
     }
@@ -136,6 +142,7 @@ public class PaymentModel {
     }
 
     public void setCardLastFour(String cardLastFour) {
+        // Full card numbers should not be stored in this model.
         this.cardLastFour = cardLastFour;
     }
 
