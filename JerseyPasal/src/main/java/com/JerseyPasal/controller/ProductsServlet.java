@@ -126,17 +126,19 @@ public class ProductsServlet extends HttpServlet {
                 Double minPrice = null;
                 Double maxPrice = null;
                 String filterError = null;
+                boolean invalidFilter = false;
 
                 if (minPriceValue != null && !minPriceValue.trim().isEmpty()) {
                     try {
                         minPrice = Double.parseDouble(minPriceValue.trim());
 
                         if (minPrice < 0) {
-                            minPrice = null;
                             filterError = "Minimum price cannot be negative.";
+                            invalidFilter = true;
                         }
                     } catch (NumberFormatException e) {
                         filterError = "Minimum price must be a valid number.";
+                        invalidFilter = true;
                     }
                 }
 
@@ -145,22 +147,28 @@ public class ProductsServlet extends HttpServlet {
                         maxPrice = Double.parseDouble(maxPriceValue.trim());
 
                         if (maxPrice < 0) {
-                            maxPrice = null;
                             filterError = "Maximum price cannot be negative.";
+                            invalidFilter = true;
                         }
                     } catch (NumberFormatException e) {
                         filterError = "Maximum price must be a valid number.";
+                        invalidFilter = true;
                     }
                 }
 
-                // Invalid price range is cleared so the product page can still load safely.
-                if (minPrice != null && maxPrice != null && minPrice > maxPrice) {
+                // Invalid price range is treated as invalid so products are not shown.
+                if (!invalidFilter && minPrice != null && maxPrice != null && minPrice > maxPrice) {
                     filterError = "Minimum price cannot be greater than maximum price.";
-                    minPrice = null;
-                    maxPrice = null;
+                    invalidFilter = true;
                 }
 
-                ArrayList<ProductModel> allProducts = dao.getFilteredProducts(size, minPrice, maxPrice);
+                ArrayList<ProductModel> allProducts;
+
+                if (invalidFilter) {
+                    allProducts = new ArrayList<>();
+                } else {
+                    allProducts = dao.getFilteredProducts(size, minPrice, maxPrice);
+                }
 
                 int currentPage = 1;
                 int productsPerPage = 9;

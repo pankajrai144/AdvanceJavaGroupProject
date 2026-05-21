@@ -103,65 +103,79 @@ public class AdmindashboardServlet extends HttpServlet {
 
             String adminMessage = "";
 
+            Object sessionSuccessMessage = session.getAttribute("successMessage");
+            Object sessionErrorMessage = session.getAttribute("errorMessage");
+
+            session.removeAttribute("successMessage");
+            session.removeAttribute("errorMessage");
+
+            if (sessionErrorMessage != null && !String.valueOf(sessionErrorMessage).trim().isEmpty()) {
+                adminMessage = "<p class='error-message'>" + htmlEscape(String.valueOf(sessionErrorMessage)) + "</p>";
+            } else if (sessionSuccessMessage != null && !String.valueOf(sessionSuccessMessage).trim().isEmpty()) {
+                adminMessage = "<p class='success-message'>" + htmlEscape(String.valueOf(sessionSuccessMessage)) + "</p>";
+            }
+
             // Messages are selected from query parameters after admin actions are completed.
-            if ("true".equals(request.getParameter("denied"))) {
-                adminMessage = "<p class='success-message'>User account has been denied successfully.</p>";
-            } else if ("true".equals(request.getParameter("approved"))) {
-                adminMessage = "<p class='success-message'>User account has been approved successfully.</p>";
-            } else if ("true".equals(request.getParameter("productAdded"))) {
-                adminMessage = "<p class='success-message'>Product has been added successfully.</p>";
-            } else if ("true".equals(request.getParameter("productUpdated"))) {
-                adminMessage = "<p class='success-message'>Product has been updated successfully.</p>";
-            } else if ("true".equals(request.getParameter("productDeleted"))) {
-                adminMessage = "<p class='success-message'>Product has been deleted successfully.</p>";
-            } else if ("true".equals(request.getParameter("orderUpdated"))) {
-                adminMessage = "<p class='success-message'>Order status has been updated successfully.</p>";
-            } else if ("true".equals(request.getParameter("orderError"))) {
-                adminMessage = "<p class='error-message'>Order status could not be updated. Please try again.</p>";
-            } else if ("empty".equals(request.getParameter("productError"))) {
-                adminMessage = "<p class='error-message'>Please fill all required product fields.</p>";
-            } else if ("jerseyName".equals(request.getParameter("productError"))) {
-                adminMessage = "<p class='error-message'>Jersey name must be between 2 and 100 characters.</p>";
-            } else if ("jerseyNameFormat".equals(request.getParameter("productError"))) {
-                adminMessage = "<p class='error-message'>Jersey name can only contain letters, numbers, spaces, hyphen and slash.</p>";
-            } else if ("teamName".equals(request.getParameter("productError"))) {
-                adminMessage = "<p class='error-message'>Team name must be between 2 and 100 characters.</p>";
-            } else if ("teamNameFormat".equals(request.getParameter("productError"))) {
-                adminMessage = "<p class='error-message'>Team name can only contain letters, numbers, spaces, hyphen and full stop.</p>";
-            } else if ("size".equals(request.getParameter("productError"))) {
-                adminMessage = "<p class='error-message'>Please select at least one valid size: XS, S, M, L, XL, or XXL.</p>";
-            } else if ("season".equals(request.getParameter("productError"))) {
-                adminMessage = "<p class='error-message'>Season format must be like 2025/26.</p>";
-            } else if ("category".equals(request.getParameter("productError"))) {
-                adminMessage = "<p class='error-message'>Product category must be Club or Nation.</p>";
-            } else if ("description".equals(request.getParameter("productError"))) {
-                adminMessage = "<p class='error-message'>Description must be less than 500 characters.</p>";
-            } else if ("price".equals(request.getParameter("productError"))) {
-                adminMessage = "<p class='error-message'>Product price must be greater than 0.</p>";
-            } else if ("priceLimit".equals(request.getParameter("productError"))) {
-                adminMessage = "<p class='error-message'>Product price is too high.</p>";
-            } else if ("stock".equals(request.getParameter("productError"))) {
-                adminMessage = "<p class='error-message'>Stock quantity cannot be negative.</p>";
-            } else if ("stockLimit".equals(request.getParameter("productError"))) {
-                adminMessage = "<p class='error-message'>Stock quantity is too high.</p>";
-            } else if ("number".equals(request.getParameter("productError"))) {
-                adminMessage = "<p class='error-message'>Please enter valid numbers for price and stock.</p>";
-            } else if ("noimage".equals(request.getParameter("productError"))) {
-                adminMessage = "<p class='error-message'>Please upload a product image.</p>";
-            } else if ("imagecount".equals(request.getParameter("productError"))) {
-                adminMessage = "<p class='error-message'>Please select exactly 4 product images.</p>";
-            } else if ("image".equals(request.getParameter("productError"))) {
-                adminMessage = "<p class='error-message'>Please upload only JPG, JPEG, PNG or WEBP image files.</p>";
-            } else if ("imagesize".equals(request.getParameter("productError"))) {
-                adminMessage = "<p class='error-message'>Product image size must be less than 2MB.</p>";
-            } else if ("delete".equals(request.getParameter("productError"))) {
-                adminMessage = "<p class='error-message'>Product could not be deleted. Please try again.</p>";
-            } else if ("update".equals(request.getParameter("productError"))) {
-                adminMessage = "<p class='error-message'>Product could not be updated. Please try again.</p>";
-            } else if ("true".equals(request.getParameter("productError"))) {
-                adminMessage = "<p class='error-message'>Product could not be added. Please try again.</p>";
-            } else if ("true".equals(request.getParameter("error"))) {
-                adminMessage = "<p class='error-message'>Something went wrong. Please try again.</p>";
+            if (adminMessage.isEmpty()) {
+                if ("true".equals(request.getParameter("denied"))) {
+                    adminMessage = "<p class='success-message'>User account has been denied successfully.</p>";
+                } else if ("true".equals(request.getParameter("approved"))) {
+                    adminMessage = "<p class='success-message'>User account has been approved successfully.</p>";
+                } else if ("true".equals(request.getParameter("productAdded"))) {
+                    adminMessage = "<p class='success-message'>Product has been added successfully.</p>";
+                } else if ("true".equals(request.getParameter("productUpdated"))) {
+                    adminMessage = "<p class='success-message'>Product has been updated successfully.</p>";
+                } else if ("true".equals(request.getParameter("productDeleted"))) {
+                    adminMessage = "<p class='success-message'>Product has been deleted successfully.</p>";
+                } else if ("true".equals(request.getParameter("orderUpdated"))) {
+                    adminMessage = "<p class='success-message'>Order status has been updated successfully.</p>";
+                } else if ("true".equals(request.getParameter("orderError"))) {
+                    adminMessage = "<p class='error-message'>Order status could not be updated. Please try again.</p>";
+                } else if ("empty".equals(request.getParameter("productError"))) {
+                    adminMessage = "<p class='error-message'>Please fill all required product fields.</p>";
+                } else if ("jerseyName".equals(request.getParameter("productError"))) {
+                    adminMessage = "<p class='error-message'>Jersey name must be between 2 and 100 characters.</p>";
+                } else if ("jerseyNameFormat".equals(request.getParameter("productError"))) {
+                    adminMessage = "<p class='error-message'>Jersey name can only contain letters, numbers, spaces, hyphen and slash.</p>";
+                } else if ("teamName".equals(request.getParameter("productError"))) {
+                    adminMessage = "<p class='error-message'>Team name must be between 2 and 100 characters.</p>";
+                } else if ("teamNameFormat".equals(request.getParameter("productError"))) {
+                    adminMessage = "<p class='error-message'>Team name can only contain letters, numbers, spaces, hyphen and full stop.</p>";
+                } else if ("size".equals(request.getParameter("productError"))) {
+                    adminMessage = "<p class='error-message'>Please select at least one valid size: XS, S, M, L, XL, or XXL.</p>";
+                } else if ("season".equals(request.getParameter("productError"))) {
+                    adminMessage = "<p class='error-message'>Season format must be like 2025/26.</p>";
+                } else if ("category".equals(request.getParameter("productError"))) {
+                    adminMessage = "<p class='error-message'>Product category must be Club or Nation.</p>";
+                } else if ("description".equals(request.getParameter("productError"))) {
+                    adminMessage = "<p class='error-message'>Description must be less than 500 characters.</p>";
+                } else if ("price".equals(request.getParameter("productError"))) {
+                    adminMessage = "<p class='error-message'>Product price must be greater than 0.</p>";
+                } else if ("priceLimit".equals(request.getParameter("productError"))) {
+                    adminMessage = "<p class='error-message'>Product price is too high.</p>";
+                } else if ("stock".equals(request.getParameter("productError"))) {
+                    adminMessage = "<p class='error-message'>Stock quantity cannot be negative.</p>";
+                } else if ("stockLimit".equals(request.getParameter("productError"))) {
+                    adminMessage = "<p class='error-message'>Stock quantity is too high.</p>";
+                } else if ("number".equals(request.getParameter("productError"))) {
+                    adminMessage = "<p class='error-message'>Please enter valid numbers for price and stock.</p>";
+                } else if ("noimage".equals(request.getParameter("productError"))) {
+                    adminMessage = "<p class='error-message'>Please upload a product image.</p>";
+                } else if ("imagecount".equals(request.getParameter("productError"))) {
+                    adminMessage = "<p class='error-message'>Please select exactly 4 product images.</p>";
+                } else if ("image".equals(request.getParameter("productError"))) {
+                    adminMessage = "<p class='error-message'>Please upload only JPG, JPEG, PNG or WEBP image files.</p>";
+                } else if ("imagesize".equals(request.getParameter("productError"))) {
+                    adminMessage = "<p class='error-message'>Product image size must be less than 2MB.</p>";
+                } else if ("delete".equals(request.getParameter("productError"))) {
+                    adminMessage = "<p class='error-message'>Product could not be deleted. Please try again.</p>";
+                } else if ("update".equals(request.getParameter("productError"))) {
+                    adminMessage = "<p class='error-message'>Product could not be updated. Please try again.</p>";
+                } else if ("true".equals(request.getParameter("productError"))) {
+                    adminMessage = "<p class='error-message'>Product could not be added. Please try again.</p>";
+                } else if ("true".equals(request.getParameter("error"))) {
+                    adminMessage = "<p class='error-message'>Something went wrong. Please try again.</p>";
+                }
             }
 
             StringBuilder userRows = new StringBuilder();

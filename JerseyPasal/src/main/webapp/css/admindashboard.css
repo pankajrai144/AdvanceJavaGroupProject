@@ -184,6 +184,27 @@ body {
   color: #ffffff;
 }
 
+.admin-message {
+  width: 100%;
+  background: rgba(30, 150, 70, 0.15);
+  border-left: 3px solid #2ecc71;
+  color: #2ecc71;
+  padding: 14px 18px;
+  border-radius: 0 6px 6px 0;
+  margin-bottom: 20px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.admin-message .success-message,
+.admin-message .error-message {
+  margin-bottom: 0;
+  padding: 0;
+  background: transparent;
+  border-left: none;
+  border-radius: 0;
+}
+
 .stats {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -800,6 +821,10 @@ button:hover {
     padding: 0;
     margin-bottom: 25px;
     border-bottom: none;
+  }
+
+  .admin-message {
+    margin-bottom: 20px;
   }
 
   .stats {

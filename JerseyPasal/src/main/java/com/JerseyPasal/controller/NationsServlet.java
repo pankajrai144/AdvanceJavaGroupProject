@@ -45,17 +45,19 @@ public class NationsServlet extends HttpServlet {
             Double minPrice = null;
             Double maxPrice = null;
             String filterError = null;
+            boolean invalidFilter = false;
 
             if (minPriceValue != null && !minPriceValue.trim().isEmpty()) {
                 try {
                     minPrice = Double.parseDouble(minPriceValue.trim());
 
                     if (minPrice < 0) {
-                        minPrice = null;
                         filterError = "Minimum price cannot be negative.";
+                        invalidFilter = true;
                     }
                 } catch (NumberFormatException e) {
                     filterError = "Minimum price must be a valid number.";
+                    invalidFilter = true;
                 }
             }
 
@@ -64,22 +66,27 @@ public class NationsServlet extends HttpServlet {
                     maxPrice = Double.parseDouble(maxPriceValue.trim());
 
                     if (maxPrice < 0) {
-                        maxPrice = null;
                         filterError = "Maximum price cannot be negative.";
+                        invalidFilter = true;
                     }
                 } catch (NumberFormatException e) {
                     filterError = "Maximum price must be a valid number.";
+                    invalidFilter = true;
                 }
             }
 
-            // Invalid price range is cleared so the page can still show nation products safely.
-            if (minPrice != null && maxPrice != null && minPrice > maxPrice) {
+            if (!invalidFilter && minPrice != null && maxPrice != null && minPrice > maxPrice) {
                 filterError = "Minimum price cannot be greater than maximum price.";
-                minPrice = null;
-                maxPrice = null;
+                invalidFilter = true;
             }
 
-            ArrayList<ProductModel> allNationProducts = dao.getFilteredProductsByCategory("Nation", size, minPrice, maxPrice);
+            ArrayList<ProductModel> allNationProducts;
+
+            if (invalidFilter) {
+                allNationProducts = new ArrayList<>();
+            } else {
+                allNationProducts = dao.getFilteredProductsByCategory("Nation", size, minPrice, maxPrice);
+            }
 
             int productsPerPage = 9;
             int currentPage = 1;

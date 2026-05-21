@@ -77,6 +77,12 @@
       <h1>Dashboard Overview</h1>
     </div>
 
+    <c:if test="${not empty adminMessage}">
+      <div class="admin-message">
+        <c:out value="${adminMessage}" escapeXml="false" />
+      </div>
+    </c:if>
+
     <div class="stats">
       <div class="card">
         <h4>Total Revenue</h4>
@@ -202,12 +208,6 @@
 
     <div class="section" id="manageProducts">
       <h2>Product Management</h2>
-
-      <c:if test="${not empty adminMessage}">
-        <div class="admin-message">
-          <c:out value="${adminMessage}" escapeXml="false" />
-        </div>
-      </c:if>
 
       <form class="form-grid" action="${pageContext.request.contextPath}/adminproduct" method="post" enctype="multipart/form-data">
         <input type="text" name="jerseyName" placeholder="Jersey Name">
